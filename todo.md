@@ -106,3 +106,12 @@
 
 ## Database Cleanup
 - [x] Delete all untitled initiatives from database
+
+## Admin Improvements & Language Updates
+- [x] Add edit button to admin initiative detail modal
+- [x] Add delete button to admin initiative detail modal
+- [x] Add "Email Submitter" button that opens email client with pre-filled recipient
+- [x] Update "Start New AI Initiative Evaluation" to friendlier language
+- [x] Review and update all formal language to be more conversational
+- [x] Test admin edit/delete/email functionality
+- [x] Create checkpoint

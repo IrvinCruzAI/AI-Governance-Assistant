@@ -192,6 +192,16 @@ export const appRouter = router({
         await db.updateInitiativeStatus(input.id, input.status, input.adminNotes);
         return { success: true };
       }),
+
+    // Delete initiative (admin only)
+    deleteInitiative: adminProcedure
+      .input(z.object({
+        id: z.number(),
+      }))
+      .mutation(async ({ input }) => {
+        await db.deleteInitiative(input.id);
+        return { success: true };
+      }),
   }),
 });
 

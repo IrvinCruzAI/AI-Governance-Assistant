@@ -27,6 +27,7 @@ export const initiatives = mysqlTable("initiatives", {
   
   // Step 1: Role & Area
   userRole: text("userRole"),
+  userEmail: varchar("userEmail", { length: 320 }),
   area: varchar("area", { length: 100 }),
   
   // Step 2: Initiative Basics

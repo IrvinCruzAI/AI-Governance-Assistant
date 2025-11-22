@@ -22,6 +22,13 @@
       "when": 1763771854687,
       "tag": "0002_shiny_franklin_richards",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1763774515520,
+      "tag": "0003_flimsy_wildside",
+      "breakpoints": true
     }
   ]
 }

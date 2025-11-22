@@ -1,0 +1,1 @@
+ALTER TABLE `initiatives` ADD `userEmail` varchar(320);

@@ -73,6 +73,18 @@ export default function Admin() {
     },
   });
 
+  const deleteInitiativeMutation = trpc.admin.deleteInitiative.useMutation({
+    onSuccess: () => {
+      toast.success("Initiative deleted successfully");
+      utils.admin.getAllInitiatives.invalidate();
+      utils.admin.getAnalytics.invalidate();
+      setSelectedInitiative(null);
+    },
+    onError: () => {
+      toast.error("Failed to delete initiative");
+    },
+  });
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-teal-50 to-blue-100">
@@ -387,17 +399,45 @@ export default function Admin() {
                   />
                 </div>
 
-                <div className="flex gap-3 justify-end">
-                  <Button
-                    variant="outline"
-                    onClick={() => setSelectedInitiative(null)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={handleStatusUpdate}
-                    disabled={updateStatusMutation.isPending}
-                  >
+                <div className="flex gap-3 justify-between">
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        const email = selectedInitiative.userEmail || '';
+                        const subject = encodeURIComponent(`Re: ${selectedInitiative.title}`);
+                        const body = encodeURIComponent(`Hi,\n\nI'm reviewing your AI initiative submission "${selectedInitiative.title}" and have a few questions:\n\n\n\nBest regards,\nAdventHealth AI Team`);
+                        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+                      }}
+                      disabled={!selectedInitiative.userEmail}
+                    >
+                      Email Submitter
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => {
+                        if (confirm('Are you sure you want to delete this initiative? This action cannot be undone.')) {
+                          deleteInitiativeMutation.mutate({ id: selectedInitiative.id });
+                        }
+                      }}
+                      disabled={deleteInitiativeMutation.isPending}
+                    >
+                      {deleteInitiativeMutation.isPending ? 'Deleting...' : 'Delete'}
+                    </Button>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      onClick={() => setSelectedInitiative(null)}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={handleStatusUpdate}
+                      disabled={updateStatusMutation.isPending}
+                    >
                     {updateStatusMutation.isPending ? (
                       <>
                         <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -407,6 +447,7 @@ export default function Admin() {
                       "Update Status"
                     )}
                   </Button>
+                  </div>
                 </div>
               </div>
             </div>

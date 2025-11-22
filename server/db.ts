@@ -195,3 +195,10 @@ export async function updateInitiativeStatus(id: number, status: string, adminNo
   
   await db.update(initiatives).set(updateData).where(eq(initiatives.id, id));
 }
+
+export async function deleteInitiative(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.delete(initiatives).where(eq(initiatives.id, id));
+}

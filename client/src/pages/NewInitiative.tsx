@@ -54,7 +54,7 @@ export default function NewInitiative() {
             </Button>
           </div>
           <CardTitle className="text-2xl text-blue-900">
-            Start New AI Initiative Evaluation
+            Share Your AI Idea
           </CardTitle>
           <p className="text-gray-600 mt-2">
             Before we begin, tell us a bit about yourself and the area you're working in.
@@ -118,7 +118,7 @@ export default function NewInitiative() {
               </>
             ) : (
               <>
-                Begin Evaluation
+                Get Started
                 <ArrowRight className="h-4 w-4 ml-2" />
               </>
             )}
