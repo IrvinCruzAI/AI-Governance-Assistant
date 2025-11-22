@@ -29,3 +29,7 @@
 - [x] Verify Save & Next workflow opens next unevaluated initiative
 - [x] Verify opportunity classification badge displays correctly
 - [x] Create final checkpoint
+
+## UI Simplification
+- [x] Remove redundant "Evaluated" column from admin table
+- [x] Remove redundant "Status" column from admin table (Opportunity column already shows evaluation status)

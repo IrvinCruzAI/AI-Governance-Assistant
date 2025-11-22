@@ -446,27 +446,18 @@ export default function Admin() {
                       <table className="w-full">
                         <thead className="bg-blue-600 text-white">
                           <tr>
-                            <th className="px-4 py-3 text-left text-sm font-semibold">Evaluated</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Opportunity</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Title</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Submitter</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Area</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Risk</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Mission</th>
-                            <th className="px-4 py-3 text-left text-sm font-semibold">Status</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Actions</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                           {filteredInitiatives.map((initiative) => (
                             <tr key={initiative.id} className={`hover:bg-gray-50 ${!initiative.impact || !initiative.effort ? 'bg-gray-100/50 border-l-4 border-l-gray-400' : ''}`}>
-                              <td className="px-4 py-4">
-                                {initiative.impact && initiative.effort ? (
-                                  <CheckCircle2 className="h-5 w-5 text-green-600" />
-                                ) : (
-                                  <Clock className="h-5 w-5 text-gray-400" />
-                                )}
-                              </td>
                               <td className="px-4 py-4">
                                 <Badge className={`${initiative.priority.color} text-xs`}>
                                   {initiative.priority.label}
@@ -490,11 +481,6 @@ export default function Admin() {
                                     {initiative.missionAlignmentRating}
                                   </Badge>
                                 )}
-                              </td>
-                              <td className="px-4 py-4">
-                                <Badge className={getStatusColor(initiative.status)}>
-                                  {initiative.status}
-                                </Badge>
                               </td>
                               <td className="px-4 py-4">
                                 <Button
