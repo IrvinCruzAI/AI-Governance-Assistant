@@ -47,7 +47,17 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { PriorityRubricModal } from "@/components/PriorityRubricModal";
 
-// Opportunity Cost Priority Scoring
+// Simplified priority display (no complex scoring)
+function getSimplePriorityLabel(impact?: string, effort?: string): { label: string; color: string } {
+  if (!impact || !effort) return { label: "Not Evaluated", color: "bg-gray-100 text-gray-600" };
+  
+  if (impact === 'high' && effort === 'low') return { label: "Quick Win", color: "bg-green-100 text-green-800" };
+  if (impact === 'high' && effort === 'high') return { label: "Strategic Bet", color: "bg-purple-100 text-purple-800" };
+  if (impact === 'low' && effort === 'high') return { label: "Reconsider", color: "bg-red-100 text-red-800" };
+  return { label: "Nice to Have", color: "bg-yellow-100 text-yellow-800" };
+}
+
+// Placeholder for old function (will remove after cleanup)
 function calculatePriorityScore(initiative: any): number {
   // If backend has pre-calculated scores, use them
   if (initiative.impactScore !== undefined && initiative.feasibilityScore !== undefined) {
@@ -236,16 +246,13 @@ export default function Admin() {
   const [newStatus, setNewStatus] = useState<string>("");
   const [newRoadmapStatus, setNewRoadmapStatus] = useState<string>("");
   const [adminNotes, setAdminNotes] = useState<string>("");
-  const [showRubric, setShowRubric] = useState(false);
-  const [showRubricModal, setShowRubricModal] = useState(false);
+
   
-  // Priority evaluation state
-  const [impactScale, setImpactScale] = useState<string>("");
-  const [impactBenefitType, setImpactBenefitType] = useState<string>("");
-  const [impactFinancialReturn, setImpactFinancialReturn] = useState<string>("");
-  const [feasibilityComplexity, setFeasibilityComplexity] = useState<string>("");
-  const [feasibilityTimeline, setFeasibilityTimeline] = useState<string>("");
-  const [feasibilityDependencies, setFeasibilityDependencies] = useState<string>("");
+  // Simplified priority evaluation state (3 fields)
+  const [impact, setImpact] = useState<string>(""); // high, medium, low
+  const [effort, setEffort] = useState<string>(""); // high, medium, low
+  const [evaluationNotes, setEvaluationNotes] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
 
   // Queries
   const { data: userInitiatives, isLoading: userLoading } = trpc.initiative.list.useQuery();
@@ -329,10 +336,7 @@ export default function Admin() {
     }
   };
 
-  const handleEmailSubmitter = (email: string | null) => {
-    if (!email) return;
-    window.location.href = `mailto:${email}?subject=Regarding your AI Initiative submission`;
-  };
+
 
   const openInitiativeDetail = (initiative: any) => {
     setSelectedInitiative(initiative);
@@ -340,21 +344,18 @@ export default function Admin() {
     setNewRoadmapStatus(initiative.roadmapStatus || "under-review");
     setAdminNotes(initiative.adminNotes || "");
     
-    // Initialize evaluation state from existing data (no defaults for unevaluated initiatives)
-    setImpactScale(initiative.impactScale || "");
-    setImpactBenefitType(initiative.impactBenefitType || "");
-    setImpactFinancialReturn(initiative.impactFinancialReturn || "");
-    setFeasibilityComplexity(initiative.feasibilityComplexity || "");
-    setFeasibilityTimeline(initiative.feasibilityTimeline || "");
-    setFeasibilityDependencies(initiative.feasibilityDependencies || "");
+    // Initialize simplified evaluation state
+    setImpact(initiative.impact || "");
+    setEffort(initiative.effort || "");
+    setEvaluationNotes(initiative.evaluationNotes || "");
+    setTags(initiative.tags ? JSON.parse(initiative.tags) : []);
   };
 
   // Add priority scoring to initiatives
   const initiatives = isAdmin ? allInitiatives : userInitiatives;
   const initiativesWithPriority = initiatives?.map(initiative => ({
     ...initiative,
-    priorityScore: calculatePriorityScore(initiative),
-    priority: getPriorityLabel(initiative)
+    priority: getSimplePriorityLabel(initiative.impact || undefined, initiative.effort || undefined)
   })) || [];
 
   // Filter initiatives
@@ -365,7 +366,11 @@ export default function Admin() {
       if (priorityFilter !== "all" && initiative.priority.label !== priorityFilter) return false;
       return true;
     })
-    .sort((a, b) => b.priorityScore - a.priorityScore);
+    .sort((a, b) => {
+      // Sort by impact/effort (Quick Win > Strategic Bet > Nice to Have > Reconsider > Not Evaluated)
+      const order = { 'Quick Win': 4, 'Strategic Bet': 3, 'Nice to Have': 2, 'Reconsider': 1, 'Not Evaluated': 0 };
+      return (order[b.priority.label as keyof typeof order] || 0) - (order[a.priority.label as keyof typeof order] || 0);
+    });
 
   // Calculate additional analytics
   const quickWinCount = initiativesWithPriority.filter(i => i.priority.label === 'Quick Win').length;
@@ -521,79 +526,10 @@ export default function Admin() {
                 </Card>
               </div>
 
-              {/* Priority Rubric Info Button */}
-              <div className="flex justify-end">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowRubricModal(true)}
-                  className="gap-2"
-                >
-                  <Info className="h-4 w-4" />
-                  Show Priority Rubric
-                </Button>
-              </div>
 
-              {/* Priority Rubric Panel */}
-              {showRubric && (
-                <Card className="border-2 border-blue-200 bg-blue-50">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Target className="h-5 w-5 text-blue-600" />
-                      {PRIORITY_RUBRIC.title}
-                    </CardTitle>
-                    <p className="text-sm text-gray-600">{PRIORITY_RUBRIC.description}</p>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    {/* Impact Criteria */}
-                    <div>
-                      <h4 className="font-semibold text-teal-900 mb-3 flex items-center gap-2">
-                        <TrendingUp className="h-4 w-4" />
-                        Impact & Value Assessment
-                      </h4>
-                      <div className="space-y-3">
-                        {PRIORITY_RUBRIC.impactCriteria.map((criterion: any, idx: number) => (
-                          <div key={idx} className="bg-teal-50 p-3 rounded-lg border border-teal-200">
-                            <h5 className="font-semibold text-gray-900 text-sm">{criterion.name}</h5>
-                            <p className="text-sm text-gray-600 mt-1">{criterion.explanation}</p>
-                            <p className="text-xs text-gray-500 font-mono mt-2">{criterion.scoring}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
 
-                    {/* Feasibility Criteria */}
-                    <div>
-                      <h4 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
-                        <Wrench className="h-4 w-4" />
-                        Feasibility Assessment
-                      </h4>
-                      <div className="space-y-3">
-                        {PRIORITY_RUBRIC.feasibilityCriteria.map((criterion: any, idx: number) => (
-                          <div key={idx} className="bg-blue-50 p-3 rounded-lg border border-blue-200">
-                            <h5 className="font-semibold text-gray-900 text-sm">{criterion.name}</h5>
-                            <p className="text-sm text-gray-600 mt-1">{criterion.explanation}</p>
-                            <p className="text-xs text-gray-500 font-mono mt-2">{criterion.scoring}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
 
-                    {/* Priority Quadrants */}
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Priority Quadrants</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {PRIORITY_RUBRIC.quadrants.map((quadrant: any, idx: number) => (
-                          <div key={idx} className="bg-white p-4 rounded-lg border-2 border-gray-300">
-                            <p className="font-semibold text-sm text-gray-900 mb-1">{quadrant.label}</p>
-                            <p className="text-xs text-gray-600">{quadrant.meaning}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
+
 
               {/* Filters */}
               <Card className="border-2 border-gray-200 bg-white shadow-lg">
@@ -697,14 +633,11 @@ export default function Admin() {
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                           {filteredInitiatives.map((initiative) => (
-                            <tr key={initiative.id} className={`hover:bg-gray-50 ${initiative.priorityScore === 0 ? 'bg-gray-100/50 border-l-4 border-l-gray-400' : ''}`}>
+                            <tr key={initiative.id} className={`hover:bg-gray-50 ${!initiative.impact || !initiative.effort ? 'bg-gray-100/50 border-l-4 border-l-gray-400' : ''}`}>
                               <td className="px-4 py-4">
-                                <div className="flex flex-col gap-1">
-                                  <Badge className={`${initiative.priority.color} text-white text-xs`}>
-                                    {initiative.priorityScore}
-                                  </Badge>
-                                  <span className="text-xs text-gray-600">{initiative.priority.label}</span>
-                                </div>
+                                <Badge className={`${initiative.priority.color} text-xs`}>
+                                  {initiative.priority.label}
+                                </Badge>
                               </td>
                               <td className="px-4 py-4">
                                 <p className="font-medium text-gray-900 line-clamp-2">{initiative.title || 'Untitled Initiative'}</p>
@@ -945,147 +878,56 @@ export default function Admin() {
                       </div>
 
                       {/* Opportunity Cost Evaluation */}
-                      <div className="p-4 bg-gradient-to-br from-teal-50 to-blue-50 rounded-lg border-2 border-teal-200">
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <h4 className="font-semibold text-gray-900 flex items-center gap-2">
-                              <Target className="h-4 w-4 text-teal-600" />
-                              Priority Evaluation
-                            </h4>
-                            <p className="text-xs text-gray-600 mt-1">Assess impact and feasibility to prioritize this initiative</p>
-                          </div>
-                          {/* Real-time Score Preview */}
-                          {(() => {
-                            const previewInitiative = {
-                              impactScale,
-                              impactBenefitType,
-                              impactFinancialReturn,
-                              feasibilityComplexity,
-                              feasibilityTimeline,
-                              feasibilityDependencies
-                            };
-                            const previewScore = calculatePriorityScore(previewInitiative);
-                            const previewPriority = getPriorityLabel(previewInitiative);
-                            return (
-                              <div className="text-right">
-                                <div className="text-2xl font-bold text-gray-900">{previewScore}</div>
-                                <div className={`text-xs font-semibold px-2 py-1 rounded ${previewPriority.color}`}>
-                                  {previewPriority.label}
-                                </div>
-                              </div>
-                            );
-                          })()}
-                        </div>
-                        
-                        {/* Impact Assessment */}
-                        <div className="space-y-3 mb-4 pb-4 border-b border-teal-200">
-                          <p className="text-xs font-semibold text-teal-900">IMPACT & VALUE</p>
-                          
-                          <div className="space-y-1.5">
-                            <Label className="text-xs text-gray-700">Scale (How many people helped?)</Label>
-                            <Select value={impactScale} onValueChange={setImpactScale}>
-                              <SelectTrigger className="h-9 text-sm">
-                                <SelectValue placeholder="Select scale..." />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="large">Large (1000+ patients or 100+ staff)</SelectItem>
-                                <SelectItem value="medium">Medium (100-1000 patients or 10-100 staff)</SelectItem>
-                                <SelectItem value="small">Small (Under 100 people)</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-
-                          <div className="space-y-1.5">
-                            <Label className="text-xs text-gray-700">Benefit Type</Label>
-                            <Select value={impactBenefitType} onValueChange={setImpactBenefitType}>
-                              <SelectTrigger className="h-9 text-sm">
-                                <SelectValue placeholder="Select benefit type..." />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="patient-safety">Patient Safety (highest priority)</SelectItem>
-                                <SelectItem value="patient-outcomes">Patient Outcomes</SelectItem>
-                                <SelectItem value="staff-efficiency">Staff Efficiency</SelectItem>
-                                <SelectItem value="cost-reduction">Cost Reduction</SelectItem>
-                                <SelectItem value="experience">Experience Improvement</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-
-                          <div className="space-y-1.5">
-                            <Label className="text-xs text-gray-700">Financial Return</Label>
-                            <Select value={impactFinancialReturn} onValueChange={setImpactFinancialReturn}>
-                              <SelectTrigger className="h-9 text-sm">
-                                <SelectValue placeholder="Select financial return..." />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="high">High (Clear cost savings/revenue)</SelectItem>
-                                <SelectItem value="some">Some (Indirect savings)</SelectItem>
-                                <SelectItem value="minimal">Minimal (Quality/experience focus)</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
+                      {/* Simplified 3-Field Evaluation */}
+                      <div className="p-4 bg-gradient-to-br from-teal-50 to-blue-50 rounded-lg border-2 border-teal-200 space-y-4">
+                        <div>
+                          <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+                            <Target className="h-4 w-4 text-teal-600" />
+                            Priority Evaluation
+                          </h4>
+                          <p className="text-xs text-gray-600 mt-1">Assess impact and effort to prioritize</p>
                         </div>
 
-                        {/* Feasibility Assessment */}
-                        <div className="space-y-3">
-                          <p className="text-xs font-semibold text-blue-900">FEASIBILITY</p>
-                          
-                          <div className="space-y-1.5">
-                            <Label className="text-xs text-gray-700">Complexity (How hard to build?)</Label>
-                            <Select value={feasibilityComplexity} onValueChange={setFeasibilityComplexity}>
-                              <SelectTrigger className="h-9 text-sm">
-                                <SelectValue placeholder="Select complexity..." />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="simple">Simple (Existing tools, basic automation)</SelectItem>
-                                <SelectItem value="moderate">Moderate (Some custom work)</SelectItem>
-                                <SelectItem value="complex">Complex (Custom AI/ML, major dev)</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-
-                          <div className="space-y-1.5">
-                            <Label className="text-xs text-gray-700">Timeline (How long until working?)</Label>
-                            <Select value={feasibilityTimeline} onValueChange={setFeasibilityTimeline}>
-                              <SelectTrigger className="h-9 text-sm">
-                                <SelectValue placeholder="Select timeline..." />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="quick">Quick (3-6 months)</SelectItem>
-                                <SelectItem value="standard">Standard (6-12 months)</SelectItem>
-                                <SelectItem value="long">Long (12+ months)</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-
-                          <div className="space-y-1.5">
-                            <Label className="text-xs text-gray-700">Dependencies (What's needed first?)</Label>
-                            <Select value={feasibilityDependencies} onValueChange={setFeasibilityDependencies}>
-                              <SelectTrigger className="h-9 text-sm">
-                                <SelectValue placeholder="Select dependencies..." />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="ready">Ready Now (No blockers)</SelectItem>
-                                <SelectItem value="minor">Minor (Approval or small prep)</SelectItem>
-                                <SelectItem value="major">Major (Infrastructure/budget/other projects)</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
+                        {/* Impact */}
+                        <div className="space-y-1.5">
+                          <Label className="text-sm font-semibold text-gray-700">Impact (Value to Organization)</Label>
+                          <Select value={impact} onValueChange={setImpact}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select impact..." />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="high">High - Major benefit, affects many people</SelectItem>
+                              <SelectItem value="medium">Medium - Moderate benefit</SelectItem>
+                              <SelectItem value="low">Low - Minor benefit</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
-                      </div>
 
-                      {/* Admin Notes */}
-                      <div className="space-y-2">
-                        <Label htmlFor="notes" className="text-sm font-semibold text-gray-700">
-                          Internal Notes & Tags
-                        </Label>
-                        <Textarea
-                          id="notes"
-                          value={adminNotes}
-                          onChange={(e) => setAdminNotes(e.target.value)}
-                          placeholder="Add notes or tags (e.g., 'Strategic Priority', 'Regulatory', 'High Change Impact')..."
-                          rows={3}
-                        />
+                        {/* Effort */}
+                        <div className="space-y-1.5">
+                          <Label className="text-sm font-semibold text-gray-700">Effort (Complexity & Resources)</Label>
+                          <Select value={effort} onValueChange={setEffort}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select effort..." />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="low">Low - Quick to implement, few resources</SelectItem>
+                              <SelectItem value="medium">Medium - Moderate time and resources</SelectItem>
+                              <SelectItem value="high">High - Complex, requires significant investment</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        {/* Notes */}
+                        <div className="space-y-1.5">
+                          <Label className="text-sm font-semibold text-gray-700">Evaluation Notes</Label>
+                          <Textarea
+                            value={evaluationNotes}
+                            onChange={(e) => setEvaluationNotes(e.target.value)}
+                            placeholder="Add notes about this evaluation..."
+                            rows={3}
+                          />
+                        </div>
                       </div>
 
                       {/* Action Buttons */}
@@ -1093,16 +935,16 @@ export default function Admin() {
                         <Button 
                           onClick={async () => {
                             try {
-                              // Save priority evaluation
-                              await updatePriorityMutation.mutateAsync({
-                                id: selectedInitiative.id,
-                                impactScale: impactScale as any,
-                                impactBenefitType: impactBenefitType as any,
-                                impactFinancialReturn: impactFinancialReturn as any,
-                                feasibilityComplexity: feasibilityComplexity as any,
-                                feasibilityTimeline: feasibilityTimeline as any,
-                                feasibilityDependencies: feasibilityDependencies as any,
-                              });
+                              // Save simplified priority evaluation (3 fields)
+                              if (impact && effort) {
+                                await updatePriorityMutation.mutateAsync({
+                                  id: selectedInitiative.id,
+                                  impact: impact as 'high' | 'medium' | 'low',
+                                  effort: effort as 'high' | 'medium' | 'low',
+                                  evaluationNotes: evaluationNotes || undefined,
+                                  tags: tags.length > 0 ? tags : undefined,
+                                });
+                              }
                               
                               // Save status
                               await handleStatusUpdate();
@@ -1123,14 +965,7 @@ export default function Admin() {
                           Save All Updates
                         </Button>
                         <div className="grid grid-cols-2 gap-2">
-                          <Button 
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleEmailSubmitter(selectedInitiative.userEmail || '')}
-                          >
-                            <Mail className="h-4 w-4 mr-1" />
-                            Email
-                          </Button>
+
                           <Button 
                             variant="destructive"
                             size="sm"
@@ -1190,11 +1025,7 @@ export default function Admin() {
         )}
       </div>
 
-      {/* Priority Rubric Modal */}
-      <PriorityRubricModal 
-        open={showRubricModal} 
-        onOpenChange={setShowRubricModal} 
-      />
+
     </div>
   );
 }

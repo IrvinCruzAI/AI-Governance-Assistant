@@ -381,42 +381,58 @@ export function calculatePriority(initiative: {
 }
 
 
-// Priority evaluation
+// Simplified priority evaluation (3 fields: impact, effort, notes)
 export async function updatePriorityEvaluation(
   id: number,
   evaluation: {
-    impactScale?: string;
-    impactBenefitType?: string;
-    impactFinancialReturn?: string;
-    feasibilityComplexity?: string;
-    feasibilityTimeline?: string;
-    feasibilityDependencies?: string;
+    impact: 'high' | 'medium' | 'low';
+    effort: 'high' | 'medium' | 'low';
+    evaluationNotes?: string;
+    tags?: string[]; // Array of keyword tags
   }
 ) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  // Get current initiative to calculate priority
-  const current = await db.select().from(initiatives).where(eq(initiatives.id, id)).limit(1);
-  if (current.length === 0) throw new Error("Initiative not found");
+  // Calculate priority from impact/effort matrix
+  const priority = calculateSimplePriority(evaluation.impact, evaluation.effort);
   
-  // Merge current values with new evaluation
-  const merged = {
-    ...current[0],
-    ...evaluation
-  };
-  
-  // Calculate priority scores
-  const priority = calculatePriority(merged);
-  
-  // Update initiative with evaluation and calculated scores
+  // Update initiative with evaluation and calculated priority
   const updateData: any = {
-    ...evaluation,
-    impactScore: priority.impactScore,
-    feasibilityScore: priority.feasibilityScore,
-    priorityScore: priority.priorityScore,
-    priorityQuadrant: priority.priorityQuadrant
+    impact: evaluation.impact,
+    effort: evaluation.effort,
+    evaluationNotes: evaluation.evaluationNotes || null,
+    tags: evaluation.tags ? JSON.stringify(evaluation.tags) : null,
+    priorityScore: priority.score,
+    priorityQuadrant: priority.quadrant
   };
   
   await db.update(initiatives).set(updateData).where(eq(initiatives.id, id));
+}
+
+// Calculate priority from simplified impact/effort matrix
+function calculateSimplePriority(impact: 'high' | 'medium' | 'low', effort: 'high' | 'medium' | 'low') {
+  // Impact scores: high=100, medium=60, low=30
+  const impactScore = impact === 'high' ? 100 : impact === 'medium' ? 60 : 30;
+  
+  // Effort scores: high=100, medium=60, low=30  
+  const effortScore = effort === 'high' ? 100 : effort === 'medium' ? 60 : 30;
+  
+  // Total score (higher is better)
+  const score = impactScore + (100 - effortScore); // Impact + (inverse of effort)
+  
+  // Determine quadrant
+  let quadrant: 'quick-win' | 'strategic-bet' | 'nice-to-have' | 'reconsider';
+  
+  if (impact === 'high' && (effort === 'low' || effort === 'medium')) {
+    quadrant = 'quick-win'; // High impact, low/medium effort
+  } else if (impact === 'high' && effort === 'high') {
+    quadrant = 'strategic-bet'; // High impact, high effort
+  } else if (impact === 'medium' || (impact === 'low' && effort === 'low')) {
+    quadrant = 'nice-to-have'; // Medium impact or low impact/low effort
+  } else {
+    quadrant = 'reconsider'; // Low impact, high effort
+  }
+  
+  return { score, quadrant };
 }

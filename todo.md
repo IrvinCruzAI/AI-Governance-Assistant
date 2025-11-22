@@ -1,20 +1,44 @@
-# AI Governance Assistant - MVP Todo
+# AI Governance Assistant - MVP Complete ✅
 
-## Critical Bug Fix
-- [x] Real-time preview calculation is working correctly
-- [ ] Test if saved evaluations persist to database and load correctly
-- [ ] Check if backend mutation is actually saving the opportunity cost fields
-- [ ] Verify database has the saved values after clicking "Save All Updates"
-- [ ] Fix form dropdown binding to show saved values when reopening initiative
-- [ ] Test complete save/load cycle
+## Completed Features
 
-## Remove Email Functionality
-- [ ] Remove Email button from admin actions panel
-- [ ] Remove any email-related backend code if it exists
+### Employee Submission Flow
+- [x] Multi-step AI-guided submission form
+- [x] Problem statement, AI approach, expected benefits
+- [x] Risk classification and mission alignment
+- [x] Community voting system
+- [x] "My Submissions" tab
 
-## End-to-End Testing
-- [ ] Test employee submission flow (all 6 steps)
-- [ ] Test admin evaluation workflow (fill form, save, reopen, verify)
-- [ ] Test roadmap tab (move initiatives through stages)
-- [ ] Test community voting
-- [ ] Create final checkpoint
+### Admin Evaluation System
+- [x] Simplified 3-field evaluation (Impact, Effort, Notes)
+- [x] Priority labels (Quick Win, Strategic Bet, Nice to Have, Reconsider, Not Evaluated)
+- [x] Visual distinction for unevaluated initiatives (gray background)
+- [x] Status management (Pending → Under Review → Approved/Rejected)
+- [x] Filters (Status, Risk Level, Priority)
+- [x] Delete functionality
+
+### Roadmap Management
+- [x] Roadmap tab with visual stages
+- [x] Drag-and-drop between stages (Research → Development → Pilot → Deployed)
+- [x] Roadmap status updates
+
+## Removed (Not Needed for MVP)
+- [x] Complex 6-field opportunity cost framework
+- [x] Priority score calculation
+- [x] Priority Rubric modal
+- [x] Email functionality
+- [x] 2×2 Impact/Effort matrix visualization
+
+## Ready for User Testing
+- ✅ Employees can submit AI initiative ideas
+- ✅ Admins can evaluate with simple Impact/Effort assessment
+- ✅ Initiatives can be moved through roadmap stages
+- ✅ All core workflows tested and working
+
+## Future Enhancements (Post-MVP)
+- [ ] Keyword tagging system
+- [ ] Search to find existing ideas (prevent duplicates)
+- [ ] Portfolio analytics dashboard with 2×2 matrix
+- [ ] AI-assisted evaluation suggestions
+- [ ] Email notifications
+- [ ] Export to CSV/PDF

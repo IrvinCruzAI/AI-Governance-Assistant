@@ -62,21 +62,17 @@ export const initiatives = mysqlTable("initiatives", {
   briefGenerated: boolean("briefGenerated").default(false),
   emailSummaryGenerated: boolean("emailSummaryGenerated").default(false),
   
-  // Impact & Value Assessment (Admin evaluates)
-  impactScale: mysqlEnum("impactScale", ["large", "medium", "small"]), // How many people helped
-  impactBenefitType: mysqlEnum("impactBenefitType", ["patient-safety", "patient-outcomes", "staff-efficiency", "cost-reduction", "experience"]),
-  impactFinancialReturn: mysqlEnum("impactFinancialReturn", ["high", "some", "minimal"]),
-  impactScore: int("impactScore"), // 0-85
+  // Simplified Evaluation (Admin evaluates)
+  impact: mysqlEnum("impact", ["high", "medium", "low"]), // Value/benefit to organization
+  effort: mysqlEnum("effort", ["high", "medium", "low"]), // Complexity/resources required
+  evaluationNotes: text("evaluationNotes"), // Admin's assessment notes
   
-  // Feasibility Assessment (Admin evaluates)
-  feasibilityComplexity: mysqlEnum("feasibilityComplexity", ["simple", "moderate", "complex"]),
-  feasibilityTimeline: mysqlEnum("feasibilityTimeline", ["quick", "standard", "long"]), // quick=3-6mo, standard=6-12mo, long=12+mo
-  feasibilityDependencies: mysqlEnum("feasibilityDependencies", ["ready", "minor", "major"]),
-  feasibilityScore: int("feasibilityScore"), // 0-95
-  
-  // Calculated Priority
-  priorityScore: int("priorityScore"), // (Impact × 2) - Feasibility
+  // Calculated Priority (Impact vs Effort matrix)
+  priorityScore: int("priorityScore"), // Calculated from impact + effort
   priorityQuadrant: mysqlEnum("priorityQuadrant", ["quick-win", "strategic-bet", "nice-to-have", "reconsider"]),
+  
+  // Keyword Tags (for search and duplicate detection)
+  tags: text("tags"), // JSON array of keywords
   
   // Admin fields
   status: mysqlEnum("status", ["pending", "under-review", "approved", "rejected"]).default("pending"),

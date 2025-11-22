@@ -271,16 +271,14 @@ export const appRouter = router({
         return await db.getInitiativesByRoadmapStatus(input.roadmapStatus);
       }),
 
-    // Update priority evaluation (admin only)
+    // Update priority evaluation (admin only) - Simplified 3-field system
     updatePriorityEvaluation: adminProcedure
       .input(z.object({
         id: z.number(),
-        impactScale: z.enum(['large', 'medium', 'small']).optional(),
-        impactBenefitType: z.enum(['patient-safety', 'patient-outcomes', 'staff-efficiency', 'cost-reduction', 'experience']).optional(),
-        impactFinancialReturn: z.enum(['high', 'some', 'minimal']).optional(),
-        feasibilityComplexity: z.enum(['simple', 'moderate', 'complex']).optional(),
-        feasibilityTimeline: z.enum(['quick', 'standard', 'long']).optional(),
-        feasibilityDependencies: z.enum(['ready', 'minor', 'major']).optional(),
+        impact: z.enum(['high', 'medium', 'low']),
+        effort: z.enum(['high', 'medium', 'low']),
+        evaluationNotes: z.string().optional(),
+        tags: z.array(z.string()).optional(),
       }))
       .mutation(async ({ input }) => {
         const { id, ...evaluation } = input;
