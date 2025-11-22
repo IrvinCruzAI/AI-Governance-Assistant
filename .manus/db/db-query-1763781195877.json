@@ -1,0 +1,58 @@
+{
+  "query": "SELECT id, title, problemStatement, aiApproach FROM initiatives ORDER BY createdAt DESC LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, problemStatement, aiApproach FROM initiatives ORDER BY createdAt DESC LIMIT 10;",
+  "rows": [
+    {
+      "id": "210009",
+      "title": "Patient Flow Optimization",
+      "problemStatement": "Emergency department wait times are too long",
+      "aiApproach": "NULL"
+    },
+    {
+      "id": "210008",
+      "title": "AI-Powered Scheduling System",
+      "problemStatement": "Current scheduling is inefficient and time-consuming",
+      "aiApproach": "Use AI to optimize staff schedules based on demand patterns"
+    },
+    {
+      "id": "210006",
+      "title": "Pharmacy Inventory Optimization & Expiration Tracking",
+      "problemStatement": "Medication waste due to expiration costs tens of thousands annually. Manual inventory tracking is time-consuming and error-prone. Pharmacies often run out of critical medications while overstocking others. Staff spend hours counting and reordering.",
+      "aiApproach": "Implement an AI-powered inventory management system that predicts medication usage patterns based on historical data and patient census, automatically generates reorder recommendations, tracks expiration dates and alerts staff 30/60/90 days in advance, suggests redistribution of near-expiry medications to high-use units, and optimizes par levels to minimize waste while preventing stockouts."
+    },
+    {
+      "id": "210005",
+      "title": "Fall Risk Prediction & Alert System for Inpatient Units",
+      "problemStatement": "Patient falls are a leading cause of hospital-acquired injuries, resulting in longer stays, increased costs, and poor outcomes. Current fall risk assessments are manual, subjective, and often outdated. High-risk patients aren't always identified in time.",
+      "aiApproach": "Deploy a real-time fall risk prediction system that continuously analyzes patient data (vitals, medications, mobility, cognition, age), predicts fall risk score in real-time and updates as conditions change, alerts nurses when a patient's risk level increases, and suggests specific interventions (bed alarm, hourly rounding, mobility assistance)."
+    },
+    {
+      "id": "210001",
+      "title": "Automated Patient Appointment Reminders & Scheduling Optimization",
+      "problemStatement": "No-show rates average 15-20% across our facilities, costing thousands in lost revenue and disrupting care continuity. Manual reminder calls are time-consuming and inconsistent. Patients also struggle to find available appointments that fit their schedules.",
+      "aiApproach": "Implement an AI-powered appointment reminder system that sends personalized SMS/email reminders at optimal times based on patient behavior patterns, predicts no-show likelihood, suggests optimal rescheduling times, and analyzes scheduling patterns to recommend better appointment slot allocation."
+    },
+    {
+      "id": "210004",
+      "title": "Automated Prior Authorization Assistant",
+      "problemStatement": "Prior authorization requests take 20-30 minutes each to complete manually. Staff spend hours on hold with insurance companies, gathering documentation, and filling out redundant forms. Delays in authorization lead to delayed care and patient frustration.",
+      "aiApproach": "Implement an AI assistant that auto-fills prior authorization forms using data from EHR, predicts which procedures/medications will require prior auth, tracks authorization status and sends automated follow-ups, and identifies patterns in denials to suggest alternative approaches."
+    },
+    {
+      "id": "210003",
+      "title": "Predictive Staffing Model for Emergency Departments",
+      "problemStatement": "ED patient volumes fluctuate unpredictably, leading to either overstaffing (wasted resources) or understaffing (long wait times, poor patient experience). Current staffing models rely on historical averages and don't account for real-time factors like weather, local events, or flu season.",
+      "aiApproach": "Build a predictive analytics model that forecasts ED patient volume 24-72 hours in advance, considers weather, day of week, local events, seasonal trends, and historical patterns, recommends optimal staffing levels by hour, and sends alerts when predicted volume exceeds current staffing capacity."
+    },
+    {
+      "id": "210002",
+      "title": "AI-Assisted Clinical Documentation for Discharge Summaries",
+      "problemStatement": "Hospitalists spend 15-20 minutes per discharge summary, often staying late to complete documentation. This leads to burnout and delays in patient discharge. Summaries are sometimes incomplete or lack important details for follow-up providers.",
+      "aiApproach": "Deploy AI scribe technology that listens to physician-patient conversations during discharge planning, auto-generates draft discharge summaries with key elements (diagnosis, treatment, medications, follow-up), pulls relevant data from EHR automatically, and allows physician to review/edit/approve in 2-3 minutes."
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tproblemStatement\taiApproach\n210009\tPatient Flow Optimization\tEmergency department wait times are too long\tNULL\n210008\tAI-Powered Scheduling System\tCurrent scheduling is inefficient and time-consuming\tUse AI to optimize staff schedules based on demand patterns\n210006\tPharmacy Inventory Optimization & Expiration Tracking\tMedication waste due to expiration costs tens of thousands annually. Manual inventory tracking is time-consuming and error-prone. Pharmacies often run out of critical medications while overstocking others. Staff spend hours counting and reordering.\tImplement an AI-powered inventory management system that predicts medication usage patterns based on historical data and patient census, automatically generates reorder recommendations, tracks expiration dates and alerts staff 30/60/90 days in advance, suggests redistribution of near-expiry medications to high-use units, and optimizes par levels to minimize waste while preventing stockouts.\n210005\tFall Risk Prediction & Alert System for Inpatient Units\tPatient falls are a leading cause of hospital-acquired injuries, resulting in longer stays, increased costs, and poor outcomes. Current fall risk assessments are manual, subjective, and often outdated. High-risk patients aren't always identified in time.\tDeploy a real-time fall risk prediction system that continuously analyzes patient data (vitals, medications, mobility, cognition, age), predicts fall risk score in real-time and updates as conditions change, alerts nurses when a patient's risk level increases, and suggests specific interventions (bed alarm, hourly rounding, mobility assistance).\n210001\tAutomated Patient Appointment Reminders & Scheduling Optimization\tNo-show rates average 15-20% across our facilities, costing thousands in lost revenue and disrupting care continuity. Manual reminder calls are time-consuming and inconsistent. Patients also struggle to find available appointments that fit their schedules.\tImplement an AI-powered appointment reminder system that sends personalized SMS/email reminders at optimal times based on patient behavior patterns, predicts no-show likelihood, suggests optimal rescheduling times, and analyzes scheduling patterns to recommend better appointment slot allocation.\n210004\tAutomated Prior Authorization Assistant\tPrior authorization requests take 20-30 minutes each to complete manually. Staff spend hours on hold with insurance companies, gathering documentation, and filling out redundant forms. Delays in authorization lead to delayed care and patient frustration.\tImplement an AI assistant that auto-fills prior authorization forms using data from EHR, predicts which procedures/medications will require prior auth, tracks authorization status and sends automated follow-ups, and identifies patterns in denials to suggest alternative approaches.\n210003\tPredictive Staffing Model for Emergency Departments\tED patient volumes fluctuate unpredictably, leading to either overstaffing (wasted resources) or understaffing (long wait times, poor patient experience). Current staffing models rely on historical averages and don't account for real-time factors like weather, local events, or flu season.\tBuild a predictive analytics model that forecasts ED patient volume 24-72 hours in advance, considers weather, day of week, local events, seasonal trends, and historical patterns, recommends optimal staffing levels by hour, and sends alerts when predicted volume exceeds current staffing capacity.\n210002\tAI-Assisted Clinical Documentation for Discharge Summaries\tHospitalists spend 15-20 minutes per discharge summary, often staying late to complete documentation. This leads to burnout and delays in patient discharge. Summaries are sometimes incomplete or lack important details for follow-up providers.\tDeploy AI scribe technology that listens to physician-patient conversations during discharge planning, auto-generates draft discharge summaries with key elements (diagnosis, treatment, medications, follow-up), pulls relevant data from EHR automatically, and allows physician to review/edit/approve in 2-3 minutes.\n",
+  "stderr": "",
+  "execution_time_ms": 49
+}

@@ -1,0 +1,35 @@
+{
+  "query": "SELECT id, title, problemStatement FROM initiatives WHERE title LIKE '%Untitled%' OR title = '' OR title IS NULL OR problemStatement = '' OR problemStatement IS NULL;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, problemStatement FROM initiatives WHERE title LIKE '%Untitled%' OR title = '' OR title IS NULL OR problemStatement = '' OR problemStatement IS NULL;",
+  "rows": [
+    {
+      "id": "210007",
+      "title": "Untitled Initiative",
+      "problemStatement": "NULL"
+    },
+    {
+      "id": "210010",
+      "title": "Untitled Initiative",
+      "problemStatement": "NULL"
+    },
+    {
+      "id": "210011",
+      "title": "Untitled Initiative",
+      "problemStatement": "NULL"
+    },
+    {
+      "id": "210012",
+      "title": "Untitled Initiative",
+      "problemStatement": "NULL"
+    },
+    {
+      "id": "210013",
+      "title": "Untitled Initiative",
+      "problemStatement": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tproblemStatement\n210007\tUntitled Initiative\tNULL\n210010\tUntitled Initiative\tNULL\n210011\tUntitled Initiative\tNULL\n210012\tUntitled Initiative\tNULL\n210013\tUntitled Initiative\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 166
+}
