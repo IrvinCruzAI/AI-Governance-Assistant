@@ -9,6 +9,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Heart,
+  LayoutDashboard,
   Lightbulb,
   Lock,
   Shield,
@@ -62,16 +63,23 @@ export default function Home() {
               Sign In
             </Button>
           ) : (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <Button
                 onClick={() => setLocation("/admin")}
-                variant="ghost"
-                className="text-sm"
+                variant="default"
+                size="sm"
+                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white shadow-md hover:shadow-lg transition-all"
               >
+                <LayoutDashboard className="h-4 w-4 mr-2" />
                 {user?.role === 'admin' ? 'Dashboard' : 'My Submissions'}
               </Button>
-              <div className="text-sm font-medium text-gray-700">
-                Hi, {user?.name?.split(' ')[0] || 'there'}!
+              <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-teal-50 rounded-full border border-blue-200">
+                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                  {user?.name?.charAt(0).toUpperCase() || 'U'}
+                </div>
+                <span className="text-sm font-medium text-gray-800">
+                  Hi, {user?.name?.split(' ')[0] || 'there'}!
+                </span>
               </div>
             </div>
           )}
