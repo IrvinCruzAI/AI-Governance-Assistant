@@ -203,3 +203,8 @@
 - [x] Match text size to logo height
 - [x] Test layout and spacing
 - [x] Create checkpoint
+
+## Text Proportion Adjustment
+- [x] Increase "AI Initiative Portal" text size for better proportion
+- [x] Test visual balance with logo
+- [x] Create checkpoint

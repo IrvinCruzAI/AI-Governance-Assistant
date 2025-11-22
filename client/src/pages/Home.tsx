@@ -48,7 +48,7 @@ export default function Home() {
               </span>
             </div>
             <div className="h-12 w-px bg-gray-300" />
-            <span className="text-lg font-medium text-gray-900">
+            <span className="text-2xl font-semibold text-gray-900">
               AI Initiative Portal
             </span>
           </div>
