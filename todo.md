@@ -358,3 +358,33 @@
 - [x] Remove Portfolio Overview matrix from admin dashboard (move to future Reports page)
 - [x] Streamline admin page to focus on operational review workflow
 - [x] Create checkpoint with clean admin workflow
+
+## Fix Admin Dashboard Filters
+- [ ] Test Status filter dropdown
+- [ ] Test Risk Level filter dropdown
+- [ ] Test Priority filter dropdown
+- [ ] Fix any broken filter functionality
+- [ ] Verify Clear Filters button works
+- [ ] Test complete evaluation workflow
+- [ ] Create checkpoint with working filters
+
+## P0 Critical UX Fixes (Before Launch)
+- [ ] Fix real-time score preview to populate from saved database values
+- [ ] Add visual distinction for unevaluated initiatives (gray background in table)
+- [ ] Add "Save & Next" button to evaluation modal for batch workflow
+- [ ] Test complete evaluation workflow end-to-end
+- [ ] Create final checkpoint
+
+## CRITICAL BUG FOUND
+- [ ] Form dropdowns show default values instead of saved database values when modal opens
+- [ ] Real-time preview now works correctly (score + label calculation fixed)
+- [ ] Need to verify database schema has all opportunity cost fields
+- [ ] Test saving a new evaluation end-to-end
+
+## Critical UX Fix - Confusing Default Values
+- [x] Remove pre-selected default values from evaluation form dropdowns
+- [x] Show placeholder text "Select..." instead of default values for unevaluated initiatives
+- [x] Only populate form when database has saved evaluation values
+- [x] Add visual distinction for unevaluated initiatives in table (gray background)
+- [ ] Add "Save & Next" button for batch evaluation workflow
+- [ ] Test complete workflow and create checkpoint

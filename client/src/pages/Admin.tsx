@@ -49,21 +49,99 @@ import { PriorityRubricModal } from "@/components/PriorityRubricModal";
 
 // Opportunity Cost Priority Scoring
 function calculatePriorityScore(initiative: any): number {
-  // If opportunity cost fields are filled, use them; otherwise return 0
-  if (!initiative.impactScore && !initiative.feasibilityScore) {
-    return 0;
+  // If backend has pre-calculated scores, use them
+  if (initiative.impactScore !== undefined && initiative.feasibilityScore !== undefined) {
+    return (initiative.impactScore || 0) + (initiative.feasibilityScore || 0);
   }
   
-  // Priority score = Impact Score + Feasibility Score (calculated on backend)
-  const impactScore = initiative.impactScore || 0;
-  const feasibilityScore = initiative.feasibilityScore || 0;
+  // Otherwise calculate from raw field values (for real-time preview)
+  if (!initiative.impactScale && !initiative.feasibilityComplexity) {
+    return 0; // Not evaluated
+  }
+  
+  // Calculate Impact Score (0-100)
+  let impactScore = 0;
+  
+  // Scale contribution (0-40 points)
+  const scalePoints: Record<string, number> = {
+    'large': 40,
+    'medium': 25,
+    'small': 10
+  };
+  impactScore += scalePoints[initiative.impactScale] || 0;
+  
+  // Benefit Type contribution (0-30 points)
+  const benefitPoints: Record<string, number> = {
+    'patient-safety': 30,
+    'patient-outcomes': 25,
+    'efficiency': 20,
+    'cost-savings': 20,
+    'patient-experience': 15
+  };
+  impactScore += benefitPoints[initiative.impactBenefitType] || 0;
+  
+  // Financial Return contribution (0-30 points)
+  const financialPoints: Record<string, number> = {
+    'high': 30,
+    'some': 20,
+    'minimal': 10
+  };
+  impactScore += financialPoints[initiative.impactFinancialReturn] || 0;
+  
+  // Calculate Feasibility Score (0-100, inverted so lower effort = higher score)
+  let feasibilityScore = 100;
+  
+  // Complexity penalty (0-40 points deducted)
+  const complexityPenalty: Record<string, number> = {
+    'simple': 0,
+    'moderate': 20,
+    'complex': 40
+  };
+  feasibilityScore -= complexityPenalty[initiative.feasibilityComplexity] || 0;
+  
+  // Timeline penalty (0-30 points deducted)
+  const timelinePenalty: Record<string, number> = {
+    'quick': 0,
+    'standard': 15,
+    'long': 30
+  };
+  feasibilityScore -= timelinePenalty[initiative.feasibilityTimeline] || 0;
+  
+  // Dependencies penalty (0-30 points deducted)
+  const dependenciesPenalty: Record<string, number> = {
+    'ready': 0,
+    'minor': 15,
+    'major': 30
+  };
+  feasibilityScore -= dependenciesPenalty[initiative.feasibilityDependencies] || 0;
   
   return impactScore + feasibilityScore;
 }
 
 function getPriorityLabel(initiative: any): { label: string; color: string; action: string; quadrant: string } {
   // Use priorityQuadrant from database if available
-  const quadrant = initiative.priorityQuadrant || 'not-evaluated';
+  let quadrant = initiative.priorityQuadrant;
+  
+  // If no quadrant from database, calculate from raw field values (for real-time preview)
+  if (!quadrant && initiative.impactScale && initiative.feasibilityComplexity) {
+    // Calculate impact level (high if scale is large OR benefit is safety/outcomes)
+    const highImpact = initiative.impactScale === 'large' || 
+                       initiative.impactBenefitType === 'patient-safety' ||
+                       initiative.impactBenefitType === 'patient-outcomes';
+    
+    // Calculate effort level (high if complex OR long timeline OR major dependencies)
+    const highEffort = initiative.feasibilityComplexity === 'complex' ||
+                      initiative.feasibilityTimeline === 'long' ||
+                      initiative.feasibilityDependencies === 'major';
+    
+    // Determine quadrant based on impact/effort matrix
+    if (highImpact && !highEffort) quadrant = 'quick-win';
+    else if (highImpact && highEffort) quadrant = 'strategic-bet';
+    else if (!highImpact && !highEffort) quadrant = 'nice-to-have';
+    else if (!highImpact && highEffort) quadrant = 'reconsider';
+  }
+  
+  quadrant = quadrant || 'not-evaluated';
   
   if (quadrant === 'quick-win') return { 
     label: 'Quick Win', 
@@ -162,12 +240,12 @@ export default function Admin() {
   const [showRubricModal, setShowRubricModal] = useState(false);
   
   // Priority evaluation state
-  const [impactScale, setImpactScale] = useState<string>("medium");
-  const [impactBenefitType, setImpactBenefitType] = useState<string>("patient-outcomes");
-  const [impactFinancialReturn, setImpactFinancialReturn] = useState<string>("some");
-  const [feasibilityComplexity, setFeasibilityComplexity] = useState<string>("moderate");
-  const [feasibilityTimeline, setFeasibilityTimeline] = useState<string>("standard");
-  const [feasibilityDependencies, setFeasibilityDependencies] = useState<string>("minor");
+  const [impactScale, setImpactScale] = useState<string>("");
+  const [impactBenefitType, setImpactBenefitType] = useState<string>("");
+  const [impactFinancialReturn, setImpactFinancialReturn] = useState<string>("");
+  const [feasibilityComplexity, setFeasibilityComplexity] = useState<string>("");
+  const [feasibilityTimeline, setFeasibilityTimeline] = useState<string>("");
+  const [feasibilityDependencies, setFeasibilityDependencies] = useState<string>("");
 
   // Queries
   const { data: userInitiatives, isLoading: userLoading } = trpc.initiative.list.useQuery();
@@ -262,13 +340,13 @@ export default function Admin() {
     setNewRoadmapStatus(initiative.roadmapStatus || "under-review");
     setAdminNotes(initiative.adminNotes || "");
     
-    // Initialize evaluation state from existing data
-    setImpactScale(initiative.impactScale || "medium");
-    setImpactBenefitType(initiative.impactBenefitType || "patient-outcomes");
-    setImpactFinancialReturn(initiative.impactFinancialReturn || "some");
-    setFeasibilityComplexity(initiative.feasibilityComplexity || "moderate");
-    setFeasibilityTimeline(initiative.feasibilityTimeline || "standard");
-    setFeasibilityDependencies(initiative.feasibilityDependencies || "minor");
+    // Initialize evaluation state from existing data (no defaults for unevaluated initiatives)
+    setImpactScale(initiative.impactScale || "");
+    setImpactBenefitType(initiative.impactBenefitType || "");
+    setImpactFinancialReturn(initiative.impactFinancialReturn || "");
+    setFeasibilityComplexity(initiative.feasibilityComplexity || "");
+    setFeasibilityTimeline(initiative.feasibilityTimeline || "");
+    setFeasibilityDependencies(initiative.feasibilityDependencies || "");
   };
 
   // Add priority scoring to initiatives
@@ -619,7 +697,7 @@ export default function Admin() {
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                           {filteredInitiatives.map((initiative) => (
-                            <tr key={initiative.id} className="hover:bg-gray-50">
+                            <tr key={initiative.id} className={`hover:bg-gray-50 ${initiative.priorityScore === 0 ? 'bg-gray-100/50 border-l-4 border-l-gray-400' : ''}`}>
                               <td className="px-4 py-4">
                                 <div className="flex flex-col gap-1">
                                   <Badge className={`${initiative.priority.color} text-white text-xs`}>
@@ -907,7 +985,7 @@ export default function Admin() {
                             <Label className="text-xs text-gray-700">Scale (How many people helped?)</Label>
                             <Select value={impactScale} onValueChange={setImpactScale}>
                               <SelectTrigger className="h-9 text-sm">
-                                <SelectValue />
+                                <SelectValue placeholder="Select scale..." />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="large">Large (1000+ patients or 100+ staff)</SelectItem>
@@ -921,7 +999,7 @@ export default function Admin() {
                             <Label className="text-xs text-gray-700">Benefit Type</Label>
                             <Select value={impactBenefitType} onValueChange={setImpactBenefitType}>
                               <SelectTrigger className="h-9 text-sm">
-                                <SelectValue />
+                                <SelectValue placeholder="Select benefit type..." />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="patient-safety">Patient Safety (highest priority)</SelectItem>
@@ -937,7 +1015,7 @@ export default function Admin() {
                             <Label className="text-xs text-gray-700">Financial Return</Label>
                             <Select value={impactFinancialReturn} onValueChange={setImpactFinancialReturn}>
                               <SelectTrigger className="h-9 text-sm">
-                                <SelectValue />
+                                <SelectValue placeholder="Select financial return..." />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="high">High (Clear cost savings/revenue)</SelectItem>
@@ -956,7 +1034,7 @@ export default function Admin() {
                             <Label className="text-xs text-gray-700">Complexity (How hard to build?)</Label>
                             <Select value={feasibilityComplexity} onValueChange={setFeasibilityComplexity}>
                               <SelectTrigger className="h-9 text-sm">
-                                <SelectValue />
+                                <SelectValue placeholder="Select complexity..." />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="simple">Simple (Existing tools, basic automation)</SelectItem>
@@ -970,7 +1048,7 @@ export default function Admin() {
                             <Label className="text-xs text-gray-700">Timeline (How long until working?)</Label>
                             <Select value={feasibilityTimeline} onValueChange={setFeasibilityTimeline}>
                               <SelectTrigger className="h-9 text-sm">
-                                <SelectValue />
+                                <SelectValue placeholder="Select timeline..." />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="quick">Quick (3-6 months)</SelectItem>
@@ -984,7 +1062,7 @@ export default function Admin() {
                             <Label className="text-xs text-gray-700">Dependencies (What's needed first?)</Label>
                             <Select value={feasibilityDependencies} onValueChange={setFeasibilityDependencies}>
                               <SelectTrigger className="h-9 text-sm">
-                                <SelectValue />
+                                <SelectValue placeholder="Select dependencies..." />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="ready">Ready Now (No blockers)</SelectItem>
