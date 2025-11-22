@@ -1,0 +1,118 @@
+{
+  "query": "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'initiatives' ORDER BY ORDINAL_POSITION;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'initiatives' ORDER BY ORDINAL_POSITION;",
+  "rows": [
+    {
+      "COLUMN_NAME": "id"
+    },
+    {
+      "COLUMN_NAME": "userId"
+    },
+    {
+      "COLUMN_NAME": "userRole"
+    },
+    {
+      "COLUMN_NAME": "area"
+    },
+    {
+      "COLUMN_NAME": "title"
+    },
+    {
+      "COLUMN_NAME": "problemStatement"
+    },
+    {
+      "COLUMN_NAME": "aiApproach"
+    },
+    {
+      "COLUMN_NAME": "primaryUsers"
+    },
+    {
+      "COLUMN_NAME": "missionSupports"
+    },
+    {
+      "COLUMN_NAME": "wholPersonCareAlignment"
+    },
+    {
+      "COLUMN_NAME": "ethicalConcerns"
+    },
+    {
+      "COLUMN_NAME": "missionAlignmentRating"
+    },
+    {
+      "COLUMN_NAME": "missionAlignmentReasoning"
+    },
+    {
+      "COLUMN_NAME": "mainArea"
+    },
+    {
+      "COLUMN_NAME": "clinicalImpact"
+    },
+    {
+      "COLUMN_NAME": "dataType"
+    },
+    {
+      "COLUMN_NAME": "automationLevel"
+    },
+    {
+      "COLUMN_NAME": "riskLevel"
+    },
+    {
+      "COLUMN_NAME": "governancePath"
+    },
+    {
+      "COLUMN_NAME": "riskReasoning"
+    },
+    {
+      "COLUMN_NAME": "risks"
+    },
+    {
+      "COLUMN_NAME": "assumptions"
+    },
+    {
+      "COLUMN_NAME": "issues"
+    },
+    {
+      "COLUMN_NAME": "dependencies"
+    },
+    {
+      "COLUMN_NAME": "briefGenerated"
+    },
+    {
+      "COLUMN_NAME": "emailSummaryGenerated"
+    },
+    {
+      "COLUMN_NAME": "currentStep"
+    },
+    {
+      "COLUMN_NAME": "completed"
+    },
+    {
+      "COLUMN_NAME": "createdAt"
+    },
+    {
+      "COLUMN_NAME": "updatedAt"
+    },
+    {
+      "COLUMN_NAME": "status"
+    },
+    {
+      "COLUMN_NAME": "adminNotes"
+    },
+    {
+      "COLUMN_NAME": "userEmail"
+    },
+    {
+      "COLUMN_NAME": "roadmapStatus"
+    },
+    {
+      "COLUMN_NAME": "priorityScore"
+    },
+    {
+      "COLUMN_NAME": "priorityQuadrant"
+    }
+  ],
+  "messages": [],
+  "stdout": "COLUMN_NAME\nid\nuserId\nuserRole\narea\ntitle\nproblemStatement\naiApproach\nprimaryUsers\nmissionSupports\nwholPersonCareAlignment\nethicalConcerns\nmissionAlignmentRating\nmissionAlignmentReasoning\nmainArea\nclinicalImpact\ndataType\nautomationLevel\nriskLevel\ngovernancePath\nriskReasoning\nrisks\nassumptions\nissues\ndependencies\nbriefGenerated\nemailSummaryGenerated\ncurrentStep\ncompleted\ncreatedAt\nupdatedAt\nstatus\nadminNotes\nuserEmail\nroadmapStatus\npriorityScore\npriorityQuadrant\n",
+  "stderr": "",
+  "execution_time_ms": 51
+}

@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE initiatives \nADD COLUMN IF NOT EXISTS impactBenefitType ENUM('patient-safety', 'patient-outcomes', 'staff-efficiency', 'cost-reduction', 'experience'),\nADD COLUMN IF NOT EXISTS impactFinancialReturn ENUM('high', 'some', 'minimal'),\nADD COLUMN IF NOT EXISTS impactScore INT,\nADD COLUMN IF NOT EXISTS feasibilityComplexity ENUM('simple', 'moderate', 'complex'),\nADD COLUMN IF NOT EXISTS feasibilityTimeline ENUM('quick', 'standard', 'long'),\nADD COLUMN IF NOT EXISTS feasibilityDependencies ENUM('ready', 'minor', 'major'),\nADD COLUMN IF NOT EXISTS feasibilityScore INT;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute ALTER TABLE initiatives \nADD COLUMN IF NOT EXISTS impactBenefitType ENUM('patient-safety', 'patient-outcomes', 'staff-efficiency', 'cost-reduction', 'experience'),\nADD COLUMN IF NOT EXISTS impactFinancialReturn ENUM('high', 'some', 'minimal'),\nADD COLUMN IF NOT EXISTS impactScore INT,\nADD COLUMN IF NOT EXISTS feasibilityComplexity ENUM('simple', 'moderate', 'complex'),\nADD COLUMN IF NOT EXISTS feasibilityTimeline ENUM('quick', 'standard', 'long'),\nADD COLUMN IF NOT EXISTS feasibilityDependencies ENUM('ready', 'minor', 'major'),\nADD COLUMN IF NOT EXISTS feasibilityScore INT;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1847
+}

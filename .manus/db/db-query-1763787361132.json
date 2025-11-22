@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE initiatives ADD COLUMN IF NOT EXISTS impactScale ENUM('large', 'medium', 'small');",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute ALTER TABLE initiatives ADD COLUMN IF NOT EXISTS impactScale ENUM('large', 'medium', 'small');",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 389
+}
