@@ -1,0 +1,38 @@
+{
+  "query": "SELECT DISTINCT title, COUNT(*) as count \nFROM initiatives \nGROUP BY title \nORDER BY count DESC, title",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT DISTINCT title, COUNT(*) as count \nFROM initiatives \nGROUP BY title \nORDER BY count DESC, title",
+  "rows": [
+    {
+      "title": "AI-Powered Scheduling System",
+      "count": "2"
+    },
+    {
+      "title": "Patient Flow Optimization",
+      "count": "2"
+    },
+    {
+      "title": "AI-Assisted Clinical Documentation for Discharge Summaries",
+      "count": "1"
+    },
+    {
+      "title": "Automated Patient Appointment Reminders & Scheduling Optimization",
+      "count": "1"
+    },
+    {
+      "title": "Automated Prior Authorization Assistant",
+      "count": "1"
+    },
+    {
+      "title": "Fall Risk Prediction & Alert System for Inpatient Units",
+      "count": "1"
+    },
+    {
+      "title": "Predictive Staffing Model for Emergency Departments",
+      "count": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "title\tcount\nAI-Powered Scheduling System\t2\nPatient Flow Optimization\t2\nAI-Assisted Clinical Documentation for Discharge Summaries\t1\nAutomated Patient Appointment Reminders & Scheduling Optimization\t1\nAutomated Prior Authorization Assistant\t1\nFall Risk Prediction & Alert System for Inpatient Units\t1\nPredictive Staffing Model for Emergency Departments\t1\n",
+  "stderr": "",
+  "execution_time_ms": 50
+}

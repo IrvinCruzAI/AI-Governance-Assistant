@@ -1,0 +1,14 @@
+{
+  "query": "SELECT COUNT(*) as total_initiatives, \n       SUM(CASE WHEN title = 'Untitled Initiative' THEN 1 ELSE 0 END) as untitled_count\nFROM initiatives",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT COUNT(*) as total_initiatives, \n       SUM(CASE WHEN title = 'Untitled Initiative' THEN 1 ELSE 0 END) as untitled_count\nFROM initiatives",
+  "rows": [
+    {
+      "total_initiatives": "9",
+      "untitled_count": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_initiatives\tuntitled_count\n9\t0\n",
+  "stderr": "",
+  "execution_time_ms": 50
+}

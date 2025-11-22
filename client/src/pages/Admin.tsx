@@ -47,14 +47,22 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { PriorityRubricModal } from "@/components/PriorityRubricModal";
 
-// Simplified priority display (no complex scoring)
-function getSimplePriorityLabel(impact?: string, effort?: string): { label: string; color: string } {
-  if (!impact || !effort) return { label: "Not Evaluated", color: "bg-gray-100 text-gray-600" };
+// Get priority label from database priorityQuadrant field
+function getPriorityLabel(priorityQuadrant?: string | null): { label: string; color: string } {
+  if (!priorityQuadrant) return { label: "Not Evaluated", color: "bg-gray-100 text-gray-600" };
   
-  if (impact === 'high' && effort === 'low') return { label: "Quick Win", color: "bg-green-100 text-green-800" };
-  if (impact === 'high' && effort === 'high') return { label: "Strategic Bet", color: "bg-purple-100 text-purple-800" };
-  if (impact === 'low' && effort === 'high') return { label: "Reconsider", color: "bg-red-100 text-red-800" };
-  return { label: "Nice to Have", color: "bg-yellow-100 text-yellow-800" };
+  switch (priorityQuadrant) {
+    case 'quick-win':
+      return { label: "Quick Win", color: "bg-green-100 text-green-800" };
+    case 'strategic-bet':
+      return { label: "Strategic Bet", color: "bg-purple-100 text-purple-800" };
+    case 'reconsider':
+      return { label: "Reconsider", color: "bg-red-100 text-red-800" };
+    case 'nice-to-have':
+      return { label: "Nice to Have", color: "bg-yellow-100 text-yellow-800" };
+    default:
+      return { label: "Not Evaluated", color: "bg-gray-100 text-gray-600" };
+  }
 }
 
 // Old complex scoring functions removed - now using simplified 3-field system
@@ -184,7 +192,7 @@ export default function Admin() {
   const initiatives = isAdmin ? allInitiatives : userInitiatives;
   const initiativesWithPriority = initiatives?.map(initiative => ({
     ...initiative,
-    priority: getSimplePriorityLabel(initiative.impact || undefined, initiative.effort || undefined)
+    priority: getPriorityLabel(initiative.priorityQuadrant)
   })) || [];
 
   // Filter initiatives
@@ -567,7 +575,7 @@ export default function Admin() {
                         <div>
                           <p className="text-sm font-medium text-blue-100 mb-1">Opportunity Classification</p>
                           <Badge className="bg-white text-blue-600 border-white/30 text-2xl px-6 py-3 font-bold">
-                            {getSimplePriorityLabel(selectedInitiative.impact, selectedInitiative.effort).label}
+                            {getPriorityLabel(selectedInitiative.priorityQuadrant).label}
                           </Badge>
                         </div>
                       </div>
