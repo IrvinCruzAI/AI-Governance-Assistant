@@ -353,3 +353,8 @@
 - [x] Make matrix interactive (click quadrant to filter initiatives)
 - [x] Test all improvements from executive perspective
 - [x] Create checkpoint
+
+## Admin Workflow Cleanup
+- [x] Remove Portfolio Overview matrix from admin dashboard (move to future Reports page)
+- [x] Streamline admin page to focus on operational review workflow
+- [x] Create checkpoint with clean admin workflow

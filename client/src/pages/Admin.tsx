@@ -46,7 +46,6 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { PriorityRubricModal } from "@/components/PriorityRubricModal";
-import { PriorityMatrix } from "@/components/PriorityMatrix";
 
 // Opportunity Cost Priority Scoring
 function calculatePriorityScore(initiative: any): number {
@@ -517,21 +516,6 @@ export default function Admin() {
                   </CardContent>
                 </Card>
               )}
-
-              {/* Priority Matrix Visualization */}
-              <PriorityMatrix 
-                initiatives={initiativesWithPriority}
-                onInitiativeClick={openInitiativeDetail}
-                onQuadrantClick={(quadrant) => {
-                  const quadrantLabels: Record<string, string> = {
-                    'quick-win': 'Quick Win',
-                    'strategic-bet': 'Strategic Bet',
-                    'nice-to-have': 'Nice to Have',
-                    'reconsider': 'Reconsider'
-                  };
-                  setPriorityFilter(quadrantLabels[quadrant] || 'all');
-                }}
-              />
 
               {/* Filters */}
               <Card className="border-2 border-gray-200 bg-white shadow-lg">
