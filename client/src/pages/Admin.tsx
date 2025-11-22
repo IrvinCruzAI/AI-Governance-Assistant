@@ -57,184 +57,9 @@ function getSimplePriorityLabel(impact?: string, effort?: string): { label: stri
   return { label: "Nice to Have", color: "bg-yellow-100 text-yellow-800" };
 }
 
-// Placeholder for old function (will remove after cleanup)
-function calculatePriorityScore(initiative: any): number {
-  // If backend has pre-calculated scores, use them
-  if (initiative.impactScore !== undefined && initiative.feasibilityScore !== undefined) {
-    return (initiative.impactScore || 0) + (initiative.feasibilityScore || 0);
-  }
-  
-  // Otherwise calculate from raw field values (for real-time preview)
-  if (!initiative.impactScale && !initiative.feasibilityComplexity) {
-    return 0; // Not evaluated
-  }
-  
-  // Calculate Impact Score (0-100)
-  let impactScore = 0;
-  
-  // Scale contribution (0-40 points)
-  const scalePoints: Record<string, number> = {
-    'large': 40,
-    'medium': 25,
-    'small': 10
-  };
-  impactScore += scalePoints[initiative.impactScale] || 0;
-  
-  // Benefit Type contribution (0-30 points)
-  const benefitPoints: Record<string, number> = {
-    'patient-safety': 30,
-    'patient-outcomes': 25,
-    'efficiency': 20,
-    'cost-savings': 20,
-    'patient-experience': 15
-  };
-  impactScore += benefitPoints[initiative.impactBenefitType] || 0;
-  
-  // Financial Return contribution (0-30 points)
-  const financialPoints: Record<string, number> = {
-    'high': 30,
-    'some': 20,
-    'minimal': 10
-  };
-  impactScore += financialPoints[initiative.impactFinancialReturn] || 0;
-  
-  // Calculate Feasibility Score (0-100, inverted so lower effort = higher score)
-  let feasibilityScore = 100;
-  
-  // Complexity penalty (0-40 points deducted)
-  const complexityPenalty: Record<string, number> = {
-    'simple': 0,
-    'moderate': 20,
-    'complex': 40
-  };
-  feasibilityScore -= complexityPenalty[initiative.feasibilityComplexity] || 0;
-  
-  // Timeline penalty (0-30 points deducted)
-  const timelinePenalty: Record<string, number> = {
-    'quick': 0,
-    'standard': 15,
-    'long': 30
-  };
-  feasibilityScore -= timelinePenalty[initiative.feasibilityTimeline] || 0;
-  
-  // Dependencies penalty (0-30 points deducted)
-  const dependenciesPenalty: Record<string, number> = {
-    'ready': 0,
-    'minor': 15,
-    'major': 30
-  };
-  feasibilityScore -= dependenciesPenalty[initiative.feasibilityDependencies] || 0;
-  
-  return impactScore + feasibilityScore;
-}
+// Old complex scoring functions removed - now using simplified 3-field system
 
-function getPriorityLabel(initiative: any): { label: string; color: string; action: string; quadrant: string } {
-  // Use priorityQuadrant from database if available
-  let quadrant = initiative.priorityQuadrant;
-  
-  // If no quadrant from database, calculate from raw field values (for real-time preview)
-  if (!quadrant && initiative.impactScale && initiative.feasibilityComplexity) {
-    // Calculate impact level (high if scale is large OR benefit is safety/outcomes)
-    const highImpact = initiative.impactScale === 'large' || 
-                       initiative.impactBenefitType === 'patient-safety' ||
-                       initiative.impactBenefitType === 'patient-outcomes';
-    
-    // Calculate effort level (high if complex OR long timeline OR major dependencies)
-    const highEffort = initiative.feasibilityComplexity === 'complex' ||
-                      initiative.feasibilityTimeline === 'long' ||
-                      initiative.feasibilityDependencies === 'major';
-    
-    // Determine quadrant based on impact/effort matrix
-    if (highImpact && !highEffort) quadrant = 'quick-win';
-    else if (highImpact && highEffort) quadrant = 'strategic-bet';
-    else if (!highImpact && !highEffort) quadrant = 'nice-to-have';
-    else if (!highImpact && highEffort) quadrant = 'reconsider';
-  }
-  
-  quadrant = quadrant || 'not-evaluated';
-  
-  if (quadrant === 'quick-win') return { 
-    label: 'Quick Win', 
-    color: 'bg-green-600',
-    action: 'High impact + Easy to do → Start now. Delivers value fast with minimal risk.',
-    quadrant: 'quick-win'
-  };
-  
-  if (quadrant === 'strategic-bet') return { 
-    label: 'Strategic Bet', 
-    color: 'bg-blue-600',
-    action: 'High impact + Hard to do → Worth the investment. Plan carefully, big payoff.',
-    quadrant: 'strategic-bet'
-  };
-  
-  if (quadrant === 'nice-to-have') return { 
-    label: 'Nice to Have', 
-    color: 'bg-yellow-500',
-    action: 'Low impact + Easy → Do when capacity allows. Fill-in work between big projects.',
-    quadrant: 'nice-to-have'
-  };
-  
-  if (quadrant === 'reconsider') return { 
-    label: 'Reconsider', 
-    color: 'bg-gray-500',
-    action: 'Low impact + Hard → Probably not worth it. Focus resources elsewhere.',
-    quadrant: 'reconsider'
-  };
-  
-  // Default for initiatives without evaluation
-  return { 
-    label: 'Not Evaluated', 
-    color: 'bg-gray-400',
-    action: 'Complete opportunity cost evaluation to prioritize this initiative.',
-    quadrant: 'not-evaluated'
-  };
-}
-
-// Opportunity Cost Rubric for admins
-const PRIORITY_RUBRIC = {
-  title: 'Opportunity Cost Framework',
-  description: 'Initiatives are prioritized based on potential return vs. implementation effort to help you invest resources strategically:',
-  impactCriteria: [
-    {
-      name: 'Scale',
-      explanation: 'How many people will this help? Larger impact = higher return.',
-      scoring: 'Large (1000+ patients/100+ staff) | Medium (100-1000/10-100) | Small (<100)'
-    },
-    {
-      name: 'Benefit Type',
-      explanation: 'What does this improve? Patient safety gets highest priority.',
-      scoring: 'Patient Safety > Patient Outcomes > Staff Efficiency > Cost Reduction > Experience'
-    },
-    {
-      name: 'Financial Return',
-      explanation: 'Does this save money or generate revenue?',
-      scoring: 'High (Clear savings/revenue) | Some (Indirect) | Minimal (Quality focus)'
-    }
-  ],
-  feasibilityCriteria: [
-    {
-      name: 'Complexity',
-      explanation: 'How hard is this to build? Simpler = faster ROI.',
-      scoring: 'Simple (Existing tools) | Moderate (Some custom work) | Complex (Custom AI/ML)'
-    },
-    {
-      name: 'Timeline',
-      explanation: 'How long until it\'s working? Faster = lower opportunity cost.',
-      scoring: 'Quick (3-6 months) | Standard (6-12 months) | Long (12+ months)'
-    },
-    {
-      name: 'Dependencies',
-      explanation: 'What do we need first? Fewer blockers = easier to start.',
-      scoring: 'Ready (No blockers) | Minor (Approval/prep) | Major (Infrastructure/budget)'
-    }
-  ],
-  quadrants: [
-    { label: 'Quick Win', meaning: 'High impact + Easy to do → Start now. These deliver value fast with minimal risk.' },
-    { label: 'Strategic Bet', meaning: 'High impact + Hard to do → Worth the investment. Plan carefully, big payoff.' },
-    { label: 'Nice to Have', meaning: 'Low impact + Easy → Do when capacity allows. Fill-in work between big projects.' },
-    { label: 'Reconsider', meaning: 'Low impact + Hard → Probably not worth it. Focus resources elsewhere.' }
-  ]
-};
+// Old PRIORITY_RUBRIC removed - simplified to human-driven 3-field evaluation
 
 export default function Admin() {
   const [, setLocation] = useLocation();
@@ -621,6 +446,7 @@ export default function Admin() {
                       <table className="w-full">
                         <thead className="bg-blue-600 text-white">
                           <tr>
+                            <th className="px-4 py-3 text-left text-sm font-semibold">Evaluated</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Opportunity</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Title</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Submitter</th>
@@ -634,6 +460,13 @@ export default function Admin() {
                         <tbody className="divide-y divide-gray-200">
                           {filteredInitiatives.map((initiative) => (
                             <tr key={initiative.id} className={`hover:bg-gray-50 ${!initiative.impact || !initiative.effort ? 'bg-gray-100/50 border-l-4 border-l-gray-400' : ''}`}>
+                              <td className="px-4 py-4">
+                                {initiative.impact && initiative.effort ? (
+                                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                                ) : (
+                                  <Clock className="h-5 w-5 text-gray-400" />
+                                )}
+                              </td>
                               <td className="px-4 py-4">
                                 <Badge className={`${initiative.priority.color} text-xs`}>
                                   {initiative.priority.label}
@@ -723,17 +556,16 @@ export default function Admin() {
               <div className="flex-1 flex overflow-hidden">
                 {/* Left Column - Initiative Content (65%) */}
                 <div className="flex-1 overflow-y-auto px-8 py-6 space-y-8">
-                  {/* Priority Score - Only for admins */}
-                  {isAdmin && (
+                  {/* Opportunity Classification - Only for admins */}
+                  {isAdmin && selectedInitiative.impact && selectedInitiative.effort && (
                     <div className="bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl p-6 text-white shadow-lg">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm font-medium text-blue-100 mb-1">Opportunity Score</p>
-                          <p className="text-5xl font-bold">{selectedInitiative.priorityScore || 0}</p>
+                          <p className="text-sm font-medium text-blue-100 mb-1">Opportunity Classification</p>
+                          <Badge className="bg-white text-blue-600 border-white/30 text-2xl px-6 py-3 font-bold">
+                            {getSimplePriorityLabel(selectedInitiative.impact, selectedInitiative.effort).label}
+                          </Badge>
                         </div>
-                        <Badge className="bg-white/20 text-white border-white/30 text-lg px-4 py-2">
-                          {selectedInitiative.priority?.label || 'Low Urgency'}
-                        </Badge>
                       </div>
                     </div>
                   )}
@@ -835,6 +667,24 @@ export default function Admin() {
                               </Badge>
                             </div>
                           </div>
+                          {/* Audit Trail */}
+                          {selectedInitiative.evaluatedBy && selectedInitiative.evaluatedAt && (
+                            <div className="pt-3 border-t border-blue-200">
+                              <Label className="text-xs text-gray-600">Evaluation History</Label>
+                              <p className="text-xs text-gray-700 mt-1">
+                                Evaluated by <span className="font-semibold">{selectedInitiative.evaluatedBy}</span>
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                {new Date(selectedInitiative.evaluatedAt).toLocaleDateString('en-US', { 
+                                  month: 'short', 
+                                  day: 'numeric', 
+                                  year: 'numeric',
+                                  hour: 'numeric',
+                                  minute: '2-digit'
+                                })}
+                              </p>
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -932,9 +782,67 @@ export default function Admin() {
 
                       {/* Action Buttons */}
                       <div className="flex flex-col gap-3 pt-4 border-t">
+                        {/* Save & Next - for batch evaluation */}
                         <Button 
                           onClick={async () => {
                             try {
+                              // Validate: Require both Impact AND Effort if evaluating
+                              if ((impact || effort) && (!impact || !effort)) {
+                                toast.error("Both Impact and Effort are required for evaluation");
+                                return;
+                              }
+                              
+                              // Save simplified priority evaluation (3 fields)
+                              if (impact && effort) {
+                                await updatePriorityMutation.mutateAsync({
+                                  id: selectedInitiative.id,
+                                  impact: impact as 'high' | 'medium' | 'low',
+                                  effort: effort as 'high' | 'medium' | 'low',
+                                  evaluationNotes: evaluationNotes || undefined,
+                                  tags: tags.length > 0 ? tags : undefined,
+                                });
+                              }
+                              
+                              // Save status
+                              await handleStatusUpdate();
+                              
+                              // Save roadmap if changed
+                              if (newRoadmapStatus !== selectedInitiative.roadmapStatus) {
+                                await handleRoadmapStatusUpdate();
+                              }
+                              
+                              // Find next unevaluated initiative
+                              const nextUnevaluated = filteredInitiatives.find(
+                                (init) => init.id !== selectedInitiative.id && (!init.impact || !init.effort)
+                              );
+                              
+                              if (nextUnevaluated) {
+                                toast.success("Saved! Opening next initiative...");
+                                openInitiativeDetail(nextUnevaluated);
+                              } else {
+                                toast.success("All updates saved! No more unevaluated initiatives.");
+                                setSelectedInitiative(null);
+                              }
+                            } catch (error) {
+                              toast.error("Failed to save some updates");
+                            }
+                          }}
+                          className="w-full bg-teal-600 hover:bg-teal-700"
+                        >
+                          <Zap className="h-4 w-4 mr-2" />
+                          Save & Next
+                        </Button>
+                        
+                        {/* Regular Save */}
+                        <Button 
+                          onClick={async () => {
+                            try {
+                              // Validate: Require both Impact AND Effort if evaluating
+                              if ((impact || effort) && (!impact || !effort)) {
+                                toast.error("Both Impact and Effort are required for evaluation");
+                                return;
+                              }
+                              
                               // Save simplified priority evaluation (3 fields)
                               if (impact && effort) {
                                 await updatePriorityMutation.mutateAsync({
@@ -955,14 +863,16 @@ export default function Admin() {
                               }
                               
                               toast.success("All updates saved successfully");
+                              setSelectedInitiative(null);
                             } catch (error) {
                               toast.error("Failed to save some updates");
                             }
                           }}
+                          variant="outline"
                           className="w-full"
                         >
                           <CheckCircle2 className="h-4 w-4 mr-2" />
-                          Save All Updates
+                          Save & Close
                         </Button>
                         <div className="grid grid-cols-2 gap-2">
 

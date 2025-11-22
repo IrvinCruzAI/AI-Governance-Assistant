@@ -296,101 +296,16 @@ export async function getInitiativesByRoadmapStatus(roadmapStatus: string) {
 }
 
 
-/**
- * Calculate priority score and quadrant based on impact and feasibility
- * Following the Opportunity Cost Framework
- */
-export function calculatePriority(initiative: {
-  impactScale?: string | null;
-  impactBenefitType?: string | null;
-  impactFinancialReturn?: string | null;
-  feasibilityComplexity?: string | null;
-  feasibilityTimeline?: string | null;
-  feasibilityDependencies?: string | null;
-  missionAlignmentRating?: string | null;
-}): {
-  impactScore: number;
-  feasibilityScore: number;
-  priorityScore: number;
-  priorityQuadrant: 'quick-win' | 'strategic-bet' | 'nice-to-have' | 'reconsider';
-} {
-  // Impact Score (0-85)
-  let impactScore = 0;
-  
-  // 1. Scale (0-30)
-  if (initiative.impactScale === 'large') impactScore += 30;
-  else if (initiative.impactScale === 'medium') impactScore += 20;
-  else if (initiative.impactScale === 'small') impactScore += 10;
-  
-  // 2. Benefit Type (0-30)
-  if (initiative.impactBenefitType === 'patient-safety') impactScore += 30;
-  else if (initiative.impactBenefitType === 'patient-outcomes') impactScore += 25;
-  else if (initiative.impactBenefitType === 'staff-efficiency') impactScore += 20;
-  else if (initiative.impactBenefitType === 'cost-reduction') impactScore += 20;
-  else if (initiative.impactBenefitType === 'experience') impactScore += 15;
-  
-  // 3. Financial Return (0-25)
-  if (initiative.impactFinancialReturn === 'high') impactScore += 25;
-  else if (initiative.impactFinancialReturn === 'some') impactScore += 15;
-  else if (initiative.impactFinancialReturn === 'minimal') impactScore += 5;
-  
-  // Feasibility Score (0-95)
-  let feasibilityScore = 0;
-  
-  // 1. Complexity (0-35)
-  if (initiative.feasibilityComplexity === 'simple') feasibilityScore += 10;
-  else if (initiative.feasibilityComplexity === 'moderate') feasibilityScore += 20;
-  else if (initiative.feasibilityComplexity === 'complex') feasibilityScore += 35;
-  
-  // 2. Timeline (0-30)
-  if (initiative.feasibilityTimeline === 'quick') feasibilityScore += 5;
-  else if (initiative.feasibilityTimeline === 'standard') feasibilityScore += 15;
-  else if (initiative.feasibilityTimeline === 'long') feasibilityScore += 30;
-  
-  // 3. Dependencies (0-30)
-  if (initiative.feasibilityDependencies === 'ready') feasibilityScore += 5;
-  else if (initiative.feasibilityDependencies === 'minor') feasibilityScore += 15;
-  else if (initiative.feasibilityDependencies === 'major') feasibilityScore += 30;
-  
-  // Priority Score = (Impact × 2) - Feasibility
-  // Range: -95 to 170
-  const priorityScore = (impactScore * 2) - feasibilityScore;
-  
-  // Determine Quadrant
-  let priorityQuadrant: 'quick-win' | 'strategic-bet' | 'nice-to-have' | 'reconsider';
-  
-  const highImpact = impactScore > 60;
-  const lowFeasibility = feasibilityScore < 50;
-  
-  if (highImpact && lowFeasibility) {
-    priorityQuadrant = 'quick-win';
-  } else if (highImpact && !lowFeasibility) {
-    priorityQuadrant = 'strategic-bet';
-  } else if (!highImpact && lowFeasibility) {
-    priorityQuadrant = 'nice-to-have';
-  } else {
-    priorityQuadrant = 'reconsider';
-  }
-  
-  return {
-    impactScore,
-    feasibilityScore,
-    priorityScore,
-    priorityQuadrant
-  };
-}
-
+// Old calculatePriority function removed - replaced by simplified 3-field system
 
 // Simplified priority evaluation (3 fields: impact, effort, notes)
-export async function updatePriorityEvaluation(
-  id: number,
-  evaluation: {
-    impact: 'high' | 'medium' | 'low';
-    effort: 'high' | 'medium' | 'low';
-    evaluationNotes?: string;
-    tags?: string[]; // Array of keyword tags
-  }
-) {
+export async function updatePriorityEvaluation(id: number, evaluation: {
+  impact: 'high' | 'medium' | 'low';
+  effort: 'high' | 'medium' | 'low';
+  evaluationNotes?: string;
+  tags?: string[];
+  evaluatedBy?: string;
+}) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
@@ -404,7 +319,9 @@ export async function updatePriorityEvaluation(
     evaluationNotes: evaluation.evaluationNotes || null,
     tags: evaluation.tags ? JSON.stringify(evaluation.tags) : null,
     priorityScore: priority.score,
-    priorityQuadrant: priority.quadrant
+    priorityQuadrant: priority.quadrant,
+    evaluatedBy: evaluation.evaluatedBy || null,
+    evaluatedAt: new Date()
   };
   
   await db.update(initiatives).set(updateData).where(eq(initiatives.id, id));

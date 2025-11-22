@@ -280,9 +280,13 @@ export const appRouter = router({
         evaluationNotes: z.string().optional(),
         tags: z.array(z.string()).optional(),
       }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ ctx, input }) => {
         const { id, ...evaluation } = input;
-        await db.updatePriorityEvaluation(id, evaluation);
+        // Add audit trail: who evaluated and when
+        await db.updatePriorityEvaluation(id, {
+          ...evaluation,
+          evaluatedBy: ctx.user.name || ctx.user.email || 'Admin',
+        });
         return { success: true };
       }),
   }),

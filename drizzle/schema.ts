@@ -66,6 +66,8 @@ export const initiatives = mysqlTable("initiatives", {
   impact: mysqlEnum("impact", ["high", "medium", "low"]), // Value/benefit to organization
   effort: mysqlEnum("effort", ["high", "medium", "low"]), // Complexity/resources required
   evaluationNotes: text("evaluationNotes"), // Admin's assessment notes
+  evaluatedBy: varchar("evaluatedBy", { length: 255 }), // Admin who evaluated
+  evaluatedAt: timestamp("evaluatedAt"), // When evaluation was completed
   
   // Calculated Priority (Impact vs Effort matrix)
   priorityScore: int("priorityScore"), // Calculated from impact + effort

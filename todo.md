@@ -1,55 +1,31 @@
-# AI Governance Assistant - MVP Complete ✅
+# AI Governance Assistant - Evaluation System Improvements
 
-## Completed Features
+## Phase 1: Remove Opportunity Score Card
+- [x] Remove the "Opportunity Score: 90" card from initiative detail modal
+- [x] Keep only the opportunity label badge (Quick Win, Strategic Bet, etc.)
 
-### Employee Submission Flow
-- [x] Multi-step AI-guided submission form
-- [x] Problem statement, AI approach, expected benefits
-- [x] Risk classification and mission alignment
-- [x] Community voting system
-- [x] "My Submissions" tab
+## Phase 2: Add Evaluation Audit Trail
+- [x] Add evaluatedBy and evaluatedAt columns to database schema
+- [x] Update backend mutation to save admin name and timestamp
+- [x] Display "Evaluated by [Name] on [Date]" in modal
+- [x] Add evaluation status indicators in table (checkmark for evaluated, clock for pending)
 
-### Admin Evaluation System
-- [x] Simplified 3-field evaluation (Impact, Effort, Notes)
-- [x] Priority labels (Quick Win, Strategic Bet, Nice to Have, Reconsider, Not Evaluated)
-- [x] Visual distinction for unevaluated initiatives (gray background)
-- [x] Status management (Pending → Under Review → Approved/Rejected)
-- [x] Filters (Status, Risk Level, Priority)
-- [x] Delete functionality
+## Phase 3: Add Validation & Workflow Improvements
+- [x] Require both Impact AND Effort to be filled before saving
+- [x] Show validation error if either field is empty
+- [x] Add "Save & Next" button for batch evaluation workflow
+- [x] Add "Save & Close" button to save and close modal
 
-### Roadmap Management
-- [x] Roadmap tab with visual stages
-- [x] Drag-and-drop between stages (Research → Development → Pilot → Deployed)
-- [x] Roadmap status updates
+## Phase 4: Database Cleanup
+- [x] Remove old 6-field opportunity cost columns from database
+- [x] Remove old calculatePriority function from backend
+- [x] Remove old scoring functions from frontend
+- [x] Remove old PRIORITY_RUBRIC documentation
 
-## Removed (Not Needed for MVP)
-- [x] Complex 6-field opportunity cost framework
-- [x] Priority score calculation
-- [x] Priority Rubric modal
-- [x] Email functionality
-- [x] 2×2 Impact/Effort matrix visualization
-
-## Ready for User Testing
-- ✅ Employees can submit AI initiative ideas
-- ✅ Admins can evaluate with simple Impact/Effort assessment
-- ✅ Initiatives can be moved through roadmap stages
-- ✅ All core workflows tested and working
-
-## Future Enhancements (Post-MVP)
-- [ ] Keyword tagging system
-- [ ] Search to find existing ideas (prevent duplicates)
-- [ ] Portfolio analytics dashboard with 2×2 matrix
-- [ ] AI-assisted evaluation suggestions
-- [ ] Email notifications
-- [ ] Export to CSV/PDF
-
-## Terminology Update
-- [x] Rename "Priority" column to "Opportunity" in admin dashboard table
-- [x] Update filter dropdown label from "Priority" to "Opportunity"
-- [x] Update all UI text references from "Priority" to "Opportunity"
-- [x] Test changes and create checkpoint
-
-## Fix Remaining Priority References
-- [x] Update dropdown placeholder from "All Priorities" to "All Opportunities"
-- [x] Update dropdown option labels to remove Priority references
-- [ ] Test and create checkpoint
+## Phase 5: Test & Checkpoint
+- [x] Test complete evaluation workflow
+- [x] Verify audit trail displays correctly
+- [x] Verify evaluation status indicators work
+- [x] Verify Save & Next workflow opens next unevaluated initiative
+- [x] Verify opportunity classification badge displays correctly
+- [x] Create final checkpoint
