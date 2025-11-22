@@ -1,6 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Loader2, Settings as SettingsIcon } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
@@ -70,15 +70,9 @@ export default function Home() {
               >
                 {user?.role === 'admin' ? 'Dashboard' : 'My Submissions'}
               </Button>
-              <Button
-                onClick={() => setLocation("/settings")}
-                variant="outline"
-                size="sm"
-                className="text-sm"
-              >
-                <SettingsIcon className="h-4 w-4 mr-2" />
-                Settings
-              </Button>
+              <div className="text-sm font-medium text-gray-700">
+                Hi, {user?.name?.split(' ')[0] || 'there'}!
+              </div>
             </div>
           )}
         </div>

@@ -93,7 +93,7 @@
 - [x] Write unit tests for rich text editor integration
 
 ## Dashboard Menu Improvements
-- [ ] Move settings into dashboard menu (as tab or button)
-- [ ] Replace settings button in header with personalized user greeting showing first name
-- [ ] Test dashboard navigation and user experience
-- [ ] Ensure settings remain accessible from new location
+- [x] Move settings into dashboard menu (as tab or button)
+- [x] Replace settings button in header with personalized user greeting showing first name
+- [x] Test dashboard navigation and user experience
+- [x] Ensure settings remain accessible from new location

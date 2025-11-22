@@ -47,6 +47,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { PriorityRubricModal } from "@/components/PriorityRubricModal";
+import { SettingsView } from "@/components/SettingsView";
 
 // Get priority label from database priorityQuadrant field
 function getPriorityLabel(priorityQuadrant?: string | null): { label: string; color: string } {
@@ -303,10 +304,11 @@ export default function Admin() {
 
         {isAdmin ? (
           <Tabs defaultValue="all" className="space-y-6">
-            <TabsList className="grid w-full max-w-md grid-cols-3">
+            <TabsList className="grid w-full max-w-2xl grid-cols-4">
               <TabsTrigger value="my">My Submissions</TabsTrigger>
               <TabsTrigger value="all">All Submissions</TabsTrigger>
               <TabsTrigger value="roadmap">Roadmap</TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
 
             {/* My Submissions Tab */}
@@ -544,6 +546,11 @@ export default function Admin() {
                 initiatives={initiativesWithPriority}
                 onViewDetails={openInitiativeDetail}
               />
+            </TabsContent>
+
+            {/* Settings Tab */}
+            <TabsContent value="settings" className="space-y-6">
+              <SettingsView user={user!} />
             </TabsContent>
           </Tabs>
         ) : (
