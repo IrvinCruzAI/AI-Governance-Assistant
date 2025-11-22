@@ -65,3 +65,8 @@
 - [x] Add backend endpoint for profile updates (logout endpoint already exists)
 - [x] Add settings link to navigation
 - [x] Test settings page for both user and admin roles
+
+## Test Data Cleanup
+- [x] Identify all test initiatives in database
+- [x] Delete test initiatives while preserving 5 demo initiatives (deleted all IDs >= 300000)
+- [x] Verify database only contains demo data (5 demo initiatives remain)

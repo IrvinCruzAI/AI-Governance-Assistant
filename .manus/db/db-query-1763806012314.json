@@ -1,0 +1,195 @@
+{
+  "query": "SELECT id, title, userEmail FROM initiatives ORDER BY id",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, userEmail FROM initiatives ORDER BY id",
+  "rows": [
+    {
+      "id": "210001",
+      "title": "Automated Patient Appointment Reminders & Scheduling Optimization",
+      "userEmail": "sarah.johnson@adventhealth.com"
+    },
+    {
+      "id": "210002",
+      "title": "AI-Assisted Clinical Documentation for Discharge Summaries",
+      "userEmail": "dr.michael.chen@adventhealth.com"
+    },
+    {
+      "id": "210003",
+      "title": "Predictive Staffing Model for Emergency Departments",
+      "userEmail": "jennifer.martinez@adventhealth.com"
+    },
+    {
+      "id": "210004",
+      "title": "Automated Prior Authorization Assistant",
+      "userEmail": "amanda.rodriguez@adventhealth.com"
+    },
+    {
+      "id": "210005",
+      "title": "Fall Risk Prediction & Alert System for Inpatient Units",
+      "userEmail": "emily.thompson@adventhealth.com"
+    },
+    {
+      "id": "330001",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "330002",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "330003",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "330004",
+      "title": "AI-Powered Scheduling System",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "330005",
+      "title": "Untitled Initiative",
+      "userEmail": "test11@adventhealth.com"
+    },
+    {
+      "id": "330006",
+      "title": "Untitled Initiative",
+      "userEmail": "test12@adventhealth.com"
+    },
+    {
+      "id": "330007",
+      "title": "Patient Flow Optimization",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "330008",
+      "title": "Untitled Initiative",
+      "userEmail": "test2@adventhealth.com"
+    },
+    {
+      "id": "330009",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "330010",
+      "title": "Untitled Initiative",
+      "userEmail": "test3@adventhealth.com"
+    },
+    {
+      "id": "330011",
+      "title": "Untitled Initiative",
+      "userEmail": "test13@adventhealth.com"
+    },
+    {
+      "id": "330012",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "330013",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "330014",
+      "title": "Untitled Initiative",
+      "userEmail": "test4@adventhealth.com"
+    },
+    {
+      "id": "330015",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "330016",
+      "title": "Untitled Initiative",
+      "userEmail": "test14@adventhealth.com"
+    },
+    {
+      "id": "360001",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "360002",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "360003",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "360004",
+      "title": "AI-Powered Scheduling System",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "360005",
+      "title": "Untitled Initiative",
+      "userEmail": "test11@adventhealth.com"
+    },
+    {
+      "id": "360006",
+      "title": "Patient Flow Optimization",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "360007",
+      "title": "Untitled Initiative",
+      "userEmail": "test2@adventhealth.com"
+    },
+    {
+      "id": "360008",
+      "title": "Untitled Initiative",
+      "userEmail": "test12@adventhealth.com"
+    },
+    {
+      "id": "360009",
+      "title": "Untitled Initiative",
+      "userEmail": "test3@adventhealth.com"
+    },
+    {
+      "id": "360010",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "360011",
+      "title": "Untitled Initiative",
+      "userEmail": "test13@adventhealth.com"
+    },
+    {
+      "id": "360012",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "360013",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "360014",
+      "title": "Untitled Initiative",
+      "userEmail": "test4@adventhealth.com"
+    },
+    {
+      "id": "360015",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "360016",
+      "title": "Untitled Initiative",
+      "userEmail": "test14@adventhealth.com"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tuserEmail\n210001\tAutomated Patient Appointment Reminders & Scheduling Optimization\tsarah.johnson@adventhealth.com\n210002\tAI-Assisted Clinical Documentation for Discharge Summaries\tdr.michael.chen@adventhealth.com\n210003\tPredictive Staffing Model for Emergency Departments\tjennifer.martinez@adventhealth.com\n210004\tAutomated Prior Authorization Assistant\tamanda.rodriguez@adventhealth.com\n210005\tFall Risk Prediction & Alert System for Inpatient Units\temily.thompson@adventhealth.com\n330001\tUntitled Initiative\ttest@adventhealth.com\n330002\tUntitled Initiative\ttest@adventhealth.com\n330003\tUntitled Initiative\ttest@adventhealth.com\n330004\tAI-Powered Scheduling System\ttest@adventhealth.com\n330005\tUntitled Initiative\ttest11@adventhealth.com\n330006\tUntitled Initiative\ttest12@adventhealth.com\n330007\tPatient Flow Optimization\ttest@adventhealth.com\n330008\tUntitled Initiative\ttest2@adventhealth.com\n330009\tUntitled Initiative\ttest@adventhealth.com\n330010\tUntitled Initiative\ttest3@adventhealth.com\n330011\tUntitled Initiative\ttest13@adventhealth.com\n330012\tUntitled Initiative\ttest@adventhealth.com\n330013\tUntitled Initiative\ttest@adventhealth.com\n330014\tUntitled Initiative\ttest4@adventhealth.com\n330015\tUntitled Initiative\ttest@adventhealth.com\n330016\tUntitled Initiative\ttest14@adventhealth.com\n360001\tUntitled Initiative\ttest@adventhealth.com\n360002\tUntitled Initiative\ttest@adventhealth.com\n360003\tUntitled Initiative\ttest@adventhealth.com\n360004\tAI-Powered Scheduling System\ttest@adventhealth.com\n360005\tUntitled Initiative\ttest11@adventhealth.com\n360006\tPatient Flow Optimization\ttest@adventhealth.com\n360007\tUntitled Initiative\ttest2@adventhealth.com\n360008\tUntitled Initiative\ttest12@adventhealth.com\n360009\tUntitled Initiative\ttest3@adventhealth.com\n360010\tUntitled Initiative\ttest@adventhealth.com\n360011\tUntitled Initiative\ttest13@adventhealth.com\n360012\tUntitled Initiative\ttest@adventhealth.com\n360013\tUntitled Initiative\ttest@adventhealth.com\n360014\tUntitled Initiative\ttest4@adventhealth.com\n360015\tUntitled Initiative\ttest@adventhealth.com\n360016\tUntitled Initiative\ttest14@adventhealth.com\n",
+  "stderr": "",
+  "execution_time_ms": 103
+}
