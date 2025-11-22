@@ -138,3 +138,60 @@ export async function getInitiativeMessages(initiativeId: number) {
     .where(eq(messages.initiativeId, initiativeId))
     .orderBy(messages.createdAt);
 }
+
+// Admin queries
+export async function getAllInitiatives() {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(initiatives)
+    .orderBy(desc(initiatives.updatedAt));
+}
+
+export async function getAnalytics() {
+  const db = await getDb();
+  if (!db) return {
+    totalSubmissions: 0,
+    byRiskLevel: { Low: 0, Medium: 0, High: 0 },
+    byArea: {},
+    byStatus: { pending: 0, 'under-review': 0, approved: 0, rejected: 0 },
+  };
+  
+  const allInitiatives = await db.select().from(initiatives);
+  
+  const totalSubmissions = allInitiatives.length;
+  const byRiskLevel = { Low: 0, Medium: 0, High: 0 };
+  const byArea: Record<string, number> = {};
+  const byStatus = { pending: 0, 'under-review': 0, approved: 0, rejected: 0 };
+  
+  allInitiatives.forEach(initiative => {
+    if (initiative.riskLevel) {
+      byRiskLevel[initiative.riskLevel as 'Low' | 'Medium' | 'High']++;
+    }
+    if (initiative.area) {
+      byArea[initiative.area] = (byArea[initiative.area] || 0) + 1;
+    }
+    if (initiative.status) {
+      byStatus[initiative.status as 'pending' | 'under-review' | 'approved' | 'rejected']++;
+    }
+  });
+  
+  return {
+    totalSubmissions,
+    byRiskLevel,
+    byArea,
+    byStatus,
+  };
+}
+
+export async function updateInitiativeStatus(id: number, status: string, adminNotes?: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const updateData: any = { status };
+  if (adminNotes !== undefined) {
+    updateData.adminNotes = adminNotes;
+  }
+  
+  await db.update(initiatives).set(updateData).where(eq(initiatives.id, id));
+}

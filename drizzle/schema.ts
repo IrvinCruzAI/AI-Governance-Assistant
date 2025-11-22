@@ -61,6 +61,10 @@ export const initiatives = mysqlTable("initiatives", {
   briefGenerated: boolean("briefGenerated").default(false),
   emailSummaryGenerated: boolean("emailSummaryGenerated").default(false),
   
+  // Admin fields
+  status: mysqlEnum("status", ["pending", "under-review", "approved", "rejected"]).default("pending"),
+  adminNotes: text("adminNotes"),
+  
   // Metadata
   currentStep: int("currentStep").default(1),
   completed: boolean("completed").default(false),

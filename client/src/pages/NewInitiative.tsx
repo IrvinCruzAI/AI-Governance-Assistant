@@ -29,8 +29,8 @@ export default function NewInitiative() {
 
   const handleStart = () => {
     createMutation.mutate({
-      userRole: userRole || undefined,
-      area: area || undefined,
+      userRole: userRole || "",
+      area: area || "",
     });
   };
 

@@ -1,10 +1,19 @@
-import { z } from "zod";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
+import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
 import * as db from "./db";
-import * as aiService from "./aiService";
+import { analyzeMissionAlignment, classifyRisk, generateRAID } from "./aiService";
+
+// Admin-only procedure
+const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
+  if (ctx.user.role !== 'admin') {
+    throw new TRPCError({ code: 'FORBIDDEN', message: 'Admin access required' });
+  }
+  return next({ ctx });
+});
 
 export const appRouter = router({
   system: systemRouter,
@@ -20,37 +29,21 @@ export const appRouter = router({
   }),
 
   initiative: router({
-    // Create a new initiative
     create: protectedProcedure
       .input(z.object({
-        userRole: z.string().optional(),
-        area: z.string().optional(),
+        userRole: z.string(),
+        area: z.string(),
       }))
       .mutation(async ({ ctx, input }) => {
         const initiativeId = await db.createInitiative({
           userId: ctx.user.id,
-          title: "Untitled Initiative",
           userRole: input.userRole,
           area: input.area,
-          currentStep: 1,
+          title: "Untitled Initiative",
         });
         return { initiativeId };
       }),
 
-    // Get initiative by ID
-    get: protectedProcedure
-      .input(z.object({ id: z.number() }))
-      .query(async ({ input }) => {
-        return await db.getInitiativeById(input.id);
-      }),
-
-    // List user's initiatives
-    list: protectedProcedure
-      .query(async ({ ctx }) => {
-        return await db.getUserInitiatives(ctx.user.id);
-      }),
-
-    // Update initiative data
     update: protectedProcedure
       .input(z.object({
         id: z.number(),
@@ -64,51 +57,64 @@ export const appRouter = router({
           missionSupports: z.string().optional(),
           wholPersonCareAlignment: z.string().optional(),
           ethicalConcerns: z.string().optional(),
-          missionAlignmentRating: z.enum(["High", "Medium", "Low"]).optional(),
-          missionAlignmentReasoning: z.string().optional(),
           mainArea: z.string().optional(),
           clinicalImpact: z.string().optional(),
           dataType: z.string().optional(),
           automationLevel: z.string().optional(),
-          riskLevel: z.enum(["Low", "Medium", "High"]).optional(),
-          governancePath: z.enum(["Light", "Standard", "Full"]).optional(),
+          missionAlignmentRating: z.enum(['High', 'Medium', 'Low']).optional(),
+          missionAlignmentReasoning: z.string().optional(),
+          riskLevel: z.enum(['High', 'Medium', 'Low']).optional(),
+          governancePath: z.enum(['Light', 'Standard', 'Full']).optional(),
           riskReasoning: z.string().optional(),
           risks: z.string().optional(),
           assumptions: z.string().optional(),
           issues: z.string().optional(),
           dependencies: z.string().optional(),
-          currentStep: z.number().optional(),
           completed: z.boolean().optional(),
-          briefGenerated: z.boolean().optional(),
-          emailSummaryGenerated: z.boolean().optional(),
+          currentStep: z.number().optional(),
+          status: z.enum(['pending', 'under-review', 'approved', 'rejected']).optional(),
+          adminNotes: z.string().optional(),
         }),
       }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ ctx, input }) => {
         await db.updateInitiative(input.id, input.data);
         return { success: true };
       }),
 
-    // Get messages for an initiative
-    getMessages: protectedProcedure
-      .input(z.object({ initiativeId: z.number() }))
-      .query(async ({ input }) => {
-        return await db.getInitiativeMessages(input.initiativeId);
+    get: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ ctx, input }) => {
+        return await db.getInitiativeById(input.id);
       }),
 
-    // Add a message to an initiative
+    list: protectedProcedure
+      .query(async ({ ctx }) => {
+        return await db.getUserInitiatives(ctx.user.id);
+      }),
+
     addMessage: protectedProcedure
       .input(z.object({
         initiativeId: z.number(),
-        role: z.enum(["assistant", "user"]),
+        role: z.enum(['user', 'assistant']),
         content: z.string(),
         step: z.number(),
       }))
-      .mutation(async ({ input }) => {
-        const messageId = await db.addMessage(input);
+      .mutation(async ({ ctx, input }) => {
+        const messageId = await db.addMessage({
+          initiativeId: input.initiativeId,
+          role: input.role,
+          content: input.content,
+          step: input.step,
+        });
         return { messageId };
       }),
 
-    // AI-powered analysis
+    getMessages: protectedProcedure
+      .input(z.object({ initiativeId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        return await db.getInitiativeMessages(input.initiativeId);
+      }),
+
     analyzeMission: protectedProcedure
       .input(z.object({
         title: z.string(),
@@ -120,7 +126,7 @@ export const appRouter = router({
         ethicalConcerns: z.string(),
       }))
       .mutation(async ({ input }) => {
-        return await aiService.analyzeMissionAlignment(input);
+        return await analyzeMissionAlignment(input);
       }),
 
     classifyRisk: protectedProcedure
@@ -134,7 +140,7 @@ export const appRouter = router({
         automationLevel: z.string(),
       }))
       .mutation(async ({ input }) => {
-        return await aiService.classifyRisk(input);
+        return await classifyRisk(input);
       }),
 
     generateRAID: protectedProcedure
@@ -148,24 +154,38 @@ export const appRouter = router({
         ethicalConcerns: z.string(),
       }))
       .mutation(async ({ input }) => {
-        return await aiService.generateRAID(input);
+        return await generateRAID(input);
+      }),
+  }),
+
+  admin: router({
+    // Get all initiatives (admin only)
+    getAllInitiatives: adminProcedure
+      .input(z.object({
+        status: z.enum(['all', 'pending', 'under-review', 'approved', 'rejected']).optional(),
+        riskLevel: z.enum(['all', 'Low', 'Medium', 'High']).optional(),
+        area: z.string().optional(),
+      }))
+      .query(async () => {
+        return await db.getAllInitiatives();
       }),
 
-    getNextQuestion: protectedProcedure
+    // Get analytics data
+    getAnalytics: adminProcedure
+      .query(async () => {
+        return await db.getAnalytics();
+      }),
+
+    // Update initiative status (admin only)
+    updateStatus: adminProcedure
       .input(z.object({
-        currentStep: z.number(),
-        conversationHistory: z.array(z.object({
-          role: z.enum(["assistant", "user"]),
-          content: z.string(),
-        })),
-        initiativeData: z.any(),
+        id: z.number(),
+        status: z.enum(['pending', 'under-review', 'approved', 'rejected']),
+        adminNotes: z.string().optional(),
       }))
       .mutation(async ({ input }) => {
-        return await aiService.generateNextQuestion(
-          input.currentStep,
-          input.conversationHistory,
-          input.initiativeData
-        );
+        await db.updateInitiativeStatus(input.id, input.status, input.adminNotes);
+        return { success: true };
       }),
   }),
 });

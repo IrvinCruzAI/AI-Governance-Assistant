@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import { trpc } from "@/lib/trpc";
 import { useLocation, useParams } from "wouter";
-import { Loader2, ArrowLeft, ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
+import { Loader2, ArrowLeft, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
@@ -65,22 +65,15 @@ export default function Initiative() {
 
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
-    // Step 1: Basic Information
     title: "",
     userRole: "",
     area: "",
-    
-    // Step 2: Problem & Solution
     problemStatement: "",
     aiApproach: "",
     primaryUsers: "",
-    
-    // Step 3: Mission & Ethics
     missionSupports: [] as string[],
     wholePersonCareAlignment: "",
     ethicalConcerns: "",
-    
-    // Step 4: Risk Classification
     mainArea: "",
     clinicalImpact: "",
     dataType: "",
@@ -97,7 +90,6 @@ export default function Initiative() {
   const classifyRiskMutation = trpc.initiative.classifyRisk.useMutation();
   const generateRAIDMutation = trpc.initiative.generateRAID.useMutation();
 
-  // Load existing data
   useEffect(() => {
     if (initiative) {
       setFormData({
@@ -213,7 +205,6 @@ export default function Initiative() {
     await saveProgress();
     
     if (currentStep === 4) {
-      // Final step - run AI analysis
       toast.info("Analyzing your initiative...");
       
       try {
@@ -285,7 +276,7 @@ export default function Initiative() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-teal-50 to-blue-100">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
@@ -293,103 +284,116 @@ export default function Initiative() {
 
   if (!initiative) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card>
-          <CardContent className="p-8 text-center">
-            <p className="text-gray-600 mb-4">Initiative not found</p>
-            <Button onClick={() => setLocation("/")}>
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-teal-50 to-blue-100">
+        <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-2xl p-8 text-center">
+          <p className="text-gray-600 mb-4">Initiative not found</p>
+          <Button onClick={() => setLocation("/")}>
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Home
+          </Button>
+        </div>
       </div>
     );
   }
 
   const totalSteps = 5;
   const isComplete = currentStep === 5;
+  const progress = (currentStep / totalSteps) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-teal-50">
-      <div className="container max-w-4xl py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-teal-500 to-blue-700 relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-300/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="relative z-10 container max-w-4xl py-8">
         {/* Header */}
         <div className="mb-6 flex items-center gap-4">
-          <Button variant="ghost" size="sm" onClick={() => setLocation("/")}>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={() => setLocation("/")}
+            className="text-white hover:bg-white/10"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
           </Button>
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-blue-900">AI Initiative Intake Form</h1>
-            <p className="text-sm text-gray-600">
+            <h1 className="text-2xl font-bold text-white">AI Initiative Intake Form</h1>
+            <p className="text-sm text-white/80">
               {isComplete ? "Review & Submit" : `Step ${currentStep} of ${totalSteps - 1}`}
             </p>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-8">
-          <div className="flex justify-between mb-2 text-xs text-gray-600">
-            <span>Basic Info</span>
-            <span>Problem & Solution</span>
-            <span>Mission & Ethics</span>
-            <span>Risk Assessment</span>
-            <span>Review</span>
+        <div className="mb-8 backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-6">
+          <div className="flex justify-between mb-3 text-xs font-medium text-white">
+            <span className={currentStep >= 1 ? "opacity-100" : "opacity-50"}>Basic Info</span>
+            <span className={currentStep >= 2 ? "opacity-100" : "opacity-50"}>Problem & Solution</span>
+            <span className={currentStep >= 3 ? "opacity-100" : "opacity-50"}>Mission & Ethics</span>
+            <span className={currentStep >= 4 ? "opacity-100" : "opacity-50"}>Risk Assessment</span>
+            <span className={currentStep >= 5 ? "opacity-100" : "opacity-50"}>Review</span>
           </div>
-          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-3 bg-white/20 rounded-full overflow-hidden">
             <div
-              className="h-full bg-blue-600 transition-all duration-300"
-              style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+              className="h-full bg-gradient-to-r from-teal-400 to-blue-400 transition-all duration-500 rounded-full"
+              style={{ width: `${progress}%` }}
             />
           </div>
         </div>
 
         {/* Form Content */}
-        <Card>
-          <CardHeader>
-            <CardTitle>
+        <div className="backdrop-blur-md bg-white/90 border border-white/30 rounded-3xl shadow-2xl overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-500 to-teal-500 p-6">
+            <h2 className="text-2xl font-bold text-white mb-1">
               {currentStep === 1 && "Basic Information"}
               {currentStep === 2 && "Problem & Solution"}
               {currentStep === 3 && "Mission & Ethics Alignment"}
               {currentStep === 4 && "Risk Classification"}
               {currentStep === 5 && "Review & Submit"}
-            </CardTitle>
-            <CardDescription>
+            </h2>
+            <p className="text-white/90 text-sm">
               {currentStep === 1 && "Tell us about your initiative and your role"}
               {currentStep === 2 && "Describe the problem and how AI can help"}
               {currentStep === 3 && "Assess alignment with AdventHealth's mission"}
               {currentStep === 4 && "Help us understand the risk profile"}
               {currentStep === 5 && "Review your submission before sending"}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
+            </p>
+          </div>
+
+          <div className="p-8 space-y-6">
             {/* Step 1: Basic Information */}
             {currentStep === 1 && (
               <>
                 <div className="space-y-2">
-                  <Label htmlFor="title">Initiative Title *</Label>
+                  <Label htmlFor="title" className="text-gray-700 font-semibold">Initiative Title *</Label>
                   <Input
                     id="title"
                     placeholder="e.g., AI-Powered Diagnostic Assistant"
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="userRole">Your Role</Label>
+                  <Label htmlFor="userRole" className="text-gray-700 font-semibold">Your Role</Label>
                   <Input
                     id="userRole"
                     placeholder="e.g., Clinical Director, IT Manager"
                     value={formData.userRole}
                     onChange={(e) => handleInputChange("userRole", e.target.value)}
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="area">Primary Area</Label>
+                  <Label htmlFor="area" className="text-gray-700 font-semibold">Primary Area</Label>
                   <Select value={formData.area} onValueChange={(value) => handleInputChange("area", value)}>
-                    <SelectTrigger id="area">
+                    <SelectTrigger id="area" className="border-gray-300 focus:border-blue-500 focus:ring-blue-500">
                       <SelectValue placeholder="Select an area" />
                     </SelectTrigger>
                     <SelectContent>
@@ -408,34 +412,37 @@ export default function Initiative() {
             {currentStep === 2 && (
               <>
                 <div className="space-y-2">
-                  <Label htmlFor="problem">Problem or Opportunity *</Label>
+                  <Label htmlFor="problem" className="text-gray-700 font-semibold">Problem or Opportunity *</Label>
                   <Textarea
                     id="problem"
                     placeholder="In 3-5 sentences, describe the current pain or gap. Focus on the problem, not the AI solution yet."
                     value={formData.problemStatement}
                     onChange={(e) => handleInputChange("problemStatement", e.target.value)}
                     rows={5}
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="aiApproach">How AI Might Help *</Label>
+                  <Label htmlFor="aiApproach" className="text-gray-700 font-semibold">How AI Might Help *</Label>
                   <Textarea
                     id="aiApproach"
                     placeholder="Describe in plain language how you think AI could address this problem. It's okay if this is rough."
                     value={formData.aiApproach}
                     onChange={(e) => handleInputChange("aiApproach", e.target.value)}
                     rows={5}
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="users">Primary Users or Affected Groups</Label>
+                  <Label htmlFor="users" className="text-gray-700 font-semibold">Primary Users or Affected Groups</Label>
                   <Input
                     id="users"
                     placeholder="e.g., physicians, nurses, patients, finance staff"
                     value={formData.primaryUsers}
                     onChange={(e) => handleInputChange("primaryUsers", e.target.value)}
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
               </>
@@ -445,40 +452,44 @@ export default function Initiative() {
             {currentStep === 3 && (
               <>
                 <div className="space-y-3">
-                  <Label>Which of these does this idea most directly support? * (Select all that apply)</Label>
-                  {MISSION_OPTIONS.map((option) => (
-                    <div key={option} className="flex items-center space-x-2">
-                      <Checkbox
-                        id={option}
-                        checked={formData.missionSupports.includes(option)}
-                        onCheckedChange={() => handleMissionToggle(option)}
-                      />
-                      <label htmlFor={option} className="text-sm cursor-pointer">
-                        {option}
-                      </label>
-                    </div>
-                  ))}
+                  <Label className="text-gray-700 font-semibold">Which of these does this idea most directly support? * (Select all that apply)</Label>
+                  <div className="space-y-3 bg-gray-50 p-4 rounded-xl">
+                    {MISSION_OPTIONS.map((option) => (
+                      <div key={option} className="flex items-center space-x-3">
+                        <Checkbox
+                          id={option}
+                          checked={formData.missionSupports.includes(option)}
+                          onCheckedChange={() => handleMissionToggle(option)}
+                        />
+                        <label htmlFor={option} className="text-sm cursor-pointer text-gray-700">
+                          {option}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="wholePerson">Whole-Person Care Alignment *</Label>
+                  <Label htmlFor="wholePerson" className="text-gray-700 font-semibold">Whole-Person Care Alignment *</Label>
                   <Textarea
                     id="wholePerson"
                     placeholder="In 2-4 sentences, describe how this idea supports whole-person care (physical, emotional, spiritual, social) or the organization's healing mission."
                     value={formData.wholePersonCareAlignment}
                     onChange={(e) => handleInputChange("wholePersonCareAlignment", e.target.value)}
                     rows={4}
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="ethical">Potential Ethical Concerns</Label>
+                  <Label htmlFor="ethical" className="text-gray-700 font-semibold">Potential Ethical Concerns</Label>
                   <Textarea
                     id="ethical"
                     placeholder="Do you see any potential ethical concerns? (e.g., unfair treatment of groups, over-reliance on automation, privacy concerns). If none, you can leave this blank."
                     value={formData.ethicalConcerns}
                     onChange={(e) => handleInputChange("ethicalConcerns", e.target.value)}
                     rows={4}
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
               </>
@@ -488,12 +499,12 @@ export default function Initiative() {
             {currentStep === 4 && (
               <>
                 <div className="space-y-3">
-                  <Label>Which best describes the main area this AI idea touches? *</Label>
-                  <RadioGroup value={formData.mainArea} onValueChange={(value) => handleInputChange("mainArea", value)}>
+                  <Label className="text-gray-700 font-semibold">Which best describes the main area this AI idea touches? *</Label>
+                  <RadioGroup value={formData.mainArea} onValueChange={(value) => handleInputChange("mainArea", value)} className="space-y-3">
                     {AREA_OPTIONS.map((option) => (
-                      <div key={option.value} className="flex items-center space-x-2">
+                      <div key={option.value} className="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
                         <RadioGroupItem value={option.value} id={option.value} />
-                        <label htmlFor={option.value} className="text-sm cursor-pointer">
+                        <label htmlFor={option.value} className="text-sm cursor-pointer text-gray-700">
                           {option.label}
                         </label>
                       </div>
@@ -502,12 +513,12 @@ export default function Initiative() {
                 </div>
 
                 <div className="space-y-3">
-                  <Label>Does this idea directly affect clinical decisions or patient safety? *</Label>
-                  <RadioGroup value={formData.clinicalImpact} onValueChange={(value) => handleInputChange("clinicalImpact", value)}>
+                  <Label className="text-gray-700 font-semibold">Does this idea directly affect clinical decisions or patient safety? *</Label>
+                  <RadioGroup value={formData.clinicalImpact} onValueChange={(value) => handleInputChange("clinicalImpact", value)} className="space-y-3">
                     {CLINICAL_IMPACT_OPTIONS.map((option) => (
-                      <div key={option.value} className="flex items-center space-x-2">
+                      <div key={option.value} className="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
                         <RadioGroupItem value={option.value} id={option.value} />
-                        <label htmlFor={option.value} className="text-sm cursor-pointer">
+                        <label htmlFor={option.value} className="text-sm cursor-pointer text-gray-700">
                           {option.label}
                         </label>
                       </div>
@@ -516,12 +527,12 @@ export default function Initiative() {
                 </div>
 
                 <div className="space-y-3">
-                  <Label>What kind of data would this likely use? *</Label>
-                  <RadioGroup value={formData.dataType} onValueChange={(value) => handleInputChange("dataType", value)}>
+                  <Label className="text-gray-700 font-semibold">What kind of data would this likely use? *</Label>
+                  <RadioGroup value={formData.dataType} onValueChange={(value) => handleInputChange("dataType", value)} className="space-y-3">
                     {DATA_TYPE_OPTIONS.map((option) => (
-                      <div key={option.value} className="flex items-center space-x-2">
+                      <div key={option.value} className="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
                         <RadioGroupItem value={option.value} id={option.value} />
-                        <label htmlFor={option.value} className="text-sm cursor-pointer">
+                        <label htmlFor={option.value} className="text-sm cursor-pointer text-gray-700">
                           {option.label}
                         </label>
                       </div>
@@ -530,12 +541,12 @@ export default function Initiative() {
                 </div>
 
                 <div className="space-y-3">
-                  <Label>How would the AI be used? *</Label>
-                  <RadioGroup value={formData.automationLevel} onValueChange={(value) => handleInputChange("automationLevel", value)}>
+                  <Label className="text-gray-700 font-semibold">How would the AI be used? *</Label>
+                  <RadioGroup value={formData.automationLevel} onValueChange={(value) => handleInputChange("automationLevel", value)} className="space-y-3">
                     {AUTOMATION_OPTIONS.map((option) => (
-                      <div key={option.value} className="flex items-center space-x-2">
+                      <div key={option.value} className="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
                         <RadioGroupItem value={option.value} id={option.value} />
-                        <label htmlFor={option.value} className="text-sm cursor-pointer">
+                        <label htmlFor={option.value} className="text-sm cursor-pointer text-gray-700">
                           {option.label}
                         </label>
                       </div>
@@ -548,27 +559,35 @@ export default function Initiative() {
             {/* Step 5: Review */}
             {currentStep === 5 && initiative && (
               <div className="space-y-6">
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <div className="bg-gradient-to-r from-green-50 to-teal-50 border-2 border-green-200 rounded-2xl p-6 flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
+                      <CheckCircle2 className="h-6 w-6 text-white" />
+                    </div>
+                  </div>
                   <div>
-                    <p className="font-semibold text-green-900">Initiative Submitted Successfully!</p>
-                    <p className="text-sm text-green-800 mt-1">
+                    <p className="font-bold text-green-900 text-lg mb-1">Initiative Submitted Successfully!</p>
+                    <p className="text-sm text-green-800">
                       Your AI initiative has been analyzed and is ready for review by the Chief AI Officer's team.
                     </p>
                   </div>
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="p-4 bg-blue-50 rounded-lg">
-                    <p className="text-sm font-semibold text-blue-900 mb-1">Mission Alignment</p>
-                    <p className="text-2xl font-bold text-blue-600">{initiative.missionAlignmentRating}</p>
-                    <p className="text-sm text-blue-800 mt-2">{initiative.missionAlignmentReasoning}</p>
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div className="backdrop-blur-md bg-gradient-to-br from-blue-500/10 to-teal-500/10 border-2 border-blue-200 rounded-2xl p-6">
+                    <p className="text-sm font-semibold text-blue-900 mb-2">Mission Alignment</p>
+                    <p className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent mb-3">
+                      {initiative.missionAlignmentRating}
+                    </p>
+                    <p className="text-sm text-gray-700 leading-relaxed">{initiative.missionAlignmentReasoning}</p>
                   </div>
 
-                  <div className="p-4 bg-orange-50 rounded-lg">
-                    <p className="text-sm font-semibold text-orange-900 mb-1">Risk Level</p>
-                    <p className="text-2xl font-bold text-orange-600">{initiative.riskLevel}</p>
-                    <p className="text-sm text-orange-800 mt-2">
+                  <div className="backdrop-blur-md bg-gradient-to-br from-orange-500/10 to-red-500/10 border-2 border-orange-200 rounded-2xl p-6">
+                    <p className="text-sm font-semibold text-orange-900 mb-2">Risk Level</p>
+                    <p className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-3">
+                      {initiative.riskLevel}
+                    </p>
+                    <p className="text-sm text-gray-700">
                       Recommended: <strong>{initiative.governancePath}</strong> governance
                     </p>
                   </div>
@@ -576,15 +595,16 @@ export default function Initiative() {
 
                 <Button
                   onClick={() => setLocation(`/brief/${initiativeId}`)}
-                  className="w-full"
+                  className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white text-lg py-6 rounded-xl shadow-lg"
                   size="lg"
                 >
+                  <Sparkles className="h-5 w-5 mr-2" />
                   View Complete Brief & Download
                 </Button>
               </div>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Navigation */}
         {!isComplete && (
@@ -593,6 +613,7 @@ export default function Initiative() {
               variant="outline"
               onClick={handleBack}
               disabled={currentStep === 1}
+              className="backdrop-blur-md bg-white/20 border-white/30 text-white hover:bg-white/30"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back
@@ -600,6 +621,7 @@ export default function Initiative() {
             <Button
               onClick={handleNext}
               disabled={updateMutation.isPending || analyzeMissionMutation.isPending}
+              className="bg-white text-blue-600 hover:bg-white/90 shadow-lg"
             >
               {currentStep === 4 ? (
                 analyzeMissionMutation.isPending ? (
@@ -609,8 +631,8 @@ export default function Initiative() {
                   </>
                 ) : (
                   <>
+                    <Sparkles className="h-4 w-4 mr-2" />
                     Submit for Analysis
-                    <ArrowRight className="h-4 w-4 ml-2" />
                   </>
                 )
               ) : (

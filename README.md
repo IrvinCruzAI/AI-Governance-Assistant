@@ -1,123 +1,129 @@
 # AdventHealth AI Initiative Intake & Governance Assistant
 
-A structured multi-step intake form that guides AdventHealth team members through submitting well-thought-out AI initiative proposals for review by the Chief AI Officer's team.
+A world-class web application for submitting, evaluating, and managing AI initiative proposals at AdventHealth. Features a stunning glassmorphism design, educational landing page, structured intake form, and comprehensive admin dashboard.
 
 ## Overview
 
-This tool transforms rough AI ideas into comprehensive, structured proposals through a guided questionnaire format. It provides:
+This application transforms the AI governance process into an engaging, user-friendly experience that drives innovation while ensuring patient safety, mission alignment, and ethical standards.
 
-- **Multi-Step Intake Form**: 4-step wizard with clear progress tracking
-- **Structured Questions**: Radio buttons, checkboxes, dropdowns, and text fields
-- **AI-Powered Analysis**: Automated mission alignment and risk classification
-- **RAID Generation**: Automatic generation of Risks, Assumptions, Issues, and Dependencies
-- **Professional Briefs**: Downloadable initiative briefs and email summaries
-- **Progress Saving**: Save and resume at any time
+### Key Features
 
-## Features
+**For Team Members:**
+- Educational landing page explaining AI governance
+- Beautiful 4-step intake form with glassmorphism design
+- AI-powered mission alignment analysis
+- Automated risk classification and governance path recommendations
+- Comprehensive RAID (Risks, Assumptions, Issues, Dependencies) generation
+- Downloadable initiative briefs and email summaries
+- Save and resume progress at any time
 
-### Step 1: Basic Information
-- Initiative title (required)
-- Your role at AdventHealth
-- Primary area (clinical care, clinical support, operations, back-office)
-
-### Step 2: Problem & Solution
-- Problem or opportunity description (required)
-- How AI might help (required)
-- Primary users or affected groups
-
-### Step 3: Mission & Ethics Alignment
-- Select mission support areas (patient safety, health equity, burnout reduction, etc.)
-- Describe whole-person care alignment (required)
-- Identify potential ethical concerns
-
-### Step 4: Risk Classification
-- Main area the AI touches (clinical decisions, support, operations, back-office)
-- Clinical impact level (no direct effect, indirect, direct low/high stakes)
-- Data type (no personal data, de-identified, PHI, highly sensitive)
-- Automation level (suggestions only, review required, automated actions)
-
-### Step 5: Review & Submit
-- View AI-generated mission alignment rating (High/Medium/Low)
-- View risk classification (Low/Medium/High) and governance path
-- Download complete initiative brief
-- Download email summary for Chief AI Officer
+**For Administrators:**
+- Comprehensive admin dashboard with analytics
+- Review queue with filtering by status, risk level, and area
+- Initiative detail view with full submission history
+- Status management (Pending, Under Review, Approved, Rejected)
+- Admin notes and comments
+- Real-time analytics on submissions, risk levels, and approval rates
 
 ## Technology Stack
 
-- **Frontend**: React 19 + TypeScript + Tailwind CSS 4
-- **Backend**: Express 4 + tRPC 11
+- **Frontend**: React 19 + TypeScript + Tailwind CSS 4 with glassmorphism design
+- **Backend**: Express 4 + tRPC 11 for type-safe APIs
 - **Database**: MySQL/TiDB with Drizzle ORM
 - **AI Integration**: Built-in LLM service with structured JSON responses
-- **Authentication**: Manus OAuth
-- **Form Validation**: Real-time validation with toast notifications
+- **Authentication**: Manus OAuth with role-based access control
+- **Design**: Modern glassmorphism with AdventHealth branding (healthcare blue/teal)
 
 ## User Guide
 
-### Starting a New Initiative
+### For Team Members
 
-1. **Sign In**: Click "Sign In to Get Started" on the home page
-2. **Create Initiative**: Click "Start New Initiative"
-3. **Provide Context**: Enter your role and select the primary area
-4. **Begin Evaluation**: Click "Begin Evaluation" to start the intake form
+#### Accessing the Application
 
-### Completing the Intake Form
+1. Visit the application URL
+2. View the educational landing page to learn about AI governance
+3. Click "Get Started" or "Sign In to Submit Your Idea"
+4. Authenticate using your AdventHealth credentials
 
-Navigate through 4 steps using the "Next" and "Back" buttons:
+#### Submitting an Initiative
 
-1. **Basic Information**: Provide title, role, and area
-2. **Problem & Solution**: Describe the problem and AI approach
-3. **Mission & Ethics**: Select mission supports and describe alignment
-4. **Risk Classification**: Answer questions about area, impact, data, and automation
+1. **Start New Initiative**: Click "Start New Initiative" from the home page
+2. **Step 1 - Basic Information**: Provide initiative title, your role, and primary area
+3. **Step 2 - Problem & Solution**: Describe the problem and how AI might help
+4. **Step 3 - Mission & Ethics**: Select mission support areas and describe alignment
+5. **Step 4 - Risk Assessment**: Answer questions about clinical impact, data, and automation
+6. **Submit for Analysis**: Click to receive AI-powered analysis
+7. **Review Results**: View mission alignment rating, risk level, and governance path
+8. **Download Brief**: Get a complete initiative brief and email summary
 
-After Step 4, click "Submit for Analysis" to:
-- Automatically analyze mission alignment
-- Classify risk level and recommend governance path
-- Generate comprehensive RAID view
-- Create downloadable brief and email summary
+#### Progress Tracking
 
-### Form Validation
-
-- Required fields are marked with *
-- Validation occurs when clicking "Next"
-- Error messages appear as toast notifications
-- Progress is automatically saved after each step
-
-### Viewing Past Initiatives
-
+- All initiatives are automatically saved after each step
 - Return to the home page to see all your initiatives
-- Click on any initiative card to view or continue
+- Click any initiative card to continue where you left off
 - Completed initiatives show mission alignment and risk ratings
-- In-progress initiatives show current step (e.g., "Step 2 of 4")
 
-### Downloading Briefs
+### For Administrators
 
-1. Complete all 4 steps and submit for analysis
-2. View the review page with analysis results
-3. Click "View Complete Brief & Download"
-4. Use "Download Brief" for markdown document
-5. Use "Download Email" for email summary
+#### Accessing the Admin Dashboard
+
+1. Sign in with an admin account
+2. Click "Admin Dashboard" from the home page
+3. View analytics and review queue
+
+#### Dashboard Features
+
+**Analytics Cards:**
+- Total Submissions: Overall count of all initiatives
+- High Risk Initiatives: Number of high-risk submissions requiring full governance
+- Pending Review: Initiatives awaiting admin review
+- Approved: Successfully approved initiatives
+
+**Review Queue:**
+- Filter by status (Pending, Under Review, Approved, Rejected)
+- Filter by risk level (Low, Medium, High)
+- View submitter, area, risk level, mission alignment, and submission date
+- Click "Review" to open detailed view
+
+**Reviewing Initiatives:**
+1. Click "Review" on any initiative
+2. Read full initiative details including problem statement and AI approach
+3. Review AI-generated mission alignment and risk classification
+4. Update status (Pending, Under Review, Approved, Rejected)
+5. Add admin notes explaining your decision
+6. Click "Update Status" to save
 
 ## Design Philosophy
 
-### Intake Form UX
+### Glassmorphism Aesthetic
 
-- **Clear Progress**: Visual progress bar with step labels
-- **Structured Input**: Appropriate input types for each question
-- **Validation**: Real-time feedback on required fields
-- **Flexibility**: Save progress and return anytime
-- **Transparency**: AI reasoning explained in plain language
+The application uses modern glassmorphism design principles:
+- Frosted glass effect with backdrop blur
+- Subtle gradients and transparency
+- Soft shadows and borders
+- Smooth animations and transitions
+- Responsive to all screen sizes
 
 ### AdventHealth Branding
 
-- **Colors**: Healthcare blue (#0080D6) and teal accents
+- **Primary Colors**: Healthcare blue (#0080D6) and teal accents
 - **Typography**: Inter font family for professional, readable text
-- **Layout**: Clean, spacious design with clear visual hierarchy
-- **Accessibility**: High contrast, keyboard navigation, screen reader support
+- **Visual Hierarchy**: Clear distinction between sections using color and spacing
+- **Accessibility**: High contrast, keyboard navigation, ARIA labels
+
+### User Experience
+
+- **Educational First**: Landing page explains AI governance before asking for input
+- **Progressive Disclosure**: Information revealed step-by-step to avoid overwhelm
+- **Instant Feedback**: Real-time validation and toast notifications
+- **Transparent AI**: AI reasoning explained in plain language
+- **Mobile-First**: Fully responsive design works on all devices
 
 ## AI Governance Framework
 
 ### Mission Alignment Criteria
 
+Initiatives are evaluated against AdventHealth's core mission:
 - Patient safety
 - Health equity
 - Reducing clinician or staff burnout
@@ -127,83 +133,144 @@ After Step 4, click "Submit for Analysis" to:
 - Whole-person care (physical, emotional, spiritual, social)
 - "Extending the Healing Ministry of Christ"
 
+**Ratings:**
+- **High**: Strongly aligned with multiple mission areas
+- **Medium**: Aligned with some mission areas
+- **Low**: Minimal or unclear mission alignment
+
 ### Risk Classification Model
 
-**Low Risk** → Light Governance
-- Back-office applications
-- No PHI or de-identified data only
-- Suggestions only, human decision-making
+Risk level is determined by analyzing:
+- **Area**: Direct clinical decisions vs. back-office operations
+- **Clinical Impact**: Effect on patient care and safety
+- **Data Type**: No personal data vs. highly sensitive PHI
+- **Automation Level**: Suggestions only vs. automated actions
 
-**Medium Risk** → Standard Governance
-- Clinical support or operations
-- Protected health information (PHI)
-- Human review required for all actions
+**Risk Levels & Governance Paths:**
+- **Low Risk → Light Governance**: Back-office, no PHI, suggestions only
+- **Medium Risk → Standard Governance**: Clinical support, PHI, human review required
+- **High Risk → Full Clinical Governance**: Direct clinical decisions, sensitive data, automated actions
 
-**High Risk** → Full Clinical Governance
-- Direct clinical decisions
-- Highly sensitive data
-- Automated actions affecting patient care
+### RAID Analysis
+
+The AI automatically generates:
+- **Risks**: Potential negative outcomes or failures
+- **Assumptions**: Conditions that must be true for success
+- **Issues**: Current problems that need resolution
+- **Dependencies**: External factors or resources required
 
 ## Development
 
-### Running Tests
+### Running Locally
 
 ```bash
+# Install dependencies
+pnpm install
+
+# Push database schema
+pnpm db:push
+
+# Start development server
+pnpm dev
+
+# Run tests
 pnpm test
 ```
 
-All tRPC procedures have comprehensive vitest coverage including:
-- Initiative creation and updates
-- Form data persistence
-- AI-powered analysis functions
-- Authentication flows
-
 ### Database Schema
 
-**initiatives**: Stores all initiative data including form responses and AI analysis
-**messages**: Stores conversation history (legacy from chat version)
-**users**: Manages authentication and user profiles
+**users**: Authentication and user profiles with role-based access
+**initiatives**: All initiative data including form responses and AI analysis
+**messages**: Conversation history (legacy from chat version)
 
-### AI Service
+### Key Files
 
-The `aiService.ts` module provides:
-- `analyzeMissionAlignment()`: Rates mission fit and provides reasoning
-- `classifyRisk()`: Determines risk level and governance path
-- `generateRAID()`: Creates comprehensive RAID analysis
+- `client/src/pages/Home.tsx`: Landing page with glassmorphism design
+- `client/src/pages/Initiative.tsx`: 4-step intake form
+- `client/src/pages/Admin.tsx`: Admin dashboard
+- `client/src/pages/Brief.tsx`: Initiative brief and download page
+- `server/routers.ts`: tRPC API routes
+- `server/aiService.ts`: AI-powered analysis functions
+- `server/db.ts`: Database helper functions
+- `drizzle/schema.ts`: Database schema definitions
 
-All AI functions use structured JSON responses with strict schemas for reliability.
+### AI Service Functions
 
-## Form Fields Reference
+**analyzeMissionAlignment()**: Evaluates initiative against AdventHealth's mission
+- Input: Initiative details, mission supports, whole-person care alignment
+- Output: Rating (High/Medium/Low) and reasoning
 
-### Step 1 Fields
-- `title` (text, required)
-- `userRole` (text, optional)
-- `area` (dropdown, optional)
+**classifyRisk()**: Determines risk level and governance path
+- Input: Area, clinical impact, data type, automation level
+- Output: Risk level, governance path, and reasoning
 
-### Step 2 Fields
-- `problemStatement` (textarea, required)
-- `aiApproach` (textarea, required)
-- `primaryUsers` (text, optional)
-
-### Step 3 Fields
-- `missionSupports` (checkbox group, required - at least one)
-- `wholePersonCareAlignment` (textarea, required)
-- `ethicalConcerns` (textarea, optional)
-
-### Step 4 Fields
-- `mainArea` (radio group, required)
-- `clinicalImpact` (radio group, required)
-- `dataType` (radio group, required)
-- `automationLevel` (radio group, required)
+**generateRAID()**: Creates comprehensive RAID analysis
+- Input: Initiative details, area, data type, ethical concerns
+- Output: Arrays of risks, assumptions, issues, and dependencies
 
 ## Deployment
 
 The application is ready for deployment through the Manus platform:
 
-1. Create a checkpoint using the "Save Checkpoint" feature
-2. Click "Publish" in the management UI
-3. Configure custom domain if desired
-4. Share the URL with your team
+1. **Create Checkpoint**: Save the current state
+2. **Click Publish**: Use the Publish button in the management UI
+3. **Configure Domain**: Set up custom domain if desired
+4. **Share URL**: Distribute to your AdventHealth team
+
+### Environment Variables
+
+All required environment variables are automatically injected by the Manus platform:
+- Database connection (MySQL/TiDB)
+- OAuth credentials
+- LLM API access
+- Session secrets
+
+No manual configuration required.
+
+## Admin Management
+
+### Promoting Users to Admin
+
+To grant admin access to a user:
+
+1. Access the Database panel in the management UI
+2. Find the user in the `users` table
+3. Update their `role` field from `user` to `admin`
+4. User will have admin access on next login
+
+### Admin Capabilities
+
+Admins can:
+- View all submitted initiatives from all users
+- Filter and search the review queue
+- Update initiative status
+- Add review notes and comments
+- View analytics and submission trends
+- Access the admin dashboard
+
+## Analytics
+
+The admin dashboard provides insights into:
+- **Total Submissions**: Track overall engagement
+- **Risk Distribution**: Understand the mix of low/medium/high risk initiatives
+- **Status Breakdown**: Monitor pending, under review, approved, and rejected counts
+- **Area Distribution**: See which departments are most active
+
+## Best Practices
+
+### For Team Members
+
+- **Be Specific**: Provide detailed problem statements and AI approaches
+- **Think Holistically**: Consider whole-person care and mission alignment
+- **Identify Concerns**: Flag potential ethical issues early
+- **Save Progress**: Use the auto-save feature to work at your own pace
+
+### For Administrators
+
+- **Timely Reviews**: Respond to submissions within 48 hours
+- **Clear Feedback**: Provide actionable notes in your reviews
+- **Consistent Standards**: Apply governance criteria uniformly
+- **Track Trends**: Use analytics to identify patterns and opportunities
 
 ## Support
 
