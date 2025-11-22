@@ -1,0 +1,298 @@
+{
+  "query": "DESCRIBE initiatives;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute DESCRIBE initiatives;",
+  "rows": [
+    {
+      "Field": "id",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "userId",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "userRole",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "area",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "title",
+      "Type": "varchar(255)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "problemStatement",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "aiApproach",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "primaryUsers",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "missionSupports",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "wholPersonCareAlignment",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "ethicalConcerns",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "missionAlignmentRating",
+      "Type": "enum('High','Medium','Low')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "missionAlignmentReasoning",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "mainArea",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "clinicalImpact",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "dataType",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "automationLevel",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "riskLevel",
+      "Type": "enum('Low','Medium','High')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "governancePath",
+      "Type": "enum('Light','Standard','Full')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "riskReasoning",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "risks",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "assumptions",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "issues",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "dependencies",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "briefGenerated",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "emailSummaryGenerated",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "currentStep",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "1",
+      "Extra": ""
+    },
+    {
+      "Field": "completed",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "createdAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    },
+    {
+      "Field": "updatedAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+    },
+    {
+      "Field": "status",
+      "Type": "enum('pending','under-review','approved','rejected')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "pending",
+      "Extra": ""
+    },
+    {
+      "Field": "adminNotes",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "userEmail",
+      "Type": "varchar(320)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "roadmapStatus",
+      "Type": "enum('under-review','research','development','pilot','deployed','on-hold','rejected')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "under-review",
+      "Extra": ""
+    },
+    {
+      "Field": "priorityScore",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "priorityQuadrant",
+      "Type": "enum('quick-win','strategic-investment','low-priority','reconsider')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nid\tint(11)\tNO\tPRI\tNULL\tauto_increment\nuserId\tint(11)\tNO\t\tNULL\t\nuserRole\ttext\tYES\t\tNULL\t\narea\tvarchar(100)\tYES\t\tNULL\t\ntitle\tvarchar(255)\tNO\t\tNULL\t\nproblemStatement\ttext\tYES\t\tNULL\t\naiApproach\ttext\tYES\t\tNULL\t\nprimaryUsers\ttext\tYES\t\tNULL\t\nmissionSupports\ttext\tYES\t\tNULL\t\nwholPersonCareAlignment\ttext\tYES\t\tNULL\t\nethicalConcerns\ttext\tYES\t\tNULL\t\nmissionAlignmentRating\tenum('High','Medium','Low')\tYES\t\tNULL\t\nmissionAlignmentReasoning\ttext\tYES\t\tNULL\t\nmainArea\tvarchar(100)\tYES\t\tNULL\t\nclinicalImpact\tvarchar(100)\tYES\t\tNULL\t\ndataType\tvarchar(100)\tYES\t\tNULL\t\nautomationLevel\tvarchar(100)\tYES\t\tNULL\t\nriskLevel\tenum('Low','Medium','High')\tYES\t\tNULL\t\ngovernancePath\tenum('Light','Standard','Full')\tYES\t\tNULL\t\nriskReasoning\ttext\tYES\t\tNULL\t\nrisks\ttext\tYES\t\tNULL\t\nassumptions\ttext\tYES\t\tNULL\t\nissues\ttext\tYES\t\tNULL\t\ndependencies\ttext\tYES\t\tNULL\t\nbriefGenerated\ttinyint(1)\tYES\t\t0\t\nemailSummaryGenerated\ttinyint(1)\tYES\t\t0\t\ncurrentStep\tint(11)\tYES\t\t1\t\ncompleted\ttinyint(1)\tYES\t\t0\t\ncreatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\t\nupdatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\tDEFAULT_GENERATED on update CURRENT_TIMESTAMP\nstatus\tenum('pending','under-review','approved','rejected')\tYES\t\tpending\t\nadminNotes\ttext\tYES\t\tNULL\t\nuserEmail\tvarchar(320)\tYES\t\tNULL\t\nroadmapStatus\tenum('under-review','research','development','pilot','deployed','on-hold','rejected')\tYES\t\tunder-review\t\npriorityScore\tint(11)\tYES\t\tNULL\t\npriorityQuadrant\tenum('quick-win','strategic-investment','low-priority','reconsider')\tYES\t\tNULL\t\n",
+  "stderr": "",
+  "execution_time_ms": 87
+}

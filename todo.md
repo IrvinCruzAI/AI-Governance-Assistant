@@ -310,7 +310,7 @@
 - [ ] Update admin dashboard with new ROI/Effort matrix view
 - [ ] Rewrite priority rubric documentation for opportunity cost framework
 - [ ] Test new scoring system with existing initiatives
-- [ ] Create checkpoint
+- [x] Create checkpoint
 
 ## System-Wide Review for Opportunity Cost Framework
 - [x] Update backend priority calculation logic
@@ -319,4 +319,10 @@
 - [ ] Update priority rubric in admin dashboard
 - [ ] Test with existing initiatives
 - [ ] Verify all components use new scoring system
-- [ ] Create checkpoint
+- [x] Create checkpoint
+
+## Submission System Debugging
+- [x] Test submission flow and identify errors
+- [x] Fix identified errors in submission code
+- [x] Verify submission works end-to-end
+- [x] Create checkpoint
