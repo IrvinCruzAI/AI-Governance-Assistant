@@ -39,6 +39,7 @@ describe("initiative.create", () => {
     const result = await caller.initiative.create({
       userRole: "Clinical Director",
       area: "clinical-care",
+      userEmail: "test@adventhealth.com",
     });
 
     expect(result).toHaveProperty("initiativeId");
@@ -56,6 +57,7 @@ describe("initiative.update", () => {
     const created = await caller.initiative.create({
       userRole: "IT Manager",
       area: "back-office",
+      userEmail: "test@adventhealth.com",
     });
 
     // Update the initiative
@@ -81,6 +83,7 @@ describe("initiative.get", () => {
     const created = await caller.initiative.create({
       userRole: "Operations Lead",
       area: "clinical-operations",
+      userEmail: "test@adventhealth.com",
     });
 
     // Update it with data
@@ -113,11 +116,13 @@ describe("initiative.list", () => {
     await caller.initiative.create({
       userRole: "Clinical Director",
       area: "clinical-care",
+      userEmail: "test@adventhealth.com",
     });
 
     await caller.initiative.create({
       userRole: "Clinical Director",
       area: "clinical-support",
+      userEmail: "test@adventhealth.com",
     });
 
     // List initiatives
@@ -137,6 +142,7 @@ describe("initiative.addMessage", () => {
     const created = await caller.initiative.create({
       userRole: "Test User",
       area: "back-office",
+      userEmail: "test@adventhealth.com",
     });
 
     // Add a message
@@ -161,6 +167,7 @@ describe("initiative.getMessages", () => {
     const created = await caller.initiative.create({
       userRole: "Test User",
       area: "clinical-care",
+      userEmail: "test@adventhealth.com",
     });
 
     // Add messages

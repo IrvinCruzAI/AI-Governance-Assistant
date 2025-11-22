@@ -33,12 +33,16 @@ export const appRouter = router({
       .input(z.object({
         userRole: z.string(),
         area: z.string(),
+        userEmail: z.string(),
+        department: z.string().optional(),
+        urgency: z.string().optional(),
       }))
       .mutation(async ({ ctx, input }) => {
         const initiativeId = await db.createInitiative({
           userId: ctx.user.id,
           userRole: input.userRole,
           area: input.area,
+          userEmail: input.userEmail,
           title: "Untitled Initiative",
         });
         return { initiativeId };
