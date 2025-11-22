@@ -638,7 +638,7 @@ export default function Admin() {
 
         {/* Initiative Detail Dialog */}
         <Dialog open={!!selectedInitiative} onOpenChange={() => setSelectedInitiative(null)}>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-7xl max-h-[90vh] overflow-hidden flex flex-col">
             <DialogHeader>
               <DialogTitle>{selectedInitiative?.title || 'Untitled Initiative'}</DialogTitle>
               <DialogDescription>
@@ -647,14 +647,9 @@ export default function Admin() {
             </DialogHeader>
 
             {selectedInitiative && (
-              <Tabs defaultValue="details" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-4">
-                  <TabsTrigger value="details">Initiative Details</TabsTrigger>
-                  {isAdmin && <TabsTrigger value="admin">Admin Actions</TabsTrigger>}
-                </TabsList>
-
-                {/* Details Tab */}
-                <TabsContent value="details" className="space-y-6 mt-4">
+              <div className="grid grid-cols-[1fr,400px] gap-6 overflow-hidden h-full">
+                {/* Left Column - Initiative Content (Scrollable) */}
+                <div className="overflow-y-auto pr-4 space-y-6">
                   {/* Priority Score - Only for admins */}
                   {isAdmin && (
                     <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-blue-50 to-teal-50 rounded-lg border border-blue-100">
@@ -695,7 +690,7 @@ export default function Admin() {
                   </div>
 
                   {/* Risk & Mission Badges */}
-                  <div className="flex gap-6 items-center">
+                  <div className="flex gap-6 items-center flex-wrap">
                     <div className="space-y-2">
                       <Label className="text-sm font-semibold text-gray-600">Risk Level</Label>
                       {selectedInitiative.riskLevel && (
@@ -733,38 +728,47 @@ export default function Admin() {
                       {selectedInitiative.aiApproach}
                     </p>
                   </div>
-                </TabsContent>
+                </div>
 
-                {/* Admin Actions Tab */}
-                {isAdmin && (
-                  <TabsContent value="admin" className="space-y-6 mt-4">
-                    <div className="space-y-6">
+                {/* Right Column - Action Panel (Sticky) */}
+                <div className="border-l pl-6 overflow-y-auto">
+                  {isAdmin ? (
+                    // Admin Actions
+                    <div className="space-y-6 sticky top-0">
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Admin Actions</h3>
+                      </div>
+
                       {/* Current Status Overview */}
                       <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
-                        <h4 className="font-semibold text-gray-700 mb-3">Current Status</h4>
-                        <div className="grid grid-cols-2 gap-4">
+                        <h4 className="font-semibold text-gray-700 mb-3 text-sm">Current Status</h4>
+                        <div className="space-y-3">
                           <div>
-                            <Label className="text-sm text-gray-600">Review Status</Label>
-                            <Badge variant="outline" className={`mt-1 ${getStatusColor(selectedInitiative.status)}`}>
-                              {selectedInitiative.status || 'pending'}
-                            </Badge>
+                            <Label className="text-xs text-gray-600">Review Status</Label>
+                            <div className="mt-1">
+                              <Badge variant="outline" className={`${getStatusColor(selectedInitiative.status)}`}>
+                                {selectedInitiative.status || 'pending'}
+                              </Badge>
+                            </div>
                           </div>
                           <div>
-                            <Label className="text-sm text-gray-600">Roadmap Stage</Label>
-                            <Badge variant="outline" className="mt-1 bg-purple-100 text-purple-700">
-                              {selectedInitiative.roadmapStatus || 'under-review'}
-                            </Badge>
+                            <Label className="text-xs text-gray-600">Roadmap Stage</Label>
+                            <div className="mt-1">
+                              <Badge variant="outline" className="bg-purple-100 text-purple-700">
+                                {selectedInitiative.roadmapStatus || 'under-review'}
+                              </Badge>
+                            </div>
                           </div>
                         </div>
                       </div>
 
                       {/* Update Review Status */}
-                      <div className="space-y-3">
-                        <Label htmlFor="status" className="text-base font-semibold text-gray-700">
+                      <div className="space-y-2">
+                        <Label htmlFor="status" className="text-sm font-semibold text-gray-700">
                           Update Review Status
                         </Label>
                         <Select value={newStatus} onValueChange={setNewStatus}>
-                          <SelectTrigger id="status" className="h-11">
+                          <SelectTrigger id="status">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -777,12 +781,12 @@ export default function Admin() {
                       </div>
 
                       {/* Update Roadmap Status */}
-                      <div className="space-y-3">
-                        <Label htmlFor="roadmap-status" className="text-base font-semibold text-gray-700">
+                      <div className="space-y-2">
+                        <Label htmlFor="roadmap-status" className="text-sm font-semibold text-gray-700">
                           Update Roadmap Stage
                         </Label>
                         <Select value={newRoadmapStatus} onValueChange={setNewRoadmapStatus}>
-                          <SelectTrigger id="roadmap-status" className="h-11">
+                          <SelectTrigger id="roadmap-status">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -798,17 +802,16 @@ export default function Admin() {
                       </div>
 
                       {/* Admin Notes */}
-                      <div className="space-y-3">
-                        <Label htmlFor="notes" className="text-base font-semibold text-gray-700">
+                      <div className="space-y-2">
+                        <Label htmlFor="notes" className="text-sm font-semibold text-gray-700">
                           Internal Notes
                         </Label>
                         <Textarea
                           id="notes"
                           value={adminNotes}
                           onChange={(e) => setAdminNotes(e.target.value)}
-                          placeholder="Add internal notes about this initiative..."
-                          rows={6}
-                          className="text-base"
+                          placeholder="Add internal notes..."
+                          rows={4}
                         />
                       </div>
 
@@ -821,34 +824,74 @@ export default function Admin() {
                               handleRoadmapStatusUpdate();
                             }
                           }}
-                          className="w-full h-11"
+                          className="w-full"
                         >
-                          <CheckCircle2 className="h-5 w-5 mr-2" />
-                          Save Status Updates
+                          <CheckCircle2 className="h-4 w-4 mr-2" />
+                          Save Updates
                         </Button>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 gap-2">
                           <Button 
                             variant="outline"
+                            size="sm"
                             onClick={() => handleEmailSubmitter(selectedInitiative.userEmail || '')}
-                            className="h-11"
                           >
-                            <Mail className="h-4 w-4 mr-2" />
-                            Email Submitter
+                            <Mail className="h-4 w-4 mr-1" />
+                            Email
                           </Button>
                           <Button 
                             variant="destructive"
+                            size="sm"
                             onClick={handleDelete}
-                            className="h-11"
                           >
-                            <Trash2 className="h-4 w-4 mr-2" />
-                            Delete Initiative
+                            <Trash2 className="h-4 w-4 mr-1" />
+                            Delete
                           </Button>
                         </div>
                       </div>
                     </div>
-                  </TabsContent>
-                )}
-              </Tabs>
+                  ) : (
+                    // Regular User - Status Tracking
+                    <div className="space-y-6 sticky top-0">
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Submission Status</h3>
+                      </div>
+
+                      <div className="p-4 bg-blue-50 rounded-lg border border-blue-100 space-y-4">
+                        <div>
+                          <Label className="text-sm font-semibold text-gray-700">Review Status</Label>
+                          <div className="mt-2">
+                            <Badge variant="outline" className={`${getStatusColor(selectedInitiative.status)} text-base px-3 py-1`}>
+                              {selectedInitiative.status || 'pending'}
+                            </Badge>
+                          </div>
+                        </div>
+                        <div>
+                          <Label className="text-sm font-semibold text-gray-700">Roadmap Stage</Label>
+                          <div className="mt-2">
+                            <Badge variant="outline" className="bg-purple-100 text-purple-700 text-base px-3 py-1">
+                              {selectedInitiative.roadmapStatus || 'under-review'}
+                            </Badge>
+                          </div>
+                        </div>
+                        {selectedInitiative.adminNotes && (
+                          <div>
+                            <Label className="text-sm font-semibold text-gray-700">Feedback from Team</Label>
+                            <p className="mt-2 text-sm text-gray-700 bg-white p-3 rounded border">
+                              {selectedInitiative.adminNotes}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="p-4 bg-teal-50 rounded-lg border border-teal-100">
+                        <Label className="text-sm font-semibold text-gray-700">Community Support</Label>
+                        <p className="text-3xl font-bold text-gray-900 mt-2">👍 {selectedInitiative.voteCount || 0}</p>
+                        <p className="text-xs text-gray-600 mt-1">colleagues voted for this idea</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             )}
           </DialogContent>
         </Dialog>

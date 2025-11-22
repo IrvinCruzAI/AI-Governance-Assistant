@@ -277,3 +277,13 @@
 - [x] Remove all "Untitled Initiative" placeholder entries
 - [x] Verify only 6 realistic examples remain
 - [x] Create checkpoint
+
+## Workflow-Optimized Dialog Redesign
+- [x] Remove tabs - show everything at once
+- [x] Implement side-by-side layout (content left, actions right)
+- [x] Make dialog wider (max-w-7xl) to use screen space
+- [x] Make right panel sticky for long content
+- [x] For regular users: show status tracking instead of admin controls
+- [x] Test admin workflow (scan → decide → act)
+- [x] Test user workflow (view submission → check status)
+- [x] Create checkpoint
