@@ -21,6 +21,8 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { trpc } from "@/lib/trpc";
 import { useLocation } from "wouter";
+import { useEffect, useState } from "react";
+import { getLoginUrl } from "@/const";
 import { 
   Loader2, 
   ArrowLeft, 
@@ -43,7 +45,6 @@ import {
   Settings,
   Zap
 } from "lucide-react";
-import { useState } from "react";
 import { toast } from "sonner";
 import { PriorityRubricModal } from "@/components/PriorityRubricModal";
 
@@ -108,6 +109,13 @@ export default function Admin() {
   const deleteMutation = trpc.admin.deleteInitiative.useMutation();
   const utils = trpc.useUtils();
 
+  // Redirect to login if not authenticated (must be before any conditional returns)
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      window.location.href = getLoginUrl();
+    }
+  }, [loading, isAuthenticated]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -117,8 +125,11 @@ export default function Admin() {
   }
 
   if (!isAuthenticated) {
-    setLocation("/");
-    return null;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+      </div>
+    );
   }
 
   const isAdmin = user?.role === 'admin';

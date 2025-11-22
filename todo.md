@@ -51,3 +51,17 @@
 - [x] Verify all evaluated initiatives have audit trail (all show "Evaluated by Irvin Cruz")
 - [x] Fix frontend caching issue (was calculating priority from impact/effort instead of using database priorityQuadrant)
 - [x] Test complete admin workflow end-to-end
+
+## Authentication Fix
+- [ ] Diagnose authentication issues (test login flow)
+- [ ] Fix OAuth configuration and callback handling
+- [ ] Test complete sign up and login workflow
+- [ ] Verify user session persistence
+
+## Settings Page
+- [x] Create Settings page component with profile section
+- [x] Add account information display (name, email, role)
+- [x] Add logout button
+- [x] Add backend endpoint for profile updates (logout endpoint already exists)
+- [x] Add settings link to navigation
+- [x] Test settings page for both user and admin roles
