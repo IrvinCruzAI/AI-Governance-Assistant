@@ -567,7 +567,7 @@ export default function Admin() {
                     </div>
 
                     <div className="flex-1 min-w-[180px]">
-                      <Label className="text-sm font-semibold text-gray-700 mb-2 block">Priority</Label>
+                      <Label className="text-sm font-semibold text-gray-700 mb-2 block">Opportunity</Label>
                       <Select value={priorityFilter} onValueChange={setPriorityFilter}>
                         <SelectTrigger>
                           <SelectValue />
@@ -621,7 +621,7 @@ export default function Admin() {
                       <table className="w-full">
                         <thead className="bg-blue-600 text-white">
                           <tr>
-                            <th className="px-4 py-3 text-left text-sm font-semibold">Priority</th>
+                            <th className="px-4 py-3 text-left text-sm font-semibold">Opportunity</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Title</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Submitter</th>
                             <th className="px-4 py-3 text-left text-sm font-semibold">Area</th>
@@ -728,7 +728,7 @@ export default function Admin() {
                     <div className="bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl p-6 text-white shadow-lg">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm font-medium text-blue-100 mb-1">Priority Score</p>
+                          <p className="text-sm font-medium text-blue-100 mb-1">Opportunity Score</p>
                           <p className="text-5xl font-bold">{selectedInitiative.priorityScore || 0}</p>
                         </div>
                         <Badge className="bg-white/20 text-white border-white/30 text-lg px-4 py-2">
@@ -883,7 +883,7 @@ export default function Admin() {
                         <div>
                           <h4 className="font-semibold text-gray-900 flex items-center gap-2">
                             <Target className="h-4 w-4 text-teal-600" />
-                            Priority Evaluation
+                            Opportunity Evaluation
                           </h4>
                           <p className="text-xs text-gray-600 mt-1">Assess impact and effort to prioritize</p>
                         </div>

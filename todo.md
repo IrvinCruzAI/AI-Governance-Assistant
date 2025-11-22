@@ -42,3 +42,9 @@
 - [ ] AI-assisted evaluation suggestions
 - [ ] Email notifications
 - [ ] Export to CSV/PDF
+
+## Terminology Update
+- [x] Rename "Priority" column to "Opportunity" in admin dashboard table
+- [x] Update filter dropdown label from "Priority" to "Opportunity"
+- [x] Update all UI text references from "Priority" to "Opportunity"
+- [x] Test changes and create checkpoint
