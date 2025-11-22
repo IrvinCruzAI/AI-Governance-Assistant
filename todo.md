@@ -272,3 +272,8 @@
 - [x] Create checkpoint
 
 ## Dialog UX Redesign (Fix Compresse
+
+## Database Cleanup
+- [x] Remove all "Untitled Initiative" placeholder entries
+- [x] Verify only 6 realistic examples remain
+- [x] Create checkpoint
