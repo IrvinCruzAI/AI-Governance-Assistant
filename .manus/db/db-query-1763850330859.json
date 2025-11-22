@@ -1,0 +1,106 @@
+{
+  "query": "SELECT id, name, email, role FROM users;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, name, email, role FROM users;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "Irvin Cruz",
+      "email": "irvin@futurecrafters.ai",
+      "role": "admin"
+    },
+    {
+      "id": "690045",
+      "name": "First User",
+      "email": "duplicate-1763839809133@adventhealth.com",
+      "role": "user"
+    },
+    {
+      "id": "690047",
+      "name": "First User",
+      "email": "duplicate-1763839834230@adventhealth.com",
+      "role": "user"
+    },
+    {
+      "id": "690053",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "690054",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "690055",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "720001",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "720002",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "720003",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "720004",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "720005",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "720006",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "720007",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "720008",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "admin"
+    },
+    {
+      "id": "720010",
+      "name": "First User",
+      "email": "duplicate-1763841336201@adventhealth.com",
+      "role": "user"
+    },
+    {
+      "id": "720012",
+      "name": "First User",
+      "email": "duplicate-1763841344931@adventhealth.com",
+      "role": "user"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\trole\n1\tIrvin Cruz\tirvin@futurecrafters.ai\tadmin\n690045\tFirst User\tduplicate-1763839809133@adventhealth.com\tuser\n690047\tFirst User\tduplicate-1763839834230@adventhealth.com\tuser\n690053\tNULL\tNULL\tadmin\n690054\tNULL\tNULL\tadmin\n690055\tNULL\tNULL\tadmin\n720001\tNULL\tNULL\tadmin\n720002\tNULL\tNULL\tadmin\n720003\tNULL\tNULL\tadmin\n720004\tNULL\tNULL\tadmin\n720005\tNULL\tNULL\tadmin\n720006\tNULL\tNULL\tadmin\n720007\tNULL\tNULL\tadmin\n720008\tNULL\tNULL\tadmin\n720010\tFirst User\tduplicate-1763841336201@adventhealth.com\tuser\n720012\tFirst User\tduplicate-1763841344931@adventhealth.com\tuser\n",
+  "stderr": "",
+  "execution_time_ms": 643
+}

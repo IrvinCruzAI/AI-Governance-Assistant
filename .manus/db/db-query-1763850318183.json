@@ -1,0 +1,45 @@
+{
+  "query": "SELECT id, title, userEmail, area, priorityQuadrant FROM initiatives ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, userEmail, area, priorityQuadrant FROM initiatives ORDER BY id;",
+  "rows": [
+    {
+      "id": "210001",
+      "title": "Automated Patient Appointment Reminders & Scheduling Optimization",
+      "userEmail": "sarah.johnson@adventhealth.com",
+      "area": "clinical-operations",
+      "priorityQuadrant": "quick-win"
+    },
+    {
+      "id": "210002",
+      "title": "AI-Assisted Clinical Documentation for Discharge Summaries",
+      "userEmail": "dr.michael.chen@adventhealth.com",
+      "area": "clinical-care",
+      "priorityQuadrant": "strategic-bet"
+    },
+    {
+      "id": "210003",
+      "title": "Predictive Staffing Model for Emergency Departments",
+      "userEmail": "jennifer.martinez@adventhealth.com",
+      "area": "clinical-operations",
+      "priorityQuadrant": "reconsider"
+    },
+    {
+      "id": "210004",
+      "title": "Automated Prior Authorization Assistant",
+      "userEmail": "amanda.rodriguez@adventhealth.com",
+      "area": "back-office",
+      "priorityQuadrant": "strategic-bet"
+    },
+    {
+      "id": "210005",
+      "title": "Fall Risk Prediction & Alert System for Inpatient Units",
+      "userEmail": "emily.thompson@adventhealth.com",
+      "area": "clinical-care",
+      "priorityQuadrant": "reconsider"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tuserEmail\tarea\tpriorityQuadrant\n210001\tAutomated Patient Appointment Reminders & Scheduling Optimization\tsarah.johnson@adventhealth.com\tclinical-operations\tquick-win\n210002\tAI-Assisted Clinical Documentation for Discharge Summaries\tdr.michael.chen@adventhealth.com\tclinical-care\tstrategic-bet\n210003\tPredictive Staffing Model for Emergency Departments\tjennifer.martinez@adventhealth.com\tclinical-operations\treconsider\n210004\tAutomated Prior Authorization Assistant\tamanda.rodriguez@adventhealth.com\tback-office\tstrategic-bet\n210005\tFall Risk Prediction & Alert System for Inpatient Units\temily.thompson@adventhealth.com\tclinical-care\treconsider\n",
+  "stderr": "",
+  "execution_time_ms": 76
+}

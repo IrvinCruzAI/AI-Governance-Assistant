@@ -1,0 +1,110 @@
+{
+  "query": "SELECT id, title, userEmail FROM initiatives WHERE title LIKE '%Test%' OR userEmail LIKE '%test%' LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, userEmail FROM initiatives WHERE title LIKE '%Test%' OR userEmail LIKE '%test%' LIMIT 20;",
+  "rows": [
+    {
+      "id": "390001",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "390002",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "390003",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "390004",
+      "title": "AI-Powered Scheduling System",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "390005",
+      "title": "Untitled Initiative",
+      "userEmail": "test11@adventhealth.com"
+    },
+    {
+      "id": "390006",
+      "title": "Untitled Initiative",
+      "userEmail": "test12@adventhealth.com"
+    },
+    {
+      "id": "390007",
+      "title": "Patient Flow Optimization",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "390008",
+      "title": "Untitled Initiative",
+      "userEmail": "test2@adventhealth.com"
+    },
+    {
+      "id": "390009",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "390010",
+      "title": "Untitled Initiative",
+      "userEmail": "test13@adventhealth.com"
+    },
+    {
+      "id": "390011",
+      "title": "Untitled Initiative",
+      "userEmail": "test3@adventhealth.com"
+    },
+    {
+      "id": "390012",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "390013",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "390014",
+      "title": "Untitled Initiative",
+      "userEmail": "test4@adventhealth.com"
+    },
+    {
+      "id": "390015",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "390016",
+      "title": "Untitled Initiative",
+      "userEmail": "test14@adventhealth.com"
+    },
+    {
+      "id": "390018",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "390020",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "420002",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "420004",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tuserEmail\n390001\tUntitled Initiative\ttest@adventhealth.com\n390002\tUntitled Initiative\ttest@adventhealth.com\n390003\tUntitled Initiative\ttest@adventhealth.com\n390004\tAI-Powered Scheduling System\ttest@adventhealth.com\n390005\tUntitled Initiative\ttest11@adventhealth.com\n390006\tUntitled Initiative\ttest12@adventhealth.com\n390007\tPatient Flow Optimization\ttest@adventhealth.com\n390008\tUntitled Initiative\ttest2@adventhealth.com\n390009\tUntitled Initiative\ttest@adventhealth.com\n390010\tUntitled Initiative\ttest13@adventhealth.com\n390011\tUntitled Initiative\ttest3@adventhealth.com\n390012\tUntitled Initiative\ttest@adventhealth.com\n390013\tUntitled Initiative\ttest@adventhealth.com\n390014\tUntitled Initiative\ttest4@adventhealth.com\n390015\tUntitled Initiative\ttest@adventhealth.com\n390016\tUntitled Initiative\ttest14@adventhealth.com\n390018\tTest Initiative\ttest@adventhealth.com\n390020\tTest Initiative\ttest@adventhealth.com\n420002\tTest Initiative\ttest@adventhealth.com\n420004\tTest Initiative\ttest@adventhealth.com\n",
+  "stderr": "",
+  "execution_time_ms": 23625
+}

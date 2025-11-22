@@ -1,5 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { AuthDialog } from "@/components/AuthDialog";
 import { Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -55,13 +56,7 @@ export default function Home() {
             </span>
           </div>
           {!isAuthenticated ? (
-            <Button
-              variant="outline"
-              onClick={() => window.location.href = getLoginUrl()}
-              className="border-blue-600 text-blue-600 hover:bg-blue-50"
-            >
-              Sign In
-            </Button>
+            <AuthDialog />
           ) : (
             <div className="flex items-center gap-4">
               <Button

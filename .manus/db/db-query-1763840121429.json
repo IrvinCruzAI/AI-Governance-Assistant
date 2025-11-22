@@ -1,0 +1,9 @@
+{
+  "query": "SELECT id, name, email, openId, passwordHash IS NOT NULL as has_password, loginMethod, role FROM users WHERE email = 'jane.smith@adventhealth.com';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, name, email, openId, passwordHash IS NOT NULL as has_password, loginMethod, role FROM users WHERE email = 'jane.smith@adventhealth.com';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 53
+}

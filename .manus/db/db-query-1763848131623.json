@@ -1,0 +1,13 @@
+{
+  "query": "SELECT COUNT(*) as test_count FROM initiatives WHERE title LIKE '%Test%' OR userEmail LIKE '%test%' OR id >= 300000;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT COUNT(*) as test_count FROM initiatives WHERE title LIKE '%Test%' OR userEmail LIKE '%test%' OR id >= 300000;",
+  "rows": [
+    {
+      "test_count": "135"
+    }
+  ],
+  "messages": [],
+  "stdout": "test_count\n135\n",
+  "stderr": "",
+  "execution_time_ms": 2984
+}

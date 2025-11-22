@@ -1,0 +1,34 @@
+{
+  "query": "SELECT id, name, email, role FROM users WHERE email LIKE '%test%' OR email LIKE '%jane%' OR email LIKE '%sarah%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, name, email, role FROM users WHERE email LIKE '%test%' OR email LIKE '%jane%' OR email LIKE '%sarah%';",
+  "rows": [
+    {
+      "id": "690044",
+      "name": "Test User",
+      "email": "test-1763839808818@adventhealth.com",
+      "role": "user"
+    },
+    {
+      "id": "690046",
+      "name": "Test User",
+      "email": "test-1763839833957@adventhealth.com",
+      "role": "user"
+    },
+    {
+      "id": "720009",
+      "name": "Test User",
+      "email": "test-1763841335868@adventhealth.com",
+      "role": "user"
+    },
+    {
+      "id": "720011",
+      "name": "Test User",
+      "email": "test-1763841344588@adventhealth.com",
+      "role": "user"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\trole\n690044\tTest User\ttest-1763839808818@adventhealth.com\tuser\n690046\tTest User\ttest-1763839833957@adventhealth.com\tuser\n720009\tTest User\ttest-1763841335868@adventhealth.com\tuser\n720011\tTest User\ttest-1763841344588@adventhealth.com\tuser\n",
+  "stderr": "",
+  "execution_time_ms": 113
+}

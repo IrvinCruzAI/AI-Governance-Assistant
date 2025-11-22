@@ -1,0 +1,9 @@
+{
+  "query": "DELETE FROM votes WHERE initiativeId NOT IN (SELECT id FROM initiatives);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute DELETE FROM votes WHERE initiativeId NOT IN (SELECT id FROM initiatives);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 79
+}

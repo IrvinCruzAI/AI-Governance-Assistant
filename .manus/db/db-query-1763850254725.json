@@ -1,0 +1,40 @@
+{
+  "query": "SELECT id, title, userEmail, area FROM initiatives ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, userEmail, area FROM initiatives ORDER BY id;",
+  "rows": [
+    {
+      "id": "210001",
+      "title": "Automated Patient Appointment Reminders & Scheduling Optimization",
+      "userEmail": "sarah.johnson@adventhealth.com",
+      "area": "clinical-operations"
+    },
+    {
+      "id": "210002",
+      "title": "AI-Assisted Clinical Documentation for Discharge Summaries",
+      "userEmail": "dr.michael.chen@adventhealth.com",
+      "area": "clinical-care"
+    },
+    {
+      "id": "210003",
+      "title": "Predictive Staffing Model for Emergency Departments",
+      "userEmail": "jennifer.martinez@adventhealth.com",
+      "area": "clinical-operations"
+    },
+    {
+      "id": "210004",
+      "title": "Automated Prior Authorization Assistant",
+      "userEmail": "amanda.rodriguez@adventhealth.com",
+      "area": "back-office"
+    },
+    {
+      "id": "210005",
+      "title": "Fall Risk Prediction & Alert System for Inpatient Units",
+      "userEmail": "emily.thompson@adventhealth.com",
+      "area": "clinical-care"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tuserEmail\tarea\n210001\tAutomated Patient Appointment Reminders & Scheduling Optimization\tsarah.johnson@adventhealth.com\tclinical-operations\n210002\tAI-Assisted Clinical Documentation for Discharge Summaries\tdr.michael.chen@adventhealth.com\tclinical-care\n210003\tPredictive Staffing Model for Emergency Departments\tjennifer.martinez@adventhealth.com\tclinical-operations\n210004\tAutomated Prior Authorization Assistant\tamanda.rodriguez@adventhealth.com\tback-office\n210005\tFall Risk Prediction & Alert System for Inpatient Units\temily.thompson@adventhealth.com\tclinical-care\n",
+  "stderr": "",
+  "execution_time_ms": 1751
+}

@@ -1,0 +1,990 @@
+{
+  "query": "SELECT id, title, userEmail, area, createdAt FROM initiatives ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, userEmail, area, createdAt FROM initiatives ORDER BY id;",
+  "rows": [
+    {
+      "id": "210001",
+      "title": "Automated Patient Appointment Reminders & Scheduling Optimization",
+      "userEmail": "sarah.johnson@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 08:38:56"
+    },
+    {
+      "id": "210002",
+      "title": "AI-Assisted Clinical Documentation for Discharge Summaries",
+      "userEmail": "dr.michael.chen@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 08:39:29"
+    },
+    {
+      "id": "210003",
+      "title": "Predictive Staffing Model for Emergency Departments",
+      "userEmail": "jennifer.martinez@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 08:39:29"
+    },
+    {
+      "id": "210004",
+      "title": "Automated Prior Authorization Assistant",
+      "userEmail": "amanda.rodriguez@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 08:39:29"
+    },
+    {
+      "id": "210005",
+      "title": "Fall Risk Prediction & Alert System for Inpatient Units",
+      "userEmail": "emily.thompson@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 08:39:29"
+    },
+    {
+      "id": "390001",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390002",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390003",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390004",
+      "title": "AI-Powered Scheduling System",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390005",
+      "title": "Untitled Initiative",
+      "userEmail": "test11@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390006",
+      "title": "Untitled Initiative",
+      "userEmail": "test12@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390007",
+      "title": "Patient Flow Optimization",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390008",
+      "title": "Untitled Initiative",
+      "userEmail": "test2@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390009",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390010",
+      "title": "Untitled Initiative",
+      "userEmail": "test13@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390011",
+      "title": "Untitled Initiative",
+      "userEmail": "test3@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390012",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390013",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390014",
+      "title": "Untitled Initiative",
+      "userEmail": "test4@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390015",
+      "title": "Untitled Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390016",
+      "title": "Untitled Initiative",
+      "userEmail": "test14@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 10:08:15"
+    },
+    {
+      "id": "390018",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 10:21:42"
+    },
+    {
+      "id": "390019",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 10:21:42"
+    },
+    {
+      "id": "390020",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 10:22:07"
+    },
+    {
+      "id": "390021",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 10:22:07"
+    },
+    {
+      "id": "420002",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:45:36"
+    },
+    {
+      "id": "420003",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:45:36"
+    },
+    {
+      "id": "420004",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:46:32"
+    },
+    {
+      "id": "420005",
+      "title": "Test Initiative 1",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:46:32"
+    },
+    {
+      "id": "420006",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:46:32"
+    },
+    {
+      "id": "420007",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:46:32"
+    },
+    {
+      "id": "420008",
+      "title": "Test Initiative 3",
+      "userEmail": "test3@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:46:32"
+    },
+    {
+      "id": "420009",
+      "title": "Test Initiative for Voting",
+      "userEmail": "test4@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:46:32"
+    },
+    {
+      "id": "420010",
+      "title": "Test Initiative 1",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:47:46"
+    },
+    {
+      "id": "420011",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:47:46"
+    },
+    {
+      "id": "420012",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:47:46"
+    },
+    {
+      "id": "420013",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:47:46"
+    },
+    {
+      "id": "420014",
+      "title": "Test Initiative 3",
+      "userEmail": "test3@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:47:46"
+    },
+    {
+      "id": "420015",
+      "title": "Test Initiative for Voting",
+      "userEmail": "test4@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:47:47"
+    },
+    {
+      "id": "420016",
+      "title": "Test Initiative 1",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420017",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420018",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420019",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420020",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420021",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420022",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420023",
+      "title": "Test Initiative",
+      "userEmail": "test11@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420024",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420025",
+      "title": "Test Initiative 3",
+      "userEmail": "test3@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420026",
+      "title": "Test Initiative",
+      "userEmail": "test12@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420027",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420028",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420029",
+      "title": "Test Initiative for Voting",
+      "userEmail": "test4@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420030",
+      "title": "Test Initiative",
+      "userEmail": "test13@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420031",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420032",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420033",
+      "title": "Test Initiative",
+      "userEmail": "test14@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:50:11"
+    },
+    {
+      "id": "420034",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420035",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420036",
+      "title": "Test Initiative 1",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420037",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420038",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420039",
+      "title": "AI-Powered Scheduling System",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420040",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420041",
+      "title": "Patient Flow Optimization",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420042",
+      "title": "Test Initiative",
+      "userEmail": "test11@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420043",
+      "title": "Test Initiative 3",
+      "userEmail": "test3@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420044",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420045",
+      "title": "Test Initiative",
+      "userEmail": "test12@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420046",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420047",
+      "title": "Test Initiative for Voting",
+      "userEmail": "test4@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420048",
+      "title": "Test Initiative",
+      "userEmail": "test13@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420049",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420050",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420051",
+      "title": "Test Initiative",
+      "userEmail": "test14@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:50:56"
+    },
+    {
+      "id": "420052",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420053",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420054",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420055",
+      "title": "Test Initiative",
+      "userEmail": "test11@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420056",
+      "title": "AI-Powered Scheduling System",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420057",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420058",
+      "title": "Test Initiative",
+      "userEmail": "test12@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420059",
+      "title": "Patient Flow Optimization",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420060",
+      "title": "Test Initiative",
+      "userEmail": "test13@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420061",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420062",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420063",
+      "title": "Test Initiative 1",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420064",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420065",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420066",
+      "title": "Test Initiative",
+      "userEmail": "test14@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420067",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420068",
+      "title": "Test Initiative 3",
+      "userEmail": "test3@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "420069",
+      "title": "Test Initiative for Voting",
+      "userEmail": "test4@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 18:56:47"
+    },
+    {
+      "id": "450001",
+      "title": "Test Initiative 1",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450002",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450003",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450004",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450005",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450006",
+      "title": "Test Initiative",
+      "userEmail": "test11@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450007",
+      "title": "AI-Powered Scheduling System",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450008",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450009",
+      "title": "Test Initiative",
+      "userEmail": "test12@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450010",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450011",
+      "title": "Test Initiative 3",
+      "userEmail": "test3@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 19:55:23"
+    },
+    {
+      "id": "450012",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450013",
+      "title": "Test Initiative 1",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450014",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450015",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450016",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450017",
+      "title": "AI-Powered Scheduling System",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450018",
+      "title": "Test Initiative",
+      "userEmail": "test11@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450019",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450020",
+      "title": "Test Initiative",
+      "userEmail": "test12@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450021",
+      "title": "Patient Flow Optimization",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450022",
+      "title": "Test Initiative 3",
+      "userEmail": "test3@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450023",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450024",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450025",
+      "title": "Test Initiative",
+      "userEmail": "test13@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450026",
+      "title": "Test Initiative for Voting",
+      "userEmail": "test4@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 19:55:33"
+    },
+    {
+      "id": "450027",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 19:55:34"
+    },
+    {
+      "id": "450028",
+      "title": "Test Initiative",
+      "userEmail": "test14@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 19:55:34"
+    },
+    {
+      "id": "450029",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:34"
+    },
+    {
+      "id": "450030",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450031",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450032",
+      "title": "Test Initiative 1",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450033",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450034",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450035",
+      "title": "AI-Powered Scheduling System",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450036",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450037",
+      "title": "Test Initiative",
+      "userEmail": "test11@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450038",
+      "title": "Patient Flow Optimization",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450039",
+      "title": "Test Initiative",
+      "userEmail": "test12@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450040",
+      "title": "Test Initiative 3",
+      "userEmail": "test3@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450041",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450042",
+      "title": "Test Initiative",
+      "userEmail": "test13@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450043",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-support",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450044",
+      "title": "Test Initiative for Voting",
+      "userEmail": "test4@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450045",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "back-office",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450046",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com",
+      "area": "clinical-care",
+      "createdAt": "2025-11-22 19:55:43"
+    },
+    {
+      "id": "450047",
+      "title": "Test Initiative",
+      "userEmail": "test14@adventhealth.com",
+      "area": "clinical-operations",
+      "createdAt": "2025-11-22 19:55:43"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tuserEmail\tarea\tcreatedAt\n210001\tAutomated Patient Appointment Reminders & Scheduling Optimization\tsarah.johnson@adventhealth.com\tclinical-operations\t2025-11-22 08:38:56\n210002\tAI-Assisted Clinical Documentation for Discharge Summaries\tdr.michael.chen@adventhealth.com\tclinical-care\t2025-11-22 08:39:29\n210003\tPredictive Staffing Model for Emergency Departments\tjennifer.martinez@adventhealth.com\tclinical-operations\t2025-11-22 08:39:29\n210004\tAutomated Prior Authorization Assistant\tamanda.rodriguez@adventhealth.com\tback-office\t2025-11-22 08:39:29\n210005\tFall Risk Prediction & Alert System for Inpatient Units\temily.thompson@adventhealth.com\tclinical-care\t2025-11-22 08:39:29\n390001\tUntitled Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 10:08:15\n390002\tUntitled Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 10:08:15\n390003\tUntitled Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 10:08:15\n390004\tAI-Powered Scheduling System\ttest@adventhealth.com\tback-office\t2025-11-22 10:08:15\n390005\tUntitled Initiative\ttest11@adventhealth.com\tclinical-care\t2025-11-22 10:08:15\n390006\tUntitled Initiative\ttest12@adventhealth.com\tclinical-support\t2025-11-22 10:08:15\n390007\tPatient Flow Optimization\ttest@adventhealth.com\tclinical-operations\t2025-11-22 10:08:15\n390008\tUntitled Initiative\ttest2@adventhealth.com\tclinical-care\t2025-11-22 10:08:15\n390009\tUntitled Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 10:08:15\n390010\tUntitled Initiative\ttest13@adventhealth.com\tback-office\t2025-11-22 10:08:15\n390011\tUntitled Initiative\ttest3@adventhealth.com\tclinical-support\t2025-11-22 10:08:15\n390012\tUntitled Initiative\ttest@adventhealth.com\tclinical-support\t2025-11-22 10:08:15\n390013\tUntitled Initiative\ttest@adventhealth.com\tback-office\t2025-11-22 10:08:15\n390014\tUntitled Initiative\ttest4@adventhealth.com\tback-office\t2025-11-22 10:08:15\n390015\tUntitled Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 10:08:15\n390016\tUntitled Initiative\ttest14@adventhealth.com\tclinical-operations\t2025-11-22 10:08:15\n390018\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 10:21:42\n390019\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 10:21:42\n390020\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 10:22:07\n390021\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 10:22:07\n420002\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:45:36\n420003\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 18:45:36\n420004\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:46:32\n420005\tTest Initiative 1\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:46:32\n420006\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 18:46:32\n420007\tTest Initiative 2\ttest2@adventhealth.com\tclinical-care\t2025-11-22 18:46:32\n420008\tTest Initiative 3\ttest3@adventhealth.com\tclinical-support\t2025-11-22 18:46:32\n420009\tTest Initiative for Voting\ttest4@adventhealth.com\tback-office\t2025-11-22 18:46:32\n420010\tTest Initiative 1\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:47:46\n420011\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:47:46\n420012\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 18:47:46\n420013\tTest Initiative 2\ttest2@adventhealth.com\tclinical-care\t2025-11-22 18:47:46\n420014\tTest Initiative 3\ttest3@adventhealth.com\tclinical-support\t2025-11-22 18:47:46\n420015\tTest Initiative for Voting\ttest4@adventhealth.com\tback-office\t2025-11-22 18:47:47\n420016\tTest Initiative 1\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:11\n420017\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:11\n420018\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:11\n420019\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:11\n420020\tTest Initiative 2\ttest2@adventhealth.com\tclinical-care\t2025-11-22 18:50:11\n420021\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 18:50:11\n420022\tTest Initiative\ttest@adventhealth.com\tback-office\t2025-11-22 18:50:11\n420023\tTest Initiative\ttest11@adventhealth.com\tclinical-care\t2025-11-22 18:50:11\n420024\tTest Initiative\ttest@adventhealth.com\tclinical-operations\t2025-11-22 18:50:11\n420025\tTest Initiative 3\ttest3@adventhealth.com\tclinical-support\t2025-11-22 18:50:11\n420026\tTest Initiative\ttest12@adventhealth.com\tclinical-support\t2025-11-22 18:50:11\n420027\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:11\n420028\tTest Initiative\ttest@adventhealth.com\tclinical-support\t2025-11-22 18:50:11\n420029\tTest Initiative for Voting\ttest4@adventhealth.com\tback-office\t2025-11-22 18:50:11\n420030\tTest Initiative\ttest13@adventhealth.com\tback-office\t2025-11-22 18:50:11\n420031\tTest Initiative\ttest@adventhealth.com\tback-office\t2025-11-22 18:50:11\n420032\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:11\n420033\tTest Initiative\ttest14@adventhealth.com\tclinical-operations\t2025-11-22 18:50:11\n420034\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:56\n420035\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:56\n420036\tTest Initiative 1\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:56\n420037\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 18:50:56\n420038\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:56\n420039\tAI-Powered Scheduling System\ttest@adventhealth.com\tback-office\t2025-11-22 18:50:56\n420040\tTest Initiative 2\ttest2@adventhealth.com\tclinical-care\t2025-11-22 18:50:56\n420041\tPatient Flow Optimization\ttest@adventhealth.com\tclinical-operations\t2025-11-22 18:50:56\n420042\tTest Initiative\ttest11@adventhealth.com\tclinical-care\t2025-11-22 18:50:56\n420043\tTest Initiative 3\ttest3@adventhealth.com\tclinical-support\t2025-11-22 18:50:56\n420044\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:56\n420045\tTest Initiative\ttest12@adventhealth.com\tclinical-support\t2025-11-22 18:50:56\n420046\tTest Initiative\ttest@adventhealth.com\tclinical-support\t2025-11-22 18:50:56\n420047\tTest Initiative for Voting\ttest4@adventhealth.com\tback-office\t2025-11-22 18:50:56\n420048\tTest Initiative\ttest13@adventhealth.com\tback-office\t2025-11-22 18:50:56\n420049\tTest Initiative\ttest@adventhealth.com\tback-office\t2025-11-22 18:50:56\n420050\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:50:56\n420051\tTest Initiative\ttest14@adventhealth.com\tclinical-operations\t2025-11-22 18:50:56\n420052\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:56:47\n420053\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:56:47\n420054\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:56:47\n420055\tTest Initiative\ttest11@adventhealth.com\tclinical-care\t2025-11-22 18:56:47\n420056\tAI-Powered Scheduling System\ttest@adventhealth.com\tback-office\t2025-11-22 18:56:47\n420057\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 18:56:47\n420058\tTest Initiative\ttest12@adventhealth.com\tclinical-support\t2025-11-22 18:56:47\n420059\tPatient Flow Optimization\ttest@adventhealth.com\tclinical-operations\t2025-11-22 18:56:47\n420060\tTest Initiative\ttest13@adventhealth.com\tback-office\t2025-11-22 18:56:47\n420061\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:56:47\n420062\tTest Initiative\ttest@adventhealth.com\tclinical-support\t2025-11-22 18:56:47\n420063\tTest Initiative 1\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:56:47\n420064\tTest Initiative\ttest@adventhealth.com\tback-office\t2025-11-22 18:56:47\n420065\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 18:56:47\n420066\tTest Initiative\ttest14@adventhealth.com\tclinical-operations\t2025-11-22 18:56:47\n420067\tTest Initiative 2\ttest2@adventhealth.com\tclinical-care\t2025-11-22 18:56:47\n420068\tTest Initiative 3\ttest3@adventhealth.com\tclinical-support\t2025-11-22 18:56:47\n420069\tTest Initiative for Voting\ttest4@adventhealth.com\tback-office\t2025-11-22 18:56:47\n450001\tTest Initiative 1\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:23\n450002\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:23\n450003\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:23\n450004\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:23\n450005\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 19:55:23\n450006\tTest Initiative\ttest11@adventhealth.com\tclinical-care\t2025-11-22 19:55:23\n450007\tAI-Powered Scheduling System\ttest@adventhealth.com\tback-office\t2025-11-22 19:55:23\n450008\tTest Initiative 2\ttest2@adventhealth.com\tclinical-care\t2025-11-22 19:55:23\n450009\tTest Initiative\ttest12@adventhealth.com\tclinical-support\t2025-11-22 19:55:23\n450010\tTest Initiative\ttest@adventhealth.com\tclinical-operations\t2025-11-22 19:55:23\n450011\tTest Initiative 3\ttest3@adventhealth.com\tclinical-support\t2025-11-22 19:55:23\n450012\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:33\n450013\tTest Initiative 1\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:33\n450014\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:33\n450015\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:33\n450016\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 19:55:33\n450017\tAI-Powered Scheduling System\ttest@adventhealth.com\tback-office\t2025-11-22 19:55:33\n450018\tTest Initiative\ttest11@adventhealth.com\tclinical-care\t2025-11-22 19:55:33\n450019\tTest Initiative 2\ttest2@adventhealth.com\tclinical-care\t2025-11-22 19:55:33\n450020\tTest Initiative\ttest12@adventhealth.com\tclinical-support\t2025-11-22 19:55:33\n450021\tPatient Flow Optimization\ttest@adventhealth.com\tclinical-operations\t2025-11-22 19:55:33\n450022\tTest Initiative 3\ttest3@adventhealth.com\tclinical-support\t2025-11-22 19:55:33\n450023\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:33\n450024\tTest Initiative\ttest@adventhealth.com\tclinical-support\t2025-11-22 19:55:33\n450025\tTest Initiative\ttest13@adventhealth.com\tback-office\t2025-11-22 19:55:33\n450026\tTest Initiative for Voting\ttest4@adventhealth.com\tback-office\t2025-11-22 19:55:33\n450027\tTest Initiative\ttest@adventhealth.com\tback-office\t2025-11-22 19:55:34\n450028\tTest Initiative\ttest14@adventhealth.com\tclinical-operations\t2025-11-22 19:55:34\n450029\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:34\n450030\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:43\n450031\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:43\n450032\tTest Initiative 1\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:43\n450033\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:43\n450034\tMinimal Initiative\tminimal@adventhealth.com\tclinical-operations\t2025-11-22 19:55:43\n450035\tAI-Powered Scheduling System\ttest@adventhealth.com\tback-office\t2025-11-22 19:55:43\n450036\tTest Initiative 2\ttest2@adventhealth.com\tclinical-care\t2025-11-22 19:55:43\n450037\tTest Initiative\ttest11@adventhealth.com\tclinical-care\t2025-11-22 19:55:43\n450038\tPatient Flow Optimization\ttest@adventhealth.com\tclinical-operations\t2025-11-22 19:55:43\n450039\tTest Initiative\ttest12@adventhealth.com\tclinical-support\t2025-11-22 19:55:43\n450040\tTest Initiative 3\ttest3@adventhealth.com\tclinical-support\t2025-11-22 19:55:43\n450041\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:43\n450042\tTest Initiative\ttest13@adventhealth.com\tback-office\t2025-11-22 19:55:43\n450043\tTest Initiative\ttest@adventhealth.com\tclinical-support\t2025-11-22 19:55:43\n450044\tTest Initiative for Voting\ttest4@adventhealth.com\tback-office\t2025-11-22 19:55:43\n450045\tTest Initiative\ttest@adventhealth.com\tback-office\t2025-11-22 19:55:43\n450046\tTest Initiative\ttest@adventhealth.com\tclinical-care\t2025-11-22 19:55:43\n450047\tTest Initiative\ttest14@adventhealth.com\tclinical-operations\t2025-11-22 19:55:43\n",
+  "stderr": "",
+  "execution_time_ms": 10304
+}

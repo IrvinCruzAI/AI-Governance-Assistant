@@ -116,3 +116,42 @@
 - [x] Add vertical divider (|) between Dashboard button and greeting
 - [x] Remove avatar icon for cleaner, more minimal look
 - [x] Test refined design for better visual separation and professionalism
+
+## Email/Password Authentication
+- [x] Add passwordHash field to users table schema
+- [x] Make openId nullable to support email/password authentication
+- [x] Create password hashing helper functions (bcrypt)
+- [x] Add getUserByEmail helper function to db.ts
+- [x] Create signup endpoint with password hashing
+- [x] Create login endpoint with password verification
+- [x] Replace OAuth Sign In button with email/password forms
+- [x] Add signup and login forms to Home page (AuthDialog component)
+- [x] Fix require() issues by using ES6 imports for bcrypt and jsonwebtoken
+- [x] Test user registration and login flow
+- [x] Write unit tests for authentication endpoints (3/3 passing)
+
+## Fix API JSON Error
+- [ ] Diagnose why tRPC API is returning HTML instead of JSON
+- [ ] Check server logs for errors during API calls
+- [ ] Verify tRPC endpoint configuration is correct
+- [ ] Fix server-side issue causing HTML error pages
+- [ ] Test API endpoints return proper JSON responses
+- [ ] Verify signup and login work without errors
+
+## Database Cleanup - Remove All Test Data
+- [ ] Audit initiatives table for test data
+- [ ] Audit users table for test accounts
+- [ ] Audit votes table for test votes
+- [ ] Audit messages table for test messages
+- [ ] Delete all test initiatives
+- [ ] Delete all test user accounts
+- [ ] Delete orphaned votes and messages
+- [ ] Verify only legitimate demo data remains
+
+## Database Cleanup - Remove All Test Data
+- [x] Audit initiatives table for test data (found 140 initiatives)
+- [x] Audit users table for test accounts (found 16 users)
+- [x] Delete all test initiatives (IDs >= 300000, titles with "Test", test emails)
+- [x] Delete all test user accounts (deleted accounts with test emails)
+- [x] Delete orphaned votes and messages
+- [x] Verify only legitimate demo data remains (5 initiatives, 16 users)
