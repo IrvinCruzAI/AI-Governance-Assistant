@@ -196,3 +196,10 @@
 - [x] Optimize spacing and alignment
 - [x] Test responsive behavior
 - [x] Create checkpoint
+
+## Header Layout Update
+- [x] Add tagline under AdventHealth logo
+- [x] Align "AI Initiative Portal" horizontally with logo
+- [x] Match text size to logo height
+- [x] Test layout and spacing
+- [x] Create checkpoint

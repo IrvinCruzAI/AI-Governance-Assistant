@@ -40,9 +40,14 @@ export default function Home() {
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <img src={APP_LOGO} alt="AdventHealth" className="h-12" />
-            <div className="h-8 w-px bg-gray-300" />
+          <div className="flex items-center gap-6">
+            <div className="flex flex-col">
+              <img src={APP_LOGO} alt="AdventHealth" className="h-12" />
+              <span className="text-xs text-gray-500 mt-1">
+                Extending the Healing Ministry of Christ
+              </span>
+            </div>
+            <div className="h-12 w-px bg-gray-300" />
             <span className="text-lg font-medium text-gray-900">
               AI Initiative Portal
             </span>
