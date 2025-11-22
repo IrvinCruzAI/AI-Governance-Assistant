@@ -73,12 +73,12 @@ export default function Home() {
                 <LayoutDashboard className="h-4 w-4 mr-2" />
                 {user?.role === 'admin' ? 'Dashboard' : 'My Submissions'}
               </Button>
-              <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-teal-50 rounded-full border border-blue-200">
+              <div className="flex items-center gap-2">
                 <div className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
                   {user?.name?.charAt(0).toUpperCase() || 'U'}
                 </div>
-                <span className="text-sm font-medium text-gray-800">
-                  Hi, {user?.name?.split(' ')[0] || 'there'}!
+                <span className="text-sm text-gray-600">
+                  Hi, <span className="font-medium text-gray-900">{user?.name?.split(' ')[0] || 'there'}</span>!
                 </span>
               </div>
             </div>
