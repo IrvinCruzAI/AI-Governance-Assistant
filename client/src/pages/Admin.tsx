@@ -40,10 +40,13 @@ import {
   Target,
   X,
   Wrench,
-  Settings
+  Settings,
+  Zap
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { PriorityRubricModal } from "@/components/PriorityRubricModal";
+import { PriorityMatrix } from "@/components/PriorityMatrix";
 
 // Opportunity Cost Priority Scoring
 function calculatePriorityScore(initiative: any): number {
@@ -59,39 +62,44 @@ function calculatePriorityScore(initiative: any): number {
   return impactScore + feasibilityScore;
 }
 
-function getPriorityLabel(initiative: any): { label: string; color: string; action: string } {
+function getPriorityLabel(initiative: any): { label: string; color: string; action: string; quadrant: string } {
   // Use priorityQuadrant from database if available
-  const quadrant = initiative.priorityQuadrant;
+  const quadrant = initiative.priorityQuadrant || 'not-evaluated';
   
   if (quadrant === 'quick-win') return { 
     label: 'Quick Win', 
     color: 'bg-green-600',
-    action: 'High impact + Easy to do → Start now. Delivers value fast with minimal risk.'
+    action: 'High impact + Easy to do → Start now. Delivers value fast with minimal risk.',
+    quadrant: 'quick-win'
   };
   
   if (quadrant === 'strategic-bet') return { 
     label: 'Strategic Bet', 
     color: 'bg-blue-600',
-    action: 'High impact + Hard to do → Worth the investment. Plan carefully, big payoff.'
+    action: 'High impact + Hard to do → Worth the investment. Plan carefully, big payoff.',
+    quadrant: 'strategic-bet'
   };
   
   if (quadrant === 'nice-to-have') return { 
     label: 'Nice to Have', 
     color: 'bg-yellow-500',
-    action: 'Low impact + Easy → Do when capacity allows. Fill-in work between big projects.'
+    action: 'Low impact + Easy → Do when capacity allows. Fill-in work between big projects.',
+    quadrant: 'nice-to-have'
   };
   
   if (quadrant === 'reconsider') return { 
     label: 'Reconsider', 
     color: 'bg-gray-500',
-    action: 'Low impact + Hard → Probably not worth it. Focus resources elsewhere.'
+    action: 'Low impact + Hard → Probably not worth it. Focus resources elsewhere.',
+    quadrant: 'reconsider'
   };
   
   // Default for initiatives without evaluation
   return { 
     label: 'Not Evaluated', 
     color: 'bg-gray-400',
-    action: 'Complete opportunity cost evaluation to prioritize this initiative.'
+    action: 'Complete opportunity cost evaluation to prioritize this initiative.',
+    quadrant: 'not-evaluated'
   };
 }
 
@@ -152,6 +160,7 @@ export default function Admin() {
   const [newRoadmapStatus, setNewRoadmapStatus] = useState<string>("");
   const [adminNotes, setAdminNotes] = useState<string>("");
   const [showRubric, setShowRubric] = useState(false);
+  const [showRubricModal, setShowRubricModal] = useState(false);
   
   // Priority evaluation state
   const [impactScale, setImpactScale] = useState<string>("medium");
@@ -282,7 +291,10 @@ export default function Admin() {
     .sort((a, b) => b.priorityScore - a.priorityScore);
 
   // Calculate additional analytics
-  const immediateActionCount = initiativesWithPriority.filter(i => i.priority.label === 'Immediate Action').length;
+  const quickWinCount = initiativesWithPriority.filter(i => i.priority.label === 'Quick Win').length;
+  const strategicBetCount = initiativesWithPriority.filter(i => i.priority.label === 'Strategic Bet').length;
+  const niceToHaveCount = initiativesWithPriority.filter(i => i.priority.label === 'Nice to Have').length;
+  const reconsiderCount = initiativesWithPriority.filter(i => i.priority.label === 'Reconsider').length;
   const avgDaysPending = initiatives?.length 
     ? Math.round(initiatives.reduce((acc, i) => {
         const days = i.createdAt ? Math.floor((Date.now() - new Date(i.createdAt).getTime()) / (1000 * 60 * 60 * 24)) : 0;
@@ -390,13 +402,14 @@ export default function Admin() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-2 border-red-200 bg-white shadow-lg">
+                <Card className="border-2 border-emerald-200 bg-white shadow-lg">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-2">
-                      <AlertCircle className="h-8 w-8 text-red-600" />
+                      <Zap className="h-8 w-8 text-emerald-600" />
                     </div>
-                    <p className="text-3xl font-bold text-gray-900">{immediateActionCount}</p>
-                    <p className="text-sm text-gray-600">Immediate Action</p>
+                    <p className="text-3xl font-bold text-gray-900">{quickWinCount}</p>
+                    <p className="text-sm text-gray-600">Quick Wins</p>
+                    <p className="text-xs text-gray-500 mt-1">High Impact, Low Effort</p>
                   </CardContent>
                 </Card>
 
@@ -436,11 +449,11 @@ export default function Admin() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setShowRubric(!showRubric)}
+                  onClick={() => setShowRubricModal(true)}
                   className="gap-2"
                 >
                   <Info className="h-4 w-4" />
-                  {showRubric ? 'Hide' : 'Show'} Priority Rubric
+                  Show Priority Rubric
                 </Button>
               </div>
 
@@ -505,6 +518,21 @@ export default function Admin() {
                 </Card>
               )}
 
+              {/* Priority Matrix Visualization */}
+              <PriorityMatrix 
+                initiatives={initiativesWithPriority}
+                onInitiativeClick={openInitiativeDetail}
+                onQuadrantClick={(quadrant) => {
+                  const quadrantLabels: Record<string, string> = {
+                    'quick-win': 'Quick Win',
+                    'strategic-bet': 'Strategic Bet',
+                    'nice-to-have': 'Nice to Have',
+                    'reconsider': 'Reconsider'
+                  };
+                  setPriorityFilter(quadrantLabels[quadrant] || 'all');
+                }}
+              />
+
               {/* Filters */}
               <Card className="border-2 border-gray-200 bg-white shadow-lg">
                 <CardContent className="p-6">
@@ -548,10 +576,11 @@ export default function Admin() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="all">All Priorities</SelectItem>
-                          <SelectItem value="Immediate Action">Immediate Action</SelectItem>
-                          <SelectItem value="Review This Week">Review This Week</SelectItem>
-                          <SelectItem value="Standard Queue">Standard Queue</SelectItem>
-                          <SelectItem value="Low Urgency">Low Urgency</SelectItem>
+                          <SelectItem value="Quick Win">Quick Win (High Impact, Low Effort)</SelectItem>
+                          <SelectItem value="Strategic Bet">Strategic Bet (High Impact, High Effort)</SelectItem>
+                          <SelectItem value="Nice to Have">Nice to Have (Low Impact, Low Effort)</SelectItem>
+                          <SelectItem value="Reconsider">Reconsider (Low Impact, High Effort)</SelectItem>
+                          <SelectItem value="Not Evaluated">Not Evaluated</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -855,11 +884,36 @@ export default function Admin() {
 
                       {/* Opportunity Cost Evaluation */}
                       <div className="p-4 bg-gradient-to-br from-teal-50 to-blue-50 rounded-lg border-2 border-teal-200">
-                        <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                          <Target className="h-4 w-4 text-teal-600" />
-                          Priority Evaluation
-                        </h4>
-                        <p className="text-xs text-gray-600 mb-4">Assess impact and feasibility to prioritize this initiative</p>
+                        <div className="flex items-start justify-between mb-3">
+                          <div>
+                            <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+                              <Target className="h-4 w-4 text-teal-600" />
+                              Priority Evaluation
+                            </h4>
+                            <p className="text-xs text-gray-600 mt-1">Assess impact and feasibility to prioritize this initiative</p>
+                          </div>
+                          {/* Real-time Score Preview */}
+                          {(() => {
+                            const previewInitiative = {
+                              impactScale,
+                              impactBenefitType,
+                              impactFinancialReturn,
+                              feasibilityComplexity,
+                              feasibilityTimeline,
+                              feasibilityDependencies
+                            };
+                            const previewScore = calculatePriorityScore(previewInitiative);
+                            const previewPriority = getPriorityLabel(previewInitiative);
+                            return (
+                              <div className="text-right">
+                                <div className="text-2xl font-bold text-gray-900">{previewScore}</div>
+                                <div className={`text-xs font-semibold px-2 py-1 rounded ${previewPriority.color}`}>
+                                  {previewPriority.label}
+                                </div>
+                              </div>
+                            );
+                          })()}
+                        </div>
                         
                         {/* Impact Assessment */}
                         <div className="space-y-3 mb-4 pb-4 border-b border-teal-200">
@@ -1073,6 +1127,12 @@ export default function Admin() {
           </div>
         )}
       </div>
+
+      {/* Priority Rubric Modal */}
+      <PriorityRubricModal 
+        open={showRubricModal} 
+        onOpenChange={setShowRubricModal} 
+      />
     </div>
   );
 }

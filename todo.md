@@ -341,3 +341,15 @@
 - [x] Test admin can fill in and save opportunity cost evaluations
 - [x] Verify priority score calculation uses new framework
 - [x] Create checkpoint
+
+## Executive UX Improvements - Phase 1 (Critical Fixes)
+- [x] Replace "Immediate Action" summary card with quadrant distribution card
+- [x] Add quadrant filter options to Priority dropdown (Quick Win, Strategic Bet, Nice to Have, Reconsider)
+- [x] Create Priority Rubric modal with framework explanation and strategic guidance
+- [x] Wire "Show Priority Rubric" button to open the modal
+- [x] Add real-time priority score preview in evaluation form
+- [x] Improve evaluation form layout (remove scrolling, show all fields at once)
+- [x] Add 2×2 Impact/Effort matrix visualization to dashboard
+- [x] Make matrix interactive (click quadrant to filter initiatives)
+- [x] Test all improvements from executive perspective
+- [x] Create checkpoint
