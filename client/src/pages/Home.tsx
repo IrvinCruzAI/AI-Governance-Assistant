@@ -62,13 +62,12 @@ export default function Home() {
             </Button>
           ) : (
             <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-700">Welcome, {user?.name}</span>
               <Button
                 onClick={() => setLocation("/admin")}
                 variant="ghost"
                 className="text-sm"
               >
-                Admin
+                {user?.role === 'admin' ? 'Dashboard' : 'My Submissions'}
               </Button>
             </div>
           )}

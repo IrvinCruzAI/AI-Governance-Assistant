@@ -242,3 +242,24 @@
 - [x] Verify admin-only access to roadmap status management
 - [x] Ensure regular users can view roadmap but not edit statuses
 - [x] Test admin roadmap controls work correctly
+
+## Priority Rubric Redesign
+- [x] Design clear priority rubric with scoring criteria
+- [x] Replace "Critical/High/Medium/Low" with actionable labels
+- [x] Update priority calculation logic with transparent scoring
+- [ ] Add rubric explanation panel to admin dashboard
+- [x] Update priority colors and badges
+- [ ] Test new priority system
+- [x] Create checkpoint
+
+## Dual-Purpose Admin Panel Redesign
+- [x] Rename /admin route to /dashboard for all users
+- [x] Create "My Submissions" view for regular users
+- [x] Create "All Submissions" view for admins only
+- [x] Create "Roadmap Management" view for admins only
+- [x] Add tab navigation for admins (My Submissions | All Submissions | Roadmap)
+- [x] Add priority rubric explanation panel to admin view
+- [x] Update header navigation to show "Dashboard" for all authenticated users
+- [x] Test regular user dashboard experience
+- [x] Test admin dashboard with all tabs
+- [x] Create checkpoint
