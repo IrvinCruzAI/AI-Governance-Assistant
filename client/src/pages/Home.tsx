@@ -94,9 +94,10 @@ export default function Home() {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
-            That frustrating task you repeat 20 times a day? The information you wish was at your fingertips? 
-            The process that takes forever? <strong>You don't need to be technical to share it.</strong>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            That frustrating task you repeat 20 times a day? The information you wish was
+            at your fingertips? The process that takes forever? <strong>What if your idea could actually get built and deployed across AdventHealth?</strong> You don't need to be
+            technical to share it.
           </p>
 
           {/* CTA Buttons */}
@@ -117,7 +118,7 @@ export default function Home() {
                   onClick={() => setLocation("/new")}
                   className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all"
                 >
-                  Share Your Idea Now
+                  Submit Your Idea for Consideration
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button
@@ -280,7 +281,7 @@ export default function Home() {
               </div>
               <h3 className="font-bold text-lg mb-2">You Hear Back</h3>
               <p className="text-gray-600">
-                We email you with next steps—whether it's moving forward, needs more info, or future consideration.
+                We email you with next steps—whether it's moving forward, needs more info, or future consideration. <strong>Approved ideas may receive resources and support for pilot implementation.</strong>
               </p>
             </div>
           </div>
@@ -520,8 +521,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Disclaimer */}
+      <div className="bg-gray-50 py-8">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-sm text-gray-600 max-w-3xl mx-auto">
+            Ideas submitted are reviewed by AdventHealth's Chief AI Officer team. Selected initiatives may be developed for pilot testing and potential system-wide deployment.
+          </p>
+        </div>
+      </div>
+
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-8">
+      <footer className="bg-gray-900 text-white py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm">
             © 2025 AdventHealth • Extending the Healing Ministry of Christ

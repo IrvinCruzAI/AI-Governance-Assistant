@@ -208,3 +208,10 @@
 - [x] Increase "AI Initiative Portal" text size for better proportion
 - [x] Test visual balance with logo
 - [x] Create checkpoint
+
+## Minimal Copy Enhancements - Deployment Impact
+- [x] Update hero subheadline to mention ideas can get built
+- [x] Add sentence to "What Happens Next" about pilot implementation
+- [x] Update CTA button text to "Submit Your Idea for Consideration"
+- [x] Add disclaimer about review process and potential deployment
+- [x] Test and create checkpoint
