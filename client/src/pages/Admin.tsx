@@ -573,7 +573,7 @@ export default function Admin() {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all">All Priorities</SelectItem>
+                          <SelectItem value="all">All Opportunities</SelectItem>
                           <SelectItem value="Quick Win">Quick Win (High Impact, Low Effort)</SelectItem>
                           <SelectItem value="Strategic Bet">Strategic Bet (High Impact, High Effort)</SelectItem>
                           <SelectItem value="Nice to Have">Nice to Have (Low Impact, Low Effort)</SelectItem>

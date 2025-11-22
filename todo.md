@@ -48,3 +48,8 @@
 - [x] Update filter dropdown label from "Priority" to "Opportunity"
 - [x] Update all UI text references from "Priority" to "Opportunity"
 - [x] Test changes and create checkpoint
+
+## Fix Remaining Priority References
+- [x] Update dropdown placeholder from "All Priorities" to "All Opportunities"
+- [x] Update dropdown option labels to remove Priority references
+- [ ] Test and create checkpoint
