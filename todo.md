@@ -270,3 +270,5 @@
 - [x] Organize fields in logical groups (metadata, content, admin controls)
 - [x] Test dialog with different screen sizes
 - [x] Create checkpoint
+
+## Dialog UX Redesign (Fix Compresse
