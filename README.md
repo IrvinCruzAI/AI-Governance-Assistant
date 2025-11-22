@@ -1,42 +1,46 @@
 # AdventHealth AI Initiative Intake & Governance Assistant
 
-A comprehensive web application that guides AdventHealth team members through evaluating AI initiatives using a structured governance framework, mission alignment assessment, and risk classification system.
+A structured multi-step intake form that guides AdventHealth team members through submitting well-thought-out AI initiative proposals for review by the Chief AI Officer's team.
 
 ## Overview
 
-This tool helps staff and leaders at AdventHealth turn rough AI ideas into structured initiative briefs ready for review by the Chief AI Officer's team. It provides:
+This tool transforms rough AI ideas into comprehensive, structured proposals through a guided questionnaire format. It provides:
 
-- **Guided Conversation Flow**: 6-step interactive process to gather initiative details
-- **AI-Powered Analysis**: Automated mission alignment and risk classification using LLM
+- **Multi-Step Intake Form**: 4-step wizard with clear progress tracking
+- **Structured Questions**: Radio buttons, checkboxes, dropdowns, and text fields
+- **AI-Powered Analysis**: Automated mission alignment and risk classification
 - **RAID Generation**: Automatic generation of Risks, Assumptions, Issues, and Dependencies
-- **Professional Briefs**: Structured initiative briefs and email summaries for leadership
-- **Progress Tracking**: Save and resume initiatives, view past submissions
+- **Professional Briefs**: Downloadable initiative briefs and email summaries
+- **Progress Saving**: Save and resume at any time
 
 ## Features
 
-### 1. Initiative Basics (Step 2)
-- Collect working title, problem statement, AI approach, and primary users
-- Summarize and confirm understanding before proceeding
+### Step 1: Basic Information
+- Initiative title (required)
+- Your role at AdventHealth
+- Primary area (clinical care, clinical support, operations, back-office)
 
-### 2. Mission & Ethics Alignment (Step 3)
-- Assess alignment with AdventHealth's mission and whole-person care values
-- Identify ethical concerns and potential risks
-- AI-powered rating: High, Medium, or Low alignment
+### Step 2: Problem & Solution
+- Problem or opportunity description (required)
+- How AI might help (required)
+- Primary users or affected groups
 
-### 3. Risk Classification (Step 4)
-- Classify based on clinical impact, data sensitivity, and automation level
-- Determine appropriate governance path: Light, Standard, or Full
-- AI-powered risk assessment with clear reasoning
+### Step 3: Mission & Ethics Alignment
+- Select mission support areas (patient safety, health equity, burnout reduction, etc.)
+- Describe whole-person care alignment (required)
+- Identify potential ethical concerns
 
-### 4. RAID View Generation (Step 5)
-- Automatically generate comprehensive RAID analysis
-- Identify key risks, assumptions, issues, and dependencies
-- Allow user review and refinement
+### Step 4: Risk Classification
+- Main area the AI touches (clinical decisions, support, operations, back-office)
+- Clinical impact level (no direct effect, indirect, direct low/high stakes)
+- Data type (no personal data, de-identified, PHI, highly sensitive)
+- Automation level (suggestions only, review required, automated actions)
 
-### 5. Final Outputs (Step 6)
-- **Initiative Brief**: Comprehensive markdown document with all details
-- **Email Summary**: Concise summary for Chief AI Officer's team
-- **Export Options**: Download as markdown or text files
+### Step 5: Review & Submit
+- View AI-generated mission alignment rating (High/Medium/Low)
+- View risk classification (Low/Medium/High) and governance path
+- Download complete initiative brief
+- Download email summary for Chief AI Officer
 
 ## Technology Stack
 
@@ -45,6 +49,7 @@ This tool helps staff and leaders at AdventHealth turn rough AI ideas into struc
 - **Database**: MySQL/TiDB with Drizzle ORM
 - **AI Integration**: Built-in LLM service with structured JSON responses
 - **Authentication**: Manus OAuth
+- **Form Validation**: Real-time validation with toast notifications
 
 ## User Guide
 
@@ -53,34 +58,54 @@ This tool helps staff and leaders at AdventHealth turn rough AI ideas into struc
 1. **Sign In**: Click "Sign In to Get Started" on the home page
 2. **Create Initiative**: Click "Start New Initiative"
 3. **Provide Context**: Enter your role and select the primary area
-4. **Begin Evaluation**: Click "Begin Evaluation" to start the guided conversation
+4. **Begin Evaluation**: Click "Begin Evaluation" to start the intake form
 
-### Completing the Evaluation
+### Completing the Intake Form
 
-The assistant will guide you through 6 steps:
+Navigate through 4 steps using the "Next" and "Back" buttons:
 
-1. **Welcome & Role**: Confirm your role and area
-2. **Initiative Basics**: Provide title, problem, AI approach, and users
-3. **Mission Alignment**: Assess mission fit and ethical considerations
-4. **Risk Classification**: Answer questions about clinical impact, data, and automation
-5. **RAID Review**: Review and refine the generated RAID analysis
-6. **Final Brief**: Download your completed initiative brief and email summary
+1. **Basic Information**: Provide title, role, and area
+2. **Problem & Solution**: Describe the problem and AI approach
+3. **Mission & Ethics**: Select mission supports and describe alignment
+4. **Risk Classification**: Answer questions about area, impact, data, and automation
+
+After Step 4, click "Submit for Analysis" to:
+- Automatically analyze mission alignment
+- Classify risk level and recommend governance path
+- Generate comprehensive RAID view
+- Create downloadable brief and email summary
+
+### Form Validation
+
+- Required fields are marked with *
+- Validation occurs when clicking "Next"
+- Error messages appear as toast notifications
+- Progress is automatically saved after each step
 
 ### Viewing Past Initiatives
 
 - Return to the home page to see all your initiatives
 - Click on any initiative card to view or continue
-- Completed initiatives are marked with a green "Completed" badge
-- In-progress initiatives show current step progress
+- Completed initiatives show mission alignment and risk ratings
+- In-progress initiatives show current step (e.g., "Step 2 of 4")
 
 ### Downloading Briefs
 
-1. Complete the evaluation (reach Step 6)
-2. Click "View Final Brief" button
-3. Use "Download Brief" for the full markdown document
-4. Use "Download Email" for the email summary
+1. Complete all 4 steps and submit for analysis
+2. View the review page with analysis results
+3. Click "View Complete Brief & Download"
+4. Use "Download Brief" for markdown document
+5. Use "Download Email" for email summary
 
 ## Design Philosophy
+
+### Intake Form UX
+
+- **Clear Progress**: Visual progress bar with step labels
+- **Structured Input**: Appropriate input types for each question
+- **Validation**: Real-time feedback on required fields
+- **Flexibility**: Save progress and return anytime
+- **Transparency**: AI reasoning explained in plain language
 
 ### AdventHealth Branding
 
@@ -88,13 +113,6 @@ The assistant will guide you through 6 steps:
 - **Typography**: Inter font family for professional, readable text
 - **Layout**: Clean, spacious design with clear visual hierarchy
 - **Accessibility**: High contrast, keyboard navigation, screen reader support
-
-### User Experience
-
-- **Conversational**: Natural, supportive dialogue throughout
-- **Progressive**: Step-by-step guidance with clear progress indicators
-- **Forgiving**: Save progress automatically, resume anytime
-- **Transparent**: AI reasoning is always explained in plain language
 
 ## AI Governance Framework
 
@@ -136,14 +154,14 @@ pnpm test
 
 All tRPC procedures have comprehensive vitest coverage including:
 - Initiative creation and updates
-- Message management
+- Form data persistence
 - AI-powered analysis functions
 - Authentication flows
 
 ### Database Schema
 
-**initiatives**: Stores all initiative data including assessments and RAID
-**messages**: Stores conversation history for each initiative
+**initiatives**: Stores all initiative data including form responses and AI analysis
+**messages**: Stores conversation history (legacy from chat version)
 **users**: Manages authentication and user profiles
 
 ### AI Service
@@ -152,9 +170,31 @@ The `aiService.ts` module provides:
 - `analyzeMissionAlignment()`: Rates mission fit and provides reasoning
 - `classifyRisk()`: Determines risk level and governance path
 - `generateRAID()`: Creates comprehensive RAID analysis
-- `generateNextQuestion()`: Powers conversational flow
 
 All AI functions use structured JSON responses with strict schemas for reliability.
+
+## Form Fields Reference
+
+### Step 1 Fields
+- `title` (text, required)
+- `userRole` (text, optional)
+- `area` (dropdown, optional)
+
+### Step 2 Fields
+- `problemStatement` (textarea, required)
+- `aiApproach` (textarea, required)
+- `primaryUsers` (text, optional)
+
+### Step 3 Fields
+- `missionSupports` (checkbox group, required - at least one)
+- `wholePersonCareAlignment` (textarea, required)
+- `ethicalConcerns` (textarea, optional)
+
+### Step 4 Fields
+- `mainArea` (radio group, required)
+- `clinicalImpact` (radio group, required)
+- `dataType` (radio group, required)
+- `automationLevel` (radio group, required)
 
 ## Deployment
 

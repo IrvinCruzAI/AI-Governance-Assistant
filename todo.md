@@ -40,3 +40,13 @@
 - [x] Test on mobile devices
 - [x] Create checkpoint for deployment
 - [x] Document usage instructions
+
+## Redesign to Intake Form Format
+- [x] Replace chat interface with structured multi-step form
+- [x] Add form fields for each question (radio buttons, dropdowns, checkboxes, text areas)
+- [x] Create step-by-step wizard with clear navigation
+- [x] Add form validation for required fields
+- [x] Show progress indicator and step summary
+- [x] Add review page before final submission
+- [x] Update UI to feel like a professional intake questionnaire
+- [x] Test complete form flow from start to submission
