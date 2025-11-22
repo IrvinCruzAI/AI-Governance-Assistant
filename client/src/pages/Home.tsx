@@ -41,15 +41,11 @@ export default function Home() {
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <img src={APP_LOGO} alt="AdventHealth" className="h-10" />
-            <div className="flex flex-col">
-              <span className="text-lg font-semibold text-gray-900">
-                AI Initiative Portal
-              </span>
-              <span className="text-xs text-gray-500 hidden sm:block">
-                Extending the Healing Ministry of Christ
-              </span>
-            </div>
+            <img src={APP_LOGO} alt="AdventHealth" className="h-12" />
+            <div className="h-8 w-px bg-gray-300" />
+            <span className="text-lg font-medium text-gray-900">
+              AI Initiative Portal
+            </span>
           </div>
           {!isAuthenticated ? (
             <Button
