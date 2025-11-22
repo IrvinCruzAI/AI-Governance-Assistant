@@ -236,3 +236,9 @@
 - [x] Write vitest tests for voting functionality
 - [x] Write vitest tests for roadmap status changes
 - [x] Create checkpoint
+
+## UI Improvements for Roadmap Visibility
+- [x] Add prominent "View Roadmap" button to Browse Ideas page header
+- [x] Verify admin-only access to roadmap status management
+- [x] Ensure regular users can view roadmap but not edit statuses
+- [x] Test admin roadmap controls work correctly

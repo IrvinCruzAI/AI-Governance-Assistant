@@ -102,6 +102,15 @@ export default function Browse() {
           </h1>
           <div className="flex items-center gap-3">
             <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setLocation("/roadmap")}
+              aria-label="View AI Initiative Roadmap"
+              className="border-teal-600 text-teal-600 hover:bg-teal-50"
+            >
+              View Roadmap
+            </Button>
+            <Button
               variant="ghost"
               size="sm"
               onClick={() => setLocation("/")}
