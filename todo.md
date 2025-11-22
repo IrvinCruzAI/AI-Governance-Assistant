@@ -111,3 +111,8 @@
 - [x] Improve visual hierarchy (Dashboard button primary, greeting secondary)
 - [x] Reduce visual competition between elements
 - [x] Test refined design for better balance and professionalism
+
+## Minimal Header Design Refinement
+- [x] Add vertical divider (|) between Dashboard button and greeting
+- [x] Remove avatar icon for cleaner, more minimal look
+- [x] Test refined design for better visual separation and professionalism
