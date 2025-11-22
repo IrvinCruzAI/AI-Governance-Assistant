@@ -1,0 +1,52 @@
+{
+  "query": "SELECT id, title, priorityScore, impactScale, feasibilityComplexity FROM initiatives ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, priorityScore, impactScale, feasibilityComplexity FROM initiatives ORDER BY id;",
+  "rows": [
+    {
+      "id": "210001",
+      "title": "Automated Patient Appointment Reminders & Scheduling Optimization",
+      "priorityScore": "NULL",
+      "impactScale": "NULL",
+      "feasibilityComplexity": "NULL"
+    },
+    {
+      "id": "210002",
+      "title": "AI-Assisted Clinical Documentation for Discharge Summaries",
+      "priorityScore": "90",
+      "impactScale": "large",
+      "feasibilityComplexity": "moderate"
+    },
+    {
+      "id": "210003",
+      "title": "Predictive Staffing Model for Emergency Departments",
+      "priorityScore": "NULL",
+      "impactScale": "NULL",
+      "feasibilityComplexity": "NULL"
+    },
+    {
+      "id": "210004",
+      "title": "Automated Prior Authorization Assistant",
+      "priorityScore": "NULL",
+      "impactScale": "NULL",
+      "feasibilityComplexity": "NULL"
+    },
+    {
+      "id": "210005",
+      "title": "Fall Risk Prediction & Alert System for Inpatient Units",
+      "priorityScore": "NULL",
+      "impactScale": "NULL",
+      "feasibilityComplexity": "NULL"
+    },
+    {
+      "id": "210006",
+      "title": "Pharmacy Inventory Optimization & Expiration Tracking",
+      "priorityScore": "90",
+      "impactScale": "medium",
+      "feasibilityComplexity": "simple"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tpriorityScore\timpactScale\tfeasibilityComplexity\n210001\tAutomated Patient Appointment Reminders & Scheduling Optimization\tNULL\tNULL\tNULL\n210002\tAI-Assisted Clinical Documentation for Discharge Summaries\t90\tlarge\tmoderate\n210003\tPredictive Staffing Model for Emergency Departments\tNULL\tNULL\tNULL\n210004\tAutomated Prior Authorization Assistant\tNULL\tNULL\tNULL\n210005\tFall Risk Prediction & Alert System for Inpatient Units\tNULL\tNULL\tNULL\n210006\tPharmacy Inventory Optimization & Expiration Tracking\t90\tmedium\tsimple\n",
+  "stderr": "",
+  "execution_time_ms": 50
+}

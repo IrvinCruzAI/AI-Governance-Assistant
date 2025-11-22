@@ -1,0 +1,52 @@
+{
+  "query": "SELECT id, title, priorityScore, impactScale, impactBenefitType, impactFinancialReturn, feasibilityComplexity, feasibilityTimeline, feasibilityDependencies, impactScore, feasibilityScore, priorityQuadrant FROM initiatives LIMIT 3;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, priorityScore, impactScale, impactBenefitType, impactFinancialReturn, feasibilityComplexity, feasibilityTimeline, feasibilityDependencies, impactScore, feasibilityScore, priorityQuadrant FROM initiatives LIMIT 3;",
+  "rows": [
+    {
+      "id": "210001",
+      "title": "Automated Patient Appointment Reminders & Scheduling Optimization",
+      "priorityScore": "NULL",
+      "impactScale": "NULL",
+      "impactBenefitType": "NULL",
+      "impactFinancialReturn": "NULL",
+      "feasibilityComplexity": "NULL",
+      "feasibilityTimeline": "NULL",
+      "feasibilityDependencies": "NULL",
+      "impactScore": "NULL",
+      "feasibilityScore": "NULL",
+      "priorityQuadrant": "NULL"
+    },
+    {
+      "id": "210002",
+      "title": "AI-Assisted Clinical Documentation for Discharge Summaries",
+      "priorityScore": "90",
+      "impactScale": "large",
+      "impactBenefitType": "patient-outcomes",
+      "impactFinancialReturn": "some",
+      "feasibilityComplexity": "moderate",
+      "feasibilityTimeline": "standard",
+      "feasibilityDependencies": "minor",
+      "impactScore": "70",
+      "feasibilityScore": "50",
+      "priorityQuadrant": "strategic-bet"
+    },
+    {
+      "id": "210003",
+      "title": "Predictive Staffing Model for Emergency Departments",
+      "priorityScore": "NULL",
+      "impactScale": "NULL",
+      "impactBenefitType": "NULL",
+      "impactFinancialReturn": "NULL",
+      "feasibilityComplexity": "NULL",
+      "feasibilityTimeline": "NULL",
+      "feasibilityDependencies": "NULL",
+      "impactScore": "NULL",
+      "feasibilityScore": "NULL",
+      "priorityQuadrant": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tpriorityScore\timpactScale\timpactBenefitType\timpactFinancialReturn\tfeasibilityComplexity\tfeasibilityTimeline\tfeasibilityDependencies\timpactScore\tfeasibilityScore\tpriorityQuadrant\n210001\tAutomated Patient Appointment Reminders & Scheduling Optimization\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\n210002\tAI-Assisted Clinical Documentation for Discharge Summaries\t90\tlarge\tpatient-outcomes\tsome\tmoderate\tstandard\tminor\t70\t50\tstrategic-bet\n210003\tPredictive Staffing Model for Emergency Departments\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 93
+}
