@@ -1,439 +1,308 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
-import { trpc } from "@/lib/trpc";
+import { APP_TITLE, getLoginUrl } from "@/const";
 import { useLocation } from "wouter";
 import {
   Loader2,
   Sparkles,
-  Heart,
+  ArrowRight,
+  Lightbulb,
+  Eye,
   Shield,
   Users,
-  Lightbulb,
-  CheckCircle2,
-  ArrowRight,
-  FileText,
-  TrendingUp,
-  Clock,
-  ChevronRight,
+  Heart,
 } from "lucide-react";
 
 export default function Home() {
   const [, setLocation] = useLocation();
-  const { user, loading, isAuthenticated, logout } = useAuth();
-
-  const { data: initiatives, isLoading: initiativesLoading } = trpc.initiative.list.useQuery(
-    undefined,
-    { enabled: isAuthenticated }
-  );
+  const { user, loading, isAuthenticated } = useAuth();
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-teal-50 to-blue-100">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" aria-label="Loading" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-teal-50 to-blue-100">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="backdrop-blur-md bg-white/70 border-b border-gray-200 sticky top-0 z-50">
+      <header className="border-b border-gray-200 bg-white sticky top-0 z-50 shadow-sm">
         <div className="container flex justify-between items-center py-4">
-          <div>
-            <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-              {APP_TITLE}
-            </h1>
-          </div>
-          <div className="flex items-center gap-4">
-            {isAuthenticated ? (
-              <>
-                {user?.role === 'admin' && (
-                  <Button variant="outline" size="sm" onClick={() => setLocation("/admin")}>
-                    <TrendingUp className="h-4 w-4 mr-2" />
-                    Admin Dashboard
-                  </Button>
-                )}
-                <Button variant="ghost" size="sm" onClick={() => logout()}>
-                  Sign Out
-                </Button>
-              </>
-            ) : (
-              <Button onClick={() => window.location.href = getLoginUrl()}>
-                Sign In to Submit Your Idea
+          <h1 className="text-lg md:text-xl font-semibold text-gray-900">
+            {APP_TITLE}
+          </h1>
+          <div className="flex items-center gap-3">
+            {isAuthenticated && user?.role === 'admin' && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setLocation("/admin")}
+                aria-label="Go to admin dashboard"
+              >
+                Admin
               </Button>
             )}
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="container py-16 md:py-24">
+      {/* Hero Section - Bold & Centered */}
+      <section className="container py-20 md:py-32">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 backdrop-blur-md bg-white/60 border border-blue-200 rounded-full px-4 py-2 mb-6">
-            <Sparkles className="h-4 w-4 text-blue-600" />
-            <span className="text-sm font-medium text-blue-900">Extending the Healing Ministry of Christ with AI</span>
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-full px-4 py-2 mb-8">
+            <Sparkles className="h-4 w-4 text-blue-600" aria-hidden="true" />
+            <span className="text-sm font-medium text-blue-900">Extending the Healing Ministry of Christ</span>
           </div>
           
-          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            You Have Ideas.<br />
-            <span className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-              We Want to Hear Them.
-            </span>
+          <h2 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            Share Your AI Idea
           </h2>
           
-          <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
-            At AdventHealth, we believe the best AI ideas come from the people closest to patients and operations—<strong>that's you</strong>. Whether you're a nurse, physician, scheduler, or support staff, your daily challenges hold the key to smarter, safer, more compassionate care.
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+            You see the problems. You know the solutions. Help us build smarter, safer, more compassionate care at AdventHealth.
           </p>
 
-          <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-2xl p-8 mb-8">
-            <p className="text-lg text-gray-800 leading-relaxed">
-              <strong className="text-blue-600">"We are not trying to replace people's thinking. We're just trying to enhance it."</strong>
-              <br />
-              <span className="text-gray-600">— Dr. Victor Herrera, Chief Clinical Officer</span>
-            </p>
-          </div>
-
           {isAuthenticated ? (
-            <Button
-              size="lg"
-              className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all"
-              onClick={() => setLocation("/new")}
-            >
-              <Lightbulb className="h-5 w-5 mr-2" />
-              Start New Initiative
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </Button>
-          ) : (
-            <Button
-              size="lg"
-              className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all"
-              onClick={() => window.location.href = getLoginUrl()}
-            >
-              Sign In to Submit Your Idea
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </Button>
-          )}
-        </div>
-      </section>
-
-      {/* Why Your Idea Matters */}
-      <section className="container py-16">
-        <div className="max-w-5xl mx-auto">
-          <h3 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            Why Your Idea Matters
-          </h3>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-2xl p-6">
-              <Heart className="h-12 w-12 text-red-500 mb-4" />
-              <h4 className="text-xl font-semibold text-gray-900 mb-2">You See What We Miss</h4>
-              <p className="text-gray-700">
-                You know the daily frustrations, inefficiencies, and opportunities. Your frontline perspective is invaluable for identifying where AI can truly help.
-              </p>
-            </div>
-
-            <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-2xl p-6">
-              <Shield className="h-12 w-12 text-blue-600 mb-4" />
-              <h4 className="text-xl font-semibold text-gray-900 mb-2">Safety First, Always</h4>
-              <p className="text-gray-700">
-                Every idea goes through rigorous review for patient safety, privacy, and ethics. We go slow to go fast—ensuring AI enhances care responsibly.
-              </p>
-            </div>
-
-            <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-2xl p-6">
-              <Users className="h-12 w-12 text-teal-600 mb-4" />
-              <h4 className="text-xl font-semibold text-gray-900 mb-2">Augmented, Not Replaced</h4>
-              <p className="text-gray-700">
-                AI is here to make your job easier, not to take it. We're focused on reducing burnout, automating tedious tasks, and giving you more time for what matters most.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Addressing Concerns */}
-      <section className="container py-16">
-        <div className="max-w-4xl mx-auto backdrop-blur-md bg-gradient-to-r from-blue-500/10 to-teal-500/10 border border-blue-200 rounded-2xl p-8 md:p-12">
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
-            "But I'm Not Technical..." — You Don't Need to Be!
-          </h3>
-          
-          <div className="space-y-4 text-lg text-gray-800">
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
-              <p><strong>No coding required.</strong> Just describe the problem you see and how AI might help—we'll handle the technical details.</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
-              <p><strong>Your job is safe.</strong> AI is a tool to support you, not replace you. Our mission is to reduce your workload, not your workforce.</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
-              <p><strong>Every idea is valued.</strong> Even if your idea isn't implemented, it helps us understand where AI can make the biggest impact.</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
-              <p><strong>We'll guide you.</strong> Our intake form walks you through everything step-by-step. You'll answer simple questions—no jargon, no complexity.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Idea Sparks - Real Examples */}
-      <section className="container py-16">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Need Inspiration? Here Are Real Ideas from Your Colleagues
-            </h3>
-            <p className="text-xl text-gray-700">
-              These are actual AI initiatives submitted by AdventHealth team members—just like you.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Example 1 */}
-            <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-start gap-3 mb-3">
-                <FileText className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">AI-Powered Discharge Summary Generator</h4>
-                  <p className="text-sm text-gray-600">From a Hospitalist Physician</p>
-                </div>
-              </div>
-              <p className="text-gray-700 mb-3">
-                <strong>The Problem:</strong> "I spend 45-60 minutes per patient creating discharge summaries, taking time away from patient care."
-              </p>
-              <p className="text-gray-700">
-                <strong>The Idea:</strong> "Use AI to analyze the patient's EHR and generate a draft summary I can review in 5-10 minutes."
-              </p>
-            </div>
-
-            {/* Example 2 */}
-            <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-start gap-3 mb-3">
-                <Clock className="h-6 w-6 text-teal-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">Predictive OR Scheduling</h4>
-                  <p className="text-sm text-gray-600">From an OR Manager</p>
-                </div>
-              </div>
-              <p className="text-gray-700 mb-3">
-                <strong>The Problem:</strong> "We waste 15-20% of OR time due to inaccurate surgery duration estimates."
-              </p>
-              <p className="text-gray-700">
-                <strong>The Idea:</strong> "Train AI on historical data to predict actual procedure duration and optimize scheduling."
-              </p>
-            </div>
-
-            {/* Example 3 */}
-            <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-start gap-3 mb-3">
-                <Heart className="h-6 w-6 text-red-500 flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">Sepsis Early Warning System</h4>
-                  <p className="text-sm text-gray-600">From an ICU Nurse Manager</p>
-                </div>
-              </div>
-              <p className="text-gray-700 mb-3">
-                <strong>The Problem:</strong> "We often miss subtle early warning signs of sepsis until the patient deteriorates."
-              </p>
-              <p className="text-gray-700">
-                <strong>The Idea:</strong> "Use AI to monitor vitals and labs continuously and alert us 6-12 hours earlier."
-              </p>
-            </div>
-
-            {/* Example 4 */}
-            <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-start gap-3 mb-3">
-                <Users className="h-6 w-6 text-purple-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">Virtual Nursing Assistant for Patient Education</h4>
-                  <p className="text-sm text-gray-600">From a Nurse Educator</p>
-                </div>
-              </div>
-              <p className="text-gray-700 mb-3">
-                <strong>The Problem:</strong> "Patients forget 40-80% of what we teach them about post-discharge care."
-              </p>
-              <p className="text-gray-700">
-                <strong>The Idea:</strong> "Create an AI virtual nurse patients can ask questions 24/7 in multiple languages."
-              </p>
-            </div>
-          </div>
-
-          <div className="text-center mt-8">
-            <p className="text-lg text-gray-700 mb-4">
-              <strong>See? Your idea doesn't have to be perfect.</strong> Just share what frustrates you or what could be better.
-            </p>
-            {isAuthenticated ? (
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
                 size="lg"
-                variant="outline"
+                className="text-lg px-10 py-7 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
                 onClick={() => setLocation("/new")}
+                aria-label="Submit your AI initiative idea"
               >
-                I Have an Idea Like This
-                <ChevronRight className="h-5 w-5 ml-2" />
+                <Lightbulb className="h-5 w-5 mr-2" aria-hidden="true" />
+                Submit Your Idea
+                <ArrowRight className="h-5 w-5 ml-2" aria-hidden="true" />
               </Button>
-            ) : (
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => window.location.href = getLoginUrl()}
+                className="text-lg px-10 py-7 w-full sm:w-auto"
+                onClick={() => setLocation("/browse")}
+                aria-label="Browse ideas from colleagues"
               >
-                Sign In to Share Your Idea
-                <ChevronRight className="h-5 w-5 ml-2" />
+                <Eye className="h-5 w-5 mr-2" aria-hidden="true" />
+                Browse Ideas
               </Button>
-            )}
+            </div>
+          ) : (
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button
+                size="lg"
+                className="text-lg px-10 py-7 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+                onClick={() => window.location.href = getLoginUrl()}
+                aria-label="Sign in to submit your idea"
+              >
+                Sign In to Submit
+                <ArrowRight className="h-5 w-5 ml-2" aria-hidden="true" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-lg px-10 py-7 w-full sm:w-auto"
+                onClick={() => setLocation("/browse")}
+                aria-label="Browse ideas from colleagues without signing in"
+              >
+                <Eye className="h-5 w-5 mr-2" aria-hidden="true" />
+                Browse Ideas
+              </Button>
+            </div>
+          )}
+
+          <p className="text-sm text-gray-500 mt-6">
+            No technical experience needed • 10-15 minutes • Your idea matters
+          </p>
+        </div>
+      </section>
+
+      {/* Trust Indicators */}
+      <section className="container py-16 border-t border-gray-100">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 mb-4">
+                <Shield className="h-8 w-8 text-blue-600" aria-hidden="true" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Safe & Secure</h3>
+              <p className="text-gray-600">
+                Every idea reviewed for patient safety, privacy, and ethics
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-teal-50 mb-4">
+                <Users className="h-8 w-8 text-teal-600" aria-hidden="true" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Augmented, Not Replaced</h3>
+              <p className="text-gray-600">
+                AI supports you—reducing burnout, not your workforce
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 mb-4">
+                <Heart className="h-8 w-8 text-red-500" aria-hidden="true" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Mission-Driven</h3>
+              <p className="text-gray-600">
+                Aligned with whole-person care and our healing ministry
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* Quote Section */}
       <section className="container py-16">
+        <div className="max-w-3xl mx-auto">
+          <blockquote className="bg-gray-50 border-l-4 border-blue-600 rounded-r-xl p-8">
+            <p className="text-xl md:text-2xl text-gray-800 font-medium mb-4">
+              "We are not trying to replace people's thinking. We're just trying to enhance it."
+            </p>
+            <footer className="text-gray-600">
+              <cite className="not-italic">— Dr. Victor Herrera, Chief Clinical Officer</cite>
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
+      {/* How It Works - Simplified */}
+      <section className="container py-16 bg-gray-50 -mx-4 px-4 md:mx-0 md:px-0 md:rounded-2xl">
         <div className="max-w-4xl mx-auto">
           <h3 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            How the Process Works
+            Simple Process
+          </h3>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                1
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2">Submit</h4>
+              <p className="text-sm text-gray-600">Answer a few simple questions</p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                2
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2">AI Analyzes</h4>
+              <p className="text-sm text-gray-600">Instant mission & risk assessment</p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                3
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2">Expert Review</h4>
+              <p className="text-sm text-gray-600">Chief AI Officer's team evaluates</p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                4
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2">Get Feedback</h4>
+              <p className="text-sm text-gray-600">Hear back on next steps</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ - Addressing Concerns */}
+      <section className="container py-16">
+        <div className="max-w-3xl mx-auto">
+          <h3 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            Common Questions
           </h3>
 
           <div className="space-y-6">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 flex items-center justify-center text-white font-bold text-lg">
-                1
-              </div>
-              <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-xl p-6 flex-1">
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">Submit Your Idea</h4>
-                <p className="text-gray-700">
-                  Answer a few simple questions about the problem you see and how AI might help. Takes about 10-15 minutes.
-                </p>
-              </div>
-            </div>
+            <details className="bg-white border border-gray-200 rounded-lg p-6 group">
+              <summary className="font-semibold text-gray-900 cursor-pointer list-none flex items-center justify-between">
+                <span>"I'm not technical. Can I still submit an idea?"</span>
+                <span className="text-gray-400 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
+              </summary>
+              <p className="text-gray-600 mt-4">
+                Absolutely! You don't need any technical knowledge. Just describe the problem you see and how AI might help. We'll handle the technical details.
+              </p>
+            </details>
 
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 flex items-center justify-center text-white font-bold text-lg">
-                2
-              </div>
-              <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-xl p-6 flex-1">
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">AI Analyzes Your Idea</h4>
-                <p className="text-gray-700">
-                  Our system automatically evaluates mission alignment, risk level, and governance requirements—giving you instant feedback.
-                </p>
-              </div>
-            </div>
+            <details className="bg-white border border-gray-200 rounded-lg p-6 group">
+              <summary className="font-semibold text-gray-900 cursor-pointer list-none flex items-center justify-between">
+                <span>"Will AI take my job?"</span>
+                <span className="text-gray-400 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
+              </summary>
+              <p className="text-gray-600 mt-4">
+                No. AI is here to make your job easier, not replace you. Our focus is reducing burnout, automating tedious tasks, and giving you more time for meaningful patient care.
+              </p>
+            </details>
 
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 flex items-center justify-center text-white font-bold text-lg">
-                3
-              </div>
-              <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-xl p-6 flex-1">
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">Expert Review</h4>
-                <p className="text-gray-700">
-                  The Chief AI Officer's team reviews your submission, considering safety, feasibility, and strategic fit.
-                </p>
-              </div>
-            </div>
+            <details className="bg-white border border-gray-200 rounded-lg p-6 group">
+              <summary className="font-semibold text-gray-900 cursor-pointer list-none flex items-center justify-between">
+                <span>"What if I don't have a fully formed idea?"</span>
+                <span className="text-gray-400 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
+              </summary>
+              <p className="text-gray-600 mt-4">
+                That's perfectly fine! Browse ideas from your colleagues for inspiration, or just share the frustration you're experiencing. Even partial ideas help us understand where AI can make the biggest impact.
+              </p>
+            </details>
 
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 flex items-center justify-center text-white font-bold text-lg">
-                4
-              </div>
-              <div className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-xl p-6 flex-1">
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">You Hear Back</h4>
-                <p className="text-gray-700">
-                  We'll let you know the decision and next steps. If approved, you may be invited to help pilot the solution!
-                </p>
-              </div>
-            </div>
+            <details className="bg-white border border-gray-200 rounded-lg p-6 group">
+              <summary className="font-semibold text-gray-900 cursor-pointer list-none flex items-center justify-between">
+                <span>"How long does the process take?"</span>
+                <span className="text-gray-400 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
+              </summary>
+              <p className="text-gray-600 mt-4">
+                Submitting your idea takes about 10-15 minutes. The review process typically takes 1-2 weeks, and we'll notify you of the decision and next steps.
+              </p>
+            </details>
           </div>
         </div>
       </section>
 
-      {/* Your Initiatives (if logged in) */}
-      {isAuthenticated && initiatives && initiatives.length > 0 && (
-        <section className="container py-16">
-          <div className="max-w-6xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Your Initiatives</h3>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {initiatives.map((initiative: any) => (
-                <button
-                  key={initiative.id}
-                  onClick={() => setLocation(`/initiative/${initiative.id}`)}
-                  className="backdrop-blur-md bg-white/70 border border-gray-200 rounded-2xl p-6 text-left hover:shadow-lg transition-all"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <FileText className="h-8 w-8 text-blue-600" />
-                    <span className="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-700">
-                      In Progress
-                    </span>
-                  </div>
-                  
-                  <h4 className="font-semibold text-gray-900 mb-2 line-clamp-2">
-                    {initiative.title || "Untitled Initiative"}
-                  </h4>
-                  
-                  <div className="text-sm text-gray-600 space-y-1">
-                    <p>Step: {initiative.currentStep} of 6</p>
-                    <p>Area: {initiative.area || "—"}</p>
-                  </div>
-
-                  {initiative.missionAlignmentRating && (
-                    <div className="mt-3 pt-3 border-t border-gray-200">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-gray-600">Mission:</span>
-                        <span className="font-semibold text-blue-700">{initiative.missionAlignmentRating}</span>
-                      </div>
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Final CTA */}
-      <section className="container py-16">
-        <div className="max-w-4xl mx-auto backdrop-blur-md bg-gradient-to-r from-blue-600 to-teal-600 rounded-2xl p-12 text-center text-white">
-          <h3 className="text-3xl md:text-4xl font-bold mb-4">
-            Your Idea Could Change Everything
+      <section className="container py-20">
+        <div className="max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-teal-600 rounded-2xl p-12 text-center text-white">
+          <h3 className="text-3xl md:text-5xl font-bold mb-6">
+            Ready to Make an Impact?
           </h3>
-          <p className="text-xl mb-8 opacity-90">
-            The best innovations come from people who see problems every day. That's you. Let's build the future of healthcare together.
+          <p className="text-xl mb-8 opacity-95">
+            Your frontline perspective is invaluable. Let's build the future of healthcare together.
           </p>
           {isAuthenticated ? (
             <Button
               size="lg"
               variant="secondary"
-              className="text-lg px-8 py-6"
+              className="text-lg px-10 py-7"
               onClick={() => setLocation("/new")}
+              aria-label="Submit your AI initiative idea"
             >
-              <Lightbulb className="h-5 w-5 mr-2" />
-              Submit Your AI Initiative Idea
-              <ArrowRight className="h-5 w-5 ml-2" />
+              <Lightbulb className="h-5 w-5 mr-2" aria-hidden="true" />
+              Submit Your Idea Now
+              <ArrowRight className="h-5 w-5 ml-2" aria-hidden="true" />
             </Button>
           ) : (
             <Button
               size="lg"
               variant="secondary"
-              className="text-lg px-8 py-6"
+              className="text-lg px-10 py-7"
               onClick={() => window.location.href = getLoginUrl()}
+              aria-label="Sign in to submit your idea"
             >
               Sign In to Get Started
-              <ArrowRight className="h-5 w-5 ml-2" />
+              <ArrowRight className="h-5 w-5 ml-2" aria-hidden="true" />
             </Button>
           )}
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="backdrop-blur-md bg-white/70 border-t border-gray-200 py-8">
+      <footer className="border-t border-gray-200 bg-gray-50 py-8">
         <div className="container text-center text-gray-600">
-          <p className="mb-2">
-            <strong>Questions?</strong> Contact the Chief AI Officer's team for guidance.
-          </p>
           <p className="text-sm">
-            © 2025 AdventHealth. Extending the Healing Ministry of Christ.
+            © 2025 AdventHealth • Extending the Healing Ministry of Christ
           </p>
         </div>
       </footer>

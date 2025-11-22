@@ -9,6 +9,7 @@ import Admin from "./pages/Admin";
 import NewInitiative from "./pages/NewInitiative";
 import Initiative from "./pages/Initiative";
 import Brief from "./pages/Brief";
+import Browse from "./pages/Browse";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -19,6 +20,7 @@ function Router() {
       <Route path={"/new"} component={NewInitiative} />
       <Route path={"/initiative/:id"} component={Initiative} />
       <Route path={"/brief/:id"} component={Brief} />
+      <Route path={"/browse"} component={Browse} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

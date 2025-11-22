@@ -92,6 +92,11 @@ export const appRouter = router({
         return await db.getUserInitiatives(ctx.user.id);
       }),
 
+    listAll: publicProcedure
+      .query(async () => {
+        return await db.getAllInitiatives();
+      }),
+
     addMessage: protectedProcedure
       .input(z.object({
         initiativeId: z.number(),

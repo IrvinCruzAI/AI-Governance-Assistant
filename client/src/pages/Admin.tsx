@@ -38,6 +38,12 @@ import { toast } from "sonner";
 export default function Admin() {
   const [, setLocation] = useLocation();
   const { user, isAuthenticated, loading } = useAuth();
+
+  // Redirect non-admin users
+  if (!loading && (!isAuthenticated || user?.role !== 'admin')) {
+    setLocation('/');
+    return null;
+  }
   const [selectedInitiative, setSelectedInitiative] = useState<any>(null);
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [riskFilter, setRiskFilter] = useState<string>("all");
