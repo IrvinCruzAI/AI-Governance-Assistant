@@ -1,11 +1,10 @@
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, initiatives, messages, InsertInitiative, InsertMessage } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
-// Lazily create the drizzle instance so local tooling can run without a DB.
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
@@ -89,4 +88,53 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+// Initiative queries
+export async function createInitiative(data: InsertInitiative) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.insert(initiatives).values(data);
+  return result[0].insertId;
+}
+
+export async function getInitiativeById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const result = await db.select().from(initiatives).where(eq(initiatives.id, id)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function getUserInitiatives(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(initiatives)
+    .where(eq(initiatives.userId, userId))
+    .orderBy(desc(initiatives.updatedAt));
+}
+
+export async function updateInitiative(id: number, data: Partial<InsertInitiative>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(initiatives).set(data).where(eq(initiatives.id, id));
+}
+
+// Message queries
+export async function addMessage(data: InsertMessage) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.insert(messages).values(data);
+  return result[0].insertId;
+}
+
+export async function getInitiativeMessages(initiativeId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(messages)
+    .where(eq(messages.initiativeId, initiativeId))
+    .orderBy(messages.createdAt);
+}

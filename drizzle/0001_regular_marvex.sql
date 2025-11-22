@@ -1,0 +1,43 @@
+CREATE TABLE `initiatives` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`userId` int NOT NULL,
+	`userRole` text,
+	`area` varchar(100),
+	`title` varchar(255) NOT NULL,
+	`problemStatement` text,
+	`aiApproach` text,
+	`primaryUsers` text,
+	`missionSupports` text,
+	`wholPersonCareAlignment` text,
+	`ethicalConcerns` text,
+	`missionAlignmentRating` enum('High','Medium','Low'),
+	`missionAlignmentReasoning` text,
+	`mainArea` varchar(100),
+	`clinicalImpact` varchar(100),
+	`dataType` varchar(100),
+	`automationLevel` varchar(100),
+	`riskLevel` enum('Low','Medium','High'),
+	`governancePath` enum('Light','Standard','Full'),
+	`riskReasoning` text,
+	`risks` text,
+	`assumptions` text,
+	`issues` text,
+	`dependencies` text,
+	`briefGenerated` boolean DEFAULT false,
+	`emailSummaryGenerated` boolean DEFAULT false,
+	`currentStep` int DEFAULT 1,
+	`completed` boolean DEFAULT false,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `initiatives_id` PRIMARY KEY(`id`)
+);
+--> statement-breakpoint
+CREATE TABLE `messages` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`initiativeId` int NOT NULL,
+	`role` enum('assistant','user') NOT NULL,
+	`content` text NOT NULL,
+	`step` int NOT NULL,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	CONSTRAINT `messages_id` PRIMARY KEY(`id`)
+);
