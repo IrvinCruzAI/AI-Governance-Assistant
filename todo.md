@@ -333,3 +333,11 @@
 - [x] Run proper database migration
 - [x] Verify all queries work
 - [ ] Create checkpoint
+
+## Complete Opportunity Cost Framework Implementation
+- [x] Fix admin review modal to display opportunity cost evaluation form
+- [x] Verify evaluation form fields are connected to state and mutations
+- [x] Update all priority labels from "Immediate Action" to quadrant names
+- [x] Test admin can fill in and save opportunity cost evaluations
+- [x] Verify priority score calculation uses new framework
+- [x] Create checkpoint

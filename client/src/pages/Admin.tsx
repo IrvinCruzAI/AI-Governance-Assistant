@@ -45,58 +45,53 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 
-// Priority scoring algorithm
+// Opportunity Cost Priority Scoring
 function calculatePriorityScore(initiative: any): number {
-  let score = 0;
+  // If opportunity cost fields are filled, use them; otherwise return 0
+  if (!initiative.impactScore && !initiative.feasibilityScore) {
+    return 0;
+  }
   
-  // Risk level (0-40 points) - Higher risk = higher priority for governance review
-  if (initiative.riskLevel === 'High') score += 40;
-  else if (initiative.riskLevel === 'Medium') score += 25;
-  else if (initiative.riskLevel === 'Low') score += 10;
+  // Priority score = Impact Score + Feasibility Score (calculated on backend)
+  const impactScore = initiative.impactScore || 0;
+  const feasibilityScore = initiative.feasibilityScore || 0;
   
-  // Mission alignment (0-30 points) - Higher alignment = higher strategic value
-  if (initiative.missionAlignmentRating === 'High') score += 30;
-  else if (initiative.missionAlignmentRating === 'Medium') score += 20;
-  else if (initiative.missionAlignmentRating === 'Low') score += 10;
-  
-  // Time waiting (0-20 points) - Longer wait = higher priority to avoid delays
-  const daysPending = initiative.createdAt 
-    ? Math.floor((Date.now() - new Date(initiative.createdAt).getTime()) / (1000 * 60 * 60 * 24))
-    : 0;
-  if (daysPending > 7) score += 20;
-  else if (daysPending > 3) score += 10;
-  
-  // Review status (0-10 points) - Unreviewed items get priority
-  if (initiative.status === 'pending') score += 10;
-  else if (initiative.status === 'under-review') score += 5;
-  
-  return score;
+  return impactScore + feasibilityScore;
 }
 
-function getPriorityLabel(score: number): { label: string; color: string; action: string } {
-  // 70-100: Immediate Action Required
-  if (score >= 70) return { 
-    label: 'Immediate Action', 
-    color: 'bg-red-600',
-    action: 'High risk + high value + waiting. Review ASAP.'
+function getPriorityLabel(initiative: any): { label: string; color: string; action: string } {
+  // Use priorityQuadrant from database if available
+  const quadrant = initiative.priorityQuadrant;
+  
+  if (quadrant === 'quick-win') return { 
+    label: 'Quick Win', 
+    color: 'bg-green-600',
+    action: 'High impact + Easy to do → Start now. Delivers value fast with minimal risk.'
   };
-  // 50-69: Review This Week
-  if (score >= 50) return { 
-    label: 'Review This Week', 
-    color: 'bg-orange-500',
-    action: 'Strong candidate. Schedule review soon.'
+  
+  if (quadrant === 'strategic-bet') return { 
+    label: 'Strategic Bet', 
+    color: 'bg-blue-600',
+    action: 'High impact + Hard to do → Worth the investment. Plan carefully, big payoff.'
   };
-  // 30-49: Standard Queue
-  if (score >= 30) return { 
-    label: 'Standard Queue', 
-    color: 'bg-blue-500',
-    action: 'Normal priority. Review in regular workflow.'
+  
+  if (quadrant === 'nice-to-have') return { 
+    label: 'Nice to Have', 
+    color: 'bg-yellow-500',
+    action: 'Low impact + Easy → Do when capacity allows. Fill-in work between big projects.'
   };
-  // 0-29: Low Urgency
+  
+  if (quadrant === 'reconsider') return { 
+    label: 'Reconsider', 
+    color: 'bg-gray-500',
+    action: 'Low impact + Hard → Probably not worth it. Focus resources elsewhere.'
+  };
+  
+  // Default for initiatives without evaluation
   return { 
-    label: 'Low Urgency', 
+    label: 'Not Evaluated', 
     color: 'bg-gray-400',
-    action: 'Low risk/alignment. Review when capacity allows.'
+    action: 'Complete opportunity cost evaluation to prioritize this initiative.'
   };
 }
 
@@ -273,7 +268,7 @@ export default function Admin() {
   const initiativesWithPriority = initiatives?.map(initiative => ({
     ...initiative,
     priorityScore: calculatePriorityScore(initiative),
-    priority: getPriorityLabel(calculatePriorityScore(initiative))
+    priority: getPriorityLabel(initiative)
   })) || [];
 
   // Filter initiatives
