@@ -64,6 +64,7 @@ export const initiatives = mysqlTable("initiatives", {
   
   // Admin fields
   status: mysqlEnum("status", ["pending", "under-review", "approved", "rejected"]).default("pending"),
+  roadmapStatus: mysqlEnum("roadmapStatus", ["under-review", "research", "development", "pilot", "deployed", "on-hold", "rejected"]).default("under-review"),
   adminNotes: text("adminNotes"),
   
   // Metadata
@@ -90,3 +91,16 @@ export const messages = mysqlTable("messages", {
 
 export type Message = typeof messages.$inferSelect;
 export type InsertMessage = typeof messages.$inferInsert;
+
+/**
+ * Votes on initiatives - tracks which users voted for which initiatives
+ */
+export const votes = mysqlTable("votes", {
+  id: int("id").autoincrement().primaryKey(),
+  initiativeId: int("initiativeId").notNull(),
+  userId: int("userId").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Vote = typeof votes.$inferSelect;
+export type InsertVote = typeof votes.$inferInsert;

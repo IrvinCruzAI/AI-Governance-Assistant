@@ -1,6 +1,6 @@
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, initiatives, messages, InsertInitiative, InsertMessage } from "../drizzle/schema";
+import { InsertUser, users, initiatives, messages, votes, InsertInitiative, InsertMessage, InsertVote } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -201,4 +201,96 @@ export async function deleteInitiative(id: number) {
   if (!db) throw new Error("Database not available");
   
   await db.delete(initiatives).where(eq(initiatives.id, id));
+}
+
+// Voting queries
+export async function addVote(data: InsertVote) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  // Check if user already voted for this initiative
+  const existing = await db.select().from(votes)
+    .where(and(
+      eq(votes.initiativeId, data.initiativeId),
+      eq(votes.userId, data.userId)
+    ))
+    .limit(1);
+  
+  if (existing.length > 0) {
+    throw new Error("User already voted for this initiative");
+  }
+  
+  const result = await db.insert(votes).values(data);
+  return result[0].insertId;
+}
+
+export async function removeVote(initiativeId: number, userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.delete(votes)
+    .where(and(
+      eq(votes.initiativeId, initiativeId),
+      eq(votes.userId, userId)
+    ));
+}
+
+export async function getVoteCount(initiativeId: number) {
+  const db = await getDb();
+  if (!db) return 0;
+  
+  const result = await db.select().from(votes)
+    .where(eq(votes.initiativeId, initiativeId));
+  
+  return result.length;
+}
+
+export async function hasUserVoted(initiativeId: number, userId: number) {
+  const db = await getDb();
+  if (!db) return false;
+  
+  const result = await db.select().from(votes)
+    .where(and(
+      eq(votes.initiativeId, initiativeId),
+      eq(votes.userId, userId)
+    ))
+    .limit(1);
+  
+  return result.length > 0;
+}
+
+export async function getAllInitiativesWithVotes() {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const allInitiatives = await db.select().from(initiatives)
+    .orderBy(desc(initiatives.updatedAt));
+  
+  // Get vote counts for each initiative
+  const initiativesWithVotes = await Promise.all(
+    allInitiatives.map(async (initiative) => {
+      const voteCount = await getVoteCount(initiative.id);
+      return { ...initiative, voteCount };
+    })
+  );
+  
+  // Sort by vote count descending
+  return initiativesWithVotes.sort((a, b) => b.voteCount - a.voteCount);
+}
+
+// Roadmap status queries
+export async function updateRoadmapStatus(id: number, roadmapStatus: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(initiatives).set({ roadmapStatus: roadmapStatus as any }).where(eq(initiatives.id, id));
+}
+
+export async function getInitiativesByRoadmapStatus(roadmapStatus: string) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(initiatives)
+    .where(eq(initiatives.roadmapStatus, roadmapStatus as any))
+    .orderBy(desc(initiatives.updatedAt));
 }

@@ -219,13 +219,21 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="text-center">
+          <div className="text-center flex gap-3 justify-center">
             <Button
               variant="outline"
               onClick={() => setLocation("/browse")}
               className="border-blue-600 text-blue-600 hover:bg-blue-50"
             >
               See All Ideas
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => setLocation("/roadmap")}
+              className="border-teal-600 text-teal-600 hover:bg-teal-50"
+            >
+              View Roadmap
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>

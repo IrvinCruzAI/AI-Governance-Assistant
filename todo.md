@@ -221,3 +221,18 @@
 - [x] Delete any untitled initiatives
 - [x] Verify all visible initiatives are well-researched and documented
 - [x] Create checkpoint
+
+## Voting System & Roadmap Feature
+- [x] Update database schema to add votes table and roadmap status field
+- [x] Add vote tracking to prevent duplicate votes per user
+- [x] Create backend procedures for upvoting/downvoting initiatives
+- [x] Add roadmap status field to initiatives (Under Review, Research, Development, Pilot, Deployed, On Hold, Rejected)
+- [x] Build voting UI on Browse Ideas page with vote counts
+- [x] Sort Browse Ideas by vote count (most popular first)
+- [x] Create new Roadmap page with visual status tracking
+- [x] Add roadmap status cards/columns for each stage
+- [x] Add admin controls to move initiatives through roadmap stages
+- [x] Update admin dashboard to show roadmap status
+- [x] Write vitest tests for voting functionality
+- [x] Write vitest tests for roadmap status changes
+- [x] Create checkpoint

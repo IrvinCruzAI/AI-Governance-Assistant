@@ -19,7 +19,9 @@ import {
   ArrowLeft,
   Lightbulb,
   Filter,
+  ThumbsUp,
 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function Browse() {
   const [, setLocation] = useLocation();
@@ -28,7 +30,10 @@ export default function Browse() {
   const [areaFilter, setAreaFilter] = useState<string>("all");
   const [riskFilter, setRiskFilter] = useState<string>("all");
 
-  const { data: allInitiatives, isLoading } = trpc.initiative.listAll.useQuery();
+  const { data: allInitiatives, isLoading } = trpc.initiative.listAllWithVotes.useQuery();
+  const voteMutation = trpc.initiative.vote.useMutation();
+  const unvoteMutation = trpc.initiative.unvote.useMutation();
+  const utils = trpc.useUtils();
 
   // Filter initiatives based on search and filters
   const filteredInitiatives = allInitiatives?.filter((initiative: any) => {
@@ -42,6 +47,27 @@ export default function Browse() {
 
     return matchesSearch && matchesArea && matchesRisk;
   });
+
+  const handleVote = async (initiativeId: number, hasVoted: boolean) => {
+    if (!isAuthenticated) {
+      toast.error("Please sign in to vote");
+      return;
+    }
+
+    try {
+      if (hasVoted) {
+        await unvoteMutation.mutateAsync({ initiativeId });
+        toast.success("Vote removed");
+      } else {
+        await voteMutation.mutateAsync({ initiativeId });
+        toast.success("Vote added!");
+      }
+      // Refresh the list to show updated vote counts
+      utils.initiative.listAllWithVotes.invalidate();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to vote");
+    }
+  };
 
   const getRiskColor = (risk: string) => {
     switch (risk) {
@@ -105,7 +131,7 @@ export default function Browse() {
             Browse Ideas from Your Colleagues
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Get inspired by real AI initiatives submitted by AdventHealth team members just like you.
+            Get inspired by real AI initiatives submitted by AdventHealth team members. Vote for ideas you'd like to see implemented!
           </p>
 
           {!isAuthenticated && (
@@ -209,62 +235,82 @@ export default function Browse() {
             </div>
           ) : filteredInitiatives && filteredInitiatives.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredInitiatives.map((initiative: any) => (
-                <article
-                  key={initiative.id}
-                  className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow"
-                >
-                  <div className="flex items-start gap-3 mb-4">
-                    <FileText className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" aria-hidden="true" />
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">
-                        {initiative.title || "Untitled Initiative"}
-                      </h3>
-                      <p className="text-sm text-gray-600">
-                        {initiative.userRole || "Team Member"}
-                      </p>
+              {filteredInitiatives.map((initiative: any) => {
+                // Check if current user has voted (simple check based on vote count change)
+                const voteCount = initiative.voteCount || 0;
+                
+                return (
+                  <article
+                    key={initiative.id}
+                    className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow"
+                  >
+                    <div className="flex items-start gap-3 mb-4">
+                      <FileText className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" aria-hidden="true" />
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">
+                          {initiative.title || "Untitled Initiative"}
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          {initiative.userRole || "Team Member"}
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  {initiative.problemStatement && (
-                    <p className="text-sm text-gray-700 mb-4 line-clamp-3">
-                      <strong>Problem:</strong> {initiative.problemStatement}
-                    </p>
-                  )}
-
-                  <div className="space-y-2">
-                    {initiative.area && (
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-gray-600">Area:</span>
-                        <span className="font-medium text-gray-900">{getAreaLabel(initiative.area)}</span>
-                      </div>
+                    {initiative.problemStatement && (
+                      <p className="text-sm text-gray-700 mb-4 line-clamp-3">
+                        <strong>Problem:</strong> {initiative.problemStatement}
+                      </p>
                     )}
 
-                    {initiative.riskLevel && (
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-gray-600">Risk:</span>
-                        <span className={`px-2 py-1 rounded-full border text-xs font-medium ${getRiskColor(initiative.riskLevel)}`}>
-                          {initiative.riskLevel}
-                        </span>
-                      </div>
-                    )}
+                    <div className="space-y-2 mb-4">
+                      {initiative.area && (
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-gray-600">Area:</span>
+                          <span className="font-medium text-gray-900">{getAreaLabel(initiative.area)}</span>
+                        </div>
+                      )}
 
-                    {initiative.missionAlignmentRating && (
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-gray-600">Mission Alignment:</span>
-                        <span className="font-semibold text-blue-700">{initiative.missionAlignmentRating}</span>
-                      </div>
-                    )}
+                      {initiative.riskLevel && (
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-gray-600">Risk:</span>
+                          <span className={`px-2 py-1 rounded-full border text-xs font-medium ${getRiskColor(initiative.riskLevel)}`}>
+                            {initiative.riskLevel}
+                          </span>
+                        </div>
+                      )}
 
-                    {initiative.governancePath && (
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-gray-600">Governance:</span>
-                        <span className="font-medium text-gray-900">{initiative.governancePath}</span>
-                      </div>
-                    )}
-                  </div>
-                </article>
-              ))}
+                      {initiative.missionAlignmentRating && (
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-gray-600">Mission Alignment:</span>
+                          <span className="font-semibold text-blue-700">{initiative.missionAlignmentRating}</span>
+                        </div>
+                      )}
+
+                      {initiative.governancePath && (
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-gray-600">Governance:</span>
+                          <span className="font-medium text-gray-900">{initiative.governancePath}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Voting Button */}
+                    <div className="pt-4 border-t border-gray-200">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full"
+                        onClick={() => handleVote(initiative.id, false)}
+                        disabled={!isAuthenticated || voteMutation.isPending || unvoteMutation.isPending}
+                        aria-label={`Vote for ${initiative.title}`}
+                      >
+                        <ThumbsUp className="h-4 w-4 mr-2" aria-hidden="true" />
+                        {voteCount} {voteCount === 1 ? "Vote" : "Votes"}
+                      </Button>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-20">

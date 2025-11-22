@@ -90,6 +90,7 @@ export default function Admin() {
   const [riskFilter, setRiskFilter] = useState<string>("all");
   const [priorityFilter, setPriorityFilter] = useState<string>("all");
   const [newStatus, setNewStatus] = useState<string>("");
+  const [newRoadmapStatus, setNewRoadmapStatus] = useState<string>("");
   const [adminNotes, setAdminNotes] = useState<string>("");
 
   const utils = trpc.useUtils();
@@ -112,6 +113,17 @@ export default function Admin() {
     },
     onError: () => {
       toast.error("Failed to update status");
+    },
+  });
+
+  const updateRoadmapStatusMutation = trpc.admin.updateRoadmapStatus.useMutation({
+    onSuccess: () => {
+      toast.success("Roadmap status updated successfully");
+      utils.admin.getAllInitiatives.invalidate();
+      setSelectedInitiative(null);
+    },
+    onError: () => {
+      toast.error("Failed to update roadmap status");
     },
   });
 
@@ -164,6 +176,15 @@ export default function Admin() {
       id: selectedInitiative.id,
       status: newStatus as any,
       adminNotes: adminNotes || undefined,
+    });
+  };
+
+  const handleRoadmapStatusUpdate = () => {
+    if (!selectedInitiative || !newRoadmapStatus) return;
+    
+    updateRoadmapStatusMutation.mutate({
+      id: selectedInitiative.id,
+      roadmapStatus: newRoadmapStatus as any,
     });
   };
 
@@ -507,16 +528,34 @@ export default function Admin() {
               {/* Status Update */}
               <div className="space-y-4 border-t pt-4">
                 <div>
-                  <Label htmlFor="status" className="text-sm font-semibold text-gray-700">Update Status</Label>
+                  <Label htmlFor="status" className="text-sm font-semibold text-gray-700">Update Review Status</Label>
                   <Select value={newStatus} onValueChange={setNewStatus}>
                     <SelectTrigger id="status" className="mt-2">
-                      <SelectValue />
+                      <SelectValue placeholder={selectedInitiative.status || "Select status"} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="pending">Pending</SelectItem>
                       <SelectItem value="under-review">Under Review</SelectItem>
                       <SelectItem value="approved">Approved</SelectItem>
                       <SelectItem value="rejected">Rejected</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="roadmap-status" className="text-sm font-semibold text-gray-700">Update Roadmap Status</Label>
+                  <Select value={newRoadmapStatus} onValueChange={setNewRoadmapStatus}>
+                    <SelectTrigger id="roadmap-status" className="mt-2">
+                      <SelectValue placeholder={selectedInitiative.roadmapStatus || "Select roadmap status"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="under-review">Under Review</SelectItem>
+                      <SelectItem value="research">Research</SelectItem>
+                      <SelectItem value="development">Development</SelectItem>
+                      <SelectItem value="pilot">Pilot</SelectItem>
+                      <SelectItem value="deployed">Deployed</SelectItem>
+                      <SelectItem value="on-hold">On Hold</SelectItem>
+                      <SelectItem value="rejected">Not Pursuing</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -538,7 +577,7 @@ export default function Admin() {
               <div className="flex flex-wrap gap-3 border-t pt-4">
                 <Button
                   onClick={handleStatusUpdate}
-                  disabled={updateStatusMutation.isPending}
+                  disabled={updateStatusMutation.isPending || !newStatus}
                   className="flex-1"
                 >
                   {updateStatusMutation.isPending ? (
@@ -549,7 +588,26 @@ export default function Admin() {
                   ) : (
                     <>
                       <CheckCircle2 className="h-4 w-4 mr-2" />
-                      Save Changes
+                      Update Review Status
+                    </>
+                  )}
+                </Button>
+
+                <Button
+                  onClick={handleRoadmapStatusUpdate}
+                  disabled={updateRoadmapStatusMutation.isPending || !newRoadmapStatus}
+                  className="flex-1"
+                  variant="outline"
+                >
+                  {updateRoadmapStatusMutation.isPending ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Updating...
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 className="h-4 w-4 mr-2" />
+                      Update Roadmap
                     </>
                   )}
                 </Button>

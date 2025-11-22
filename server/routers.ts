@@ -101,6 +101,43 @@ export const appRouter = router({
         return await db.getAllInitiatives();
       }),
 
+    listAllWithVotes: publicProcedure
+      .query(async () => {
+        return await db.getAllInitiativesWithVotes();
+      }),
+
+    vote: protectedProcedure
+      .input(z.object({ initiativeId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        try {
+          await db.addVote({
+            initiativeId: input.initiativeId,
+            userId: ctx.user.id,
+          });
+          return { success: true };
+        } catch (error) {
+          throw new TRPCError({ 
+            code: 'BAD_REQUEST', 
+            message: error instanceof Error ? error.message : 'Failed to vote' 
+          });
+        }
+      }),
+
+    unvote: protectedProcedure
+      .input(z.object({ initiativeId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await db.removeVote(input.initiativeId, ctx.user.id);
+        return { success: true };
+      }),
+
+    getVoteStatus: protectedProcedure
+      .input(z.object({ initiativeId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        const hasVoted = await db.hasUserVoted(input.initiativeId, ctx.user.id);
+        const voteCount = await db.getVoteCount(input.initiativeId);
+        return { hasVoted, voteCount };
+      }),
+
     addMessage: protectedProcedure
       .input(z.object({
         initiativeId: z.number(),
@@ -205,6 +242,26 @@ export const appRouter = router({
       .mutation(async ({ input }) => {
         await db.deleteInitiative(input.id);
         return { success: true };
+      }),
+
+    // Update roadmap status (admin only)
+    updateRoadmapStatus: adminProcedure
+      .input(z.object({
+        id: z.number(),
+        roadmapStatus: z.enum(['under-review', 'research', 'development', 'pilot', 'deployed', 'on-hold', 'rejected']),
+      }))
+      .mutation(async ({ input }) => {
+        await db.updateRoadmapStatus(input.id, input.roadmapStatus);
+        return { success: true };
+      }),
+
+    // Get initiatives by roadmap status
+    getByRoadmapStatus: publicProcedure
+      .input(z.object({
+        roadmapStatus: z.enum(['under-review', 'research', 'development', 'pilot', 'deployed', 'on-hold', 'rejected']),
+      }))
+      .query(async ({ input }) => {
+        return await db.getInitiativesByRoadmapStatus(input.roadmapStatus);
       }),
   }),
 });
