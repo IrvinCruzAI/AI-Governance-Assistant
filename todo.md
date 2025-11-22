@@ -80,3 +80,20 @@
 - [x] Add success confirmation and next steps
 - [x] Test complete submission flow
 - [x] Write and run unit tests for initiative creation
+
+## Rich Text Editor for Submission Form
+- [x] Install Tiptap rich text editor library
+- [x] Create reusable RichTextEditor component
+- [x] Replace Problem Statement textarea with rich text editor
+- [x] Replace Proposed Solution textarea with rich text editor
+- [x] Update backend schema to handle HTML content
+- [x] Test formatting (bold, italic, bullet points, numbered lists)
+- [x] Test form validation with rich text content
+- [x] Verify HTML content displays correctly in admin dashboard
+- [x] Write unit tests for rich text editor integration
+
+## Dashboard Menu Improvements
+- [ ] Move settings into dashboard menu (as tab or button)
+- [ ] Replace settings button in header with personalized user greeting showing first name
+- [ ] Test dashboard navigation and user experience
+- [ ] Ensure settings remain accessible from new location

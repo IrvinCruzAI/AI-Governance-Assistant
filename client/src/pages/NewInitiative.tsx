@@ -10,13 +10,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { getLoginUrl } from "@/const";
+import { RichTextEditor } from "@/components/RichTextEditor";
 import { trpc } from "@/lib/trpc";
 import { CheckCircle2, Lightbulb, Loader2, Rocket } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
+
+// Helper function to strip HTML tags and check if content is empty
+const stripHtml = (html: string): string => {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+};
 
 export default function NewInitiative() {
   const { user, loading: authLoading, isAuthenticated } = useAuth();
@@ -64,7 +71,8 @@ export default function NewInitiative() {
       toast.error("Please provide a title for your initiative");
       return;
     }
-    if (!problemStatement.trim()) {
+    // Check if problemStatement has actual content (not just HTML tags)
+    if (!stripHtml(problemStatement).trim()) {
       toast.error("Please describe the problem you're trying to solve");
       return;
     }
@@ -340,14 +348,10 @@ export default function NewInitiative() {
                   What Problem Are You Trying to Solve?{" "}
                   <span className="text-destructive">*</span>
                 </Label>
-                <Textarea
-                  id="problem"
-                  placeholder="Describe the current challenge or frustration. What's not working? Why does it matter? Be specific about the impact."
+                <RichTextEditor
                   value={problemStatement}
-                  onChange={(e) => setProblemStatement(e.target.value)}
-                  required
-                  rows={5}
-                  className="resize-none"
+                  onChange={setProblemStatement}
+                  placeholder="Describe the current challenge or frustration. What's not working? Why does it matter? Be specific about the impact."
                 />
                 <p className="text-sm text-muted-foreground">
                   Example: "No-show rates average 15-20% across our facilities,
@@ -361,13 +365,10 @@ export default function NewInitiative() {
                   How Could AI Help?{" "}
                   <span className="text-muted-foreground">(Optional)</span>
                 </Label>
-                <Textarea
-                  id="solution"
-                  placeholder="If you have ideas about how AI could address this problem, share them here. Don't worry if you're not sure—we can help figure that out!"
+                <RichTextEditor
                   value={aiApproach}
-                  onChange={(e) => setAiApproach(e.target.value)}
-                  rows={5}
-                  className="resize-none"
+                  onChange={setAiApproach}
+                  placeholder="If you have ideas about how AI could address this problem, share them here. Don't worry if you're not sure—we can help figure that out!"
                 />
                 <p className="text-sm text-muted-foreground">
                   Example: "AI could send automated reminders via text/email 48

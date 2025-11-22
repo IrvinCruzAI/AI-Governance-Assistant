@@ -37,10 +37,12 @@ describe("Voting System", () => {
     const caller = appRouter.createCaller(ctx);
 
     // Create a test initiative first
-    const { initiativeId } = await caller.initiative.create({
-      userRole: "Nurse",
+    const { id: initiativeId } = await caller.initiative.create({
+      title: "Test Initiative 1",
+      submitterEmail: "test@adventhealth.com",
+      submitterRole: "Nurse",
       area: "clinical-care",
-      userEmail: "test@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Vote for the initiative
@@ -54,10 +56,12 @@ describe("Voting System", () => {
     const caller = appRouter.createCaller(ctx);
 
     // Create a test initiative
-    const { initiativeId } = await caller.initiative.create({
-      userRole: "Doctor",
+    const { id: initiativeId } = await caller.initiative.create({
+      title: "Test Initiative 2",
+      submitterEmail: "test2@adventhealth.com",
+      submitterRole: "Doctor",
       area: "clinical-care",
-      userEmail: "test2@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // First vote should succeed
@@ -74,10 +78,12 @@ describe("Voting System", () => {
     const caller = appRouter.createCaller(ctx);
 
     // Create a test initiative
-    const { initiativeId } = await caller.initiative.create({
-      userRole: "Pharmacist",
+    const { id: initiativeId } = await caller.initiative.create({
+      title: "Test Initiative 3",
+      submitterEmail: "test3@adventhealth.com",
+      submitterRole: "Pharmacist",
       area: "clinical-support",
-      userEmail: "test3@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Vote for the initiative
@@ -96,10 +102,12 @@ describe("Voting System", () => {
     const caller2 = appRouter.createCaller(ctx2);
 
     // Create a test initiative
-    const { initiativeId } = await caller1.initiative.create({
-      userRole: "Administrator",
+    const { id: initiativeId } = await caller1.initiative.create({
+      title: "Test Initiative for Voting",
+      submitterEmail: "test4@adventhealth.com",
+      submitterRole: "Administrator",
       area: "back-office",
-      userEmail: "test4@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Two users vote

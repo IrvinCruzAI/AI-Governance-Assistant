@@ -66,10 +66,12 @@ describe("Roadmap Status Management", () => {
     const userCaller = appRouter.createCaller(userCtx);
 
     // Create a test initiative as a regular user
-    const { initiativeId } = await userCaller.initiative.create({
-      userRole: "Nurse",
+    const { id: initiativeId } = await userCaller.initiative.create({
+      title: "Test Initiative",
+      submitterEmail: "test@adventhealth.com",
+      submitterRole: "Nurse",
       area: "clinical-care",
-      userEmail: "test@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Admin updates roadmap status
@@ -86,10 +88,12 @@ describe("Roadmap Status Management", () => {
     const userCaller = appRouter.createCaller(userCtx);
 
     // Create a test initiative
-    const { initiativeId } = await userCaller.initiative.create({
-      userRole: "Doctor",
+    const { id: initiativeId } = await userCaller.initiative.create({
+      title: "Test Initiative",
+      submitterEmail: "test11@adventhealth.com",
+      submitterRole: "Doctor",
       area: "clinical-care",
-      userEmail: "test11@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Non-admin tries to update roadmap status - should fail
@@ -108,10 +112,12 @@ describe("Roadmap Status Management", () => {
     const userCaller = appRouter.createCaller(userCtx);
 
     // Create a test initiative
-    const { initiativeId } = await userCaller.initiative.create({
-      userRole: "Pharmacist",
+    const { id: initiativeId } = await userCaller.initiative.create({
+      title: "Test Initiative",
+      submitterEmail: "test12@adventhealth.com",
+      submitterRole: "Pharmacist",
       area: "clinical-support",
-      userEmail: "test12@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Update to pilot status
@@ -138,10 +144,12 @@ describe("Roadmap Status Management", () => {
     const userCaller = appRouter.createCaller(userCtx);
 
     // Create a test initiative
-    const { initiativeId } = await userCaller.initiative.create({
-      userRole: "Administrator",
+    const { id: initiativeId } = await userCaller.initiative.create({
+      title: "Test Initiative",
+      submitterEmail: "test13@adventhealth.com",
+      submitterRole: "Administrator",
       area: "back-office",
-      userEmail: "test13@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     const statuses = [
@@ -170,10 +178,12 @@ describe("Roadmap Status Management", () => {
     const userCaller = appRouter.createCaller(userCtx);
 
     // Create a test initiative
-    const { initiativeId } = await userCaller.initiative.create({
-      userRole: "Technician",
+    const { id: initiativeId } = await userCaller.initiative.create({
+      title: "Test Initiative",
+      submitterEmail: "test14@adventhealth.com",
+      submitterRole: "Technician",
       area: "clinical-operations",
-      userEmail: "test14@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Retrieve the initiative

@@ -37,14 +37,16 @@ describe("initiative.create", () => {
     const caller = appRouter.createCaller(ctx);
 
     const result = await caller.initiative.create({
-      userRole: "Clinical Director",
+      title: "Test Initiative",
+      submitterEmail: "test@adventhealth.com",
+      submitterRole: "Clinical Director",
       area: "clinical-care",
-      userEmail: "test@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
-    expect(result).toHaveProperty("initiativeId");
-    expect(typeof result.initiativeId).toBe("number");
-    expect(result.initiativeId).toBeGreaterThan(0);
+    expect(result).toHaveProperty("id");
+    expect(typeof result.id).toBe("number");
+    expect(result.id).toBeGreaterThan(0);
   });
 });
 
@@ -55,14 +57,16 @@ describe("initiative.update", () => {
 
     // Create an initiative first
     const created = await caller.initiative.create({
-      userRole: "IT Manager",
+      title: "Test Initiative",
+      submitterEmail: "test@adventhealth.com",
+      submitterRole: "IT Manager",
       area: "back-office",
-      userEmail: "test@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Update the initiative
     const result = await caller.initiative.update({
-      id: created.initiativeId,
+      id: created.id,
       data: {
         title: "AI-Powered Scheduling System",
         problemStatement: "Current scheduling is inefficient and time-consuming",
@@ -81,14 +85,16 @@ describe("initiative.get", () => {
 
     // Create an initiative
     const created = await caller.initiative.create({
-      userRole: "Operations Lead",
+      title: "Test Initiative",
+      submitterEmail: "test@adventhealth.com",
+      submitterRole: "Operations Lead",
       area: "clinical-operations",
-      userEmail: "test@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Update it with data
     await caller.initiative.update({
-      id: created.initiativeId,
+      id: created.id,
       data: {
         title: "Patient Flow Optimization",
         problemStatement: "Emergency department wait times are too long",
@@ -97,7 +103,7 @@ describe("initiative.get", () => {
 
     // Retrieve it
     const initiative = await caller.initiative.get({
-      id: created.initiativeId,
+      id: created.id,
     });
 
     expect(initiative).toBeDefined();
@@ -114,15 +120,19 @@ describe("initiative.list", () => {
 
     // Create multiple initiatives
     await caller.initiative.create({
-      userRole: "Clinical Director",
+      title: "Test Initiative",
+      submitterEmail: "test@adventhealth.com",
+      submitterRole: "Clinical Director",
       area: "clinical-care",
-      userEmail: "test@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     await caller.initiative.create({
-      userRole: "Clinical Director",
+      title: "Test Initiative",
+      submitterEmail: "test@adventhealth.com",
+      submitterRole: "Clinical Director",
       area: "clinical-support",
-      userEmail: "test@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // List initiatives
@@ -140,14 +150,16 @@ describe("initiative.addMessage", () => {
 
     // Create an initiative
     const created = await caller.initiative.create({
-      userRole: "Test User",
+      title: "Test Initiative",
+      submitterEmail: "test@adventhealth.com",
+      submitterRole: "Test User",
       area: "back-office",
-      userEmail: "test@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Add a message
     const result = await caller.initiative.addMessage({
-      initiativeId: created.initiativeId,
+      initiativeId: created.id,
       role: "assistant",
       content: "Welcome to the AI Initiative Intake Assistant!",
       step: 1,
@@ -165,21 +177,23 @@ describe("initiative.getMessages", () => {
 
     // Create an initiative
     const created = await caller.initiative.create({
-      userRole: "Test User",
+      title: "Test Initiative",
+      submitterEmail: "test@adventhealth.com",
+      submitterRole: "Test User",
       area: "clinical-care",
-      userEmail: "test@adventhealth.com",
+      problemStatement: "Test problem statement",
     });
 
     // Add messages
     await caller.initiative.addMessage({
-      initiativeId: created.initiativeId,
+      initiativeId: created.id,
       role: "assistant",
       content: "What is your initiative title?",
       step: 1,
     });
 
     await caller.initiative.addMessage({
-      initiativeId: created.initiativeId,
+      initiativeId: created.id,
       role: "user",
       content: "AI Diagnostic Assistant",
       step: 1,
@@ -187,7 +201,7 @@ describe("initiative.getMessages", () => {
 
     // Retrieve messages
     const messages = await caller.initiative.getMessages({
-      initiativeId: created.initiativeId,
+      initiativeId: created.id,
     });
 
     expect(Array.isArray(messages)).toBe(true);

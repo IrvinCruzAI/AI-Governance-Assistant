@@ -647,17 +647,19 @@ export default function Admin() {
                   {/* Problem Statement */}
                   <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">Problem Statement</h3>
-                    <p className="text-base text-gray-700 leading-relaxed">
-                      {selectedInitiative.problemStatement}
-                    </p>
+                    <div 
+                      className="text-base text-gray-700 leading-relaxed prose prose-sm max-w-none"
+                      dangerouslySetInnerHTML={{ __html: selectedInitiative.problemStatement || '' }}
+                    />
                   </div>
 
                   {/* AI Approach */}
                   <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">Proposed AI Solution</h3>
-                    <p className="text-base text-gray-700 leading-relaxed">
-                      {selectedInitiative.aiApproach}
-                    </p>
+                    <div 
+                      className="text-base text-gray-700 leading-relaxed prose prose-sm max-w-none"
+                      dangerouslySetInnerHTML={{ __html: selectedInitiative.aiApproach || 'No proposed solution provided.' }}
+                    />
                   </div>
                 </div>
 
