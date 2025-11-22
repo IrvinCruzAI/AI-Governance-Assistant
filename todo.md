@@ -263,3 +263,10 @@
 - [x] Test regular user dashboard experience
 - [x] Test admin dashboard with all tabs
 - [x] Create checkpoint
+
+## Initiative Review Dialog Optimization
+- [x] Redesign dialog layout to use grid for better space utilization
+- [x] Make dialog responsive to fit content without scrolling
+- [x] Organize fields in logical groups (metadata, content, admin controls)
+- [x] Test dialog with different screen sizes
+- [x] Create checkpoint
