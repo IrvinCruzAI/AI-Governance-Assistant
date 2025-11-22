@@ -124,7 +124,7 @@ export default function Home() {
               <>
                 <Button
                   size="lg"
-                  onClick={() => setLocation("/new")}
+                  onClick={() => setLocation("/new-initiative")}
                   className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all"
                 >
                   Submit Your Idea for Consideration
@@ -527,7 +527,7 @@ export default function Home() {
             ) : (
               <Button
                 size="lg"
-                onClick={() => setLocation("/new")}
+                onClick={() => setLocation("/new-initiative")}
                 className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-xl"
               >
                 Submit Your Idea Now

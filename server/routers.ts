@@ -31,24 +31,30 @@ export const appRouter = router({
   initiative: router({
     create: protectedProcedure
       .input(z.object({
-        userRole: z.string(),
+        title: z.string(),
+        submitterEmail: z.string().email(),
+        submitterRole: z.string(),
         area: z.string(),
-        userEmail: z.string(),
-        department: z.string().optional(),
-        urgency: z.string().optional(),
+        problemStatement: z.string(),
+        proposedSolution: z.string().optional(),
       }))
       .mutation(async ({ ctx, input }) => {
         console.log('[DEBUG] initiative.create called with:', { userId: ctx.user.id, input });
         try {
           const initiativeId = await db.createInitiative({
             userId: ctx.user.id,
-            userRole: input.userRole,
+            userRole: input.submitterRole,
             area: input.area,
-            userEmail: input.userEmail,
-            title: "Untitled Initiative",
+            userEmail: input.submitterEmail,
+            title: input.title,
+            problemStatement: input.problemStatement,
+            aiApproach: input.proposedSolution || null,
           });
           console.log('[DEBUG] Initiative created successfully:', initiativeId);
-          return { initiativeId };
+          
+          // Fetch and return the created initiative
+          const initiative = await db.getInitiativeById(initiativeId);
+          return initiative;
         } catch (error) {
           console.error('[ERROR] Failed to create initiative:', error);
           throw error;

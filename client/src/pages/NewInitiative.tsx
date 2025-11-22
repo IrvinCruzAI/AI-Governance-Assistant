@@ -1,12 +1,8 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { trpc } from "@/lib/trpc";
-import { useLocation } from "wouter";
-import { ArrowLeft, ArrowRight, Loader2, Mail, Building2, AlertCircle } from "lucide-react";
-import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -14,189 +10,431 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { getLoginUrl } from "@/const";
+import { trpc } from "@/lib/trpc";
+import { CheckCircle2, Lightbulb, Loader2, Rocket } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useLocation } from "wouter";
+import { toast } from "sonner";
 
 export default function NewInitiative() {
+  const { user, loading: authLoading, isAuthenticated } = useAuth();
   const [, setLocation] = useLocation();
-  const { isAuthenticated, user } = useAuth();
-  const [userEmail, setUserEmail] = useState(user?.email || "");
-  const [userRole, setUserRole] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  // Form state
+  const [title, setTitle] = useState("");
+  const [problemStatement, setProblemStatement] = useState("");
+  const [aiApproach, setAiApproach] = useState("");
   const [area, setArea] = useState("");
-  const [department, setDepartment] = useState("");
-  const [urgency, setUrgency] = useState("");
+  const [userRole, setUserRole] = useState("");
+  const [userEmail, setUserEmail] = useState(user?.email || "");
+
+  // Update email when user loads
+  useEffect(() => {
+    if (user?.email) {
+      setUserEmail(user.email);
+    }
+  }, [user]);
 
   const createMutation = trpc.initiative.create.useMutation({
-    onSuccess: (data) => {
-      setLocation(`/initiative/${data.initiativeId}`);
+    onSuccess: async (data) => {
+      // Update the initiative with complete information
+      // Initiative created successfully with all data
+      setSubmitted(true);
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to submit initiative");
     },
   });
 
-  const handleStart = () => {
-    if (!userEmail) {
-      alert("Please provide your email address so we can contact you about your idea.");
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      window.location.href = getLoginUrl();
+    }
+  }, [authLoading, isAuthenticated]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validation
+    if (!title.trim()) {
+      toast.error("Please provide a title for your initiative");
       return;
     }
-    
+    if (!problemStatement.trim()) {
+      toast.error("Please describe the problem you're trying to solve");
+      return;
+    }
+    if (!area) {
+      toast.error("Please select which area this initiative belongs to");
+      return;
+    }
+    if (!userRole.trim()) {
+      toast.error("Please provide your role");
+      return;
+    }
+    if (!userEmail.trim()) {
+      toast.error("Please provide your email");
+      return;
+    }
+
+    // Create initiative with complete data
     createMutation.mutate({
-      userRole: userRole || "",
-      area: area || "",
-      userEmail: userEmail,
-      department: department || "",
-      urgency: urgency || "",
+      title: title.trim(),
+      submitterRole: userRole.trim(),
+      area,
+      submitterEmail: userEmail.trim(),
+      problemStatement: problemStatement.trim(),
+      proposedSolution: aiApproach.trim() || undefined,
     });
   };
 
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
   if (!isAuthenticated) {
-    setLocation("/");
-    return null;
+    return null; // Will redirect via useEffect
+  }
+
+  if (submitted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+        <div className="container max-w-3xl py-12">
+          <Button
+            variant="ghost"
+            onClick={() => setLocation("/")}
+            className="mb-8"
+          >
+            ← Back to Home
+          </Button>
+
+          <Card className="p-8 md:p-12 text-center">
+            <div className="flex justify-center mb-6">
+              <div className="rounded-full bg-green-100 p-4">
+                <CheckCircle2 className="h-12 w-12 text-green-600" />
+              </div>
+            </div>
+
+            <h1 className="text-3xl font-bold mb-4">
+              Your Idea Has Been Submitted!
+            </h1>
+
+            <p className="text-lg text-muted-foreground mb-8">
+              Thank you for sharing your initiative with us. Your submission has
+              been received and will be reviewed by our AI governance team.
+            </p>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 text-left">
+              <h3 className="font-semibold text-lg mb-3">What Happens Next?</h3>
+              <ol className="space-y-3 text-muted-foreground">
+                <li className="flex gap-3">
+                  <span className="font-semibold text-primary">1.</span>
+                  <span>
+                    <strong>Initial Review (24-48 hours):</strong> Our AI team
+                    will review your submission for completeness and mission
+                    alignment.
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-semibold text-primary">2.</span>
+                  <span>
+                    <strong>Leadership Evaluation (3-5 business days):</strong>{" "}
+                    The Chief AI Officer and governance team will assess
+                    feasibility, impact, and priority.
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-semibold text-primary">3.</span>
+                  <span>
+                    <strong>You'll Hear From Us:</strong> We'll email you with
+                    next steps—whether it's moving forward, needs more
+                    information, or future consideration.
+                  </span>
+                </li>
+              </ol>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button onClick={() => setLocation("/")} size="lg">
+                Return to Home
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSubmitted(false);
+                  setTitle("");
+                  setProblemStatement("");
+                  setAiApproach("");
+                  setArea("");
+                  setUserRole("");
+                }}
+                size="lg"
+              >
+                Submit Another Idea
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50 flex items-center justify-center p-4">
-      <Card className="max-w-2xl w-full shadow-xl">
-        <CardHeader>
-          <div className="flex items-center gap-4 mb-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setLocation("/")}
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
-            </Button>
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <div className="container max-w-4xl py-12">
+        <Button
+          variant="ghost"
+          onClick={() => setLocation("/")}
+          className="mb-8"
+        >
+          ← Back to Home
+        </Button>
+
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="rounded-full bg-primary/10 p-3">
+              <Lightbulb className="h-6 w-6 text-primary" />
+            </div>
+            <h1 className="text-4xl font-bold">Submit Your AI Initiative</h1>
           </div>
-          <CardTitle className="text-3xl text-gray-900">
-            Share Your AI Idea
-          </CardTitle>
-          <p className="text-gray-600 mt-2">
-            Before we begin, tell us a bit about yourself so we can follow up on your idea.
+          <p className="text-lg text-muted-foreground">
+            Share your idea to improve healthcare delivery at AdventHealth.
+            Takes just a few minutes.
           </p>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Email - Required */}
-          <div className="space-y-2">
-            <Label htmlFor="email" className="flex items-center gap-2">
-              <Mail className="h-4 w-4" />
-              Your Email <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="your.name@adventhealth.com"
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
-              required
-            />
-            <p className="text-sm text-gray-500">
-              We'll use this to send you updates on your idea's status
-            </p>
-          </div>
+        </div>
 
-          {/* Role */}
-          <div className="space-y-2">
-            <Label htmlFor="role">Your Role</Label>
-            <Input
-              id="role"
-              placeholder="e.g., Clinical Director, Nurse Practitioner, IT Manager"
-              value={userRole}
-              onChange={(e) => setUserRole(e.target.value)}
-            />
-            <p className="text-sm text-gray-500">
-              What is your current role at AdventHealth?
-            </p>
-          </div>
+        <Card className="p-8 md:p-12">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* About You Section */}
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-2xl font-semibold mb-2 flex items-center gap-2">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">
+                    1
+                  </span>
+                  About You
+                </h2>
+                <p className="text-muted-foreground">
+                  Help us understand your perspective
+                </p>
+              </div>
 
-          {/* Department */}
-          <div className="space-y-2">
-            <Label htmlFor="department" className="flex items-center gap-2">
-              <Building2 className="h-4 w-4" />
-              Department/Facility
-            </Label>
-            <Input
-              id="department"
-              placeholder="e.g., Emergency Department - Orlando Campus"
-              value={department}
-              onChange={(e) => setDepartment(e.target.value)}
-            />
-            <p className="text-sm text-gray-500">
-              Which department or facility do you work in?
-            </p>
-          </div>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Your Name</Label>
+                  <Input
+                    id="name"
+                    value={user?.name || ""}
+                    disabled
+                    className="bg-muted"
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    From your account
+                  </p>
+                </div>
 
-          {/* Primary Area */}
-          <div className="space-y-2">
-            <Label htmlFor="area">Primary Area</Label>
-            <Select value={area} onValueChange={setArea}>
-              <SelectTrigger id="area">
-                <SelectValue placeholder="Select an area" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="clinical-care">Clinical Care</SelectItem>
-                <SelectItem value="clinical-support">Clinical Support</SelectItem>
-                <SelectItem value="clinical-operations">Clinical Operations</SelectItem>
-                <SelectItem value="back-office">Back Office</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
-              </SelectContent>
-            </Select>
-            <p className="text-sm text-gray-500">
-              Which area does this AI initiative primarily relate to?
-            </p>
-          </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">
+                    Email <span className="text-destructive">*</span>
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    required
+                    placeholder="your.email@adventhealth.com"
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    We'll use this to contact you
+                  </p>
+                </div>
 
-          {/* Urgency */}
-          <div className="space-y-2">
-            <Label htmlFor="urgency" className="flex items-center gap-2">
-              <AlertCircle className="h-4 w-4" />
-              How urgent is this problem?
-            </Label>
-            <Select value={urgency} onValueChange={setUrgency}>
-              <SelectTrigger id="urgency">
-                <SelectValue placeholder="Select urgency level" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="critical">Critical - Immediate safety or compliance issue</SelectItem>
-                <SelectItem value="high">High - Significantly impacts daily operations</SelectItem>
-                <SelectItem value="medium">Medium - Important but not blocking work</SelectItem>
-                <SelectItem value="low">Low - Nice to have, long-term improvement</SelectItem>
-              </SelectContent>
-            </Select>
-            <p className="text-sm text-gray-500">
-              This helps us prioritize which ideas to review first
-            </p>
-          </div>
+                <div className="space-y-2">
+                  <Label htmlFor="role">
+                    Your Role <span className="text-destructive">*</span>
+                  </Label>
+                  <Input
+                    id="role"
+                    placeholder="e.g., Registered Nurse, IT Manager, Physician"
+                    value={userRole}
+                    onChange={(e) => setUserRole(e.target.value)}
+                    required
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    Your job title or position
+                  </p>
+                </div>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <p className="text-sm text-blue-900 font-semibold mb-2">
-              What to expect:
-            </p>
-            <ul className="text-sm text-blue-800 space-y-1 ml-4 list-disc">
-              <li>4-step guided form (10-15 minutes)</li>
-              <li>Questions about your AI idea, mission alignment, and risks</li>
-              <li>Automated generation of a structured brief and RAID view</li>
-              <li>Expert review within 48 hours</li>
-              <li>Email notification when your idea is reviewed</li>
-            </ul>
-          </div>
+                <div className="space-y-2">
+                  <Label htmlFor="area">
+                    Department/Area <span className="text-destructive">*</span>
+                  </Label>
+                  <Select value={area} onValueChange={setArea} required>
+                    <SelectTrigger id="area">
+                      <SelectValue placeholder="Select your area" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="clinical-care">
+                        Clinical Care
+                      </SelectItem>
+                      <SelectItem value="clinical-operations">
+                        Clinical Operations
+                      </SelectItem>
+                      <SelectItem value="clinical-support">
+                        Clinical Support
+                      </SelectItem>
+                      <SelectItem value="back-office">
+                        Back Office / Administrative
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-sm text-muted-foreground">
+                    Where do you work?
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          <Button
-            onClick={handleStart}
-            disabled={createMutation.isPending || !userEmail}
-            className="w-full"
-            size="lg"
-          >
-            {createMutation.isPending ? (
-              <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Starting...
-              </>
-            ) : (
-              <>
-                Get Started
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </>
-            )}
-          </Button>
-        </CardContent>
-      </Card>
+            {/* Your Idea Section */}
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-2xl font-semibold mb-2 flex items-center gap-2">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">
+                    2
+                  </span>
+                  Your Idea
+                </h2>
+                <p className="text-muted-foreground">
+                  Tell us about the problem and your proposed solution
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="title">
+                  Initiative Title <span className="text-destructive">*</span>
+                </Label>
+                <Input
+                  id="title"
+                  placeholder="e.g., Automated Patient Appointment Reminders"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                  maxLength={200}
+                />
+                <p className="text-sm text-muted-foreground">
+                  A clear, descriptive name for your initiative
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="problem">
+                  What Problem Are You Trying to Solve?{" "}
+                  <span className="text-destructive">*</span>
+                </Label>
+                <Textarea
+                  id="problem"
+                  placeholder="Describe the current challenge or frustration. What's not working? Why does it matter? Be specific about the impact."
+                  value={problemStatement}
+                  onChange={(e) => setProblemStatement(e.target.value)}
+                  required
+                  rows={5}
+                  className="resize-none"
+                />
+                <p className="text-sm text-muted-foreground">
+                  Example: "No-show rates average 15-20% across our facilities,
+                  wasting appointment slots and delaying care for other
+                  patients."
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="solution">
+                  How Could AI Help?{" "}
+                  <span className="text-muted-foreground">(Optional)</span>
+                </Label>
+                <Textarea
+                  id="solution"
+                  placeholder="If you have ideas about how AI could address this problem, share them here. Don't worry if you're not sure—we can help figure that out!"
+                  value={aiApproach}
+                  onChange={(e) => setAiApproach(e.target.value)}
+                  rows={5}
+                  className="resize-none"
+                />
+                <p className="text-sm text-muted-foreground">
+                  Example: "AI could send automated reminders via text/email 48
+                  hours and 24 hours before appointments, with easy
+                  rescheduling options."
+                </p>
+              </div>
+            </div>
+
+            {/* Submit Section */}
+            <div className="border-t pt-8">
+              <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+                <div className="flex items-start gap-3">
+                  <Rocket className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium">Ready to submit?</p>
+                    <p className="text-sm text-muted-foreground">
+                      Your idea will be reviewed within 3-5 business days
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={createMutation.isPending}
+                  className="w-full sm:w-auto"
+                >
+                  {createMutation.isPending ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit Initiative"
+                  )}
+                </Button>
+              </div>
+            </div>
+          </form>
+        </Card>
+
+        {/* Help Section */}
+        <Card className="mt-8 p-6 bg-blue-50 border-blue-200">
+          <h3 className="font-semibold mb-3">Need Help?</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Not sure what to share? Think about:
+          </p>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li className="flex gap-2">
+              <span className="text-primary">•</span>
+              <span>Tasks you repeat 10+ times per day</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-primary">•</span>
+              <span>Information that's hard to find when you need it</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-primary">•</span>
+              <span>Processes that create unnecessary delays or errors</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-primary">•</span>
+              <span>Administrative work that takes you away from patients</span>
+            </li>
+          </ul>
+        </Card>
+      </div>
     </div>
   );
 }
