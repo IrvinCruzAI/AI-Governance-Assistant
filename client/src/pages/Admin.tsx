@@ -78,6 +78,10 @@ export default function Admin() {
   const [effort, setEffort] = useState<string>(""); // high, medium, low
   const [evaluationNotes, setEvaluationNotes] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
+  
+  // Delete confirmation state
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [initiativeToDelete, setInitiativeToDelete] = useState<any>(null);
 
   // Queries
   const { data: userInitiatives, isLoading: userLoading } = trpc.initiative.list.useQuery();
@@ -483,13 +487,27 @@ export default function Admin() {
                                 )}
                               </td>
                               <td className="px-4 py-4">
-                                <Button
-                                  size="sm"
-                                  onClick={() => openInitiativeDetail(initiative)}
-                                  aria-label={`Review ${initiative.title || 'initiative'}`}
-                                >
-                                  Review
-                                </Button>
+                                <div className="flex gap-2">
+                                  <Button
+                                    size="sm"
+                                    onClick={() => openInitiativeDetail(initiative)}
+                                    aria-label={`Review ${initiative.title || 'initiative'}`}
+                                  >
+                                    Review
+                                  </Button>
+                                  <Button
+                                    size="sm"
+                                    variant="destructive"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setInitiativeToDelete(initiative);
+                                      setDeleteConfirmOpen(true);
+                                    }}
+                                    aria-label={`Delete ${initiative.title || 'initiative'}`}
+                                  >
+                                    <Trash2 className="h-4 w-4" />
+                                  </Button>
+                                </div>
                               </td>
                             </tr>
                           ))}
@@ -921,6 +939,45 @@ export default function Admin() {
         )}
       </div>
 
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete Initiative</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete "{initiativeToDelete?.title || 'this initiative'}"? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end gap-3 mt-4">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setDeleteConfirmOpen(false);
+                setInitiativeToDelete(null);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={async () => {
+                if (!initiativeToDelete) return;
+                try {
+                  await deleteMutation.mutateAsync({ id: initiativeToDelete.id });
+                  toast.success("Initiative deleted successfully");
+                  utils.admin.getAllInitiatives.invalidate();
+                  setDeleteConfirmOpen(false);
+                  setInitiativeToDelete(null);
+                } catch (error) {
+                  toast.error("Failed to delete initiative");
+                }
+              }}
+            >
+              Delete
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
     </div>
   );

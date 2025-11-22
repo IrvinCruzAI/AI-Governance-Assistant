@@ -33,3 +33,8 @@
 ## UI Simplification
 - [x] Remove redundant "Evaluated" column from admin table
 - [x] Remove redundant "Status" column from admin table (Opportunity column already shows evaluation status)
+
+## Delete Functionality
+- [x] Add delete button to Actions column in admin table
+- [x] Add confirmation dialog before deleting
+- [x] Test delete functionality end-to-end
