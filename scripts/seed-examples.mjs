@@ -1,6 +1,6 @@
 /**
- * Seed realistic AdventHealth AI initiative examples
- * Run with: node scripts/seed-examples.mjs
+ * Seed 6 practical, executable AdventHealth AI initiative examples
+ * Run with: tsx scripts/seed-examples.mjs
  */
 
 import { drizzle } from "drizzle-orm/mysql2";
@@ -8,267 +8,394 @@ import { initiatives } from "../drizzle/schema.js";
 
 const db = drizzle(process.env.DATABASE_URL);
 
-const exampleInitiatives = [
-  {
-    userId: 1, // Owner user
-    title: "AI-Powered Patient Discharge Summary Generator",
-    userRole: "Hospitalist Physician",
-    area: "clinical-care",
-    problemStatement: "Physicians spend 45-60 minutes per patient creating discharge summaries, taking time away from patient care. The summaries often miss key details from the full hospital stay.",
-    aiApproach: "Use AI to analyze the patient's full EHR record during hospitalization and generate a comprehensive discharge summary draft that physicians can review and finalize in 5-10 minutes.",
-    targetUsers: "Hospitalist physicians, case managers, and discharge coordinators across all 50 AdventHealth hospitals",
-    missionSupports: JSON.stringify(["Reducing clinician burnout", "Improving patient experience"]),
-    wholePersonCareAlignment: "Gives physicians more time for meaningful patient interactions addressing physical, emotional, and spiritual needs before discharge",
-    ethicalConcerns: "None identified - physician always reviews and approves final summary",
-    clinicalImpact: "indirect",
-    dataType: "phi",
-    automationLevel: "human-review",
-    missionAlignmentRating: "High",
-    missionAlignmentReasoning: "Directly reduces physician burnout while improving discharge quality and patient experience",
-    riskLevel: "Medium",
-    riskReasoning: "Uses PHI and affects clinical documentation, but physician review required before finalization",
-    governancePath: "Standard",
-    raidData: JSON.stringify({
-      risks: ["AI may miss nuanced clinical details", "Integration with Epic EHR required", "Physician trust in AI-generated content"],
-      assumptions: ["EHR data is complete and accurate", "Physicians will adopt the tool", "Discharge summary format remains consistent"],
-      issues: ["Current discharge summaries are inconsistent in quality", "No standardized template across facilities"],
-      dependencies: ["Epic integration team", "Clinical informatics approval", "Physician training program"]
-    }),
-    status: "pending",
-    currentStep: 6,
-    createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
-    updatedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-  },
+const practicalIdeas = [
   {
     userId: 1,
-    title: "Predictive Scheduling for OR Block Time Optimization",
-    userRole: "OR Manager",
+    userRole: "Scheduling Coordinator",
+    userEmail: "sarah.johnson@adventhealth.com",
     area: "clinical-operations",
-    problemStatement: "We waste 15-20% of OR block time due to inaccurate surgery duration estimates. Surgeons either rush or leave expensive OR time unused.",
-    aiApproach: "Train an AI model on historical surgery data to predict actual procedure duration based on surgeon, procedure type, patient factors, and time of day. Automatically suggest optimal OR scheduling.",
-    targetUsers: "OR schedulers, surgeons, and perioperative staff across all surgical centers",
-    missionSupports: JSON.stringify(["Operational efficiency", "Improving access to care"]),
-    wholePersonCareAlignment: "Reduces patient wait times for surgery and minimizes last-minute schedule changes that cause patient anxiety",
-    ethicalConcerns: "None - scheduling optimization doesn't affect clinical decisions",
-    clinicalImpact: "none",
-    dataType: "de-identified",
-    automationLevel: "suggestions",
-    missionAlignmentRating: "Medium",
-    missionAlignmentReasoning: "Improves operational efficiency and access to care, but indirect impact on patient outcomes",
+    title: "Automated Patient Appointment Reminders & Scheduling Optimization",
+    problemStatement: "No-show rates average 15-20% across our facilities, costing thousands in lost revenue and disrupting care continuity. Manual reminder calls are time-consuming and inconsistent. Patients also struggle to find available appointments that fit their schedules.",
+    aiApproach: "Implement an AI-powered appointment reminder system that sends personalized SMS/email reminders at optimal times based on patient behavior patterns, predicts no-show likelihood, suggests optimal rescheduling times, and analyzes scheduling patterns to recommend better appointment slot allocation.",
+    primaryUsers: "Scheduling coordinators, front desk staff, patients",
+    patientImpact: "yes",
+    patientImpactDetails: "Patients receive timely reminders and can easily reschedule, improving access to care",
+    clinicalDecisions: "no",
+    dataTypes: "Appointment history, patient contact information, no-show patterns",
+    ethicsAlignment: "Improves access to care and reduces waste, aligning with stewardship and whole-person care values",
+    missionAlignmentRating: "High",
+    missionAlignmentReasoning: "Directly improves patient access and care continuity while reducing administrative burden",
     riskLevel: "Low",
-    riskReasoning: "Uses de-identified data, provides suggestions only, no direct clinical impact",
+    riskFactors: "Minimal risk - primarily administrative automation with patient consent for communications",
     governancePath: "Light",
-    raidData: JSON.stringify({
-      risks: ["Surgeon resistance to AI-suggested schedules", "Model accuracy varies by specialty"],
-      assumptions: ["Historical data reflects future patterns", "Schedulers will use the recommendations"],
-      issues: ["Current scheduling system is manual and time-consuming"],
-      dependencies: ["Access to historical OR data", "Integration with scheduling software"]
-    }),
-    status: "under-review",
-    currentStep: 6,
-    createdAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000), // 14 days ago
-    updatedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
+    risks: "Patient privacy concerns if reminders contain PHI; potential for reminder fatigue",
+    assumptions: "Patients have valid contact information; patients prefer automated reminders over manual calls",
+    issues: "Integration with existing scheduling system required; need patient consent management",
+    dependencies: "EHR/scheduling system API access; SMS/email service provider",
+    briefGenerated: true,
+    briefContent: `# AI Initiative Brief: Automated Patient Appointment Reminders
+
+## Executive Summary
+Implement AI-powered appointment reminder and scheduling optimization system to reduce 15-20% no-show rates and improve patient access.
+
+## Problem & Opportunity
+Manual reminder calls consume significant staff time while no-shows disrupt care and cost revenue.
+
+## Proposed Solution
+AI system for personalized reminders, no-show prediction, and scheduling optimization.
+
+## Expected Impact
+- 30-40% reduction in no-show rates
+- 10+ hours saved per week per facility
+- Improved appointment utilization and revenue
+
+## Implementation
+**Complexity:** Low (vendor solutions available)  
+**Timeline:** 3-6 months  
+**Resources:** Scheduling system integration, vendor partnership
+
+## Risk Assessment
+**Level:** Low  
+**Governance:** Light touch review
+
+## Next Steps
+1. Evaluate vendor solutions
+2. Pilot at 1-2 facilities
+3. Measure no-show rate improvement
+4. Scale system-wide`,
+    status: "pending",
+    adminNotes: null,
+    department: "Patient Access",
+    urgency: "medium",
+    createdAt: new Date("2025-01-15"),
+    updatedAt: new Date("2025-01-15"),
   },
   {
-    userId: 1,
-    title: "Ambient Clinical Documentation with DAX Copilot",
-    userRole: "Primary Care Physician",
+    userId: 2,
+    userRole: "Hospitalist",
+    userEmail: "dr.michael.chen@adventhealth.com",
     area: "clinical-care",
-    problemStatement: "Physicians spend 2-3 hours after clinic documenting visits in the EHR, leading to burnout and reducing time with family. Patients feel physicians focus more on computers than on them during visits.",
-    aiApproach: "Deploy Microsoft DAX Copilot to listen to patient-physician conversations and automatically generate clinical notes, allowing physicians to maintain eye contact and focus fully on the patient.",
-    targetUsers: "Primary care physicians, specialists, and advanced practice providers across all outpatient clinics",
-    missionSupports: JSON.stringify(["Reducing clinician burnout", "Improving patient experience", "Whole-person care"]),
-    wholePersonCareAlignment: "Enables physicians to be fully present with patients, addressing emotional and spiritual needs alongside physical health without distraction",
-    ethicalConcerns: "Patient consent required for recording conversations; privacy concerns about AI listening to sensitive discussions",
-    clinicalImpact: "indirect",
-    dataType: "phi",
-    automationLevel: "human-review",
+    title: "AI-Assisted Clinical Documentation for Discharge Summaries",
+    problemStatement: "Hospitalists spend 15-20 minutes per discharge summary, often staying late to complete documentation. This leads to burnout and delays in patient discharge. Summaries are sometimes incomplete or lack important details for follow-up providers.",
+    aiApproach: "Deploy AI scribe technology that listens to physician-patient conversations during discharge planning, auto-generates draft discharge summaries with key elements (diagnosis, treatment, medications, follow-up), pulls relevant data from EHR automatically, and allows physician to review/edit/approve in 2-3 minutes.",
+    primaryUsers: "Hospitalists, physician assistants, nurse practitioners",
+    patientImpact: "yes",
+    patientImpactDetails: "Faster discharge process, more complete handoff to follow-up providers",
+    clinicalDecisions: "no",
+    dataTypes: "Patient conversations, EHR data (diagnosis, medications, vitals), discharge instructions",
+    ethicsAlignment: "Reduces physician burnout while improving documentation quality, supporting whole-person care",
     missionAlignmentRating: "High",
-    missionAlignmentReasoning: "Directly addresses clinician burnout and patient experience while enabling whole-person care",
+    missionAlignmentReasoning: "Enables physicians to spend more time with patients by reducing documentation burden",
     riskLevel: "Medium",
-    riskReasoning: "Handles sensitive PHI and patient conversations, but physician reviews all documentation",
+    riskFactors: "Involves clinical documentation; requires physician review; potential for transcription errors",
     governancePath: "Standard",
-    raidData: JSON.stringify({
-      risks: ["Patient privacy concerns", "AI misinterpretation of medical terminology", "Physician over-reliance on AI notes"],
-      assumptions: ["Patients will consent to recording", "Physicians will review and edit notes", "Microsoft maintains HIPAA compliance"],
-      issues: ["Current documentation burden is unsustainable", "Patient satisfaction scores declining"],
-      dependencies: ["Microsoft DAX licensing", "Epic integration", "Patient consent workflow", "Physician training"]
-    }),
-    status: "approved",
-    adminNotes: "Approved for pilot with 10 primary care physicians. Requires patient consent process and quarterly review.",
-    currentStep: 6,
-    createdAt: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000), // 21 days ago
-    updatedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
-  },
-  {
-    userId: 1,
-    title: "AI Chatbot for Employee Benefits Questions",
-    userRole: "HR Benefits Coordinator",
-    area: "back-office",
-    problemStatement: "HR receives 200+ repetitive questions per week about benefits enrollment, PTO policies, and insurance coverage. Staff spend hours answering the same questions instead of handling complex cases.",
-    aiApproach: "Deploy an AI chatbot trained on AdventHealth HR policies, benefits documentation, and FAQs to answer employee questions 24/7 via Teams or the employee portal.",
-    targetUsers: "All 80,000+ AdventHealth employees",
-    missionSupports: JSON.stringify(["Operational efficiency"]),
-    wholePersonCareAlignment: "Helps employees quickly resolve benefits questions, reducing stress and allowing them to focus on patient care",
-    ethicalConcerns: "None - public HR policy information only",
-    clinicalImpact: "none",
-    dataType: "no-personal-data",
-    automationLevel: "automated",
-    missionAlignmentRating: "Low",
-    missionAlignmentReasoning: "Improves operational efficiency but limited direct impact on patient care or mission",
-    riskLevel: "Low",
-    riskReasoning: "No personal data, no clinical impact, automated responses for non-sensitive information",
-    governancePath: "Light",
-    raidData: JSON.stringify({
-      risks: ["Chatbot provides incorrect policy information", "Employees frustrated by lack of human touch"],
-      assumptions: ["HR policies are well-documented", "Employees prefer self-service"],
-      issues: ["Current HR response time is 24-48 hours"],
-      dependencies: ["HR policy documentation", "Teams integration", "IT security approval"]
-    }),
-    status: "pending",
-    currentStep: 6,
-    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
-    updatedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
-  },
-  {
-    userId: 1,
-    title: "Sepsis Early Warning System",
-    userRole: "ICU Nurse Manager",
-    area: "clinical-care",
-    problemStatement: "Sepsis kills 1 in 3 patients who die in hospitals. Early detection is critical, but nurses and physicians often miss subtle early warning signs until the patient deteriorates.",
-    aiApproach: "Implement an AI model that continuously monitors vital signs, lab values, and clinical notes to detect early sepsis patterns and alert the care team 6-12 hours before traditional criteria are met.",
-    targetUsers: "ICU nurses, hospitalists, and rapid response teams",
-    missionSupports: JSON.stringify(["Patient safety", "Improving patient outcomes"]),
-    wholePersonCareAlignment: "Saves lives and prevents suffering, allowing patients to recover and return to their families",
-    ethicalConcerns: "Risk of alert fatigue if false positive rate is high; potential for over-treatment if AI is overly sensitive",
-    clinicalImpact: "direct",
-    dataType: "phi",
-    automationLevel: "human-review",
-    missionAlignmentRating: "High",
-    missionAlignmentReasoning: "Directly improves patient safety and outcomes, core to healing ministry",
-    riskLevel: "High",
-    riskReasoning: "Direct clinical decision support affecting life-threatening conditions, uses PHI, requires immediate action",
-    governancePath: "Full",
-    raidData: JSON.stringify({
-      risks: ["False positives cause alert fatigue", "False negatives miss sepsis cases", "Clinicians may over-rely on AI", "Regulatory scrutiny as potential medical device"],
-      assumptions: ["EHR data is real-time and accurate", "Clinicians will respond to alerts promptly", "Model performs equally across patient populations"],
-      issues: ["Current sepsis detection is reactive, not proactive", "No standardized early warning system"],
-      dependencies: ["Epic integration for real-time data", "Clinical validation study", "FDA regulatory review", "Nursing workflow redesign", "24/7 rapid response team"]
-    }),
-    status: "pending",
-    currentStep: 6,
-    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
-    updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
-  },
-  {
-    userId: 1,
-    title: "Automated Prior Authorization for Common Procedures",
-    userRole: "Revenue Cycle Manager",
-    area: "back-office",
-    problemStatement: "Staff spend 15-20 hours per week on prior authorizations for routine procedures like MRIs and physical therapy. Delays frustrate patients and physicians.",
-    aiApproach: "Use AI to automatically complete prior authorization forms by extracting relevant clinical information from the EHR and submitting to insurance companies, with staff review only for denials.",
-    targetUsers: "Prior authorization staff, schedulers, and patients awaiting approval",
-    missionSupports: JSON.stringify(["Improving access to care", "Operational efficiency"]),
-    wholePersonCareAlignment: "Reduces delays in care, allowing patients to receive needed treatments faster",
-    ethicalConcerns: "None - administrative process only",
-    clinicalImpact: "none",
-    dataType: "phi",
-    automationLevel: "automated",
-    missionAlignmentRating: "Medium",
-    missionAlignmentReasoning: "Improves access to care and efficiency, but indirect impact on patient outcomes",
-    riskLevel: "Low",
-    riskReasoning: "Administrative process, no clinical decisions, PHI handled securely",
-    governancePath: "Light",
-    raidData: JSON.stringify({
-      risks: ["AI submits incomplete or incorrect information", "Insurance companies reject automated submissions"],
-      assumptions: ["Insurance portals accept automated submissions", "EHR contains all required information"],
-      issues: ["Current prior auth process causes 3-5 day delays"],
-      dependencies: ["Integration with insurance portals", "EHR data extraction", "Compliance review"]
-    }),
+    risks: "Transcription errors could lead to incorrect documentation; privacy concerns with voice recording",
+    assumptions: "Physicians will adopt new workflow; AI transcription accuracy is sufficient; EHR integration is feasible",
+    issues: "Physician training required; workflow redesign needed; EHR vendor cooperation",
+    dependencies: "EHR API access; AI scribe vendor; physician buy-in and training",
+    briefGenerated: true,
+    briefContent: `# AI Initiative Brief: AI-Assisted Discharge Documentation
+
+## Executive Summary
+Deploy AI scribe technology to reduce discharge summary documentation time from 15 minutes to 3 minutes.
+
+## Problem & Opportunity
+Physician burnout from documentation burden; delayed discharges; incomplete summaries.
+
+## Proposed Solution
+AI scribe listens to discharge conversations, auto-generates draft summaries, physician reviews/approves.
+
+## Expected Impact
+- Reduce documentation time by 80%
+- Save 200+ physician hours per month system-wide
+- Improve discharge summary completeness
+- Reduce physician burnout
+
+## Implementation
+**Complexity:** Medium (EHR integration, training)  
+**Timeline:** 6-9 months  
+**Resources:** AI scribe vendor, EHR integration, physician champions
+
+## Risk Assessment
+**Level:** Medium (clinical documentation)  
+**Governance:** Standard review with clinical oversight
+
+## Next Steps
+1. Pilot with 5-10 hospitalists
+2. Measure documentation time and quality
+3. Gather physician feedback
+4. Refine workflow and scale`,
     status: "under-review",
-    adminNotes: "Reviewing with compliance team to ensure HIPAA requirements are met for automated submissions.",
-    currentStep: 6,
-    createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000), // 10 days ago
-    updatedAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000),
+    adminNotes: "High priority - aligns with physician wellness initiative",
+    department: "Hospital Medicine",
+    urgency: "high",
+    createdAt: new Date("2025-01-10"),
+    updatedAt: new Date("2025-01-18"),
   },
   {
-    userId: 1,
-    title: "Virtual Nursing Assistant for Patient Education",
-    userRole: "Nurse Educator",
-    area: "clinical-support",
-    problemStatement: "Patients forget 40-80% of what nurses teach them about post-discharge care. Readmission rates are high because patients don't understand medication instructions or warning signs.",
-    aiApproach: "Create an AI-powered virtual nurse avatar that patients can access via tablet or phone to ask questions about their care plan, medications, and recovery. Available 24/7 in multiple languages.",
-    targetUsers: "All hospitalized patients and their families",
-    missionSupports: JSON.stringify(["Improving patient experience", "Patient safety", "Health equity"]),
-    wholePersonCareAlignment: "Empowers patients with knowledge and support, addressing their concerns and fears about recovery",
-    ethicalConcerns: "Must not replace human nursing care; patients may prefer human interaction for sensitive questions",
-    clinicalImpact: "indirect",
-    dataType: "phi",
-    automationLevel: "suggestions",
+    userId: 3,
+    userRole: "ED Nurse Manager",
+    userEmail: "jennifer.martinez@adventhealth.com",
+    area: "clinical-operations",
+    title: "Predictive Staffing Model for Emergency Departments",
+    problemStatement: "ED patient volumes fluctuate unpredictably, leading to either overstaffing (wasted resources) or understaffing (long wait times, poor patient experience). Current staffing models rely on historical averages and don't account for real-time factors like weather, local events, or flu season.",
+    aiApproach: "Build a predictive analytics model that forecasts ED patient volume 24-72 hours in advance, considers weather, day of week, local events, seasonal trends, and historical patterns, recommends optimal staffing levels by hour, and sends alerts when predicted volume exceeds current staffing capacity.",
+    primaryUsers: "ED nurse managers, staffing coordinators, hospital operations leaders",
+    patientImpact: "yes",
+    patientImpactDetails: "Reduced wait times, better nurse-to-patient ratios, improved care quality",
+    clinicalDecisions: "no",
+    dataTypes: "Historical ED visit data, weather data, local event calendars, seasonal trends",
+    ethicsAlignment: "Optimizes resource allocation to improve patient care and reduce staff burnout",
     missionAlignmentRating: "High",
-    missionAlignmentReasoning: "Improves patient safety, experience, and health equity through accessible education",
-    riskLevel: "Medium",
-    riskReasoning: "Provides patient education affecting care decisions, uses PHI, but suggestions only",
-    governancePath: "Standard",
-    raidData: JSON.stringify({
-      risks: ["Patients may follow AI advice without consulting nurse", "Language translation errors", "Digital divide excludes some patients"],
-      assumptions: ["Patients have access to devices", "Content is clinically accurate", "Patients will use the tool"],
-      issues: ["Current patient education is inconsistent", "Language barriers limit understanding"],
-      dependencies: ["Multilingual content development", "Clinical validation of responses", "Patient portal integration", "Accessibility compliance"]
-    }),
+    missionAlignmentReasoning: "Improves patient experience and staff well-being through better resource planning",
+    riskLevel: "Low",
+    riskFactors: "Operational decision support; no direct patient care impact; predictions are recommendations",
+    governancePath: "Light",
+    risks: "Inaccurate predictions could lead to poor staffing decisions; over-reliance on model",
+    assumptions: "Historical patterns are predictive of future volumes; external data sources are reliable",
+    issues: "Data integration from multiple sources; model training and validation; change management",
+    dependencies: "ED visit data access; weather API; local event data; staffing system integration",
+    briefGenerated: true,
+    briefContent: `# AI Initiative Brief: Predictive ED Staffing
+
+## Executive Summary
+AI-powered predictive model to forecast ED patient volume and optimize staffing 24-72 hours in advance.
+
+## Problem & Opportunity
+Unpredictable ED volumes lead to overstaffing or understaffing, impacting costs and patient experience.
+
+## Proposed Solution
+Predictive analytics considering weather, events, seasonality, and historical patterns.
+
+## Expected Impact
+- 20-30% reduction in wait times
+- 10-15% optimization in staffing costs
+- Improved patient satisfaction
+- Reduced staff overtime and burnout
+
+## Implementation
+**Complexity:** Medium (data integration, model training)  
+**Timeline:** 6-9 months  
+**Resources:** Data science team, ED leadership, staffing coordinators
+
+## Risk Assessment
+**Level:** Low (operational support)  
+**Governance:** Light touch review
+
+## Next Steps
+1. Collect and integrate data sources
+2. Build and validate predictive model
+3. Pilot at 1-2 EDs
+4. Measure impact on wait times and staffing costs`,
     status: "pending",
-    currentStep: 6,
-    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
-    updatedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+    adminNotes: null,
+    department: "Emergency Medicine",
+    urgency: "high",
+    createdAt: new Date("2025-01-12"),
+    updatedAt: new Date("2025-01-12"),
   },
   {
-    userId: 1,
-    title: "AI-Assisted Radiology Report Prioritization",
-    userRole: "Radiologist",
-    area: "clinical-support",
-    problemStatement: "Radiologists read scans in the order they arrive, but some contain critical findings (like pulmonary embolism) that need immediate attention. Delays can be life-threatening.",
-    aiApproach: "Use AI to analyze incoming radiology scans and flag critical findings, automatically moving those studies to the top of the radiologist's worklist for immediate review.",
-    targetUsers: "Radiologists and emergency department physicians",
-    missionSupports: JSON.stringify(["Patient safety", "Improving patient outcomes"]),
-    wholePersonCareAlignment: "Saves lives by ensuring critical findings are addressed immediately",
-    ethicalConcerns: "Radiologist must still review all scans; AI prioritization should not delay non-critical but important findings",
-    clinicalImpact: "indirect",
-    dataType: "phi",
-    automationLevel: "suggestions",
+    userId: 4,
+    userRole: "Prior Authorization Specialist",
+    userEmail: "amanda.rodriguez@adventhealth.com",
+    area: "back-office",
+    title: "Automated Prior Authorization Assistant",
+    problemStatement: "Prior authorization requests take 20-30 minutes each to complete manually. Staff spend hours on hold with insurance companies, gathering documentation, and filling out redundant forms. Delays in authorization lead to delayed care and patient frustration.",
+    aiApproach: "Implement an AI assistant that auto-fills prior authorization forms using data from EHR, predicts which procedures/medications will require prior auth, tracks authorization status and sends automated follow-ups, and identifies patterns in denials to suggest alternative approaches.",
+    primaryUsers: "Prior authorization specialists, case managers, physicians",
+    patientImpact: "yes",
+    patientImpactDetails: "Faster authorization turnaround means quicker access to needed care and medications",
+    clinicalDecisions: "no",
+    dataTypes: "EHR data (diagnoses, procedures, medications), insurance policies, authorization history",
+    ethicsAlignment: "Improves patient access to care by reducing administrative delays",
     missionAlignmentRating: "High",
-    missionAlignmentReasoning: "Directly improves patient safety and outcomes by accelerating critical diagnoses",
-    riskLevel: "Medium",
-    riskReasoning: "Affects clinical workflow and timing of diagnoses, uses PHI, but radiologist makes final decisions",
-    governancePath: "Standard",
-    raidData: JSON.stringify({
-      risks: ["AI misses critical findings", "Over-prioritization causes alert fatigue", "Non-critical cases delayed"],
-      assumptions: ["AI accuracy is validated", "Radiologists trust the prioritization", "PACS integration is seamless"],
-      issues: ["Current first-in-first-out approach delays critical findings"],
-      dependencies: ["PACS integration", "AI model validation study", "Radiologist training", "FDA clearance if marketed as medical device"]
-    }),
+    missionAlignmentReasoning: "Removes barriers to care access, aligning with healing ministry values",
+    riskLevel: "Low",
+    riskFactors: "Administrative automation; physician retains final decision-making",
+    governancePath: "Light",
+    risks: "Incorrect form completion could delay authorization; payer system integration challenges",
+    assumptions: "Payers will accept automated submissions; EHR data is accurate and complete",
+    issues: "Integration with multiple payer systems; workflow redesign; staff training",
+    dependencies: "EHR API access; payer portal integrations; authorization tracking system",
+    briefGenerated: true,
+    briefContent: `# AI Initiative Brief: Automated Prior Authorization
+
+## Executive Summary
+AI assistant to automate prior authorization form completion and tracking, reducing processing time from 30 minutes to 5 minutes.
+
+## Problem & Opportunity
+Manual prior auth process delays care, frustrates patients, and consumes significant staff time.
+
+## Proposed Solution
+AI auto-fills forms from EHR, predicts auth requirements, tracks status, identifies denial patterns.
+
+## Expected Impact
+- Reduce time per prior auth by 80%
+- Process 3-4x more authorizations per staff member
+- Reduce turnaround from 3-5 days to 24-48 hours
+- Improve patient satisfaction and care access
+
+## Implementation
+**Complexity:** Medium (payer integration, workflow redesign)  
+**Timeline:** 6-12 months  
+**Resources:** Revenue cycle team, payer partnerships, EHR integration
+
+## Risk Assessment
+**Level:** Low (administrative automation)  
+**Governance:** Light touch review
+
+## Next Steps
+1. Map current prior auth workflow
+2. Identify key payer integration opportunities
+3. Pilot with high-volume procedures
+4. Measure time savings and approval rates`,
     status: "pending",
-    currentStep: 6,
-    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
-    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+    adminNotes: null,
+    department: "Revenue Cycle",
+    urgency: "high",
+    createdAt: new Date("2025-01-14"),
+    updatedAt: new Date("2025-01-14"),
+  },
+  {
+    userId: 5,
+    userRole: "Bedside Nurse",
+    userEmail: "emily.thompson@adventhealth.com",
+    area: "clinical-care",
+    title: "Fall Risk Prediction & Alert System for Inpatient Units",
+    problemStatement: "Patient falls are a leading cause of hospital-acquired injuries, resulting in longer stays, increased costs, and poor outcomes. Current fall risk assessments are manual, subjective, and often outdated. High-risk patients aren't always identified in time.",
+    aiApproach: "Deploy a real-time fall risk prediction system that continuously analyzes patient data (vitals, medications, mobility, cognition, age), predicts fall risk score in real-time and updates as conditions change, alerts nurses when a patient's risk level increases, and suggests specific interventions (bed alarm, hourly rounding, mobility assistance).",
+    primaryUsers: "Bedside nurses, charge nurses, patient safety coordinators",
+    patientImpact: "yes",
+    patientImpactDetails: "Prevents falls and serious injuries, improving patient safety and outcomes",
+    clinicalDecisions: "no",
+    dataTypes: "Patient vitals, medications, mobility assessments, cognitive status, age, prior fall history",
+    ethicsAlignment: "Directly protects patient safety and prevents harm, core to healing ministry",
+    missionAlignmentRating: "High",
+    missionAlignmentReasoning: "Prevents patient harm and improves safety outcomes",
+    riskLevel: "Medium",
+    riskFactors: "Clinical decision support; alerts must be accurate to avoid alarm fatigue; nurse judgment still required",
+    governancePath: "Standard",
+    risks: "False positives could cause alarm fatigue; false negatives could miss high-risk patients; over-reliance on AI",
+    assumptions: "EHR data is accurate and up-to-date; nurses will respond to alerts; interventions are effective",
+    issues: "EHR integration; nurse workflow integration; alert threshold tuning; training",
+    dependencies: "EHR API access; nurse call system integration; patient safety team buy-in",
+    briefGenerated: true,
+    briefContent: `# AI Initiative Brief: Fall Risk Prediction System
+
+## Executive Summary
+Real-time AI system to predict patient fall risk and alert nurses, preventing hospital-acquired injuries.
+
+## Problem & Opportunity
+Patient falls cause injuries, longer stays, and poor outcomes. Manual assessments are outdated and subjective.
+
+## Proposed Solution
+AI continuously analyzes patient data, predicts fall risk in real-time, alerts nurses, suggests interventions.
+
+## Expected Impact
+- Reduce inpatient falls by 25-35%
+- Prevent serious injuries and associated costs
+- Improve patient safety metrics and HCAHPS scores
+- Reduce nurse liability and stress
+
+## Implementation
+**Complexity:** Medium (EHR integration, workflow training)  
+**Timeline:** 6-9 months  
+**Resources:** Patient safety team, nursing leadership, EHR integration
+
+## Risk Assessment
+**Level:** Medium (clinical decision support)  
+**Governance:** Standard review with clinical oversight
+
+## Next Steps
+1. Pilot on 1-2 medical-surgical units
+2. Tune alert thresholds to minimize false positives
+3. Train nurses on responding to alerts
+4. Measure fall rate reduction`,
+    status: "pending",
+    adminNotes: null,
+    department: "Nursing / Patient Safety",
+    urgency: "high",
+    createdAt: new Date("2025-01-16"),
+    updatedAt: new Date("2025-01-16"),
+  },
+  {
+    userId: 6,
+    userRole: "Pharmacist",
+    userEmail: "david.kim@adventhealth.com",
+    area: "clinical-support",
+    title: "Pharmacy Inventory Optimization & Expiration Tracking",
+    problemStatement: "Medication waste due to expiration costs tens of thousands annually. Manual inventory tracking is time-consuming and error-prone. Pharmacies often run out of critical medications while overstocking others. Staff spend hours counting and reordering.",
+    aiApproach: "Implement an AI-powered inventory management system that predicts medication usage patterns based on historical data and patient census, automatically generates reorder recommendations, tracks expiration dates and alerts staff 30/60/90 days in advance, suggests redistribution of near-expiry medications to high-use units, and optimizes par levels to minimize waste while preventing stockouts.",
+    primaryUsers: "Pharmacists, pharmacy technicians, supply chain coordinators",
+    patientImpact: "yes",
+    patientImpactDetails: "Ensures critical medications are always available when needed",
+    clinicalDecisions: "no",
+    dataTypes: "Medication usage history, patient census, expiration dates, inventory levels, reorder lead times",
+    ethicsAlignment: "Reduces waste and ensures medication availability, supporting stewardship and patient care",
+    missionAlignmentRating: "Medium",
+    missionAlignmentReasoning: "Improves operational efficiency and resource stewardship",
+    riskLevel: "Low",
+    riskFactors: "Operational support; pharmacist retains final ordering decisions; low patient risk",
+    governancePath: "Light",
+    risks: "Inaccurate predictions could lead to stockouts or overstocking; system dependency",
+    assumptions: "Historical usage patterns are predictive; census data is accurate; vendor lead times are consistent",
+    issues: "Integration with pharmacy system; vendor partnerships; staff training",
+    dependencies: "Pharmacy system API; supply chain system integration; vendor catalogs",
+    briefGenerated: true,
+    briefContent: `# AI Initiative Brief: Pharmacy Inventory Optimization
+
+## Executive Summary
+AI-powered inventory management to reduce medication waste and prevent stockouts.
+
+## Problem & Opportunity
+Medication expiration waste costs tens of thousands annually. Manual tracking is time-consuming and error-prone.
+
+## Proposed Solution
+AI predicts usage, automates reordering, tracks expirations, suggests redistribution, optimizes par levels.
+
+## Expected Impact
+- Reduce medication waste by 40-50%
+- Save $50K-$100K annually per facility
+- Reduce stockouts by 80%
+- Free up 10+ pharmacy staff hours per week
+
+## Implementation
+**Complexity:** Low (vendor solutions available)  
+**Timeline:** 3-6 months  
+**Resources:** Pharmacy leadership, supply chain, vendor partnership
+
+## Risk Assessment
+**Level:** Low (operational support)  
+**Governance:** Light touch review
+
+## Next Steps
+1. Evaluate vendor solutions
+2. Pilot at 1-2 pharmacies
+3. Measure waste reduction and cost savings
+4. Scale system-wide`,
+    status: "pending",
+    adminNotes: null,
+    department: "Pharmacy",
+    urgency: "medium",
+    createdAt: new Date("2025-01-17"),
+    updatedAt: new Date("2025-01-17"),
   },
 ];
 
 async function seed() {
-  try {
-    console.log("🌱 Seeding realistic AdventHealth AI initiative examples...");
-    
-    // Insert all examples
-    for (const initiative of exampleInitiatives) {
-      await db.insert(initiatives).values(initiative);
-      console.log(`✅ Created: ${initiative.title}`);
-    }
-    
-    console.log(`\n🎉 Successfully seeded ${exampleInitiatives.length} initiative examples!`);
-    process.exit(0);
-  } catch (error) {
-    console.error("❌ Error seeding database:", error);
-    process.exit(1);
+  console.log("Clearing existing initiatives...");
+  await db.delete(initiatives);
+
+  console.log("Seeding 6 practical AI initiative examples...");
+  for (const idea of practicalIdeas) {
+    await db.insert(initiatives).values(idea);
   }
+
+  console.log(`✅ Successfully seeded ${practicalIdeas.length} practical AI initiatives`);
+  process.exit(0);
 }
 
-seed();
+seed().catch((error) => {
+  console.error("Error seeding database:", error);
+  process.exit(1);
+});

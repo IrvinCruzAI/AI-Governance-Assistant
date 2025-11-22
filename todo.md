@@ -162,3 +162,13 @@
 - [x] Ensure all sections are fully designed and polished
 - [x] Add micro-copy that builds trust and reduces anxiety
 - [x] Test emotional impact and conversion flow
+
+## Replace Examples with Practical Ideas
+- [x] Research proven, practical healthcare AI use cases
+- [x] Select 6 highly executable ideas across different departments
+- [x] Create fully fleshed-out descriptions with clear value
+- [x] Update seed-examples.mjs with new practical ideas
+- [x] Update Home.tsx success stories with practical examples
+- [x] Update IdeaStarters.tsx with practical examples
+- [x] Clear database and reseed with practical ideas only
+- [x] Test all pages to ensure nothing breaks
