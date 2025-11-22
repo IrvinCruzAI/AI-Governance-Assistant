@@ -287,3 +287,14 @@
 - [x] Test admin workflow (scan → decide → act)
 - [x] Test user workflow (view submission → check status)
 - [x] Create checkpoint
+
+## Professional Modal Redesign (Fix Broken Layout)
+- [x] Replace dialog with full-screen modal pattern
+- [x] Implement fixed header with title and close button
+- [x] Create 65/35 content/action split layout
+- [x] Add proper visual hierarchy with spacing and typography
+- [x] Make action sidebar sticky and always visible
+- [x] Apply professional color scheme and shadows
+- [x] Test scrolling behavior for long content
+- [x] Ensure responsive and beautiful on all screen sizes
+- [x] Create checkpoint

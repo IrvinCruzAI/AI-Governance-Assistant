@@ -37,7 +37,8 @@ import {
   Star,
   Calendar,
   Info,
-  Target
+  Target,
+  X
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -637,36 +638,49 @@ export default function Admin() {
         )}
 
         {/* Initiative Detail Dialog */}
-        <Dialog open={!!selectedInitiative} onOpenChange={() => setSelectedInitiative(null)}>
-          <DialogContent className="max-w-7xl max-h-[90vh] overflow-hidden flex flex-col">
-            <DialogHeader>
-              <DialogTitle>{selectedInitiative?.title || 'Untitled Initiative'}</DialogTitle>
-              <DialogDescription>
-                Review and update the status of this AI initiative
-              </DialogDescription>
-            </DialogHeader>
+        {/* Full-Screen Modal */}
+        {selectedInitiative && (
+          <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-[1400px] h-[90vh] flex flex-col">
+              {/* Fixed Header */}
+              <div className="flex items-center justify-between px-8 py-6 border-b bg-gradient-to-r from-blue-50 to-white">
+                <div className="flex-1">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-1">
+                    {selectedInitiative.title || 'Untitled Initiative'}
+                  </h2>
+                  <p className="text-sm text-gray-600">Review and manage this AI initiative submission</p>
+                </div>
+                <button
+                  onClick={() => setSelectedInitiative(null)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X className="h-6 w-6 text-gray-500" />
+                </button>
+              </div>
 
-            {selectedInitiative && (
-              <div className="grid grid-cols-[1fr,400px] gap-6 overflow-hidden h-full">
-                {/* Left Column - Initiative Content (Scrollable) */}
-                <div className="overflow-y-auto pr-4 space-y-6">
+              {/* Body: Content + Actions */}
+              <div className="flex-1 flex overflow-hidden">
+                {/* Left Column - Initiative Content (65%) */}
+                <div className="flex-1 overflow-y-auto px-8 py-6 space-y-8">
                   {/* Priority Score - Only for admins */}
                   {isAdmin && (
-                    <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-blue-50 to-teal-50 rounded-lg border border-blue-100">
-                      <div className="flex items-center gap-3">
-                        <span className="text-base font-semibold text-gray-700">Priority Score</span>
-                        <Badge className={`${selectedInitiative.priority?.color || 'bg-gray-400'} text-white text-xl px-4 py-1.5`}>
-                          {selectedInitiative.priorityScore || 0}
-                        </Badge>
-                        <Badge variant="outline" className="text-base px-3 py-1">
+                    <div className="bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl p-6 text-white shadow-lg">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium text-blue-100 mb-1">Priority Score</p>
+                          <p className="text-5xl font-bold">{selectedInitiative.priorityScore || 0}</p>
+                        </div>
+                        <Badge className="bg-white/20 text-white border-white/30 text-lg px-4 py-2">
                           {selectedInitiative.priority?.label || 'Low Urgency'}
                         </Badge>
                       </div>
                     </div>
                   )}
 
-                  {/* Metadata Grid */}
-                  <div className="grid grid-cols-2 gap-6">
+                  {/* Metadata Section */}
+                  <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Initiative Details</h3>
+                    <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label className="text-sm font-semibold text-gray-600">Submitter</Label>
                       <p className="text-base text-gray-900">{selectedInitiative.userEmail || selectedInitiative.email}</p>
@@ -687,10 +701,10 @@ export default function Admin() {
                         </Badge>
                       )}
                     </div>
-                  </div>
+                    </div>
 
-                  {/* Risk & Mission Badges */}
-                  <div className="flex gap-6 items-center flex-wrap">
+                    {/* Risk & Mission Badges */}
+                    <div className="flex gap-6 items-center flex-wrap mt-6 pt-6 border-t border-gray-200">
                     <div className="space-y-2">
                       <Label className="text-sm font-semibold text-gray-600">Risk Level</Label>
                       {selectedInitiative.riskLevel && (
@@ -711,27 +725,28 @@ export default function Admin() {
                       <Label className="text-sm font-semibold text-gray-600">Community Votes</Label>
                       <p className="text-lg font-semibold text-gray-900">👍 {selectedInitiative.voteCount || 0}</p>
                     </div>
+                    </div>
                   </div>
 
                   {/* Problem Statement */}
-                  <div className="space-y-3">
-                    <Label className="text-base font-semibold text-gray-700">Problem Statement</Label>
-                    <p className="text-base text-gray-900 leading-relaxed bg-gray-50 p-4 rounded-lg">
+                  <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Problem Statement</h3>
+                    <p className="text-base text-gray-700 leading-relaxed">
                       {selectedInitiative.problemStatement}
                     </p>
                   </div>
 
                   {/* AI Approach */}
-                  <div className="space-y-3">
-                    <Label className="text-base font-semibold text-gray-700">AI Approach</Label>
-                    <p className="text-base text-gray-900 leading-relaxed bg-gray-50 p-4 rounded-lg">
+                  <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Proposed AI Solution</h3>
+                    <p className="text-base text-gray-700 leading-relaxed">
                       {selectedInitiative.aiApproach}
                     </p>
                   </div>
                 </div>
 
-                {/* Right Column - Action Panel (Sticky) */}
-                <div className="border-l pl-6 overflow-y-auto">
+                {/* Right Column - Action Panel (35%) */}
+                <div className="w-[450px] border-l border-gray-200 bg-gray-50 px-6 py-6 overflow-y-auto">
                   {isAdmin ? (
                     // Admin Actions
                     <div className="space-y-6 sticky top-0">
@@ -892,9 +907,9 @@ export default function Admin() {
                   )}
                 </div>
               </div>
-            )}
-          </DialogContent>
-        </Dialog>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
