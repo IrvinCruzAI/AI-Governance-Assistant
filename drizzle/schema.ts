@@ -62,6 +62,22 @@ export const initiatives = mysqlTable("initiatives", {
   briefGenerated: boolean("briefGenerated").default(false),
   emailSummaryGenerated: boolean("emailSummaryGenerated").default(false),
   
+  // Impact & Value Assessment (Admin evaluates)
+  impactScale: mysqlEnum("impactScale", ["large", "medium", "small"]), // How many people helped
+  impactBenefitType: mysqlEnum("impactBenefitType", ["patient-safety", "patient-outcomes", "staff-efficiency", "cost-reduction", "experience"]),
+  impactFinancialReturn: mysqlEnum("impactFinancialReturn", ["high", "some", "minimal"]),
+  impactScore: int("impactScore"), // 0-85
+  
+  // Feasibility Assessment (Admin evaluates)
+  feasibilityComplexity: mysqlEnum("feasibilityComplexity", ["simple", "moderate", "complex"]),
+  feasibilityTimeline: mysqlEnum("feasibilityTimeline", ["quick", "standard", "long"]), // quick=3-6mo, standard=6-12mo, long=12+mo
+  feasibilityDependencies: mysqlEnum("feasibilityDependencies", ["ready", "minor", "major"]),
+  feasibilityScore: int("feasibilityScore"), // 0-95
+  
+  // Calculated Priority
+  priorityScore: int("priorityScore"), // (Impact × 2) - Feasibility
+  priorityQuadrant: mysqlEnum("priorityQuadrant", ["quick-win", "strategic-bet", "nice-to-have", "reconsider"]),
+  
   // Admin fields
   status: mysqlEnum("status", ["pending", "under-review", "approved", "rejected"]).default("pending"),
   roadmapStatus: mysqlEnum("roadmapStatus", ["under-review", "research", "development", "pilot", "deployed", "on-hold", "rejected"]).default("under-review"),

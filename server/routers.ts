@@ -263,6 +263,23 @@ export const appRouter = router({
       .query(async ({ input }) => {
         return await db.getInitiativesByRoadmapStatus(input.roadmapStatus);
       }),
+
+    // Update priority evaluation (admin only)
+    updatePriorityEvaluation: adminProcedure
+      .input(z.object({
+        id: z.number(),
+        impactScale: z.enum(['large', 'medium', 'small']).optional(),
+        impactBenefitType: z.enum(['patient-safety', 'patient-outcomes', 'staff-efficiency', 'cost-reduction', 'experience']).optional(),
+        impactFinancialReturn: z.enum(['high', 'some', 'minimal']).optional(),
+        feasibilityComplexity: z.enum(['simple', 'moderate', 'complex']).optional(),
+        feasibilityTimeline: z.enum(['quick', 'standard', 'long']).optional(),
+        feasibilityDependencies: z.enum(['ready', 'minor', 'major']).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...evaluation } = input;
+        await db.updatePriorityEvaluation(id, evaluation);
+        return { success: true };
+      }),
   }),
 });
 

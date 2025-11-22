@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE initiatives \nDROP COLUMN IF EXISTS scaleOfImpact,\nDROP COLUMN IF EXISTS financialImpact,\nDROP COLUMN IF EXISTS riskMitigationValue,\nDROP COLUMN IF EXISTS returnPotentialScore,\nDROP COLUMN IF EXISTS technicalComplexity,\nDROP COLUMN IF EXISTS dataRequirements,\nDROP COLUMN IF EXISTS integrationNeeds,\nDROP COLUMN IF EXISTS timelineToDeployment,\nDROP COLUMN IF EXISTS implementationEffortScore;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute ALTER TABLE initiatives \nDROP COLUMN IF EXISTS scaleOfImpact,\nDROP COLUMN IF EXISTS financialImpact,\nDROP COLUMN IF EXISTS riskMitigationValue,\nDROP COLUMN IF EXISTS returnPotentialScore,\nDROP COLUMN IF EXISTS technicalComplexity,\nDROP COLUMN IF EXISTS dataRequirements,\nDROP COLUMN IF EXISTS integrationNeeds,\nDROP COLUMN IF EXISTS timelineToDeployment,\nDROP COLUMN IF EXISTS implementationEffortScore;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 3031
+}

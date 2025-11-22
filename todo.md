@@ -298,3 +298,25 @@
 - [x] Test scrolling behavior for long content
 - [x] Ensure responsive and beautiful on all screen sizes
 - [x] Create checkpoint
+
+## Opportunity Cost Framework (ROI/Effort Matrix)
+- [x] Design return potential scoring algorithm (mission alignment, scale, cost savings, risk mitigation)
+- [x] Design implementation effort scoring algorithm (technical complexity, data requirements, integration, timeline)
+- [x] Update database schema with effort and return metrics fields
+- [ ] Update submission form to capture ROI/effort data points
+- [ ] Implement new priority calculation backend logic
+- [ ] Create 2x2 matrix visualization (Quick Wins, Strategic Bets, Fill-Ins, Money Pits)
+- [ ] Update priority labels (Quick Win, Strategic Investment, Low Priority, Reconsider)
+- [ ] Update admin dashboard with new ROI/Effort matrix view
+- [ ] Rewrite priority rubric documentation for opportunity cost framework
+- [ ] Test new scoring system with existing initiatives
+- [ ] Create checkpoint
+
+## System-Wide Review for Opportunity Cost Framework
+- [x] Update backend priority calculation logic
+- [ ] Update admin review interface with new evaluation fields
+- [ ] Update all priority label references (Immediate Action → Quick Win, etc.)
+- [ ] Update priority rubric in admin dashboard
+- [ ] Test with existing initiatives
+- [ ] Verify all components use new scoring system
+- [ ] Create checkpoint

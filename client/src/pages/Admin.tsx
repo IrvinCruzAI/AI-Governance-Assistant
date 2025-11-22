@@ -38,7 +38,9 @@ import {
   Calendar,
   Info,
   Target,
-  X
+  X,
+  Wrench,
+  Settings
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -98,41 +100,49 @@ function getPriorityLabel(score: number): { label: string; color: string; action
   };
 }
 
-// Rubric explanation for admins
+// Opportunity Cost Rubric for admins
 const PRIORITY_RUBRIC = {
-  title: 'Priority Scoring Rubric',
-  description: 'Initiatives are automatically scored based on four criteria to help you focus on what matters most:',
-  criteria: [
+  title: 'Opportunity Cost Framework',
+  description: 'Initiatives are prioritized based on potential return vs. implementation effort to help you invest resources strategically:',
+  impactCriteria: [
     {
-      name: 'Risk Level',
-      weight: '40 points',
-      explanation: 'Higher risk initiatives (patient safety, data privacy, clinical decisions) require more thorough governance review and get higher priority.',
-      scoring: 'High Risk = 40pts | Medium Risk = 25pts | Low Risk = 10pts'
+      name: 'Scale',
+      explanation: 'How many people will this help? Larger impact = higher return.',
+      scoring: 'Large (1000+ patients/100+ staff) | Medium (100-1000/10-100) | Small (<100)'
     },
     {
-      name: 'Mission Alignment',
-      weight: '30 points',
-      explanation: 'Initiatives strongly aligned with AdventHealth\'s healing ministry and whole-person care mission have higher strategic value.',
-      scoring: 'High Alignment = 30pts | Medium = 20pts | Low = 10pts'
+      name: 'Benefit Type',
+      explanation: 'What does this improve? Patient safety gets highest priority.',
+      scoring: 'Patient Safety > Patient Outcomes > Staff Efficiency > Cost Reduction > Experience'
     },
     {
-      name: 'Time Waiting',
-      weight: '20 points',
-      explanation: 'Ideas waiting longer get higher priority to ensure timely feedback and maintain staff engagement.',
-      scoring: '>7 days = 20pts | 3-7 days = 10pts | <3 days = 0pts'
-    },
-    {
-      name: 'Review Status',
-      weight: '10 points',
-      explanation: 'Unreviewed submissions get slight priority boost to ensure nothing falls through the cracks.',
-      scoring: 'Pending = 10pts | Under Review = 5pts | Approved/Rejected = 0pts'
+      name: 'Financial Return',
+      explanation: 'Does this save money or generate revenue?',
+      scoring: 'High (Clear savings/revenue) | Some (Indirect) | Minimal (Quality focus)'
     }
   ],
-  priorities: [
-    { range: '70-100', label: 'Immediate Action', meaning: 'High-risk, high-value initiatives that have been waiting. Review within 24-48 hours.' },
-    { range: '50-69', label: 'Review This Week', meaning: 'Strong candidates that should be reviewed within 3-5 business days.' },
-    { range: '30-49', label: 'Standard Queue', meaning: 'Normal priority. Review in regular workflow (5-7 business days).' },
-    { range: '0-29', label: 'Low Urgency', meaning: 'Lower risk/alignment. Review when team has capacity.' }
+  feasibilityCriteria: [
+    {
+      name: 'Complexity',
+      explanation: 'How hard is this to build? Simpler = faster ROI.',
+      scoring: 'Simple (Existing tools) | Moderate (Some custom work) | Complex (Custom AI/ML)'
+    },
+    {
+      name: 'Timeline',
+      explanation: 'How long until it\'s working? Faster = lower opportunity cost.',
+      scoring: 'Quick (3-6 months) | Standard (6-12 months) | Long (12+ months)'
+    },
+    {
+      name: 'Dependencies',
+      explanation: 'What do we need first? Fewer blockers = easier to start.',
+      scoring: 'Ready (No blockers) | Minor (Approval/prep) | Major (Infrastructure/budget)'
+    }
+  ],
+  quadrants: [
+    { label: 'Quick Win', meaning: 'High impact + Easy to do → Start now. These deliver value fast with minimal risk.' },
+    { label: 'Strategic Bet', meaning: 'High impact + Hard to do → Worth the investment. Plan carefully, big payoff.' },
+    { label: 'Nice to Have', meaning: 'Low impact + Easy → Do when capacity allows. Fill-in work between big projects.' },
+    { label: 'Reconsider', meaning: 'Low impact + Hard → Probably not worth it. Focus resources elsewhere.' }
   ]
 };
 
@@ -147,6 +157,14 @@ export default function Admin() {
   const [newRoadmapStatus, setNewRoadmapStatus] = useState<string>("");
   const [adminNotes, setAdminNotes] = useState<string>("");
   const [showRubric, setShowRubric] = useState(false);
+  
+  // Priority evaluation state
+  const [impactScale, setImpactScale] = useState<string>("medium");
+  const [impactBenefitType, setImpactBenefitType] = useState<string>("patient-outcomes");
+  const [impactFinancialReturn, setImpactFinancialReturn] = useState<string>("some");
+  const [feasibilityComplexity, setFeasibilityComplexity] = useState<string>("moderate");
+  const [feasibilityTimeline, setFeasibilityTimeline] = useState<string>("standard");
+  const [feasibilityDependencies, setFeasibilityDependencies] = useState<string>("minor");
 
   // Queries
   const { data: userInitiatives, isLoading: userLoading } = trpc.initiative.list.useQuery();
@@ -161,6 +179,7 @@ export default function Admin() {
   // Mutations
   const updateStatusMutation = trpc.admin.updateStatus.useMutation();
   const updateRoadmapMutation = trpc.admin.updateRoadmapStatus.useMutation();
+  const updatePriorityMutation = trpc.admin.updatePriorityEvaluation.useMutation();
   const deleteMutation = trpc.admin.deleteInitiative.useMutation();
   const utils = trpc.useUtils();
 
@@ -239,6 +258,14 @@ export default function Admin() {
     setNewStatus(initiative.status || "pending");
     setNewRoadmapStatus(initiative.roadmapStatus || "under-review");
     setAdminNotes(initiative.adminNotes || "");
+    
+    // Initialize evaluation state from existing data
+    setImpactScale(initiative.impactScale || "medium");
+    setImpactBenefitType(initiative.impactBenefitType || "patient-outcomes");
+    setImpactFinancialReturn(initiative.impactFinancialReturn || "some");
+    setFeasibilityComplexity(initiative.feasibilityComplexity || "moderate");
+    setFeasibilityTimeline(initiative.feasibilityTimeline || "standard");
+    setFeasibilityDependencies(initiative.feasibilityDependencies || "minor");
   };
 
   // Add priority scoring to initiatives
@@ -432,34 +459,49 @@ export default function Admin() {
                     </CardTitle>
                     <p className="text-sm text-gray-600">{PRIORITY_RUBRIC.description}</p>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    {/* Scoring Criteria */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {PRIORITY_RUBRIC.criteria.map((criterion, idx) => (
-                        <div key={idx} className="bg-white p-4 rounded-lg border border-blue-200">
-                          <div className="flex justify-between items-start mb-2">
-                            <h4 className="font-semibold text-gray-900">{criterion.name}</h4>
-                            <Badge variant="outline" className="bg-blue-100 text-blue-700">
-                              {criterion.weight}
-                            </Badge>
+                  <CardContent className="space-y-6">
+                    {/* Impact Criteria */}
+                    <div>
+                      <h4 className="font-semibold text-teal-900 mb-3 flex items-center gap-2">
+                        <TrendingUp className="h-4 w-4" />
+                        Impact & Value Assessment
+                      </h4>
+                      <div className="space-y-3">
+                        {PRIORITY_RUBRIC.impactCriteria.map((criterion: any, idx: number) => (
+                          <div key={idx} className="bg-teal-50 p-3 rounded-lg border border-teal-200">
+                            <h5 className="font-semibold text-gray-900 text-sm">{criterion.name}</h5>
+                            <p className="text-sm text-gray-600 mt-1">{criterion.explanation}</p>
+                            <p className="text-xs text-gray-500 font-mono mt-2">{criterion.scoring}</p>
                           </div>
-                          <p className="text-sm text-gray-600 mb-2">{criterion.explanation}</p>
-                          <p className="text-xs text-gray-500 font-mono">{criterion.scoring}</p>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
 
-                    {/* Priority Levels */}
+                    {/* Feasibility Criteria */}
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Priority Levels</h4>
-                      <div className="space-y-2">
-                        {PRIORITY_RUBRIC.priorities.map((priority, idx) => (
-                          <div key={idx} className="bg-white p-3 rounded-lg border border-gray-200 flex items-start gap-3">
-                            <Badge className="mt-0.5">{priority.range}</Badge>
-                            <div>
-                              <p className="font-semibold text-sm text-gray-900">{priority.label}</p>
-                              <p className="text-xs text-gray-600">{priority.meaning}</p>
-                            </div>
+                      <h4 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+                        <Wrench className="h-4 w-4" />
+                        Feasibility Assessment
+                      </h4>
+                      <div className="space-y-3">
+                        {PRIORITY_RUBRIC.feasibilityCriteria.map((criterion: any, idx: number) => (
+                          <div key={idx} className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                            <h5 className="font-semibold text-gray-900 text-sm">{criterion.name}</h5>
+                            <p className="text-sm text-gray-600 mt-1">{criterion.explanation}</p>
+                            <p className="text-xs text-gray-500 font-mono mt-2">{criterion.scoring}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Priority Quadrants */}
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-3">Priority Quadrants</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {PRIORITY_RUBRIC.quadrants.map((quadrant: any, idx: number) => (
+                          <div key={idx} className="bg-white p-4 rounded-lg border-2 border-gray-300">
+                            <p className="font-semibold text-sm text-gray-900 mb-1">{quadrant.label}</p>
+                            <p className="text-xs text-gray-600">{quadrant.meaning}</p>
                           </div>
                         ))}
                       </div>
@@ -816,33 +858,158 @@ export default function Admin() {
                         </Select>
                       </div>
 
+                      {/* Opportunity Cost Evaluation */}
+                      <div className="p-4 bg-gradient-to-br from-teal-50 to-blue-50 rounded-lg border-2 border-teal-200">
+                        <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                          <Target className="h-4 w-4 text-teal-600" />
+                          Priority Evaluation
+                        </h4>
+                        <p className="text-xs text-gray-600 mb-4">Assess impact and feasibility to prioritize this initiative</p>
+                        
+                        {/* Impact Assessment */}
+                        <div className="space-y-3 mb-4 pb-4 border-b border-teal-200">
+                          <p className="text-xs font-semibold text-teal-900">IMPACT & VALUE</p>
+                          
+                          <div className="space-y-1.5">
+                            <Label className="text-xs text-gray-700">Scale (How many people helped?)</Label>
+                            <Select value={impactScale} onValueChange={setImpactScale}>
+                              <SelectTrigger className="h-9 text-sm">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="large">Large (1000+ patients or 100+ staff)</SelectItem>
+                                <SelectItem value="medium">Medium (100-1000 patients or 10-100 staff)</SelectItem>
+                                <SelectItem value="small">Small (Under 100 people)</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <Label className="text-xs text-gray-700">Benefit Type</Label>
+                            <Select value={impactBenefitType} onValueChange={setImpactBenefitType}>
+                              <SelectTrigger className="h-9 text-sm">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="patient-safety">Patient Safety (highest priority)</SelectItem>
+                                <SelectItem value="patient-outcomes">Patient Outcomes</SelectItem>
+                                <SelectItem value="staff-efficiency">Staff Efficiency</SelectItem>
+                                <SelectItem value="cost-reduction">Cost Reduction</SelectItem>
+                                <SelectItem value="experience">Experience Improvement</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <Label className="text-xs text-gray-700">Financial Return</Label>
+                            <Select value={impactFinancialReturn} onValueChange={setImpactFinancialReturn}>
+                              <SelectTrigger className="h-9 text-sm">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="high">High (Clear cost savings/revenue)</SelectItem>
+                                <SelectItem value="some">Some (Indirect savings)</SelectItem>
+                                <SelectItem value="minimal">Minimal (Quality/experience focus)</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+
+                        {/* Feasibility Assessment */}
+                        <div className="space-y-3">
+                          <p className="text-xs font-semibold text-blue-900">FEASIBILITY</p>
+                          
+                          <div className="space-y-1.5">
+                            <Label className="text-xs text-gray-700">Complexity (How hard to build?)</Label>
+                            <Select value={feasibilityComplexity} onValueChange={setFeasibilityComplexity}>
+                              <SelectTrigger className="h-9 text-sm">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="simple">Simple (Existing tools, basic automation)</SelectItem>
+                                <SelectItem value="moderate">Moderate (Some custom work)</SelectItem>
+                                <SelectItem value="complex">Complex (Custom AI/ML, major dev)</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <Label className="text-xs text-gray-700">Timeline (How long until working?)</Label>
+                            <Select value={feasibilityTimeline} onValueChange={setFeasibilityTimeline}>
+                              <SelectTrigger className="h-9 text-sm">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="quick">Quick (3-6 months)</SelectItem>
+                                <SelectItem value="standard">Standard (6-12 months)</SelectItem>
+                                <SelectItem value="long">Long (12+ months)</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <Label className="text-xs text-gray-700">Dependencies (What's needed first?)</Label>
+                            <Select value={feasibilityDependencies} onValueChange={setFeasibilityDependencies}>
+                              <SelectTrigger className="h-9 text-sm">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="ready">Ready Now (No blockers)</SelectItem>
+                                <SelectItem value="minor">Minor (Approval or small prep)</SelectItem>
+                                <SelectItem value="major">Major (Infrastructure/budget/other projects)</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                      </div>
+
                       {/* Admin Notes */}
                       <div className="space-y-2">
                         <Label htmlFor="notes" className="text-sm font-semibold text-gray-700">
-                          Internal Notes
+                          Internal Notes & Tags
                         </Label>
                         <Textarea
                           id="notes"
                           value={adminNotes}
                           onChange={(e) => setAdminNotes(e.target.value)}
-                          placeholder="Add internal notes..."
-                          rows={4}
+                          placeholder="Add notes or tags (e.g., 'Strategic Priority', 'Regulatory', 'High Change Impact')..."
+                          rows={3}
                         />
                       </div>
 
                       {/* Action Buttons */}
                       <div className="flex flex-col gap-3 pt-4 border-t">
                         <Button 
-                          onClick={() => {
-                            handleStatusUpdate();
-                            if (newRoadmapStatus !== selectedInitiative.roadmapStatus) {
-                              handleRoadmapStatusUpdate();
+                          onClick={async () => {
+                            try {
+                              // Save priority evaluation
+                              await updatePriorityMutation.mutateAsync({
+                                id: selectedInitiative.id,
+                                impactScale: impactScale as any,
+                                impactBenefitType: impactBenefitType as any,
+                                impactFinancialReturn: impactFinancialReturn as any,
+                                feasibilityComplexity: feasibilityComplexity as any,
+                                feasibilityTimeline: feasibilityTimeline as any,
+                                feasibilityDependencies: feasibilityDependencies as any,
+                              });
+                              
+                              // Save status
+                              await handleStatusUpdate();
+                              
+                              // Save roadmap if changed
+                              if (newRoadmapStatus !== selectedInitiative.roadmapStatus) {
+                                await handleRoadmapStatusUpdate();
+                              }
+                              
+                              toast.success("All updates saved successfully");
+                            } catch (error) {
+                              toast.error("Failed to save some updates");
                             }
                           }}
                           className="w-full"
                         >
                           <CheckCircle2 className="h-4 w-4 mr-2" />
-                          Save Updates
+                          Save All Updates
                         </Button>
                         <div className="grid grid-cols-2 gap-2">
                           <Button 
