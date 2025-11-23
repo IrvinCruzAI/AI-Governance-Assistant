@@ -346,3 +346,15 @@
 - [x] Verify regular users see read-only roadmap
 - [x] All 35 tests passing
 - [x] Save checkpoint with drag-and-drop feature
+
+## Redesign Evaluation Card System
+- [x] Audit current Risk Level and Mission Alignment calculation - AI functions exist, just not displayed
+- [x] Review Opportunity Evaluation (Impact/Effort) functionality - Dropdowns exist but no logic
+- [x] Design improved evaluation framework with clear purpose - Decision support tool with priority matrix
+- [x] Update database schema to store impact and effort scores - Already existed in schema
+- [x] Redesign evaluation card UI to display AI assessment beautifully
+- [x] Implement prioritization matrix (Impact vs Effort quadrants) - Live recommendation with color coding
+- [x] Add clear decision actions (Approve/Reject/Request Info) - Existing buttons retained
+- [x] Ensure all AI metrics are properly displayed with reasoning - Mission alignment & risk reasoning now visible
+- [x] Test evaluation workflow end-to-end - All 35 tests passing
+- [x] Save checkpoint with improved evaluation system

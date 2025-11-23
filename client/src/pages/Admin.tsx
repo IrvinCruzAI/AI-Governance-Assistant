@@ -658,28 +658,67 @@ export default function Admin() {
                     </div>
                     </div>
 
-                    {/* Risk & Mission Badges */}
-                    <div className="flex gap-6 items-center flex-wrap mt-6 pt-6 border-t border-gray-200">
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-gray-600">Risk Level</Label>
-                      {selectedInitiative.riskLevel && (
-                        <Badge variant="outline" className={`${getRiskColor(selectedInitiative.riskLevel)} text-sm px-3 py-1`}>
-                          {selectedInitiative.riskLevel}
-                        </Badge>
-                      )}
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-gray-600">Mission Alignment</Label>
+                    {/* AI Assessment Section */}
+                    <div className="mt-6 pt-6 border-t border-gray-200 space-y-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Shield className="h-5 w-5 text-blue-600" />
+                        <h4 className="font-semibold text-gray-900">AI Assessment</h4>
+                      </div>
+                      
+                      {/* Mission Alignment Card */}
                       {selectedInitiative.missionAlignmentRating && (
-                        <Badge variant="outline" className="bg-teal-100 text-teal-700 text-sm px-3 py-1">
-                          {selectedInitiative.missionAlignmentRating}
-                        </Badge>
+                        <div className="p-4 bg-gradient-to-br from-teal-50 to-green-50 rounded-lg border-2 border-teal-200">
+                          <div className="flex items-start justify-between mb-2">
+                            <div>
+                              <Label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Mission Alignment</Label>
+                              <Badge className="mt-1 bg-teal-600 text-white">
+                                {selectedInitiative.missionAlignmentRating}
+                              </Badge>
+                            </div>
+                            <CheckCircle2 className="h-5 w-5 text-teal-600" />
+                          </div>
+                          {selectedInitiative.missionAlignmentReasoning && (
+                            <p className="text-sm text-gray-700 leading-relaxed mt-3">
+                              {selectedInitiative.missionAlignmentReasoning}
+                            </p>
+                          )}
+                        </div>
                       )}
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-gray-600">Community Votes</Label>
-                      <p className="text-lg font-semibold text-gray-900">👍 {selectedInitiative.voteCount || 0}</p>
-                    </div>
+
+                      {/* Risk Level Card */}
+                      {selectedInitiative.riskLevel && (
+                        <div className="p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-lg border-2 border-orange-200">
+                          <div className="flex items-start justify-between mb-2">
+                            <div>
+                              <Label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Risk Level</Label>
+                              <Badge className={`mt-1 ${getRiskColor(selectedInitiative.riskLevel)}`}>
+                                {selectedInitiative.riskLevel}
+                              </Badge>
+                            </div>
+                            <AlertCircle className="h-5 w-5 text-orange-600" />
+                          </div>
+                          {selectedInitiative.governancePath && (
+                            <div className="mt-2">
+                              <Label className="text-xs text-gray-600">Governance Path:</Label>
+                              <Badge variant="outline" className="ml-2 text-xs">
+                                {selectedInitiative.governancePath}
+                              </Badge>
+                            </div>
+                          )}
+                          {selectedInitiative.riskReasoning && (
+                            <p className="text-sm text-gray-700 leading-relaxed mt-3">
+                              {selectedInitiative.riskReasoning}
+                            </p>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Community Votes */}
+                      <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                        <ThumbsUp className="h-4 w-4 text-blue-600" />
+                        <Label className="text-sm text-gray-600">Community Votes:</Label>
+                        <span className="text-lg font-semibold text-gray-900">{selectedInitiative.voteCount || 0}</span>
+                      </div>
                     </div>
                   </div>
 
@@ -791,55 +830,88 @@ export default function Admin() {
                         </Select>
                       </div>
 
-                      {/* Opportunity Cost Evaluation */}
-                      {/* Simplified 3-Field Evaluation */}
-                      <div className="p-4 bg-gradient-to-br from-teal-50 to-blue-50 rounded-lg border-2 border-teal-200 space-y-4">
+                      {/* Prioritization Matrix */}
+                      <div className="p-5 bg-gradient-to-br from-purple-50 via-blue-50 to-teal-50 rounded-xl border-2 border-purple-200 space-y-4 shadow-sm">
                         <div>
                           <h4 className="font-semibold text-gray-900 flex items-center gap-2">
-                            <Target className="h-4 w-4 text-teal-600" />
-                            Opportunity Evaluation
+                            <Target className="h-5 w-5 text-purple-600" />
+                            Prioritization Matrix
                           </h4>
-                          <p className="text-xs text-gray-600 mt-1">Assess impact and effort to prioritize</p>
+                          <p className="text-xs text-gray-600 mt-1">Evaluate impact and effort to determine priority</p>
                         </div>
 
                         {/* Impact */}
-                        <div className="space-y-1.5">
+                        <div className="space-y-2">
                           <Label className="text-sm font-semibold text-gray-700">Impact (Value to Organization)</Label>
                           <Select value={impact} onValueChange={setImpact}>
-                            <SelectTrigger>
+                            <SelectTrigger className="bg-white">
                               <SelectValue placeholder="Select impact..." />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="high">High - Major benefit, affects many people</SelectItem>
-                              <SelectItem value="medium">Medium - Moderate benefit</SelectItem>
-                              <SelectItem value="low">Low - Minor benefit</SelectItem>
+                              <SelectItem value="high">🔥 High - Transformative, affects many</SelectItem>
+                              <SelectItem value="medium">⭐ Medium - Significant benefit</SelectItem>
+                              <SelectItem value="low">💡 Low - Minor improvement</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
 
                         {/* Effort */}
-                        <div className="space-y-1.5">
-                          <Label className="text-sm font-semibold text-gray-700">Effort (Complexity & Resources)</Label>
+                        <div className="space-y-2">
+                          <Label className="text-sm font-semibold text-gray-700">Effort (Time & Resources)</Label>
                           <Select value={effort} onValueChange={setEffort}>
-                            <SelectTrigger>
+                            <SelectTrigger className="bg-white">
                               <SelectValue placeholder="Select effort..." />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="low">Low - Quick to implement, few resources</SelectItem>
-                              <SelectItem value="medium">Medium - Moderate time and resources</SelectItem>
-                              <SelectItem value="high">High - Complex, requires significant investment</SelectItem>
+                              <SelectItem value="low">⚡ Low - Weeks, minimal resources</SelectItem>
+                              <SelectItem value="medium">🔧 Medium - Months, moderate investment</SelectItem>
+                              <SelectItem value="high">🏗️ High - 6+ months, major investment</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
 
+                        {/* Priority Recommendation */}
+                        {impact && effort && (
+                          <div className={`p-4 rounded-lg border-2 ${
+                            impact === 'high' && effort === 'low' ? 'bg-green-100 border-green-400' :
+                            impact === 'high' && effort === 'medium' ? 'bg-blue-100 border-blue-400' :
+                            impact === 'high' && effort === 'high' ? 'bg-blue-100 border-blue-400' :
+                            impact === 'medium' && effort === 'low' ? 'bg-green-100 border-green-400' :
+                            impact === 'low' && effort === 'low' ? 'bg-yellow-100 border-yellow-400' :
+                            'bg-red-100 border-red-400'
+                          }`}>
+                            <div className="flex items-center gap-2">
+                              <Zap className="h-4 w-4" />
+                              <Label className="text-xs font-semibold uppercase tracking-wide">Priority Recommendation</Label>
+                            </div>
+                            <p className="text-sm font-bold mt-2">
+                              {impact === 'high' && effort === 'low' && '🎯 Quick Win - Prioritize Now!'}
+                              {impact === 'high' && (effort === 'medium' || effort === 'high') && '🚀 Strategic Bet - Plan Carefully'}
+                              {impact === 'medium' && effort === 'low' && '✅ Quick Win - Good ROI'}
+                              {impact === 'medium' && effort === 'medium' && '📊 Standard Project - Evaluate'}
+                              {impact === 'low' && effort === 'low' && '💡 Nice to Have - Fill-in Work'}
+                              {((impact === 'low' && effort === 'medium') || (impact === 'low' && effort === 'high') || (impact === 'medium' && effort === 'high')) && '⚠️ Reconsider - Low ROI'}
+                            </p>
+                            <p className="text-xs text-gray-700 mt-1">
+                              {impact === 'high' && effort === 'low' && 'High value with minimal effort - ideal candidate for immediate implementation.'}
+                              {impact === 'high' && (effort === 'medium' || effort === 'high') && 'High strategic value justifies the investment - ensure proper planning and resources.'}
+                              {impact === 'medium' && effort === 'low' && 'Moderate value with quick turnaround - good for filling capacity.'}
+                              {impact === 'medium' && effort === 'medium' && 'Standard project - weigh against other opportunities.'}
+                              {impact === 'low' && effort === 'low' && 'Low priority but easy to complete when resources are available.'}
+                              {((impact === 'low' && effort === 'medium') || (impact === 'low' && effort === 'high') || (impact === 'medium' && effort === 'high')) && 'Resources may be better allocated elsewhere - consider deferring or rejecting.'}
+                            </p>
+                          </div>
+                        )}
+
                         {/* Notes */}
-                        <div className="space-y-1.5">
+                        <div className="space-y-2">
                           <Label className="text-sm font-semibold text-gray-700">Evaluation Notes</Label>
                           <Textarea
                             value={evaluationNotes}
                             onChange={(e) => setEvaluationNotes(e.target.value)}
                             placeholder="Add notes about this evaluation..."
                             rows={3}
+                            className="bg-white"
                           />
                         </div>
                       </div>
