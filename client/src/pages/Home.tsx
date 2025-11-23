@@ -214,9 +214,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Why We Need Your Input */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            We Need Your Perspective
+          </h2>
+          <p className="text-xl text-gray-600 leading-relaxed">
+            The best AI solutions don't come from executives in conference rooms—they come from people on the ground who see the problems every day. <strong>You know what would actually help.</strong> We're not guessing. We're listening.
+          </p>
+        </div>
+      </section>
+
       {/* Recently Submitted Ideas */}
       {recentThree.length > 0 && (
-        <section className="container mx-auto px-4 py-16">
+        <section className="container mx-auto px-4 py-16 bg-gray-50">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Ideas Your Colleagues Are Already Sharing

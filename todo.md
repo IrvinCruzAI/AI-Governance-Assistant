@@ -263,3 +263,11 @@
 - [x] Ensure responsive design works on all screen sizes
 - [x] Test readability and visual appeal
 - [x] Save checkpoint with improved design
+
+## Add Bottom-Up Approach Copy Section
+- [x] Add new section before "Ideas Your Colleagues Are Already Sharing"
+- [x] Write short, authentic copy explaining why employee input matters
+- [x] Emphasize bottom-up approach vs top-down solutions
+- [x] Keep it concise and impactful
+- [x] Test placement and readability
+- [x] Save checkpoint with new section
