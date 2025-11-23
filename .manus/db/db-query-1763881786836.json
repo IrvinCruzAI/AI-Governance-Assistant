@@ -1,0 +1,160 @@
+{
+  "query": "SELECT id, title, userEmail FROM initiatives WHERE title LIKE '%Test%' OR title = 'Untitled Initiative' ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, userEmail FROM initiatives WHERE title LIKE '%Test%' OR title = 'Untitled Initiative' ORDER BY id;",
+  "rows": [
+    {
+      "id": "510001",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "510002",
+      "title": "Test Initiative 1",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "510003",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "510004",
+      "title": "Test Initiative",
+      "userEmail": "test11@adventhealth.com"
+    },
+    {
+      "id": "510006",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@adventhealth.com"
+    },
+    {
+      "id": "510007",
+      "title": "Test Initiative",
+      "userEmail": "test12@adventhealth.com"
+    },
+    {
+      "id": "510009",
+      "title": "Test Initiative 3",
+      "userEmail": "test3@adventhealth.com"
+    },
+    {
+      "id": "510010",
+      "title": "Test Initiative",
+      "userEmail": "test13@adventhealth.com"
+    },
+    {
+      "id": "510011",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "510012",
+      "title": "Test Initiative for Voting",
+      "userEmail": "test4@adventhealth.com"
+    },
+    {
+      "id": "510013",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "510014",
+      "title": "Test Initiative",
+      "userEmail": "test14@adventhealth.com"
+    },
+    {
+      "id": "510015",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "510016",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "510017",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "540001",
+      "title": "Test Initiative 1",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "540002",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "540004",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@adventhealth.com"
+    },
+    {
+      "id": "540006",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "540007",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "540008",
+      "title": "Test Initiative 3",
+      "userEmail": "test3@adventhealth.com"
+    },
+    {
+      "id": "540009",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "540010",
+      "title": "Test Initiative",
+      "userEmail": "test11@adventhealth.com"
+    },
+    {
+      "id": "540011",
+      "title": "Test Initiative for Voting",
+      "userEmail": "test4@adventhealth.com"
+    },
+    {
+      "id": "540012",
+      "title": "Test Initiative",
+      "userEmail": "test12@adventhealth.com"
+    },
+    {
+      "id": "540013",
+      "title": "Test Initiative",
+      "userEmail": "test13@adventhealth.com"
+    },
+    {
+      "id": "540014",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "540015",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    },
+    {
+      "id": "540016",
+      "title": "Test Initiative",
+      "userEmail": "test14@adventhealth.com"
+    },
+    {
+      "id": "540017",
+      "title": "Test Initiative",
+      "userEmail": "test@adventhealth.com"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tuserEmail\n510001\tTest Initiative\ttest@adventhealth.com\n510002\tTest Initiative 1\ttest@adventhealth.com\n510003\tTest Initiative\ttest@adventhealth.com\n510004\tTest Initiative\ttest11@adventhealth.com\n510006\tTest Initiative 2\ttest2@adventhealth.com\n510007\tTest Initiative\ttest12@adventhealth.com\n510009\tTest Initiative 3\ttest3@adventhealth.com\n510010\tTest Initiative\ttest13@adventhealth.com\n510011\tTest Initiative\ttest@adventhealth.com\n510012\tTest Initiative for Voting\ttest4@adventhealth.com\n510013\tTest Initiative\ttest@adventhealth.com\n510014\tTest Initiative\ttest14@adventhealth.com\n510015\tTest Initiative\ttest@adventhealth.com\n510016\tTest Initiative\ttest@adventhealth.com\n510017\tTest Initiative\ttest@adventhealth.com\n540001\tTest Initiative 1\ttest@adventhealth.com\n540002\tTest Initiative\ttest@adventhealth.com\n540004\tTest Initiative 2\ttest2@adventhealth.com\n540006\tTest Initiative\ttest@adventhealth.com\n540007\tTest Initiative\ttest@adventhealth.com\n540008\tTest Initiative 3\ttest3@adventhealth.com\n540009\tTest Initiative\ttest@adventhealth.com\n540010\tTest Initiative\ttest11@adventhealth.com\n540011\tTest Initiative for Voting\ttest4@adventhealth.com\n540012\tTest Initiative\ttest12@adventhealth.com\n540013\tTest Initiative\ttest13@adventhealth.com\n540014\tTest Initiative\ttest@adventhealth.com\n540015\tTest Initiative\ttest@adventhealth.com\n540016\tTest Initiative\ttest14@adventhealth.com\n540017\tTest Initiative\ttest@adventhealth.com\n",
+  "stderr": "",
+  "execution_time_ms": 52
+}

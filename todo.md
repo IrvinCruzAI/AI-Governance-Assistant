@@ -271,3 +271,10 @@
 - [x] Keep it concise and impactful
 - [x] Test placement and readability
 - [x] Save checkpoint with new section
+
+## Fix Border and Spacing Issues in Ideas Section
+- [x] Remove "Test Initiative" and other test data from database (deleted 30 test initiatives)
+- [x] Fix card styling and borders in "Ideas Your Colleagues Are Already Sharing" section
+- [x] Remove gray background that was creating awkward visual boundaries
+- [x] Test visual appearance
+- [x] Save checkpoint with fixes

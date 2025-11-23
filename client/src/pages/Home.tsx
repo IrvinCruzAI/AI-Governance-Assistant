@@ -228,7 +228,7 @@ export default function Home() {
 
       {/* Recently Submitted Ideas */}
       {recentThree.length > 0 && (
-        <section className="container mx-auto px-4 py-16 bg-gray-50">
+        <section className="container mx-auto px-4 py-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Ideas Your Colleagues Are Already Sharing

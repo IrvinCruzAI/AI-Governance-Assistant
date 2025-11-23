@@ -1,0 +1,62 @@
+{
+  "query": "SELECT id, title FROM initiatives ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title FROM initiatives ORDER BY id;",
+  "rows": [
+    {
+      "id": "210001",
+      "title": "Automated Patient Appointment Reminders & Scheduling Optimization"
+    },
+    {
+      "id": "210002",
+      "title": "AI-Assisted Clinical Documentation for Discharge Summaries"
+    },
+    {
+      "id": "210003",
+      "title": "Predictive Staffing Model for Emergency Departments"
+    },
+    {
+      "id": "210004",
+      "title": "Automated Prior Authorization Assistant"
+    },
+    {
+      "id": "210005",
+      "title": "Fall Risk Prediction & Alert System for Inpatient Units"
+    },
+    {
+      "id": "480001",
+      "title": "AI-Powered Triage Assistant for Emergency Department"
+    },
+    {
+      "id": "480002",
+      "title": "Customer Service Reporting"
+    },
+    {
+      "id": "510005",
+      "title": "AI-Powered Scheduling System"
+    },
+    {
+      "id": "510008",
+      "title": "Patient Flow Optimization"
+    },
+    {
+      "id": "510018",
+      "title": "Minimal Initiative"
+    },
+    {
+      "id": "540003",
+      "title": "AI-Powered Scheduling System"
+    },
+    {
+      "id": "540005",
+      "title": "Patient Flow Optimization"
+    },
+    {
+      "id": "540018",
+      "title": "Minimal Initiative"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\n210001\tAutomated Patient Appointment Reminders & Scheduling Optimization\n210002\tAI-Assisted Clinical Documentation for Discharge Summaries\n210003\tPredictive Staffing Model for Emergency Departments\n210004\tAutomated Prior Authorization Assistant\n210005\tFall Risk Prediction & Alert System for Inpatient Units\n480001\tAI-Powered Triage Assistant for Emergency Department\n480002\tCustomer Service Reporting\n510005\tAI-Powered Scheduling System\n510008\tPatient Flow Optimization\n510018\tMinimal Initiative\n540003\tAI-Powered Scheduling System\n540005\tPatient Flow Optimization\n540018\tMinimal Initiative\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}
