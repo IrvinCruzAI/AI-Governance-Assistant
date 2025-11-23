@@ -164,3 +164,12 @@
 - [x] Test account creation with new credentials
 - [x] Verify user can log in after signup
 - [x] Write and run comprehensive authentication tests (5/5 passing)
+
+## Improve Session Persistence
+- [x] Check current cookie settings and duration
+- [x] Extend session duration from 7 days to 30 days (industry standard)
+- [x] Verify cookie persistence settings (httpOnly, secure, sameSite)
+- [x] Test session persists across browser restarts
+- [x] Test session persists across different tabs
+- [x] Verify users don't need to re-login frequently
+- [x] Complete end-to-end MVP test (signup → login → submit initiative)

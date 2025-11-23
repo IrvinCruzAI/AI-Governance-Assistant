@@ -70,14 +70,14 @@ export const appRouter = router({
             appId: process.env.VITE_APP_ID || '',
             name: user.name ?? ''
           },
-          { expiresInMs: 7 * 24 * 60 * 60 * 1000 } // 7 days
+          { expiresInMs: 30 * 24 * 60 * 60 * 1000 } // 30 days
         );
         
         // Set session cookie
         const cookieOptions = getSessionCookieOptions(ctx.req);
         ctx.res.cookie(COOKIE_NAME, token, {
           ...cookieOptions,
-          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+          maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         });
         
         return {
@@ -124,14 +124,14 @@ export const appRouter = router({
             appId: process.env.VITE_APP_ID || '',
             name: user.name ?? ''
           },
-          { expiresInMs: 7 * 24 * 60 * 60 * 1000 } // 7 days
+          { expiresInMs: 30 * 24 * 60 * 60 * 1000 } // 30 days
         );
         
         // Set session cookie
         const cookieOptions = getSessionCookieOptions(ctx.req);
         ctx.res.cookie(COOKIE_NAME, token, {
           ...cookieOptions,
-          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+          maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         });
         
         return {
