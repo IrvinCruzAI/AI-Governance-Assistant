@@ -6,7 +6,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import * as db from "./db";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { sdk } from "./_core/sdk";
 import { analyzeMissionAlignment, classifyRisk, generateRAID } from "./aiService";
 
 // Admin-only procedure
@@ -63,11 +63,14 @@ export const appRouter = router({
           throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'Failed to create user' });
         }
         
-        // Create session token
-        const token = jwt.sign(
-          { openId: user.openId },
-          process.env.JWT_SECRET || 'fallback-secret',
-          { expiresIn: '7d' }
+        // Create session token with all required fields
+        const token = await sdk.signSession(
+          { 
+            openId: user.openId ?? '',
+            appId: process.env.VITE_APP_ID || '',
+            name: user.name ?? ''
+          },
+          { expiresInMs: 7 * 24 * 60 * 60 * 1000 } // 7 days
         );
         
         // Set session cookie
@@ -114,11 +117,14 @@ export const appRouter = router({
           lastSignedIn: new Date(),
         });
         
-        // Create session token
-        const token = jwt.sign(
-          { openId: user.openId },
-          process.env.JWT_SECRET || 'fallback-secret',
-          { expiresIn: '7d' }
+        // Create session token with all required fields
+        const token = await sdk.signSession(
+          { 
+            openId: user.openId ?? '',
+            appId: process.env.VITE_APP_ID || '',
+            name: user.name ?? ''
+          },
+          { expiresInMs: 7 * 24 * 60 * 60 * 1000 } // 7 days
         );
         
         // Set session cookie

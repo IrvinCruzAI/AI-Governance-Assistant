@@ -155,3 +155,12 @@
 - [x] Delete all test user accounts (deleted accounts with test emails)
 - [x] Delete orphaned votes and messages
 - [x] Verify only legitimate demo data remains (5 initiatives, 16 users)
+
+## Fix Account Creation Issue
+- [x] Test signup flow in browser to reproduce issue
+- [x] Check browser console for error messages
+- [x] Check server logs for authentication errors
+- [x] Fix identified issues in signup mutation (replaced jwt.sign with sdk.signSession)
+- [x] Test account creation with new credentials
+- [x] Verify user can log in after signup
+- [x] Write and run comprehensive authentication tests (5/5 passing)
