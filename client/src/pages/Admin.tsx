@@ -113,9 +113,10 @@ export default function Admin() {
   // Redirect to login if not authenticated (must be before any conditional returns)
   useEffect(() => {
     if (!loading && !isAuthenticated) {
-      window.location.href = getLoginUrl();
+      toast.info("Please sign in to access your dashboard");
+      setLocation("/");
     }
-  }, [loading, isAuthenticated]);
+  }, [loading, isAuthenticated, setLocation]);
 
   if (loading) {
     return (
@@ -554,11 +555,26 @@ export default function Admin() {
             </TabsContent>
           </Tabs>
         ) : (
-          <UserSubmissionsView 
-            initiatives={userInitiatives || []}
-            loading={userLoading}
-            onViewDetails={openInitiativeDetail}
-          />
+          <Tabs defaultValue="my" className="space-y-6">
+            <TabsList className="grid w-full max-w-md grid-cols-2">
+              <TabsTrigger value="my">My Submissions</TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
+            </TabsList>
+
+            {/* My Submissions Tab */}
+            <TabsContent value="my" className="space-y-6">
+              <UserSubmissionsView 
+                initiatives={userInitiatives || []}
+                loading={userLoading}
+                onViewDetails={openInitiativeDetail}
+              />
+            </TabsContent>
+
+            {/* Settings Tab */}
+            <TabsContent value="settings" className="space-y-6">
+              <SettingsView user={user!} />
+            </TabsContent>
+          </Tabs>
         )}
 
         {/* Initiative Detail Dialog */}

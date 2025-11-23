@@ -213,3 +213,11 @@
 - [ ] Login authentication needs further debugging (401 error persists)
 
 
+
+## Add Settings Tab for Regular Users
+- [x] Check Admin.tsx to see how tabs are conditionally rendered
+- [x] Add Settings tab to user view (non-admin users)
+- [x] Ensure Settings tab shows SettingsView component
+- [x] Fix Admin page redirect to use home page instead of OAuth
+- [x] Test Settings tab access for regular users (verified with test account)
+- [x] Verify logout functionality works from Settings tab (logout successful)
