@@ -648,14 +648,7 @@ export default function Admin() {
                       <Label className="text-sm font-semibold text-gray-600">Area</Label>
                       <p className="text-base text-gray-900">{selectedInitiative.area}</p>
                     </div>
-                    <div className="space-y-2">
-                      <Label className="text-sm font-semibold text-gray-600">Governance Path</Label>
-                      {selectedInitiative.governancePath && (
-                        <Badge variant="outline" className="text-sm">
-                          {selectedInitiative.governancePath}
-                        </Badge>
-                      )}
-                    </div>
+
                     </div>
 
                     {/* AI Assessment Section */}

@@ -384,3 +384,10 @@
 - [x] Remove any other broken AI features from evaluation card - Only governancePath was broken
 - [x] Clean up backend code for removed features - Left in schema for potential future fix
 - [x] Test and save checkpoint - All 35 tests passing
+
+## Remove Governance Path Label from Initiative Details
+- [x] Find and remove "Governance Path" label in Initiative Details section
+- [x] Verify AI Assessment cards display when data exists - Working for initiatives with data
+- [x] Test with initiative that has AI data - Confirmed working
+- [x] All 35 tests passing
+- [x] Save checkpoint
