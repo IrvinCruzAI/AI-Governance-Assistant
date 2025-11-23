@@ -44,7 +44,8 @@ import {
   Wrench,
   Settings,
   Zap,
-  ThumbsUp
+  ThumbsUp,
+  Download
 } from "lucide-react";
 import { toast } from "sonner";
 import { PriorityRubricModal } from "@/components/PriorityRubricModal";
@@ -192,6 +193,69 @@ export default function Admin() {
     }
   };
 
+  const handleExportToExcel = async () => {
+    try {
+      const XLSX = await import('xlsx');
+      
+      // Prepare data for export
+      const exportData = filteredInitiatives.map(initiative => ({
+        'Title': initiative.title || 'Untitled',
+        'Submitter': initiative.userEmail || 'Unknown',
+        'Role': initiative.userRole || '',
+        'Department/Area': initiative.area || '',
+        'Status': initiative.status || 'pending',
+        'Roadmap Stage': initiative.roadmapStatus || 'under-review',
+        'Priority': initiative.priority.label,
+        'Impact': initiative.impact || 'Not Evaluated',
+        'Effort': initiative.effort || 'Not Evaluated',
+        'Risk Level': initiative.riskLevel || 'Not Assessed',
+        'Mission Alignment': initiative.missionAlignmentRating || 'Not Assessed',
+        'Votes': 0, // Vote count not available in admin view
+        'Submitted': new Date(initiative.createdAt).toLocaleDateString(),
+        'Problem Statement': initiative.problemStatement?.replace(/<[^>]*>/g, '') || '',
+        'Proposed Solution': initiative.aiApproach?.replace(/<[^>]*>/g, '') || ''
+      }));
+
+      // Create worksheet
+      const ws = XLSX.utils.json_to_sheet(exportData);
+      
+      // Set column widths
+      ws['!cols'] = [
+        { wch: 30 }, // Title
+        { wch: 25 }, // Submitter
+        { wch: 20 }, // Role
+        { wch: 20 }, // Department
+        { wch: 15 }, // Status
+        { wch: 15 }, // Roadmap
+        { wch: 15 }, // Priority
+        { wch: 12 }, // Impact
+        { wch: 12 }, // Effort
+        { wch: 12 }, // Risk
+        { wch: 12 }, // Mission
+        { wch: 8 },  // Votes
+        { wch: 12 }, // Submitted
+        { wch: 50 }, // Problem
+        { wch: 50 }  // Solution
+      ];
+
+      // Create workbook
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'AI Initiatives');
+
+      // Generate filename with timestamp
+      const timestamp = new Date().toISOString().split('T')[0];
+      const filename = `AdventHealth_AI_Initiatives_${timestamp}.xlsx`;
+
+      // Download
+      XLSX.writeFile(wb, filename);
+      
+      toast.success(`Exported ${filteredInitiatives.length} initiatives to Excel`);
+    } catch (error) {
+      console.error('Export error:', error);
+      toast.error('Failed to export to Excel');
+    }
+  };
+
 
 
   const openInitiativeDetail = (initiative: any) => {
@@ -329,8 +393,108 @@ export default function Admin() {
 
             {/* All Submissions Tab (Admin Only) */}
             <TabsContent value="all" className="space-y-6">
-              {/* Analytics Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+              {/* Executive Summary Dashboard */}
+              <Card className="border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-teal-50 shadow-lg mb-6">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold text-gray-900">Executive Summary</CardTitle>
+                  <p className="text-sm text-gray-600">Key metrics and strategic insights</p>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Engagement Metrics */}
+                    <div className="space-y-4">
+                      <h3 className="font-semibold text-gray-700 text-sm uppercase tracking-wide">Engagement</h3>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                          <div className="flex items-center gap-2">
+                            <Users className="h-5 w-5 text-blue-600" />
+                            <span className="text-sm text-gray-600">Total Submissions</span>
+                          </div>
+                          <span className="text-2xl font-bold text-gray-900">{analytics?.totalSubmissions || 0}</span>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                          <div className="flex items-center gap-2">
+                            <BarChart3 className="h-5 w-5 text-purple-600" />
+                            <span className="text-sm text-gray-600">Evaluated</span>
+                          </div>
+                          <span className="text-2xl font-bold text-gray-900">{initiativesWithPriority.filter(i => i.impact && i.effort).length}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Priority Distribution */}
+                    <div className="space-y-4">
+                      <h3 className="font-semibold text-gray-700 text-sm uppercase tracking-wide">Priority Distribution</h3>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                          <div className="flex items-center gap-2">
+                            <Zap className="h-5 w-5 text-emerald-600" />
+                            <span className="text-sm text-gray-600">Quick Wins</span>
+                          </div>
+                          <span className="text-2xl font-bold text-emerald-600">{quickWinCount}</span>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                          <div className="flex items-center gap-2">
+                            <Target className="h-5 w-5 text-purple-600" />
+                            <span className="text-sm text-gray-600">Strategic Bets</span>
+                          </div>
+                          <span className="text-2xl font-bold text-purple-600">{strategicBetCount}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Review Status */}
+                    <div className="space-y-4">
+                      <h3 className="font-semibold text-gray-700 text-sm uppercase tracking-wide">Review Status</h3>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-5 w-5 text-orange-600" />
+                            <span className="text-sm text-gray-600">Pending Review</span>
+                          </div>
+                          <span className="text-2xl font-bold text-orange-600">{analytics?.byStatus?.pending || 0}</span>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm">
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2 className="h-5 w-5 text-green-600" />
+                            <span className="text-sm text-gray-600">Approved</span>
+                          </div>
+                          <span className="text-2xl font-bold text-green-600">{analytics?.byStatus?.approved || 0}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Key Insights */}
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                      <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                        <p className="text-sm text-gray-600 mb-1">Approval Rate</p>
+                        <p className="text-2xl font-bold text-blue-600">
+                          {analytics?.totalSubmissions ? Math.round((analytics.byStatus?.approved || 0) / analytics.totalSubmissions * 100) : 0}%
+                        </p>
+                      </div>
+                      <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                        <p className="text-sm text-gray-600 mb-1">Avg Response Time</p>
+                        <p className="text-2xl font-bold text-teal-600">{avgDaysPending} days</p>
+                      </div>
+                      <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                        <p className="text-sm text-gray-600 mb-1">High Impact Ideas</p>
+                        <p className="text-2xl font-bold text-purple-600">{quickWinCount + strategicBetCount}</p>
+                      </div>
+                      <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                        <p className="text-sm text-gray-600 mb-1">In Development</p>
+                        <p className="text-2xl font-bold text-indigo-600">
+                          {initiativesWithPriority.filter(i => ['development', 'pilot', 'deployed'].includes(i.roadmapStatus || '')).length}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Old Analytics Cards - Removed */}
+              <div className="hidden grid-cols-1 md:grid-cols-5 gap-4">
                 <Card className="border-2 border-blue-200 bg-white shadow-lg">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-2">
@@ -387,6 +551,17 @@ export default function Admin() {
 
 
 
+
+              {/* Export Button */}
+              <div className="flex justify-end mb-4">
+                <Button
+                  onClick={handleExportToExcel}
+                  className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white shadow-md hover:shadow-lg transition-all"
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  Export to Excel
+                </Button>
+              </div>
 
               {/* Filters */}
               <Card className="border-2 border-gray-200 bg-white shadow-lg">

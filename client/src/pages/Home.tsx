@@ -429,53 +429,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Real Ideas, Real Impact */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Real Ideas, Real Impact
-          </h2>
-          <p className="text-xl text-gray-600">
-            See how colleagues' ideas are transforming healthcare delivery
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <Card className="border-2 border-green-200 bg-green-50/30">
-            <CardHeader>
-              <Badge className="w-fit mb-2 bg-green-600">Implemented</Badge>
-              <CardTitle className="text-xl">AI-Powered Discharge Summaries</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-700 mb-4">
-                Submitted by a hospitalist who was frustrated with spending 15+ minutes per discharge summary. 
-                Now automated with AI review.
-              </p>
-              <div className="flex items-center gap-2 text-green-700 font-semibold">
-                <TrendingUp className="h-5 w-5" />
-                <span>200+ hours saved/month</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-2 border-blue-200 bg-blue-50/30">
-            <CardHeader>
-              <Badge className="w-fit mb-2 bg-blue-600">In Development</Badge>
-              <CardTitle className="text-xl">Predictive Sepsis Detection</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-700 mb-4">
-                ICU nurse noticed patterns in vital signs before sepsis onset. AI now flags high-risk patients 6-8 hours earlier.
-              </p>
-              <div className="flex items-center gap-2 text-blue-700 font-semibold">
-                <Shield className="h-5 w-5" />
-                <span>Potential to save lives</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
       {/* Common Questions - More Human */}
       <section className="bg-gray-50 py-12 md:py-16" aria-labelledby="faq-heading">
         <div className="container mx-auto px-4">

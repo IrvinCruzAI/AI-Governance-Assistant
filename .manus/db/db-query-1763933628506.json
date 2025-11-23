@@ -1,0 +1,46 @@
+{
+  "query": "SELECT id, title, userEmail, createdAt FROM initiatives WHERE riskLevel IS NULL AND missionAlignmentRating IS NULL ORDER BY createdAt DESC LIMIT 18;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, userEmail, createdAt FROM initiatives WHERE riskLevel IS NULL AND missionAlignmentRating IS NULL ORDER BY createdAt DESC LIMIT 18;",
+  "rows": [
+    {
+      "id": "570018",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "createdAt": "2025-11-23 08:21:40"
+    },
+    {
+      "id": "540180",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "createdAt": "2025-11-23 08:10:23"
+    },
+    {
+      "id": "540162",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "createdAt": "2025-11-23 08:03:17"
+    },
+    {
+      "id": "540144",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "createdAt": "2025-11-23 07:55:58"
+    },
+    {
+      "id": "540126",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "createdAt": "2025-11-23 07:46:17"
+    },
+    {
+      "id": "540108",
+      "title": "Minimal Initiative",
+      "userEmail": "minimal@adventhealth.com",
+      "createdAt": "2025-11-23 07:40:57"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tuserEmail\tcreatedAt\n570018\tMinimal Initiative\tminimal@adventhealth.com\t2025-11-23 08:21:40\n540180\tMinimal Initiative\tminimal@adventhealth.com\t2025-11-23 08:10:23\n540162\tMinimal Initiative\tminimal@adventhealth.com\t2025-11-23 08:03:17\n540144\tMinimal Initiative\tminimal@adventhealth.com\t2025-11-23 07:55:58\n540126\tMinimal Initiative\tminimal@adventhealth.com\t2025-11-23 07:46:17\n540108\tMinimal Initiative\tminimal@adventhealth.com\t2025-11-23 07:40:57\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}
