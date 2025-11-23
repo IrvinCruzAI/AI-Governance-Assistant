@@ -358,3 +358,19 @@
 - [x] Ensure all AI metrics are properly displayed with reasoning - Mission alignment & risk reasoning now visible
 - [x] Test evaluation workflow end-to-end - All 35 tests passing
 - [x] Save checkpoint with improved evaluation system
+
+## Update Admin Dashboard Table View
+- [x] Ensure Risk and Mission columns display AI assessment values - Already working
+- [x] Verify Opportunity column shows priority quadrants correctly - Already working
+- [x] Make sure empty values are handled gracefully - Shows empty when not evaluated
+
+## Comprehensive UX Audit of Evaluation System
+- [x] Audit data flow: submission → AI assessment → admin evaluation → decision
+- [x] Check terminology consistency - Found mismatches between frontend and backend
+- [x] Fix priority quadrant logic to use clean 4-quadrant model
+- [x] Update backend calculateSimplePriority function - Now uses consistent 4 quadrants
+- [x] Update frontend priority recommendation display - Matches backend logic
+- [x] Ensure all views use same 4 quadrants (Quick Win, Strategic Bet, Nice to Have, Reconsider)
+- [x] Verify visual consistency (colors: green, purple, yellow, red) across all views
+- [x] Test complete admin workflow end-to-end - All 35 tests passing
+- [x] Save checkpoint with UX improvements

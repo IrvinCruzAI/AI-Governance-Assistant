@@ -873,11 +873,9 @@ export default function Admin() {
                         {/* Priority Recommendation */}
                         {impact && effort && (
                           <div className={`p-4 rounded-lg border-2 ${
-                            impact === 'high' && effort === 'low' ? 'bg-green-100 border-green-400' :
-                            impact === 'high' && effort === 'medium' ? 'bg-blue-100 border-blue-400' :
-                            impact === 'high' && effort === 'high' ? 'bg-blue-100 border-blue-400' :
-                            impact === 'medium' && effort === 'low' ? 'bg-green-100 border-green-400' :
-                            impact === 'low' && effort === 'low' ? 'bg-yellow-100 border-yellow-400' :
+                            impact === 'high' && (effort === 'low' || effort === 'medium') ? 'bg-green-100 border-green-400' :
+                            impact === 'high' && effort === 'high' ? 'bg-purple-100 border-purple-400' :
+                            (impact === 'medium' || impact === 'low') && effort === 'low' ? 'bg-yellow-100 border-yellow-400' :
                             'bg-red-100 border-red-400'
                           }`}>
                             <div className="flex items-center gap-2">
@@ -885,20 +883,16 @@ export default function Admin() {
                               <Label className="text-xs font-semibold uppercase tracking-wide">Priority Recommendation</Label>
                             </div>
                             <p className="text-sm font-bold mt-2">
-                              {impact === 'high' && effort === 'low' && '🎯 Quick Win - Prioritize Now!'}
-                              {impact === 'high' && (effort === 'medium' || effort === 'high') && '🚀 Strategic Bet - Plan Carefully'}
-                              {impact === 'medium' && effort === 'low' && '✅ Quick Win - Good ROI'}
-                              {impact === 'medium' && effort === 'medium' && '📊 Standard Project - Evaluate'}
-                              {impact === 'low' && effort === 'low' && '💡 Nice to Have - Fill-in Work'}
-                              {((impact === 'low' && effort === 'medium') || (impact === 'low' && effort === 'high') || (impact === 'medium' && effort === 'high')) && '⚠️ Reconsider - Low ROI'}
+                              {impact === 'high' && (effort === 'low' || effort === 'medium') && '🎯 Quick Win - Prioritize Now!'}
+                              {impact === 'high' && effort === 'high' && '🚀 Strategic Bet - Plan Carefully'}
+                              {(impact === 'medium' || impact === 'low') && effort === 'low' && '💡 Nice to Have - Fill-in Work'}
+                              {((impact === 'medium' || impact === 'low') && (effort === 'medium' || effort === 'high')) && '⚠️ Reconsider - Low ROI'}
                             </p>
                             <p className="text-xs text-gray-700 mt-1">
-                              {impact === 'high' && effort === 'low' && 'High value with minimal effort - ideal candidate for immediate implementation.'}
-                              {impact === 'high' && (effort === 'medium' || effort === 'high') && 'High strategic value justifies the investment - ensure proper planning and resources.'}
-                              {impact === 'medium' && effort === 'low' && 'Moderate value with quick turnaround - good for filling capacity.'}
-                              {impact === 'medium' && effort === 'medium' && 'Standard project - weigh against other opportunities.'}
-                              {impact === 'low' && effort === 'low' && 'Low priority but easy to complete when resources are available.'}
-                              {((impact === 'low' && effort === 'medium') || (impact === 'low' && effort === 'high') || (impact === 'medium' && effort === 'high')) && 'Resources may be better allocated elsewhere - consider deferring or rejecting.'}
+                              {impact === 'high' && (effort === 'low' || effort === 'medium') && 'High return on investment. Execute immediately.'}
+                              {impact === 'high' && effort === 'high' && 'Major initiative requiring substantial resources. Worth the investment—plan carefully.'}
+                              {(impact === 'medium' || impact === 'low') && effort === 'low' && 'Low-hanging fruit. Good for filling capacity gaps when available.'}
+                              {((impact === 'medium' || impact === 'low') && (effort === 'medium' || effort === 'high')) && 'Limited value for the effort required. Strongly reconsider or deprioritize.'}
                             </p>
                           </div>
                         )}

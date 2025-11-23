@@ -370,7 +370,7 @@ export async function updatePriorityEvaluation(id: number, evaluation: {
   await db.update(initiatives).set(updateData).where(eq(initiatives.id, id));
 }
 
-// Calculate priority from simplified impact/effort matrix
+// Calculate priority from simplified impact/effort matrix (Clean 4-Quadrant Model)
 function calculateSimplePriority(impact: 'high' | 'medium' | 'low', effort: 'high' | 'medium' | 'low') {
   // Impact scores: high=100, medium=60, low=30
   const impactScore = impact === 'high' ? 100 : impact === 'medium' ? 60 : 30;
@@ -381,17 +381,21 @@ function calculateSimplePriority(impact: 'high' | 'medium' | 'low', effort: 'hig
   // Total score (higher is better)
   const score = impactScore + (100 - effortScore); // Impact + (inverse of effort)
   
-  // Determine quadrant
+  // Determine quadrant using clean 4-quadrant model
   let quadrant: 'quick-win' | 'strategic-bet' | 'nice-to-have' | 'reconsider';
   
   if (impact === 'high' && (effort === 'low' || effort === 'medium')) {
-    quadrant = 'quick-win'; // High impact, low/medium effort
+    // High impact, low/medium effort → Do now!
+    quadrant = 'quick-win';
   } else if (impact === 'high' && effort === 'high') {
-    quadrant = 'strategic-bet'; // High impact, high effort
-  } else if (impact === 'medium' || (impact === 'low' && effort === 'low')) {
-    quadrant = 'nice-to-have'; // Medium impact or low impact/low effort
+    // High impact, high effort → Worth the investment
+    quadrant = 'strategic-bet';
+  } else if ((impact === 'medium' || impact === 'low') && effort === 'low') {
+    // Medium/low impact, low effort → Fill-in work
+    quadrant = 'nice-to-have';
   } else {
-    quadrant = 'reconsider'; // Low impact, high effort
+    // Medium/low impact, medium/high effort → Low ROI
+    quadrant = 'reconsider';
   }
   
   return { score, quadrant };
