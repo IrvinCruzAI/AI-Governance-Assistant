@@ -331,12 +331,17 @@ export default function Home() {
               </div>
               <h3 className="font-bold text-lg mb-2">You Hear Back</h3>
               <p className="text-gray-600">
-                We email you with next steps—whether it's moving forward, needs more info, or future consideration. <strong className="inline-block">Approved ideas may receive resources and support for pilot implementation.</strong>
+                We email you with next steps—whether it's moving forward, needs more info, or future consideration.
               </p>
             </div>
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 space-y-6">
+            <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-900 font-semibold">
+                <span className="text-green-600">✨</span> <strong className="inline-block">Approved ideas may receive resources and support for pilot implementation.</strong> <span className="text-green-600">✨</span>
+              </p>
+            </div>
             <p className="text-lg text-gray-700 font-semibold">
               Average response time: <span className="text-blue-600">3-5 business days</span>
             </p>

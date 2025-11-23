@@ -285,3 +285,10 @@
 - [x] Review all bold text instances on home page
 - [x] Test responsive behavior
 - [x] Save checkpoint with typography fixes
+
+## Restructure What Happens Next Section
+- [x] Remove pilot implementation text from step 4 description
+- [x] Create standalone highlighted blurb for pilot implementation message (green box with sparkle emojis)
+- [x] Position blurb above "Average response time: 3-5 business days"
+- [x] Test visual hierarchy and readability
+- [x] Save checkpoint with restructured section
