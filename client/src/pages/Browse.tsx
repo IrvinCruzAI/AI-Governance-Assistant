@@ -266,9 +266,10 @@ export default function Browse() {
                     </div>
 
                     {initiative.problemStatement && (
-                      <p className="text-sm text-gray-700 mb-4 line-clamp-3">
-                        <strong>Problem:</strong> {initiative.problemStatement}
-                      </p>
+                      <div className="text-sm text-gray-700 mb-4 line-clamp-3">
+                        <strong>Problem:</strong>{' '}
+                        <span dangerouslySetInnerHTML={{ __html: initiative.problemStatement }} />
+                      </div>
                     )}
 
                     <div className="space-y-2 mb-4">

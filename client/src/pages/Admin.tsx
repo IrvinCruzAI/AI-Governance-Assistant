@@ -1091,7 +1091,10 @@ function UserSubmissionsView({
           <CardContent className="space-y-4">
             <div>
               <p className="text-sm font-semibold text-gray-700">Problem</p>
-              <p className="text-sm text-gray-600 line-clamp-3">{initiative.problemStatement}</p>
+              <div 
+                className="text-sm text-gray-600 line-clamp-3"
+                dangerouslySetInnerHTML={{ __html: initiative.problemStatement || '' }}
+              />
             </div>
             <div className="flex justify-between items-center pt-4 border-t">
               <div className="text-xs text-gray-500">

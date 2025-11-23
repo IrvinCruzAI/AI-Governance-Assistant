@@ -182,3 +182,12 @@
 - [x] Fix authentication redirect to use home page instead of OAuth
 - [x] Test /new route loads correctly (redirects to home with toast for unauth users)
 - [x] Verify form submission still works
+
+## Fix HTML Rendering for Problem Statements
+- [x] Find where problemStatement is displayed (Browse page, cards, etc.)
+- [x] Replace plain text rendering with proper HTML rendering
+- [x] Use dangerouslySetInnerHTML in Admin.tsx, Browse.tsx, and Home.tsx
+- [x] Test on Browse page initiative cards (all rendering correctly)
+- [x] Test on Home page featured ideas (all rendering correctly)
+- [x] Test on admin dashboard cards (rendering correctly)
+- [x] Verify all HTML content renders correctly (no <p> tags visible)

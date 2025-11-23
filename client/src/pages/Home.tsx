@@ -213,9 +213,12 @@ export default function Home() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-gray-600 line-clamp-3">
-                    {idea.problemStatement || "Improving healthcare delivery through AI innovation."}
-                  </p>
+                  <div 
+                    className="text-sm text-gray-600 line-clamp-3"
+                    dangerouslySetInnerHTML={{ 
+                      __html: idea.problemStatement || "Improving healthcare delivery through AI innovation." 
+                    }}
+                  />
                 </CardContent>
               </Card>
             ))}
