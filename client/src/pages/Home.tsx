@@ -221,7 +221,7 @@ export default function Home() {
             We Need Your Perspective
           </h2>
           <p className="text-xl text-gray-600 leading-relaxed">
-            The best AI solutions don't come from executives in conference rooms—they come from people on the ground who see the problems every day. <strong>You know what would actually help.</strong> We're not guessing. We're listening.
+            The best AI solutions don't come from executives in conference rooms—they come from people on the ground who see the problems every day. <strong className="inline-block">You know what would actually help.</strong> We're not guessing. We're listening.
           </p>
         </div>
       </section>
@@ -331,7 +331,7 @@ export default function Home() {
               </div>
               <h3 className="font-bold text-lg mb-2">You Hear Back</h3>
               <p className="text-gray-600">
-                We email you with next steps—whether it's moving forward, needs more info, or future consideration. <strong>Approved ideas may receive resources and support for pilot implementation.</strong>
+                We email you with next steps—whether it's moving forward, needs more info, or future consideration. <strong className="inline-block">Approved ideas may receive resources and support for pilot implementation.</strong>
               </p>
             </div>
           </div>
@@ -478,7 +478,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-700">
-                    <strong>Absolutely.</strong> In fact, we prefer it. You don't need to know how AI works—you just need to know what frustrates you. 
+                    <strong className="inline-block">Absolutely.</strong> In fact, we prefer it. You don't need to know how AI works—you just need to know what frustrates you. 
                     We have technical people to figure out the "how." We need YOU to tell us the "what."
                   </p>
                 </CardContent>
@@ -490,7 +490,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-700">
-                    <strong>No.</strong> AI can't hold a patient's hand, have a difficult conversation with a family, or make the kind of judgment calls you make every day. 
+                    <strong className="inline-block">No.</strong> AI can't hold a patient's hand, have a difficult conversation with a family, or make the kind of judgment calls you make every day. 
                     What it CAN do is handle the repetitive, time-consuming tasks that keep you from doing those things. Think of it as getting an assistant, not a replacement.
                   </p>
                 </CardContent>
@@ -502,7 +502,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-700">
-                    <strong>Even better.</strong> Most great ideas start as "I wish this was easier" or "Why do we still do it this way?" 
+                    <strong className="inline-block">Even better.</strong> Most great ideas start as "I wish this was easier" or "Why do we still do it this way?" 
                     You don't need a solution—just a problem you see. We'll help you shape it from there.
                   </p>
                 </CardContent>
@@ -514,7 +514,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-700">
-                    <strong>It depends on the idea.</strong> Simple, low-risk ideas might move in weeks. Complex ones (like anything touching clinical decisions) take longer because we're extra careful. 
+                    <strong className="inline-block">It depends on the idea.</strong> Simple, low-risk ideas might move in weeks. Complex ones (like anything touching clinical decisions) take longer because we're extra careful. 
                     But you'll hear back from us within 3-5 business days either way.
                   </p>
                 </CardContent>
@@ -526,7 +526,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-700">
-                    <strong>A problem you see repeatedly.</strong> If it frustrates you, it probably frustrates others too. 
+                    <strong className="inline-block">A problem you see repeatedly.</strong> If it frustrates you, it probably frustrates others too. 
                     The best ideas are things that happen 10+ times a day, waste time, or create unnecessary risk. Start there.
                   </p>
                 </CardContent>

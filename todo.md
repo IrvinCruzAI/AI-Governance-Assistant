@@ -278,3 +278,10 @@
 - [x] Remove gray background that was creating awkward visual boundaries
 - [x] Test visual appearance
 - [x] Save checkpoint with fixes
+
+## Fix Bold Text Line Breaks
+- [x] Add CSS rule to prevent bold text from breaking across lines
+- [x] Apply inline-block to all strong elements (7 instances fixed)
+- [x] Review all bold text instances on home page
+- [x] Test responsive behavior
+- [x] Save checkpoint with typography fixes
