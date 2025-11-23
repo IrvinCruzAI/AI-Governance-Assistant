@@ -42,34 +42,36 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white">
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-6">
+        <div className="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3 md:gap-6">
             <div className="flex flex-col">
-              <img src={APP_LOGO} alt="AdventHealth" className="h-12" />
-              <span className="text-xs text-gray-500 mt-1">
+              <img src={APP_LOGO} alt="AdventHealth logo" className="h-8 md:h-12" />
+              <span className="text-xs text-gray-500 mt-1 hidden sm:block">
                 Extending the Healing Ministry of Christ
               </span>
             </div>
-            <div className="h-12 w-px bg-gray-300" />
-            <span className="text-2xl font-semibold text-gray-900">
-              AI Initiative Portal
+            <div className="h-8 md:h-12 w-px bg-gray-300 hidden sm:block" />
+            <span className="text-lg md:text-2xl font-semibold text-gray-900">
+              <span className="hidden sm:inline">AI Initiative Portal</span>
+              <span className="sm:hidden">AI Portal</span>
             </span>
           </div>
           {!isAuthenticated ? (
             <AuthDialog />
           ) : (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 md:gap-4">
               <Button
                 onClick={() => setLocation("/admin")}
                 variant="default"
                 size="sm"
                 className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white shadow-md hover:shadow-lg transition-all"
+                aria-label={user?.role === 'admin' ? 'Go to admin dashboard' : 'View my submissions'}
               >
-                <LayoutDashboard className="h-4 w-4 mr-2" />
-                {user?.role === 'admin' ? 'Dashboard' : 'My Submissions'}
+                <LayoutDashboard className="h-4 w-4 md:mr-2" />
+                <span className="hidden md:inline">{user?.role === 'admin' ? 'Dashboard' : 'My Submissions'}</span>
               </Button>
-              <div className="h-6 w-px bg-gray-300" />
-              <span className="text-sm text-gray-600">
+              <div className="h-6 w-px bg-gray-300 hidden md:block" />
+              <span className="text-sm text-gray-600 hidden md:inline">
                 Hi, <span className="font-medium text-gray-900">{user?.name?.split(' ')[0] || 'there'}</span>!
               </span>
             </div>
@@ -114,96 +116,102 @@ export default function Home() {
               <Button
                 size="lg"
                 onClick={() => window.location.href = getLoginUrl()}
-                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all"
+                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold shadow-xl hover:shadow-2xl transition-all min-h-[48px]"
+                aria-label="Sign in to share your AI idea"
               >
                 Share Your Idea Now
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
               </Button>
             ) : (
               <>
                 <Button
                   size="lg"
                   onClick={() => setLocation("/new-initiative")}
-                  className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all"
+                  className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold shadow-xl hover:shadow-2xl transition-all min-h-[48px]"
+                  aria-label="Submit a new AI initiative idea"
                 >
-                  Submit Your Idea for Consideration
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <span className="hidden sm:inline">Submit Your Idea for Consideration</span>
+                  <span className="sm:hidden">Submit Your Idea</span>
+                  <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
                   onClick={() => setLocation("/idea-starters")}
-                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-6 text-lg font-semibold"
+                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold min-h-[48px]"
+                  aria-label="View idea starters and examples"
                 >
-                  <Lightbulb className="mr-2 h-5 w-5" />
-                  Not Sure What to Share?
+                  <Lightbulb className="mr-2 h-5 w-5" aria-hidden="true" />
+                  <span className="hidden sm:inline">Not Sure What to Share?</span>
+                  <span className="sm:hidden">Need Ideas?</span>
                 </Button>
               </>
             )}
           </div>
 
           {/* Trust Signals */}
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base text-gray-600">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-green-600" />
+              <CheckCircle2 className="h-5 w-5 text-green-600" aria-hidden="true" />
               <span>No technical knowledge needed</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-green-600" />
+              <CheckCircle2 className="h-5 w-5 text-green-600" aria-hidden="true" />
               <span>Takes 10-15 minutes</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-green-600" />
+              <CheckCircle2 className="h-5 w-5 text-green-600" aria-hidden="true" />
               <span>Ideas reviewed weekly</span>
             </div>
           </div>
 
           {/* Social Proof */}
           {totalSubmissions > 0 && (
-            <div className="mt-8 inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-800 px-6 py-3 rounded-full">
-              <Users className="h-5 w-5" />
+            <div className="mt-8 inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-800 px-4 md:px-6 py-3 rounded-full text-sm md:text-base" role="status" aria-live="polite">
+              <Users className="h-5 w-5" aria-hidden="true" />
               <span className="font-semibold">{totalSubmissions} colleagues</span>
-              <span>have already shared their ideas</span>
+              <span className="hidden sm:inline">have already shared their ideas</span>
+              <span className="sm:hidden">shared ideas</span>
             </div>
           )}
         </div>
       </section>
 
       {/* Let's Be Honest Section - Addresses Fear */}
-      <section className="bg-gradient-to-r from-blue-600 to-teal-600 text-white py-20">
+      <section className="bg-gradient-to-r from-blue-600 to-teal-600 text-white py-12 md:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">
+            <h2 className="text-2xl md:text-5xl font-bold mb-8 md:mb-12 text-center">
               Let's Be Honest About AI
             </h2>
-            <div className="space-y-8 text-lg md:text-xl leading-relaxed">
+            <div className="space-y-6 md:space-y-8 text-base md:text-xl leading-relaxed">
               <p className="text-center text-blue-50">
                 We know what you might be thinking:
               </p>
               
-              <p className="text-2xl md:text-3xl font-bold text-center italic">
+              <p className="text-xl md:text-3xl font-bold text-center italic px-4">
                 "Is this how they replace me?"
               </p>
               
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-white/20">
-                <p className="text-xl md:text-2xl font-bold text-white mb-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 border border-white/20">
+                <p className="text-lg md:text-2xl font-bold text-white mb-4 md:mb-6">
                   Here's the truth:
                 </p>
-                <p className="text-lg md:text-xl text-blue-50 leading-relaxed">
+                <p className="text-base md:text-xl text-blue-50 leading-relaxed">
                   We're not trying to replace anyone. We're trying to give you your time back.
                 </p>
               </div>
               
-              <p className="text-lg md:text-xl text-blue-50 leading-relaxed">
+              <p className="text-base md:text-xl text-blue-50 leading-relaxed px-2">
                 AI won't replace nurses, doctors, or staff. But it can handle the repetitive stuff—the charting, the scheduling headaches, the endless searching for information—so you can focus on what actually matters:
               </p>
               
-              <p className="text-3xl md:text-4xl font-bold text-center">
+              <p className="text-2xl md:text-4xl font-bold text-center px-4">
                 Caring for people.
               </p>
               
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/20 mt-10">
-                <p className="text-2xl md:text-3xl font-bold text-center">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 md:p-8 border border-white/20 mt-8 md:mt-10">
+                <p className="text-xl md:text-3xl font-bold text-center">
                   Your job isn't going away.
                   <br />
                   <span className="text-blue-100">The boring parts of it might.</span>
@@ -283,18 +291,18 @@ export default function Home() {
       )}
 
       {/* What Happens Next - Humanized */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-gray-50 py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
               "Okay, But What Actually Happens?"
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-base md:text-xl text-gray-600 px-4">
               We get it—you want to know where your idea goes. Here's the honest process:
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                 1
@@ -336,13 +344,13 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="text-center mt-12 space-y-6">
-            <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6 max-w-2xl mx-auto">
-              <p className="text-lg text-gray-900 font-semibold">
-                <span className="text-green-600">✨</span> <strong className="inline-block">Approved ideas may receive resources and support for pilot implementation.</strong> <span className="text-green-600">✨</span>
+          <div className="text-center mt-10 md:mt-12 space-y-4 md:space-y-6">
+            <div className="bg-green-50 border-2 border-green-200 rounded-xl p-5 md:p-6 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-gray-900 font-semibold">
+                <span className="text-green-600" aria-hidden="true">✨</span> <strong className="inline-block">Approved ideas may receive resources and support for pilot implementation.</strong> <span className="text-green-600" aria-hidden="true">✨</span>
               </p>
             </div>
-            <p className="text-lg text-gray-700 font-semibold">
+            <p className="text-base md:text-lg text-gray-700 font-semibold">
               Average response time: <span className="text-blue-600">3-5 business days</span>
             </p>
           </div>
@@ -469,14 +477,14 @@ export default function Home() {
       </section>
 
       {/* Common Questions - More Human */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-gray-50 py-12 md:py-16" aria-labelledby="faq-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
+            <h2 id="faq-heading" className="text-2xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8 text-center">
               Questions We Hear a Lot
             </h2>
 
-            <div className="space-y-4">
+            <div className="space-y-4" role="list">
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">"I'm not technical. Can I still submit an idea?"</CardTitle>
@@ -542,14 +550,14 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-gradient-to-r from-blue-600 to-teal-600 text-white py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-teal-600 text-white py-12 md:py-16">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
-            <Sparkles className="h-16 w-16 mx-auto mb-6 text-yellow-300" />
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            <Sparkles className="h-12 md:h-16 w-12 md:w-16 mx-auto mb-4 md:mb-6 text-yellow-300" aria-hidden="true" />
+            <h2 className="text-2xl md:text-5xl font-bold mb-4 md:mb-6 px-4">
               Your Idea Could Change Everything
             </h2>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100">
+            <p className="text-lg md:text-2xl mb-6 md:mb-8 text-blue-100 px-4">
               The best innovations come from people doing the work every day. 
               That's you. Let's build the future of healthcare together.
             </p>
@@ -557,19 +565,21 @@ export default function Home() {
               <Button
                 size="lg"
                 onClick={() => window.location.href = getLoginUrl()}
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-xl"
+                className="bg-white text-blue-600 hover:bg-gray-100 px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold shadow-xl min-h-[48px]"
+                aria-label="Sign in and submit your AI idea"
               >
                 Submit Your Idea Now
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
               </Button>
             ) : (
               <Button
                 size="lg"
                 onClick={() => setLocation("/new-initiative")}
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-xl"
+                className="bg-white text-blue-600 hover:bg-gray-100 px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold shadow-xl min-h-[48px]"
+                aria-label="Submit a new AI initiative idea"
               >
                 Submit Your Idea Now
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
               </Button>
             )}
           </div>
