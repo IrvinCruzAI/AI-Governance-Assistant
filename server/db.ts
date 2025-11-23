@@ -100,6 +100,18 @@ export async function getUserByEmail(email: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
+export async function updateUserPassword(openId: string, passwordHash: string) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot update password: database not available");
+    throw new Error("Database not available");
+  }
+
+  await db.update(users)
+    .set({ passwordHash })
+    .where(eq(users.openId, openId));
+}
+
 // Initiative queries
 export async function createInitiative(data: InsertInitiative) {
   const db = await getDb();

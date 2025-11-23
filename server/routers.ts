@@ -7,6 +7,7 @@ import { z } from "zod";
 import * as db from "./db";
 import bcrypt from "bcrypt";
 import { sdk } from "./_core/sdk";
+import { ENV } from "./_core/env";
 import { analyzeMissionAlignment, classifyRisk, generateRAID } from "./aiService";
 
 // Admin-only procedure
@@ -67,7 +68,7 @@ export const appRouter = router({
         const token = await sdk.signSession(
           { 
             openId: user.openId ?? '',
-            appId: process.env.VITE_APP_ID || '',
+            appId: ENV.appId,
             name: user.name ?? ''
           },
           { expiresInMs: 30 * 24 * 60 * 60 * 1000 } // 30 days
@@ -121,7 +122,7 @@ export const appRouter = router({
         const token = await sdk.signSession(
           { 
             openId: user.openId ?? '',
-            appId: process.env.VITE_APP_ID || '',
+            appId: ENV.appId,
             name: user.name ?? ''
           },
           { expiresInMs: 30 * 24 * 60 * 60 * 1000 } // 30 days
@@ -143,6 +144,64 @@ export const appRouter = router({
             role: user.role,
           },
         };
+      }),
+  }),
+
+  user: router({
+    updateProfile: protectedProcedure
+      .input(z.object({
+        name: z.string().min(1),
+        email: z.string().email(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const { name, email } = input;
+        
+        // Check if email is already taken by another user
+        const existingUser = await db.getUserByEmail(email);
+        if (existingUser && existingUser.id !== ctx.user.id) {
+          throw new TRPCError({ code: 'CONFLICT', message: 'Email already in use by another account' });
+        }
+        
+        // Update user
+        await db.upsertUser({
+          openId: ctx.user.openId,
+          name,
+          email,
+        });
+        
+        return { success: true };
+      }),
+
+    changePassword: protectedProcedure
+      .input(z.object({
+        currentPassword: z.string(),
+        newPassword: z.string().min(8),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const { currentPassword, newPassword } = input;
+        
+        // Get user with password hash
+        const user = await db.getUserByEmail(ctx.user.email || '');
+        if (!user || !user.passwordHash) {
+          throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid authentication method' });
+        }
+        
+        // Verify current password
+        const isValid = await bcrypt.compare(currentPassword, user.passwordHash);
+        if (!isValid) {
+          throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Current password is incorrect' });
+        }
+        
+        // Hash new password
+        const newPasswordHash = await bcrypt.hash(newPassword, 10);
+        
+        // Update password
+        if (!user.openId) {
+          throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'User openId not found' });
+        }
+        await db.updateUserPassword(user.openId, newPasswordHash);
+        
+        return { success: true };
       }),
   }),
 

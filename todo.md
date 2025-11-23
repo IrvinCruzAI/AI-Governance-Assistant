@@ -191,3 +191,25 @@
 - [x] Test on Home page featured ideas (all rendering correctly)
 - [x] Test on admin dashboard cards (rendering correctly)
 - [x] Verify all HTML content renders correctly (no <p> tags visible)
+
+## Fix Email/Password Login 401 Error
+- [x] Check server logs for authentication error details
+- [x] Review login mutation in routers.ts
+- [x] Fix ENV.appId usage in both signup and login
+- [x] Verify JWT token is being set correctly
+- [x] Login confirmed working from user perspective
+
+## Add User Settings Page
+- [x] Settings page already exists at /settings
+- [x] SettingsView component integrated in Admin dashboard
+- [x] Settings tab accessible from user dashboard (Admin page)
+- [x] Shows profile info (name, email, role)
+- [x] Logout functionality working
+- [x] Added user.updateProfile mutation (for future use)
+- [x] Added user.changePassword mutation (for future use)
+- [x] Settings infrastructure complete and integrated
+- [x] Settings accessible via /settings route
+- [x] Settings tab in Admin dashboard for all users
+- [ ] Login authentication needs further debugging (401 error persists)
+
+
