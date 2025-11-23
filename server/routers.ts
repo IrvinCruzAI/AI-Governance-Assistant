@@ -283,7 +283,7 @@ export const appRouter = router({
 
     list: protectedProcedure
       .query(async ({ ctx }) => {
-        return await db.getUserInitiatives(ctx.user.id);
+        return await db.getUserInitiativesWithVotes(ctx.user.id);
       }),
 
     listAll: publicProcedure

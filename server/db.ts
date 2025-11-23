@@ -138,6 +138,25 @@ export async function getUserInitiatives(userId: number) {
     .orderBy(desc(initiatives.updatedAt));
 }
 
+export async function getUserInitiativesWithVotes(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const userInitiatives = await db.select().from(initiatives)
+    .where(eq(initiatives.userId, userId))
+    .orderBy(desc(initiatives.updatedAt));
+  
+  // Get vote counts for each initiative
+  const initiativesWithVotes = await Promise.all(
+    userInitiatives.map(async (initiative) => {
+      const voteCount = await getVoteCount(initiative.id);
+      return { ...initiative, voteCount };
+    })
+  );
+  
+  return initiativesWithVotes;
+}
+
 export async function updateInitiative(id: number, data: Partial<InsertInitiative>) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");

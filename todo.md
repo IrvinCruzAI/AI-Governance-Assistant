@@ -230,3 +230,19 @@
 - [x] Add browseInitiatives query for regular users
 - [ ] Test Browse tab shows all initiatives with voting functionality (blocked by login issue)
 - [ ] Verify navigation between tabs works smoothly (blocked by login issue)
+
+## Add Vote Count to My Submissions Tab
+- [ ] Check current getUserSubmissions query in routers.ts
+- [ ] Update query to include vote count for each submission
+- [ ] Update UserSubmissionsView component to display vote counts
+- [ ] Add vote count badge/indicator to submission cards
+- [ ] Test vote count display with submissions that have votes
+- [ ] Verify vote counts update in real-time
+
+## Fix ThumbsUp Error in UserSubmissionsView
+- [x] Add ThumbsUp import to Admin.tsx
+- [x] Keep getUserInitiativesWithVotes changes in db.ts
+- [x] Keep initiative.list query changes in routers.ts
+- [x] Test admin dashboard loads without errors
+- [x] Test vote count displays correctly (showing "0 votes" badge)
+- [ ] Save checkpoint with completed feature

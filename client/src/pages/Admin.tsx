@@ -43,7 +43,8 @@ import {
   X,
   Wrench,
   Settings,
-  Zap
+  Zap,
+  ThumbsUp
 } from "lucide-react";
 import { toast } from "sonner";
 import { PriorityRubricModal } from "@/components/PriorityRubricModal";
@@ -1115,6 +1116,12 @@ function UserSubmissionsView({
               {initiative.riskLevel && (
                 <Badge variant="outline">
                   {initiative.riskLevel} Risk
+                </Badge>
+              )}
+              {initiative.voteCount !== undefined && (
+                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                  <ThumbsUp className="h-3 w-3 mr-1" />
+                  {initiative.voteCount} {initiative.voteCount === 1 ? 'vote' : 'votes'}
                 </Badge>
               )}
             </div>
