@@ -60,6 +60,7 @@ export function BrowseView({ initiatives, loading, onViewDetails }: BrowseViewPr
         toast.success("Vote added!");
       }
       utils.initiative.listAllWithVotes.invalidate();
+      utils.initiative.list.invalidate();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Failed to vote");
     }

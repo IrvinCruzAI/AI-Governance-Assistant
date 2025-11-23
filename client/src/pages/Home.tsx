@@ -96,11 +96,17 @@ export default function Home() {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            That frustrating task you repeat 20 times a day? The information you wish was
-            at your fingertips? The process that takes forever? <strong>What if your idea could actually get built and deployed across AdventHealth?</strong> You don't need to be
-            technical to share it.
-          </p>
+          <div className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto space-y-4">
+            <p>
+              That frustrating task you repeat 20 times a day? The information you wish was at your fingertips? The process that takes forever?
+            </p>
+            <p className="text-2xl font-bold text-gray-900">
+              What if your idea could actually get built and deployed across AdventHealth?
+            </p>
+            <p>
+              You don't need to be technical to share it.
+            </p>
+          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -164,26 +170,45 @@ export default function Home() {
       </section>
 
       {/* Let's Be Honest Section - Addresses Fear */}
-      <section className="bg-gradient-to-r from-blue-600 to-teal-600 text-white py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-teal-600 text-white py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">
               Let's Be Honest About AI
             </h2>
-            <div className="text-lg md:text-xl leading-relaxed space-y-4">
-              <p>
-                We know what you might be thinking: <em>"Is this how they replace me?"</em>
+            <div className="space-y-8 text-lg md:text-xl leading-relaxed">
+              <p className="text-center text-blue-50">
+                We know what you might be thinking:
               </p>
-              <p className="font-semibold text-blue-100">
-                Here's the truth: We're not trying to replace anyone. We're trying to give you your time back.
+              
+              <p className="text-2xl md:text-3xl font-bold text-center italic">
+                "Is this how they replace me?"
               </p>
-              <p>
-                AI won't replace nurses, doctors, or staff. But it can handle the repetitive stuff—the charting, the scheduling headaches, 
-                the endless searching for information—so you can focus on what actually matters: <strong>caring for people</strong>.
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-white/20">
+                <p className="text-xl md:text-2xl font-bold text-white mb-6">
+                  Here's the truth:
+                </p>
+                <p className="text-lg md:text-xl text-blue-50 leading-relaxed">
+                  We're not trying to replace anyone. We're trying to give you your time back.
+                </p>
+              </div>
+              
+              <p className="text-lg md:text-xl text-blue-50 leading-relaxed">
+                AI won't replace nurses, doctors, or staff. But it can handle the repetitive stuff—the charting, the scheduling headaches, the endless searching for information—so you can focus on what actually matters:
               </p>
-              <p className="text-xl font-bold mt-6">
-                Your job isn't going away. The boring parts of it might.
+              
+              <p className="text-3xl md:text-4xl font-bold text-center">
+                Caring for people.
               </p>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/20 mt-10">
+                <p className="text-2xl md:text-3xl font-bold text-center">
+                  Your job isn't going away.
+                  <br />
+                  <span className="text-blue-100">The boring parts of it might.</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>

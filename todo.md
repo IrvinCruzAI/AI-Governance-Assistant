@@ -246,3 +246,20 @@
 - [x] Test admin dashboard loads without errors
 - [x] Test vote count displays correctly (showing "0 votes" badge)
 - [ ] Save checkpoint with completed feature
+
+## Fix Vote Count Not Updating After Voting
+- [x] Check BrowseView vote mutation implementation
+- [x] Add cache invalidation for initiative.list query after voting
+- [x] Add cache invalidation for initiative.listAllWithVotes query (already present)
+- [ ] Test vote count updates immediately after voting
+- [ ] Verify vote count updates in My Submissions tab
+- [ ] Save checkpoint with fix
+
+## Improve Home Page Design and Typography
+- [x] Redesign hero section with better text flow and spacing
+- [x] Fix awkward line breaks in bold text
+- [x] Improve "Let's Be Honest About AI" section layout
+- [x] Add better visual hierarchy with proper font sizes
+- [x] Ensure responsive design works on all screen sizes
+- [x] Test readability and visual appeal
+- [x] Save checkpoint with improved design
