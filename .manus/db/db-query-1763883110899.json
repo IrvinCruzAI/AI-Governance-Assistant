@@ -1,0 +1,19 @@
+{
+  "query": "SELECT id, openId, name, email, role, createdAt, lastSignedIn FROM users WHERE email = 'irvin@futurecrafters.ai';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, openId, name, email, role, createdAt, lastSignedIn FROM users WHERE email = 'irvin@futurecrafters.ai';",
+  "rows": [
+    {
+      "id": "1",
+      "openId": "MBH7wjcv2SscMja23pdZDW",
+      "name": "Irvin Cruz",
+      "email": "irvin@futurecrafters.ai",
+      "role": "admin",
+      "createdAt": "2025-11-22 00:15:33",
+      "lastSignedIn": "2025-11-22 19:33:45"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\topenId\tname\temail\trole\tcreatedAt\tlastSignedIn\n1\tMBH7wjcv2SscMja23pdZDW\tIrvin Cruz\tirvin@futurecrafters.ai\tadmin\t2025-11-22 00:15:33\t2025-11-22 19:33:45\n",
+  "stderr": "",
+  "execution_time_ms": 66
+}

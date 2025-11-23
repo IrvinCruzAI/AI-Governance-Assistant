@@ -310,3 +310,14 @@
 - [x] Ensure buttons and CTAs are easily tappable - Min 48px height, adequate padding
 - [x] Test loading states and error handling - Spinner has proper sizing
 - [x] Save checkpoint with all improvements
+
+## Fix "require is not defined" TRPCClientError
+- [x] Investigate where CommonJS require() is being used in client code
+- [x] Fix module import/export issues - Removed inline require('bcrypt') in routers.ts
+- [x] Test application functionality - All 35 tests passing
+- [x] Verify error is resolved - User successfully logged in
+
+## Promote User to Admin Role
+- [x] Update irvinm.cruz93@gmail.com role to 'admin' in database (user self-promoted)
+- [x] Verify admin dashboard access works
+- [x] Save checkpoint with bug fix

@@ -106,7 +106,6 @@ export const appRouter = router({
         }
         
         // Verify password
-        const bcrypt = require('bcrypt');
         const isValid = await bcrypt.compare(password, user.passwordHash);
         if (!isValid) {
           throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid email or password' });
