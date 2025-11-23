@@ -21,6 +21,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/settings"} component={Settings} />
       <Route path={"/admin"} component={Admin} />
+      <Route path={"/new"} component={NewInitiative} />
       <Route path={"/new-initiative"} component={NewInitiative} />
       <Route path={"/initiative/:id"} component={Initiative} />
       <Route path={"/brief/:id"} component={Brief} />

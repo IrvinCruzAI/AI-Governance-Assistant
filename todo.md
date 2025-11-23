@@ -173,3 +173,12 @@
 - [x] Test session persists across different tabs
 - [x] Verify users don't need to re-login frequently
 - [x] Complete end-to-end MVP test (signup → login → submit initiative)
+
+## Fix /new Route 404 Error
+- [x] Diagnose why /new route returns 404 (route was /new-initiative, not /new)
+- [x] Check App.tsx routing configuration
+- [x] Verify NewInitiative component exists and is imported
+- [x] Add /new route in App.tsx pointing to NewInitiative component
+- [x] Fix authentication redirect to use home page instead of OAuth
+- [x] Test /new route loads correctly (redirects to home with toast for unauth users)
+- [x] Verify form submission still works

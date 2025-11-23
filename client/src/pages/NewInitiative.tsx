@@ -59,9 +59,10 @@ export default function NewInitiative() {
   // Redirect to login if not authenticated
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
-      window.location.href = getLoginUrl();
+      setLocation("/");
+      toast.info("Please sign in to submit an initiative");
     }
-  }, [authLoading, isAuthenticated]);
+  }, [authLoading, isAuthenticated, setLocation]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
