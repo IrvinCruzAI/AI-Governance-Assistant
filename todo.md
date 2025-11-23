@@ -374,3 +374,13 @@
 - [x] Verify visual consistency (colors: green, purple, yellow, red) across all views
 - [x] Test complete admin workflow end-to-end - All 35 tests passing
 - [x] Save checkpoint with UX improvements
+
+## Remove Non-Working AI Features
+- [x] Audit all AI-calculated fields in database (riskLevel, governancePath, missionAlignment, etc.)
+- [x] Identify which fields are NULL vs populated - 69% working, governancePath 0%
+- [x] Remove Governance Path from UI (not being calculated)
+- [x] Check if Mission Alignment is working - YES (41/59 initiatives)
+- [x] Check if Risk Level is working - YES (41/59 initiatives)
+- [x] Remove any other broken AI features from evaluation card - Only governancePath was broken
+- [x] Clean up backend code for removed features - Left in schema for potential future fix
+- [x] Test and save checkpoint - All 35 tests passing

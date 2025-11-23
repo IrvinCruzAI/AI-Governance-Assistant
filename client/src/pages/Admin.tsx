@@ -697,14 +697,7 @@ export default function Admin() {
                             </div>
                             <AlertCircle className="h-5 w-5 text-orange-600" />
                           </div>
-                          {selectedInitiative.governancePath && (
-                            <div className="mt-2">
-                              <Label className="text-xs text-gray-600">Governance Path:</Label>
-                              <Badge variant="outline" className="ml-2 text-xs">
-                                {selectedInitiative.governancePath}
-                              </Badge>
-                            </div>
-                          )}
+
                           {selectedInitiative.riskReasoning && (
                             <p className="text-sm text-gray-700 leading-relaxed mt-3">
                               {selectedInitiative.riskReasoning}

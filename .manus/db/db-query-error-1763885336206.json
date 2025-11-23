@@ -1,0 +1,8 @@
+{
+  "query": "SELECT \n  COUNT(*) as total,\n  COUNT(riskLevel) as has_risk,\n  COUNT(governancePath) as has_governance,\n  COUNT(missionAlignmentScore) as has_mission_score,\n  COUNT(missionAlignmentReasoning) as has_mission_reasoning,\n  COUNT(riskReasoning) as has_risk_reasoning\nFROM initiatives;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT \n  COUNT(*) as total,\n  COUNT(riskLevel) as has_risk,\n  COUNT(governancePath) as has_governance,\n  COUNT(missionAlignmentScore) as has_mission_score,\n  COUNT(missionAlignmentReasoning) as has_mission_reasoning,\n  COUNT(riskReasoning) as has_risk_reasoning\nFROM initiatives;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'missionalignmentscore' in ''"
+  ]
+}

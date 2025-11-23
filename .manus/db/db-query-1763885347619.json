@@ -1,0 +1,18 @@
+{
+  "query": "SELECT \n  COUNT(*) as total,\n  COUNT(riskLevel) as has_risk_level,\n  COUNT(governancePath) as has_governance_path,\n  COUNT(missionAlignmentRating) as has_mission_rating,\n  COUNT(missionAlignmentReasoning) as has_mission_reasoning,\n  COUNT(riskReasoning) as has_risk_reasoning\nFROM initiatives;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT \n  COUNT(*) as total,\n  COUNT(riskLevel) as has_risk_level,\n  COUNT(governancePath) as has_governance_path,\n  COUNT(missionAlignmentRating) as has_mission_rating,\n  COUNT(missionAlignmentReasoning) as has_mission_reasoning,\n  COUNT(riskReasoning) as has_risk_reasoning\nFROM initiatives;",
+  "rows": [
+    {
+      "total": "77",
+      "has_risk_level": "5",
+      "has_governance_path": "0",
+      "has_mission_rating": "5",
+      "has_mission_reasoning": "0",
+      "has_risk_reasoning": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "total\thas_risk_level\thas_governance_path\thas_mission_rating\thas_mission_reasoning\thas_risk_reasoning\n77\t5\t0\t5\t0\t0\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}
