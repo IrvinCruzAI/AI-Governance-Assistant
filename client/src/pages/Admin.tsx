@@ -48,6 +48,7 @@ import {
 import { toast } from "sonner";
 import { PriorityRubricModal } from "@/components/PriorityRubricModal";
 import { SettingsView } from "@/components/SettingsView";
+import { BrowseView } from "@/components/BrowseView";
 
 // Get priority label from database priorityQuadrant field
 function getPriorityLabel(priorityQuadrant?: string | null): { label: string; color: string } {
@@ -98,6 +99,10 @@ export default function Admin() {
   const { data: allInitiatives, isLoading: adminLoading } = trpc.admin.getAllInitiatives.useQuery(
     { status: statusFilter === 'all' ? undefined : statusFilter as any },
     { enabled: user?.role === 'admin' }
+  );
+  const { data: browseInitiatives, isLoading: browseLoading } = trpc.initiative.listAllWithVotes.useQuery(
+    undefined,
+    { enabled: user?.role !== 'admin' }
   );
   const { data: analytics } = trpc.admin.getAnalytics.useQuery(undefined, {
     enabled: user?.role === 'admin'
@@ -556,8 +561,9 @@ export default function Admin() {
           </Tabs>
         ) : (
           <Tabs defaultValue="my" className="space-y-6">
-            <TabsList className="grid w-full max-w-md grid-cols-2">
+            <TabsList className="grid w-full max-w-2xl grid-cols-3">
               <TabsTrigger value="my">My Submissions</TabsTrigger>
+              <TabsTrigger value="browse">Browse Ideas</TabsTrigger>
               <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
 
@@ -566,6 +572,15 @@ export default function Admin() {
               <UserSubmissionsView 
                 initiatives={userInitiatives || []}
                 loading={userLoading}
+                onViewDetails={openInitiativeDetail}
+              />
+            </TabsContent>
+
+            {/* Browse Ideas Tab */}
+            <TabsContent value="browse" className="space-y-6">
+              <BrowseView 
+                initiatives={browseInitiatives || []}
+                loading={browseLoading}
                 onViewDetails={openInitiativeDetail}
               />
             </TabsContent>

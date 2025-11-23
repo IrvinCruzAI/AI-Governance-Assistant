@@ -292,8 +292,22 @@ export const appRouter = router({
       }),
 
     listAllWithVotes: publicProcedure
-      .query(async () => {
-        return await db.getAllInitiativesWithVotes();
+      .query(async ({ ctx }) => {
+        const allInitiatives = await db.getAllInitiativesWithVotes();
+        
+        // If user is authenticated, check if they've voted on each initiative
+        if (ctx.user) {
+          const initiativesWithUserVotes = await Promise.all(
+            allInitiatives.map(async (initiative) => {
+              const hasVoted = await db.hasUserVoted(initiative.id, ctx.user!.id);
+              return { ...initiative, hasVoted };
+            })
+          );
+          return initiativesWithUserVotes;
+        }
+        
+        // If not authenticated, hasVoted is false for all
+        return allInitiatives.map(initiative => ({ ...initiative, hasVoted: false }));
       }),
 
     vote: protectedProcedure

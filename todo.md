@@ -221,3 +221,12 @@
 - [x] Fix Admin page redirect to use home page instead of OAuth
 - [x] Test Settings tab access for regular users (verified with test account)
 - [x] Verify logout functionality works from Settings tab (logout successful)
+
+## Add Browse Ideas Tab to User Dashboard
+- [x] Add "Browse Ideas" tab to user dashboard (Admin.tsx)
+- [x] Create BrowseView component with search, filters, and voting
+- [x] Update tab navigation to include Browse alongside My Submissions and Settings
+- [x] Update listAllWithVotes query to include hasVoted field
+- [x] Add browseInitiatives query for regular users
+- [ ] Test Browse tab shows all initiatives with voting functionality (blocked by login issue)
+- [ ] Verify navigation between tabs works smoothly (blocked by login issue)
