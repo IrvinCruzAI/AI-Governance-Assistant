@@ -266,11 +266,22 @@ export const appRouter = router({
           completed: z.boolean().optional(),
           currentStep: z.number().optional(),
           status: z.enum(['pending', 'under-review', 'approved', 'rejected']).optional(),
+          roadmapStatus: z.enum(['under-review', 'research', 'development', 'pilot', 'deployed', 'on-hold', 'rejected']).optional(),
           adminNotes: z.string().optional(),
         }),
       }))
       .mutation(async ({ ctx, input }) => {
         await db.updateInitiative(input.id, input.data);
+        return { success: true };
+      }),
+
+    updateRoadmapStatus: adminProcedure
+      .input(z.object({
+        id: z.number(),
+        roadmapStatus: z.enum(['under-review', 'research', 'development', 'pilot', 'deployed', 'on-hold', 'rejected']),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        await db.updateInitiative(input.id, { roadmapStatus: input.roadmapStatus });
         return { success: true };
       }),
 

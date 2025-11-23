@@ -321,3 +321,28 @@
 - [x] Update irvinm.cruz93@gmail.com role to 'admin' in database (user self-promoted)
 - [x] Verify admin dashboard access works
 - [x] Save checkpoint with bug fix
+
+## Implement Drag-and-Drop for Roadmap Cards
+- [ ] Install @dnd-kit/core and @dnd-kit/sortable libraries
+- [ ] Configure drag-and-drop context in Roadmap component
+- [ ] Make initiative cards draggable
+- [ ] Make status columns droppable
+- [ ] Create backend mutation to update initiative status
+- [ ] Add optimistic updates for smooth UX
+- [ ] Test drag-and-drop across all status columns
+- [ ] Add visual feedback during drag (opacity, cursor)
+- [ ] Save checkpoint with drag-and-drop feature
+
+## Implement Admin-Only Drag-and-Drop for Roadmap Cards
+- [x] Install @dnd-kit/core and @dnd-kit/sortable libraries
+- [x] Configure drag-and-drop context in Roadmap component
+- [x] Make initiative cards draggable (admin only)
+- [x] Make status columns droppable (admin only)
+- [x] Create backend mutation to update initiative status (updateRoadmapStatus)
+- [x] Add role check to ensure only admins can drag
+- [x] Add optimistic updates for smooth UX
+- [x] Test drag-and-drop across all status columns
+- [x] Add visual feedback during drag (opacity, cursor, grab cursor)
+- [x] Verify regular users see read-only roadmap
+- [x] All 35 tests passing
+- [x] Save checkpoint with drag-and-drop feature
