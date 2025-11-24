@@ -1,6 +1,6 @@
-import { eq, desc, and } from "drizzle-orm";
+import { eq, desc, and, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, initiatives, messages, votes, InsertInitiative, InsertMessage, InsertVote } from "../drizzle/schema";
+import { InsertUser, users, initiatives, InsertInitiative, votes, InsertVote } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -176,24 +176,6 @@ export async function updateInitiative(id: number, data: Partial<InsertInitiativ
   if (!db) throw new Error("Database not available");
   
   await db.update(initiatives).set(data).where(eq(initiatives.id, id));
-}
-
-// Message queries
-export async function addMessage(data: InsertMessage) {
-  const db = await getDb();
-  if (!db) throw new Error("Database not available");
-  
-  const result = await db.insert(messages).values(data);
-  return result[0].insertId;
-}
-
-export async function getInitiativeMessages(initiativeId: number) {
-  const db = await getDb();
-  if (!db) return [];
-  
-  return db.select().from(messages)
-    .where(eq(messages.initiativeId, initiativeId))
-    .orderBy(messages.createdAt);
 }
 
 // Admin queries

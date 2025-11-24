@@ -93,21 +93,6 @@ export type Initiative = typeof initiatives.$inferSelect;
 export type InsertInitiative = typeof initiatives.$inferInsert;
 
 /**
- * Conversation messages for each initiative
- */
-export const messages = mysqlTable("messages", {
-  id: int("id").autoincrement().primaryKey(),
-  initiativeId: int("initiativeId").notNull(),
-  role: mysqlEnum("role", ["assistant", "user"]).notNull(),
-  content: text("content").notNull(),
-  step: int("step").notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-});
-
-export type Message = typeof messages.$inferSelect;
-export type InsertMessage = typeof messages.$inferInsert;
-
-/**
  * Votes on initiatives - tracks which users voted for which initiatives
  */
 export const votes = mysqlTable("votes", {

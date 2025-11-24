@@ -352,29 +352,6 @@ export const appRouter = router({
         return { hasVoted, voteCount };
       }),
 
-    addMessage: protectedProcedure
-      .input(z.object({
-        initiativeId: z.number(),
-        role: z.enum(['user', 'assistant']),
-        content: z.string(),
-        step: z.number(),
-      }))
-      .mutation(async ({ ctx, input }) => {
-        const messageId = await db.addMessage({
-          initiativeId: input.initiativeId,
-          role: input.role,
-          content: input.content,
-          step: input.step,
-        });
-        return { messageId };
-      }),
-
-    getMessages: protectedProcedure
-      .input(z.object({ initiativeId: z.number() }))
-      .query(async ({ ctx, input }) => {
-        return await db.getInitiativeMessages(input.initiativeId);
-      }),
-
     analyzeMission: protectedProcedure
       .input(z.object({
         title: z.string(),

@@ -58,3 +58,4 @@
 - [x] Delete duplicate admin entries (IDs 1890020, 1890021)
 - [x] Remove Manus OAuth login and use only /login page
 - [x] Delete test users from database (keep only 3 real users)
+- [x] Remove unused messages table and related code

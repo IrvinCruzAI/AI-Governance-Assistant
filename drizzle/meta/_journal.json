@@ -71,6 +71,13 @@
       "when": 1763850380166,
       "tag": "0009_lush_absorbing_man",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1764006425748,
+      "tag": "0010_melted_wong",
+      "breakpoints": true
     }
   ]
 }
