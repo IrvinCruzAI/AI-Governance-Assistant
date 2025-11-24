@@ -56,3 +56,5 @@
 - [x] Create dedicated admin account (Admin@aiportal.com / Admin123) for executive access
 - [x] Fix duplicate user creation bug in auth.signup
 - [x] Delete duplicate admin entries (IDs 1890020, 1890021)
+- [x] Remove Manus OAuth login and use only /login page
+- [x] Delete test users from database (keep only 3 real users)

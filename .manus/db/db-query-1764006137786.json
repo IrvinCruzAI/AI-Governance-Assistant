@@ -1,0 +1,34 @@
+{
+  "query": "SELECT id, openId, name, email, loginMethod, role FROM users ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, openId, name, email, loginMethod, role FROM users ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "openId": "MBH7wjcv2SscMja23pdZDW",
+      "name": "Irvin Cruz",
+      "email": "irvin@futurecrafters.ai",
+      "loginMethod": "google",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "openId": "email-1763882874853-174luy32w",
+      "name": "irvin",
+      "email": "irvinm.cruz93@gmail.com",
+      "loginMethod": "email",
+      "role": "admin"
+    },
+    {
+      "id": "1890019",
+      "openId": "email-1764005516510-ty0n0zkxs",
+      "name": "Admin",
+      "email": "admin@aiportal.com",
+      "loginMethod": "email",
+      "role": "user"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\topenId\tname\temail\tloginMethod\trole\n1\tMBH7wjcv2SscMja23pdZDW\tIrvin Cruz\tirvin@futurecrafters.ai\tgoogle\tadmin\n2\temail-1763882874853-174luy32w\tirvin\tirvinm.cruz93@gmail.com\temail\tadmin\n1890019\temail-1764005516510-ty0n0zkxs\tAdmin\tadmin@aiportal.com\temail\tuser\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}
