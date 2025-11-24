@@ -49,7 +49,7 @@ export const appRouter = router({
         
         // Create user
         const openId = `email-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-        await db.upsertUser({
+        await db.createUser({
           openId,
           email,
           passwordHash,

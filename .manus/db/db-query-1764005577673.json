@@ -1,0 +1,37 @@
+{
+  "query": "SELECT id, openId, name, email, loginMethod, role, createdAt FROM users WHERE openId LIKE 'email-1764005516510%' ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, openId, name, email, loginMethod, role, createdAt FROM users WHERE openId LIKE 'email-1764005516510%' ORDER BY id;",
+  "rows": [
+    {
+      "id": "1890019",
+      "openId": "email-1764005516510-ty0n0zkxs",
+      "name": "Admin",
+      "email": "admin@aiportal.com",
+      "loginMethod": "email",
+      "role": "user",
+      "createdAt": "2025-11-24 17:31:56"
+    },
+    {
+      "id": "1890020",
+      "openId": "email-1764005516510-ty0n0zkxs",
+      "name": "NULL",
+      "email": "NULL",
+      "loginMethod": "NULL",
+      "role": "user",
+      "createdAt": "2025-11-24 17:31:57"
+    },
+    {
+      "id": "1890021",
+      "openId": "email-1764005516510-ty0n0zkxs",
+      "name": "NULL",
+      "email": "NULL",
+      "loginMethod": "NULL",
+      "role": "user",
+      "createdAt": "2025-11-24 17:32:03"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\topenId\tname\temail\tloginMethod\trole\tcreatedAt\n1890019\temail-1764005516510-ty0n0zkxs\tAdmin\tadmin@aiportal.com\temail\tuser\t2025-11-24 17:31:56\n1890020\temail-1764005516510-ty0n0zkxs\tNULL\tNULL\tNULL\tuser\t2025-11-24 17:31:57\n1890021\temail-1764005516510-ty0n0zkxs\tNULL\tNULL\tNULL\tuser\t2025-11-24 17:32:03\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}

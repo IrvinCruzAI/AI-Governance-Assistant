@@ -54,3 +54,5 @@
 ### POST-DELIVERY CHANGES
 - [x] Remove "Real Ideas, Real Impact" section from home page
 - [x] Create dedicated admin account (Admin@aiportal.com / Admin123) for executive access
+- [x] Fix duplicate user creation bug in auth.signup
+- [x] Delete duplicate admin entries (IDs 1890020, 1890021)

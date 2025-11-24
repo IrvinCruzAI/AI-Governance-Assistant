@@ -1,0 +1,18 @@
+{
+  "query": "SELECT id, openId, name, email, loginMethod, role FROM users WHERE email = 'admin@aiportal.com' OR openId LIKE '%admin%' ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, openId, name, email, loginMethod, role FROM users WHERE email = 'admin@aiportal.com' OR openId LIKE '%admin%' ORDER BY id;",
+  "rows": [
+    {
+      "id": "1890019",
+      "openId": "email-1764005516510-ty0n0zkxs",
+      "name": "Admin",
+      "email": "admin@aiportal.com",
+      "loginMethod": "email",
+      "role": "user"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\topenId\tname\temail\tloginMethod\trole\n1890019\temail-1764005516510-ty0n0zkxs\tAdmin\tadmin@aiportal.com\temail\tuser\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}

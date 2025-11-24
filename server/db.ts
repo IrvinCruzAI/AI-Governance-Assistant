@@ -76,6 +76,20 @@ export async function upsertUser(user: InsertUser): Promise<void> {
   }
 }
 
+export async function createUser(user: InsertUser): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    await db.insert(users).values(user);
+  } catch (error) {
+    console.error("[Database] Failed to create user:", error);
+    throw error;
+  }
+}
+
 export async function getUserByOpenId(openId: string) {
   const db = await getDb();
   if (!db) {
