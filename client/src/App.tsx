@@ -13,6 +13,7 @@ import Initiative from "./pages/Initiative";
 import Brief from "./pages/Brief";
 import Browse from "./pages/Browse";
 import Roadmap from "./pages/Roadmap";
+import Login from "./pages/Login";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -28,6 +29,7 @@ function Router() {
       <Route path={"/browse"} component={Browse} />
       <Route path={"/roadmap"} component={Roadmap} />
       <Route path={"/idea-starters"} component={IdeaStarters} />
+      <Route path={"/login"} component={Login} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

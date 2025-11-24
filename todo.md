@@ -53,3 +53,4 @@
 
 ### POST-DELIVERY CHANGES
 - [x] Remove "Real Ideas, Real Impact" section from home page
+- [x] Create dedicated admin account (Admin@aiportal.com / Admin123) for executive access
