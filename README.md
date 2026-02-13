@@ -12,6 +12,11 @@
 
 ---
 
+![AI Governance Assistant - Enterprise AI governance platform with mission-aligned evaluation](assets/hero-screenshot.jpg)
+*Enterprise AI governance platform with automated risk classification and compliance-ready audit trails — Live demo at [adventhealthaiportal.manus.space](https://adventhealthaiportal.manus.space)*
+
+---
+
 ## TL;DR (30-Second Scan)
 
 **What:** Complete AI governance platform for any organization. Evaluate AI initiatives against custom mission criteria, classify risk, generate RAID analysis, and route through appropriate governance paths.
@@ -23,6 +28,16 @@
 **For Businesses:** Organizations get reproducible, auditable AI governance that balances innovation velocity with compliance requirements. Healthcare demo included (AdventHealth case study).
 
 **Tech:** React 19 + TypeScript + tRPC 11 + Drizzle ORM + MySQL/TiDB + AI structured outputs + OAuth RBAC.
+
+---
+
+## Platform Demo
+
+**Interactive page scroll video** showcasing the complete governance workflow:
+
+https://github.com/IrvinCruzAI/AI-Governance-Assistant/assets/demo-scroll-video.webm
+
+*Full walkthrough: Landing page → Initiative submission → AI evaluation → Admin dashboard → Review queue*
 
 ---
 
