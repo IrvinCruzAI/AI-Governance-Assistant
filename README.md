@@ -1,8 +1,8 @@
-# AdventHealth AI Governance Assistant
+# AI Governance Assistant
 
-> Enterprise AI governance platform for healthcare. Mission-aligned evaluation, automated risk classification, and healthcare compliance design.
+> Enterprise AI governance platform. Mission-aligned evaluation, automated risk classification, and compliance-ready audit trails for any industry.
 
-[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-19-blue)](https://reactjs.org/)
 
@@ -14,13 +14,13 @@
 
 ## TL;DR (30-Second Scan)
 
-**What:** Complete AI governance system for healthcare organizations. Evaluate AI initiatives against mission alignment, classify risk, generate RAID analysis, and route through appropriate governance paths.
+**What:** Complete AI governance platform for any organization. Evaluate AI initiatives against custom mission criteria, classify risk, generate RAID analysis, and route through appropriate governance paths.
 
-**Why Different:** Healthcare-grade compliance thinking (patient safety, HIPAA, clinical impact) meets modern glassmorphism UI. Not generic governance—built for regulated environments where mistakes kill.
+**Why Different:** Industry-agnostic governance framework with healthcare demo. Not generic compliance—purpose-built for regulated environments where mistakes have consequences. Adaptable to finance, healthcare, government, or any industry with compliance requirements.
 
-**Technical Showcase:** Demonstrates AI governance architecture, healthcare compliance design, admin tooling sophistication, and tRPC type-safe API mastery.
+**Technical Showcase:** Demonstrates AI governance architecture, configurable compliance design, admin tooling sophistication, and tRPC type-safe API mastery.
 
-**For Businesses:** Healthcare organizations get reproducible, auditable AI governance that balances innovation velocity with patient safety.
+**For Businesses:** Organizations get reproducible, auditable AI governance that balances innovation velocity with compliance requirements. Healthcare demo included (AdventHealth case study).
 
 **Tech:** React 19 + TypeScript + tRPC 11 + Drizzle ORM + MySQL/TiDB + AI structured outputs + OAuth RBAC.
 
@@ -28,19 +28,19 @@
 
 ## The Problem
 
-**Healthcare Organizations:** Racing to adopt AI, but patient safety and compliance are non-negotiable. Need governance that's fast enough to enable innovation, strict enough to prevent harm.
+**Enterprises Adopting AI:** Racing to implement AI, but compliance and risk management are non-negotiable. Need governance that's fast enough to enable innovation, strict enough to prevent harm.
 
 **Chief AI Officers:** Drowning in initiative proposals. Manual review = weeks per proposal. Need automated classification, mission alignment scoring, and clear governance paths.
 
-**Clinical Teams:** Want to use AI but don't understand governance requirements. Submit ideas, then wait months for approval or rejection with no feedback.
+**Business Teams:** Want to use AI but don't understand governance requirements. Submit ideas, then wait months for approval or rejection with no feedback.
 
 **Current "Solutions" Fail:**
 - ❌ **Manual review** = Weeks per proposal, inconsistent criteria, bottlenecks
-- ❌ **Generic compliance tools** = Not healthcare-specific, miss clinical nuances
+- ❌ **Generic compliance tools** = Not industry-specific, miss domain nuances
 - ❌ **SharePoint forms** = No AI assistance, no transparency, no analytics
 - ❌ **ChatGPT copy-paste** = No audit trail, inconsistent scoring, not reproducible
 
-**The gap:** No system purpose-built for healthcare AI governance that's both fast (AI-powered) and safe (auditable, reproducible, transparent).
+**The gap:** No system purpose-built for enterprise AI governance that's both fast (AI-powered) and safe (auditable, reproducible, transparent) across industries.
 
 ---
 
@@ -48,11 +48,11 @@
 
 ### AI-Powered Evaluation Pipeline
 
-**Input:** Initiative proposal (4-step form: problem, solution, mission, ethics)
+**Input:** Initiative proposal (4-step form: problem, solution, mission, risk assessment)
 
 **AI Analysis:**
-1. **Mission Alignment Scoring** — High/Medium/Low rating with reasoning
-2. **Risk Classification** — Low/Medium/High based on clinical impact, data type, automation
+1. **Mission Alignment Scoring** — High/Medium/Low rating with reasoning (configurable criteria)
+2. **Risk Classification** — Low/Medium/High based on business impact, data sensitivity, automation level
 3. **RAID Generation** — Risks, Assumptions, Issues, Dependencies automatically identified
 4. **Governance Path** — Light/Standard/Full routing recommendation
 
@@ -61,9 +61,9 @@
 ### Educational Landing Page
 
 **Before users submit:**
-- Explains why AI governance matters
+- Explains why AI governance matters for your organization
 - Shows mission alignment criteria
-- Clarifies risk levels and paths
+- Clarifies risk levels and governance paths
 - Sets expectations (transparent process)
 
 **Why this matters:** Reduces low-quality submissions, educates teams, builds trust.
@@ -74,7 +74,7 @@
 - Total submissions, high-risk initiatives, pending reviews, approval rates
 
 **Review Queue:**
-- Multi-filter (status, risk, area)
+- Multi-filter (status, risk, business area)
 - Quick-action status updates
 - Admin notes and audit trail
 - Batch operations
@@ -87,11 +87,27 @@
 
 ### Glassmorphism Design
 
-Modern frosted-glass aesthetic with AdventHealth branding (healthcare blue/teal).
+Modern frosted-glass aesthetic with configurable branding (demo uses healthcare blue/teal).
 
-**Why in healthcare:** Balances modern UX with professional credibility. Not "startup-flashy," but not "1995 hospital IT."
+**Why modern design:** Balances credibility with user experience. Not "startup-flashy," not "1995 enterprise IT."
 
 **[Try it now →](https://adventhealthaiportal.manus.space)**
+
+---
+
+## Demo Case Study: Healthcare (AdventHealth)
+
+**Context:** Built as demonstration project to showcase healthcare AI governance capability. AdventHealth used as mock client to demonstrate domain understanding.
+
+**Healthcare-Specific Features (Demo):**
+- Mission alignment: Patient safety, health equity, whole-person care
+- Risk factors: Clinical impact, PHI classification, automation level
+- Governance paths: Light (back-office) → Standard (clinical support) → Full (direct clinical decisions)
+- Faith-based values integration ("Extending the Healing Ministry of Christ")
+
+**Why healthcare:** Most challenging regulatory environment. If it works for healthcare, it works anywhere.
+
+**Adaptable to any industry:** Replace mission criteria, risk factors, and governance paths with your organization's requirements.
 
 ---
 
@@ -99,15 +115,15 @@ Modern frosted-glass aesthetic with AdventHealth branding (healthcare blue/teal)
 
 ### What This Demonstrates
 
-#### 1. Healthcare Compliance Design
+#### 1. Configurable Compliance Design
 
 Real understanding of:
-- ✅ **Patient Safety** — Clinical impact assessment, automation level analysis
-- ✅ **HIPAA** — PHI classification, data type evaluation
-- ✅ **Mission Alignment** — Faith-based healthcare values ("Extending the Healing Ministry of Christ")
-- ✅ **Risk Stratification** — Clinical vs back-office, sensitive data handling
+- ✅ **Mission Alignment Frameworks** — Adaptable criteria for any organization
+- ✅ **Risk Stratification Models** — Industry-specific factors (data sensitivity, business impact, automation)
+- ✅ **Audit Trail Requirements** — Reproducible scoring, transparent reasoning
+- ✅ **Governance Path Routing** — Automated workflow assignment
 
-**Why this matters:** Most AI builders understand prompts but not why healthcare governance exists. This shows domain expertise.
+**Why this matters:** Most AI builders understand prompts but not enterprise compliance requirements. This shows governance architecture thinking.
 
 #### 2. AI Governance Architecture
 
@@ -165,7 +181,7 @@ No REST endpoints. Full TypeScript inference from server → client.
 
 **This project shows THREE:**
 - ✅ Deep AI governance expertise (mission scoring, risk models, RAID)
-- ✅ Healthcare compliance thinking (patient safety, HIPAA, clinical impact)
+- ✅ Industry compliance thinking (configurable frameworks, audit trails)
 - ✅ Advanced technical execution (tRPC, Drizzle, structured AI outputs)
 
 ### Proof of Production Thinking
@@ -180,13 +196,13 @@ No REST endpoints. Full TypeScript inference from server → client.
 ### Interview Talking Points
 
 **"Walk me through this project":**
-> "I built a complete AI governance platform for AdventHealth. Healthcare organizations face a unique challenge: they need to move fast on AI to stay competitive, but patient safety is non-negotiable. This system automates the evaluation pipeline—mission alignment scoring, risk classification, RAID analysis—while maintaining auditability and transparency. The technical challenge was building reproducible AI outputs (same input = same score every time) using structured JSON validation. I chose tRPC for the API layer to get full type safety across the stack, which matters when you're dealing with healthcare compliance data."
+> "I built an enterprise AI governance platform that's industry-agnostic. Organizations face a universal challenge: they need to move fast on AI to stay competitive, but compliance is non-negotiable. This system automates the evaluation pipeline—mission alignment scoring, risk classification, RAID analysis—while maintaining auditability and transparency. I used healthcare (AdventHealth) as the demo case study because it's the most challenging regulatory environment. If it works for healthcare, it works for finance, government, or any regulated industry. The technical challenge was building reproducible AI outputs using structured JSON validation and tRPC for full type safety across the stack."
 
 **"What was the hardest part?":**
-> "Balancing modern UX with conservative healthcare expectations. I used glassmorphism design—frosted glass, soft gradients—but with professional color palettes (healthcare blue/teal, not startup-neon). The AI reasoning transparency was also critical: every score comes with plain-language explanations so clinicians understand *why* their initiative was classified as high-risk."
+> "Making it industry-agnostic while keeping it concrete. Generic compliance tools feel abstract—no one adopts them. So I built a complete healthcare demo with AdventHealth's actual mission criteria, then architected it so those criteria are configurable. The AI reasoning transparency was also critical: every score comes with plain-language explanations so users understand *why* their initiative was classified a certain way."
 
-**"How does this relate to an AI Strategy Manager role?":**
-> "AI Strategy Managers sit at the intersection of AI capability, business value, and risk management. This project proves I can operate at all three levels: I understand AI governance frameworks (not just prompts), I can translate business requirements into working systems (not just PowerPoints), and I ship production-quality code (not just prototypes)."
+**"Why AdventHealth?":**
+> "I researched their mission, understood their AI governance challenges, and built this as a demonstration of capability. It shows I can understand a complex domain, translate requirements into working systems, and ship production-quality code—not just talk about it in an interview. It's a spec project, but it's fully functional."
 
 ---
 
@@ -199,7 +215,7 @@ No REST endpoints. Full TypeScript inference from server → client.
 | **Database** | MySQL/TiDB with Drizzle ORM |
 | **AI** | LLM service with structured JSON outputs |
 | **Auth** | Manus OAuth with role-based access control |
-| **Design** | Glassmorphism, AdventHealth branding |
+| **Design** | Glassmorphism, configurable branding |
 | **Testing** | Vitest |
 
 ---
@@ -224,11 +240,11 @@ pnpm test
 
 ---
 
-## AI Governance Framework
+## Configurable Governance Framework
 
-### Mission Alignment Criteria
+### Mission Alignment Criteria (Example: Healthcare)
 
-Initiatives evaluated against AdventHealth's core mission:
+Demo uses AdventHealth's mission criteria:
 - Patient safety
 - Health equity
 - Reducing clinician/staff burnout
@@ -236,25 +252,27 @@ Initiatives evaluated against AdventHealth's core mission:
 - Patient and family experience
 - Operational efficiency
 - Whole-person care (physical, emotional, spiritual, social)
-- "Extending the Healing Ministry of Christ"
+- Faith-based values ("Extending the Healing Ministry of Christ")
+
+**Adaptable:** Replace with your organization's mission, values, or strategic priorities.
 
 **Ratings:**
-- **High** — Strongly aligned with multiple mission areas
-- **Medium** — Aligned with some mission areas
-- **Low** — Minimal or unclear mission alignment
+- **High** — Strongly aligned with multiple criteria
+- **Medium** — Aligned with some criteria
+- **Low** — Minimal or unclear alignment
 
 ### Risk Classification Model
 
-Risk determined by analyzing:
-- **Area** — Direct clinical decisions vs. back-office operations
-- **Clinical Impact** — Effect on patient care and safety
-- **Data Type** — No personal data vs. highly sensitive PHI
-- **Automation Level** — Suggestions only vs. automated actions
+Risk determined by analyzing (configurable):
+- **Business Area** — Core operations vs. back-office
+- **Business Impact** — Revenue, reputation, customer trust
+- **Data Sensitivity** — Public data vs. regulated/sensitive data
+- **Automation Level** — Suggestions only vs. automated decisions
 
 **Risk Levels & Governance Paths:**
-- **Low Risk → Light Governance** — Back-office, no PHI, suggestions only
-- **Medium Risk → Standard Governance** — Clinical support, PHI, human review required
-- **High Risk → Full Clinical Governance** — Direct clinical decisions, sensitive data, automated actions
+- **Low Risk → Light Governance** — Back-office, public data, suggestions only
+- **Medium Risk → Standard Governance** — Core operations, sensitive data, human oversight required
+- **High Risk → Full Governance** — Critical operations, regulated data, automated decisions
 
 ### RAID Analysis
 
@@ -283,17 +301,17 @@ AI automatically generates:
 
 ## Challenges & Learnings
 
-**Challenge: Healthcare Compliance Design**  
-Required balancing modern UX with conservative healthcare expectations. Can't look like a startup demo—must convey professionalism and safety.
+**Challenge: Industry-Agnostic Architecture**  
+Required building concrete demo (healthcare) while keeping framework adaptable to other industries.
 
-**Solution:** Glassmorphism aesthetic (modern) with professional color palette (healthcare blue/teal), extensive educational content, and transparent AI reasoning. Result: Modern without being flashy.
+**Solution:** Configurable mission criteria, risk factors, and governance paths. Healthcare demo proves complexity, but architecture supports finance, government, or any regulated industry. Result: Concrete enough to be credible, flexible enough to be reusable.
 
 ---
 
 **Challenge: Reproducible AI Scoring**  
 Governance requires audit trails. "Why was this rated high-risk?" must have consistent answers.
 
-**Solution:** Structured JSON outputs with explicit criteria in system prompts. Same initiative details → same mission score → same risk classification. AI reasoning stored with every decision for audit trail.
+**Solution:** Structured JSON outputs with explicit criteria in system prompts. Same initiative details → same mission score → same risk classification. AI reasoning stored with every decision for audit trail. Result: Reproducible governance decisions.
 
 ---
 
@@ -322,8 +340,8 @@ Initial design: Admins opened full detail view for every initiative. With 100+ s
 
 ## For Businesses
 
-**Healthcare Organizations:**
-- Accelerate AI adoption without compromising safety
+**Enterprises with AI Initiatives:**
+- Accelerate AI adoption without compromising compliance
 - Consistent governance criteria across departments
 - Audit-ready documentation and decision trail
 - Real-time visibility into initiative pipeline
@@ -334,7 +352,7 @@ Initial design: Admins opened full detail view for every initiative. With 100+ s
 - Track submission trends and approval rates
 - Focus on high-risk initiatives requiring deep review
 
-**Clinical Teams:**
+**Business Teams:**
 - Understand governance requirements before submitting
 - Get instant feedback on mission alignment
 - Clear path forward (Light vs Standard vs Full governance)
@@ -342,21 +360,35 @@ Initial design: Admins opened full detail view for every initiative. With 100+ s
 
 ---
 
+## Adaptable to Any Industry
+
+**Healthcare:** Patient safety, HIPAA, clinical impact (demo case study)  
+**Finance:** Regulatory compliance, fraud risk, customer impact  
+**Government:** Public safety, data privacy, citizen trust  
+**Manufacturing:** Operational safety, supply chain risk, quality control  
+**Retail:** Customer experience, brand reputation, data security  
+
+**Configuration required:** Mission criteria, risk factors, governance paths. Architecture supports any industry.
+
+---
+
 ## What This Proves
 
-✅ **Healthcare compliance expertise** — Patient safety, HIPAA, clinical impact  
 ✅ **AI governance architecture** — Reproducible scoring, audit trails, transparent reasoning  
+✅ **Industry adaptability** — Configurable frameworks for any compliance environment  
 ✅ **tRPC mastery** — Type-safe APIs, modern full-stack patterns  
 ✅ **Admin tooling sophistication** — Review queues, analytics, RBAC  
-✅ **Modern design in conservative space** — Glassmorphism meets healthcare credibility  
-✅ **Production thinking** — Error handling, state persistence, audit trails
+✅ **Modern design** — Glassmorphism meets enterprise credibility  
+✅ **Production thinking** — Error handling, state persistence, audit trails  
 
 ---
 
 ## License
 
-Copyright © 2024 AdventHealth. All rights reserved.
+MIT License - Open source and free to use.
 
 ---
 
 **Built by Irvin Cruz** | [Portfolio](https://github.com/IrvinCruzAI) | [LinkedIn](https://www.linkedin.com/in/irvincruzai/)
+
+**Demonstration Project** — Built as spec project to showcase AI governance capability. AdventHealth used as mock client for healthcare case study. Platform architecture supports any industry.
