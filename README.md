@@ -12,8 +12,11 @@
 
 ---
 
-![AI Governance Assistant - Enterprise AI governance platform with mission-aligned evaluation](assets/hero-screenshot.jpg)
-*Enterprise AI governance platform with automated risk classification and compliance-ready audit trails — Live demo at [adventhealthaiportal.manus.space](https://adventhealthaiportal.manus.space)*
+<p align="center">
+  <img src="https://raw.githubusercontent.com/IrvinCruzAI/AI-Governance-Assistant/main/assets/hero-screenshot.jpg" alt="AI Governance Assistant Platform" width="100%">
+</p>
+
+<p align="center"><em>Enterprise AI governance platform with automated risk classification and compliance-ready audit trails — Live demo at <a href="https://adventhealthaiportal.manus.space">adventhealthaiportal.manus.space</a></em></p>
 
 ---
 
@@ -35,7 +38,7 @@
 
 **Interactive page scroll video** showcasing the complete governance workflow:
 
-https://github.com/IrvinCruzAI/AI-Governance-Assistant/assets/demo-scroll-video.webm
+[**▶️ Watch Platform Walkthrough Video**](https://github.com/IrvinCruzAI/AI-Governance-Assistant/blob/main/assets/demo-scroll-video.webm)
 
 *Full walkthrough: Landing page → Initiative submission → AI evaluation → Admin dashboard → Review queue*
 
