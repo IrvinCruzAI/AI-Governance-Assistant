@@ -6,9 +6,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-19-blue)](https://reactjs.org/)
 
-![AI Governance Assistant Screenshot](./.github/screenshot.jpg)
-
 **[🚀 Try Live Demo](https://adventhealthaiportal.manus.space)** | **[Technical Highlights](#technical-highlights)** | **[Tech Stack](#tech-stack)** | **[Quick Start](#quick-start)**
+
+![AI Governance Assistant Screenshot](./assets/screenshot.jpg)
 
 **A [FutureCrafters](https://www.futurecrafters.ai) Project** • Built by [Irvin Cruz](https://irvincruz.com)
 
