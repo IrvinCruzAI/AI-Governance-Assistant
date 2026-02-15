@@ -8,7 +8,6 @@
 
 **[🚀 Try Live Demo](https://adventhealthaiportal.manus.space)** | **[Technical Highlights](#technical-highlights)** | **[Tech Stack](#tech-stack)** | **[Quick Start](#quick-start)**
 
-![Screenshot](assets/screenshot.jpg)
 
 **A [FutureCrafters](https://www.futurecrafters.ai) Project** • Built by [Irvin Cruz](https://irvincruz.com)
 
