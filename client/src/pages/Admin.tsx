@@ -364,7 +364,16 @@ export default function Admin() {
                 : 'Track your AI initiative ideas and their progress'}
             </p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col items-end gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setLocation("/")}
+              aria-label="Go back to home page"
+              className="whitespace-nowrap"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Home
+            </Button>
             <Button
               variant="outline"
               size="icon"
@@ -378,24 +387,16 @@ export default function Admin() {
             >
               <Settings className="h-5 w-5" />
             </Button>
-            <Button
-              variant="outline"
-              onClick={() => setLocation("/")}
-              aria-label="Go back to home page"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Button>
           </div>
         </div>
 
         {isAdmin ? (
           <Tabs defaultValue="all" className="space-y-6">
-            <TabsList className="flex flex-wrap !w-full gap-3 !bg-transparent !p-0 mb-12">
-              <TabsTrigger value="my" className="flex-1 min-w-[180px] border-2 border-gray-300 data-[state=active]:border-blue-500">My Submissions</TabsTrigger>
-              <TabsTrigger value="all" className="flex-1 min-w-[180px] border-2 border-gray-300 data-[state=active]:border-blue-500">All Submissions</TabsTrigger>
-              <TabsTrigger value="matrix" className="flex-1 min-w-[180px] border-2 border-gray-300 data-[state=active]:border-blue-500">Priority Matrix</TabsTrigger>
-              <TabsTrigger value="roadmap" className="flex-1 min-w-[180px] border-2 border-gray-300 data-[state=active]:border-blue-500">Roadmap</TabsTrigger>
+            <TabsList className="grid grid-cols-2 md:grid-cols-4 !w-full gap-3 !bg-transparent !p-0 mb-12">
+              <TabsTrigger value="my" className="border-2 border-gray-300 data-[state=active]:border-blue-500">My Submissions</TabsTrigger>
+              <TabsTrigger value="all" className="border-2 border-gray-300 data-[state=active]:border-blue-500">All Submissions</TabsTrigger>
+              <TabsTrigger value="matrix" className="border-2 border-gray-300 data-[state=active]:border-blue-500">Priority Matrix</TabsTrigger>
+              <TabsTrigger value="roadmap" className="border-2 border-gray-300 data-[state=active]:border-blue-500">Roadmap</TabsTrigger>
               {/* Settings tab hidden but still exists for navigation */}
               <TabsTrigger value="settings" className="hidden">Settings</TabsTrigger>
             </TabsList>

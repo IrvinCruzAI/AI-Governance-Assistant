@@ -33,4 +33,5 @@
 - [x] Fix inconsistent tab styling (add borders around ALL tabs, not just active tab)
 - [x] Fix tabs overlapping with content below (added mb-8 to TabsList)
 - [x] Test tab switching functionality
-- [ ] Redesign Settings access (remove from tab row, add gear icon button in header)
+- [x] Redesign Settings access (removed from tab row, added gear icon button in header)
+- [x] Optimize header button layout (vertically stacked, Back to Home on top, Settings gear below)
