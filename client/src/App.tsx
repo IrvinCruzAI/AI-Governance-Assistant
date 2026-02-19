@@ -1,10 +1,11 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import { useEffect } from "react";
 import Settings from "./pages/Settings";
 import IdeaStarters from "./pages/IdeaStarters";
 import Admin from "./pages/Admin";
@@ -17,6 +18,13 @@ import Login from "./pages/Login";
 import InitiativeDetail from "./pages/InitiativeDetail";
 
 function Router() {
+  const [location] = useLocation();
+  
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+  
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>

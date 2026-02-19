@@ -91,3 +91,13 @@
 - [x] Update trust badge to "For Travel + Leisure Co. Team Members"
 - [x] Review and adjust other homepage copy to reflect internal tool positioning
 - [ ] Test and save checkpoint
+
+## Scroll-to-Top on Page Navigation
+- [ ] Add useEffect hook to scroll to top on route changes
+- [ ] Test navigation between pages
+- [ ] Save final checkpoint
+
+## Scroll-to-Top on All Page Navigation
+- [ ] Add global scroll-to-top behavior in App.tsx for all route changes
+- [ ] Test navigation between all pages (Home, Browse, Roadmap, Idea Starters, New Initiative, Admin)
+- [ ] Save final checkpoint
