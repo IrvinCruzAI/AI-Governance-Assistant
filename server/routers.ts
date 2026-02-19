@@ -516,6 +516,38 @@ export const appRouter = router({
         return { success: true };
       }),
   }),
+
+  // Comment procedures
+  comments: router({
+    list: publicProcedure
+      .input(z.object({ initiativeId: z.number() }))
+      .query(async ({ input }) => {
+        return db.getInitiativeComments(input.initiativeId);
+      }),
+    
+    create: protectedProcedure
+      .input(z.object({
+        initiativeId: z.number(),
+        content: z.string().min(1).max(5000),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const commentId = await db.createComment({
+          initiativeId: input.initiativeId,
+          userId: ctx.user.id,
+          userName: ctx.user.name || ctx.user.email || 'Anonymous',
+          userRole: ctx.user.role,
+          content: input.content,
+        });
+        return { success: true, commentId };
+      }),
+    
+    delete: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await db.deleteComment(input.id, ctx.user.id);
+        return { success: true };
+      }),
+  }),
 });
 
 export type AppRouter = typeof appRouter;

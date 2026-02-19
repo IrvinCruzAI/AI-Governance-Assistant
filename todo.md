@@ -106,3 +106,13 @@
 - [x] TypeScript type check: ✓ No errors
 - [x] All tests: ✓ 37/37 passing
 - [x] Ready for demo
+
+## Comment Thread Feature
+- [x] Design database schema for comments table
+- [x] Run database migration to create comments table
+- [x] Create backend tRPC procedures (list, create, delete comments)
+- [x] Build CommentThread UI component with display and form
+- [x] Integrate comments into InitiativeDetail page
+- [x] Write vitest tests for comment procedures (8 tests, all passing)
+- [x] Test comment functionality end-to-end
+- [ ] Save checkpoint

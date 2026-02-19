@@ -1,6 +1,6 @@
 import { eq, desc, and, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, initiatives, InsertInitiative, votes, InsertVote } from "../drizzle/schema";
+import { InsertUser, users, initiatives, InsertInitiative, votes, InsertVote, comments, InsertComment } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -395,4 +395,34 @@ function calculateSimplePriority(impact: 'high' | 'medium' | 'low', effort: 'hig
   }
   
   return { score, quadrant };
+}
+
+// Comment queries
+export async function getInitiativeComments(initiativeId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(comments)
+    .where(eq(comments.initiativeId, initiativeId))
+    .orderBy(comments.createdAt);
+}
+
+export async function createComment(data: InsertComment) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.insert(comments).values(data);
+  return result[0].insertId;
+}
+
+export async function deleteComment(id: number, userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  // Only allow user to delete their own comments
+  await db.delete(comments)
+    .where(and(
+      eq(comments.id, id),
+      eq(comments.userId, userId)
+    ));
 }

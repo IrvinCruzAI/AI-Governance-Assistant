@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { APP_TITLE } from "@/const";
 import { trpc } from "@/lib/trpc";
 import { ArrowLeft, Loader2, AlertTriangle, CheckCircle2, Info, Target } from "lucide-react";
+import CommentThread from "@/components/CommentThread";
 import { useLocation, useRoute } from "wouter";
 
 export default function InitiativeDetail() {
@@ -415,6 +416,11 @@ export default function InitiativeDetail() {
                 </CardContent>
               </Card>
             )}
+          </div>
+
+          {/* Comment Thread */}
+          <div className="mt-12">
+            <CommentThread initiativeId={initiative.id} />
           </div>
         </div>
       </div>
