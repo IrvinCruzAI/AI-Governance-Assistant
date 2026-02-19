@@ -116,3 +116,21 @@
 - [x] Write vitest tests for comment procedures (8 tests, all passing)
 - [x] Test comment functionality end-to-end
 - [ ] Save checkpoint
+
+## Fix Missing /idea-starters Route
+- [x] Check App.tsx for /idea-starters route registration (route exists at line 41)
+- [x] Verify IdeaStarters.tsx page file exists (file confirmed)
+- [x] Add route if missing (not needed - route already registered)
+- [x] Test /idea-starters page loads correctly (route working)
+
+## Fix Build Configuration for Checkpoint Save
+- [x] Update vite.config.ts to increase chunkSizeWarningLimit to 1000 kB
+- [ ] Test build succeeds without errors
+
+## Final Database Cleanup for Production
+- [x] Delete all users except IDs 1, 2, and 3 (3 users confirmed)
+- [x] Delete all initiatives except the 6 Travel + Leisure marketing initiatives (6 initiatives confirmed)
+- [x] Delete all votes (0 votes confirmed)
+- [x] Delete all comments (0 comments confirmed)
+- [x] Verify final data state (3 users, 6 initiatives, 0 votes, 0 comments)
+- [ ] Save final production checkpoint
