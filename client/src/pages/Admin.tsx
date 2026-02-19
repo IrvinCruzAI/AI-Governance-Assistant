@@ -364,24 +364,40 @@ export default function Admin() {
                 : 'Track your AI initiative ideas and their progress'}
             </p>
           </div>
-          <Button
-            variant="outline"
-            onClick={() => setLocation("/")}
-            aria-label="Go back to home page"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Home
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => {
+                const tabs = document.querySelector('[role="tablist"]');
+                const settingsTab = document.querySelector('[value="settings"]') as HTMLButtonElement;
+                if (settingsTab) settingsTab.click();
+              }}
+              aria-label="Settings"
+              className="border-2 border-gray-300 hover:border-blue-500"
+            >
+              <Settings className="h-5 w-5" />
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => setLocation("/")}
+              aria-label="Go back to home page"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Home
+            </Button>
+          </div>
         </div>
 
         {isAdmin ? (
           <Tabs defaultValue="all" className="space-y-6">
-            <TabsList className="grid !w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 !bg-transparent !p-0 mb-12">
-              <TabsTrigger value="my" className="border-2 border-gray-300 data-[state=active]:border-blue-500">My Submissions</TabsTrigger>
-              <TabsTrigger value="all" className="border-2 border-gray-300 data-[state=active]:border-blue-500">All Submissions</TabsTrigger>
-              <TabsTrigger value="matrix" className="border-2 border-gray-300 data-[state=active]:border-blue-500">Priority Matrix</TabsTrigger>
-              <TabsTrigger value="roadmap" className="border-2 border-gray-300 data-[state=active]:border-blue-500">Roadmap</TabsTrigger>
-              <TabsTrigger value="settings" className="border-2 border-gray-300 data-[state=active]:border-blue-500">Settings</TabsTrigger>
+            <TabsList className="flex flex-wrap !w-full gap-3 !bg-transparent !p-0 mb-12">
+              <TabsTrigger value="my" className="flex-1 min-w-[180px] border-2 border-gray-300 data-[state=active]:border-blue-500">My Submissions</TabsTrigger>
+              <TabsTrigger value="all" className="flex-1 min-w-[180px] border-2 border-gray-300 data-[state=active]:border-blue-500">All Submissions</TabsTrigger>
+              <TabsTrigger value="matrix" className="flex-1 min-w-[180px] border-2 border-gray-300 data-[state=active]:border-blue-500">Priority Matrix</TabsTrigger>
+              <TabsTrigger value="roadmap" className="flex-1 min-w-[180px] border-2 border-gray-300 data-[state=active]:border-blue-500">Roadmap</TabsTrigger>
+              {/* Settings tab hidden but still exists for navigation */}
+              <TabsTrigger value="settings" className="hidden">Settings</TabsTrigger>
             </TabsList>
 
             {/* My Submissions Tab */}
