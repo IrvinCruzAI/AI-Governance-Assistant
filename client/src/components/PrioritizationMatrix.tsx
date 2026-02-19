@@ -119,16 +119,16 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
         <CardContent>
           <div className="relative w-full aspect-square bg-gradient-to-br from-background to-muted/20 rounded-lg border">
             {/* Quadrant Labels */}
-            <div className="absolute top-2 left-2 text-xs font-semibold text-muted-foreground">
+            <div className="absolute top-1 sm:top-2 left-1 sm:left-2 text-[10px] sm:text-xs font-semibold text-muted-foreground">
               High Return
             </div>
-            <div className="absolute bottom-2 left-2 text-xs font-semibold text-muted-foreground">
+            <div className="absolute bottom-1 sm:bottom-2 left-1 sm:left-2 text-[10px] sm:text-xs font-semibold text-muted-foreground">
               Low Return
             </div>
-            <div className="absolute bottom-2 left-2 text-xs font-semibold text-muted-foreground">
+            <div className="absolute bottom-1 sm:bottom-2 left-1 sm:left-2 text-[10px] sm:text-xs font-semibold text-muted-foreground">
               Low Effort
             </div>
-            <div className="absolute bottom-2 right-2 text-xs font-semibold text-muted-foreground">
+            <div className="absolute bottom-1 sm:bottom-2 right-1 sm:right-2 text-[10px] sm:text-xs font-semibold text-muted-foreground">
               High Effort
             </div>
 
@@ -137,17 +137,20 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
             <div className="absolute left-0 right-0 top-1/2 h-px bg-border" />
 
             {/* Quadrant Background Labels */}
-            <div className="absolute top-4 left-4 text-sm font-medium text-muted-foreground/40">
-              Strategic Bets
+            <div className="absolute top-2 sm:top-4 left-2 sm:left-4 text-[10px] sm:text-sm font-medium text-muted-foreground/40">
+              <span className="hidden sm:inline">Strategic Bets</span>
+              <span className="sm:hidden">Strategic</span>
             </div>
-            <div className="absolute top-4 right-4 text-sm font-medium text-muted-foreground/40">
-              Quick Wins
+            <div className="absolute top-2 sm:top-4 right-2 sm:right-4 text-[10px] sm:text-sm font-medium text-muted-foreground/40">
+              <span className="hidden sm:inline">Quick Wins</span>
+              <span className="sm:hidden">Quick</span>
             </div>
-            <div className="absolute bottom-4 left-4 text-sm font-medium text-muted-foreground/40">
+            <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-[10px] sm:text-sm font-medium text-muted-foreground/40">
               Reconsider
             </div>
-            <div className="absolute bottom-4 right-4 text-sm font-medium text-muted-foreground/40">
-              Nice-to-Have
+            <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 text-[10px] sm:text-sm font-medium text-muted-foreground/40">
+              <span className="hidden sm:inline">Nice-to-Have</span>
+              <span className="sm:hidden">Nice</span>
             </div>
 
             {/* Initiative Bubbles */}

@@ -288,8 +288,8 @@ export default function NewInitiative() {
         </div>
       </div>
 
-      {/* Form Content */}
-      <div className="container max-w-4xl py-8">
+         {/* Form */}
+      <div className="container max-w-3xl py-4 px-4 sm:py-8">
         <form onSubmit={handleSubmit}>
           {/* Step 1: Initiative Basics */}
           {currentStep === 1 && (
