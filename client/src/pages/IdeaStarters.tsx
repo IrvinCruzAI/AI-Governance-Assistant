@@ -81,48 +81,48 @@ export default function IdeaStarters() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-12 px-4">
+    <div className="min-h-screen bg-[#F5F1E8] py-12 px-4">
       <div className="container max-w-5xl">
         {/* Header */}
         <div className="mb-8">
           <Button
             variant="ghost"
             onClick={() => setLocation("/")}
-            className="mb-4"
+            className="mb-4 text-gray-700 hover:text-[#2F5A4A] hover:bg-white/50"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Button>
           
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-900 rounded-2xl mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#2F5A4A] rounded-sm mb-4">
               <Lightbulb className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 uppercase tracking-tight">
               Need Help Getting Started?
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
               Use these prompts to identify operational bottlenecks and AI opportunities in your daily workflow
             </p>
           </div>
         </div>
 
         {/* Why This Matters */}
-        <Card className="mb-12 border-2 border-gray-200 bg-gradient-to-br from-white to-gray-50">
+        <Card className="mb-12 border-2 border-[#2F5A4A]/20 bg-white shadow-sm">
           <CardHeader>
-            <CardTitle className="text-2xl flex items-center gap-2">
-              <Sparkles className="h-6 w-6 text-gray-700" />
+            <CardTitle className="text-2xl flex items-center gap-2 text-gray-900 font-bold uppercase tracking-wide">
+              <Sparkles className="h-6 w-6 text-[#2F5A4A]" />
               Why These Questions Matter
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 text-gray-700">
             <p>
-              <strong>The best AI initiatives don't come from corporate strategy decks.</strong> They come from people on the ground who see the operational inefficiencies every single day.
+              <strong className="text-gray-900">The best AI initiatives don't come from corporate strategy decks.</strong> They come from people on the ground who see the operational inefficiencies every single day.
             </p>
             <p>
-              These prompts are designed to help you articulate what you already know: <strong>where time is wasted, where members are frustrated, and where your team is burning out on repetitive work.</strong>
+              These prompts are designed to help you articulate what you already know: <strong className="text-gray-900">where time is wasted, where members are frustrated, and where your team is burning out on repetitive work.</strong>
             </p>
-            <p className="text-lg font-semibold text-gray-900">
+            <p className="text-lg font-bold text-[#2F5A4A]">
               You don't need to know how AI works. You just need to know what's broken.
             </p>
           </CardContent>
@@ -130,17 +130,17 @@ export default function IdeaStarters() {
 
         {/* Category Grid */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-black text-gray-900 mb-6 uppercase tracking-wide">
             Choose a Category (or Browse All)
           </h2>
           <div className="grid md:grid-cols-3 gap-4 mb-8">
             {IDEA_PROMPTS.map((category) => (
               <Card
                 key={category.category}
-                className={`cursor-pointer transition-all hover:shadow-lg ${
+                className={`cursor-pointer transition-all hover:shadow-md ${
                   selectedCategory === category.category
-                    ? "border-2 border-gray-800 bg-gray-50"
-                    : "border-2 border-gray-200 hover:border-gray-400"
+                    ? "border-2 border-[#2F5A4A] bg-white shadow-md"
+                    : "border-2 border-gray-200 hover:border-[#2F5A4A]/50 bg-white"
                 }`}
                 onClick={() =>
                   setSelectedCategory(
@@ -150,7 +150,7 @@ export default function IdeaStarters() {
               >
                 <CardHeader>
                   <div className="text-4xl mb-2">{category.icon}</div>
-                  <CardTitle className="text-lg">{category.category}</CardTitle>
+                  <CardTitle className="text-lg font-bold text-gray-900">{category.category}</CardTitle>
                 </CardHeader>
               </Card>
             ))}
@@ -165,13 +165,13 @@ export default function IdeaStarters() {
             <div key={category.category}>
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-3xl">{category.icon}</span>
-                <h3 className="text-2xl font-bold text-gray-900">{category.category}</h3>
+                <h3 className="text-2xl font-black text-gray-900 uppercase tracking-wide">{category.category}</h3>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 {category.prompts.map((prompt, idx) => (
                   <Card
                     key={idx}
-                    className="border-l-4 border-l-gray-700 hover:shadow-md transition-shadow"
+                    className="border-l-4 border-l-[#2F5A4A] hover:shadow-md transition-shadow bg-white border border-gray-200"
                   >
                     <CardContent className="pt-6 space-y-4">
                       <p className="text-gray-700 font-medium">{prompt}</p>
@@ -179,7 +179,7 @@ export default function IdeaStarters() {
                         onClick={() => setLocation(`/new-initiative?prompt=${encodeURIComponent(prompt)}&category=${encodeURIComponent(category.category)}`)}
                         size="sm"
                         variant="outline"
-                        className="w-full border-gray-700 text-gray-800 hover:bg-gray-100"
+                        className="w-full border-2 border-[#2F5A4A] text-[#2F5A4A] hover:bg-[#2F5A4A]/10 uppercase text-xs tracking-wider font-medium"
                       >
                         <ArrowRight className="h-4 w-4 mr-2" />
                         Start Initiative from This Prompt
@@ -194,18 +194,18 @@ export default function IdeaStarters() {
 
         {/* Example Ideas */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-black text-gray-900 mb-4 uppercase tracking-wide">
             From Prompt to Initiative: Real Examples
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-700 mb-6">
             See how simple operational questions turn into actionable AI initiatives
           </p>
           <div className="space-y-4">
             {EXAMPLE_IDEAS.map((example, idx) => (
-              <Card key={idx} className="border-2 border-gray-200">
+              <Card key={idx} className="border-2 border-gray-200 bg-white">
                 <CardHeader>
                   <div className="flex items-start gap-4">
-                    <Badge variant="outline" className="bg-gray-100 text-gray-800 border-gray-300">
+                    <Badge variant="outline" className="bg-[#2F5A4A]/10 text-[#2F5A4A] border-[#2F5A4A]/30 uppercase text-xs tracking-wider font-medium">
                       Prompt
                     </Badge>
                     <p className="text-sm text-gray-600 italic flex-1">
@@ -215,10 +215,10 @@ export default function IdeaStarters() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-start gap-4">
-                    <ArrowRight className="h-5 w-5 text-gray-700 mt-1 flex-shrink-0" />
+                    <ArrowRight className="h-5 w-5 text-[#2F5A4A] mt-1 flex-shrink-0" />
                     <div>
                       <h4 className="font-bold text-gray-900 mb-2">{example.idea}</h4>
-                      <p className="text-gray-600">{example.description}</p>
+                      <p className="text-gray-700">{example.description}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -228,18 +228,18 @@ export default function IdeaStarters() {
         </div>
 
         {/* CTA */}
-        <Card className="bg-gradient-to-r from-gray-800 to-gray-700 text-white border-0">
+        <Card className="bg-[#2F5A4A] text-white border-0 shadow-md">
           <CardContent className="pt-8 pb-8 text-center">
-            <h3 className="text-2xl font-bold mb-4">
+            <h3 className="text-2xl font-black mb-4 uppercase tracking-wide">
               Ready to Turn Your Insight Into an Initiative?
             </h3>
-            <p className="text-gray-100 mb-6 max-w-2xl mx-auto">
+            <p className="text-white/90 mb-6 max-w-2xl mx-auto">
               Use these prompts to fill out the governance framework. You don't need all the answers—just a clear operational problem.
             </p>
             <Button
               size="lg"
               onClick={() => setLocation("/new-initiative")}
-              className="bg-white text-gray-800 hover:bg-gray-100 shadow-xl"
+              className="bg-white text-[#2F5A4A] hover:bg-white/90 shadow-lg uppercase text-sm tracking-wider font-medium"
             >
               Submit Your Initiative
               <ArrowRight className="ml-2 h-5 w-5" />

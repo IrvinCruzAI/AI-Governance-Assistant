@@ -71,3 +71,8 @@
 - [x] Extract brand colors, typography, imagery style, and design patterns
 - [x] Implement brand-matched visual design on homepage
 - [x] Test responsive design and save checkpoint
+
+## Idea Starters Page Brand Matching
+- [ ] Review Idea Starters page design
+- [ ] Apply Travel + Leisure Co. brand aesthetic (beige/cream backgrounds, dark green accents, bold uppercase headlines)
+- [ ] Test and save checkpoint
