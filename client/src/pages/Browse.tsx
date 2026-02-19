@@ -330,8 +330,8 @@ export default function Browse() {
           ) : filteredInitiatives && filteredInitiatives.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredInitiatives.map((initiative: any) => {
-                // Check if current user has voted (simple check based on vote count change)
                 const voteCount = initiative.voteCount || 0;
+                const hasVoted = initiative.hasVoted || false;
                 
                 return (
                   <article
@@ -395,15 +395,15 @@ export default function Browse() {
                     {/* Voting Button */}
                     <div className="pt-4 border-t border-gray-200">
                       <Button
-                        variant="outline"
+                        variant={hasVoted ? "default" : "outline"}
                         size="sm"
-                        className="w-full"
-                        onClick={() => handleVote(initiative.id, false)}
+                        className={`w-full ${hasVoted ? 'bg-[#2F5A4A] hover:bg-[#2F5A4A]/90 text-white' : 'border-[#2F5A4A] text-[#2F5A4A] hover:bg-[#2F5A4A]/10'}`}
+                        onClick={() => handleVote(initiative.id, hasVoted)}
                         disabled={!isAuthenticated || voteMutation.isPending || unvoteMutation.isPending}
-                        aria-label={`Vote for ${initiative.title}`}
+                        aria-label={hasVoted ? `Remove vote from ${initiative.title}` : `Vote for ${initiative.title}`}
                       >
-                        <ThumbsUp className="h-4 w-4 mr-2" aria-hidden="true" />
-                        {voteCount} {voteCount === 1 ? "Vote" : "Votes"}
+                        <ThumbsUp className={`h-4 w-4 mr-2 ${hasVoted ? 'fill-current' : ''}`} aria-hidden="true" />
+                        {hasVoted ? 'Voted' : 'Vote'} ({voteCount})
                       </Button>
                     </div>
                   </article>
