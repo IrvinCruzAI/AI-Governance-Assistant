@@ -286,9 +286,17 @@ export default function Home() {
             <br />
             Operational Insights
           </h2>
-          <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
-            The best AI solutions don't come from corporate headquarters—they come from people on the ground who see the operational bottlenecks every day. <strong className="text-gray-900">You know what would actually move the needle.</strong> We're not guessing. We're listening.
-          </p>
+          <div className="space-y-4">
+            <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
+              The best AI solutions don't come from corporate headquarters—they come from people on the ground who see the operational bottlenecks every day.
+            </p>
+            <p className="text-xl md:text-2xl font-bold text-gray-900">
+              You know what would actually move the needle.
+            </p>
+            <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
+              We're not guessing. We're listening.
+            </p>
+          </div>
         </div>
       </section>
 
