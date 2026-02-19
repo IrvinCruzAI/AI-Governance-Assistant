@@ -48,6 +48,7 @@ import {
   Download
 } from "lucide-react";
 import { toast } from "sonner";
+import { PrioritizationMatrix } from "@/components/PrioritizationMatrix";
 import { PriorityRubricModal } from "@/components/PriorityRubricModal";
 import { SettingsView } from "@/components/SettingsView";
 import { BrowseView } from "@/components/BrowseView";
@@ -375,9 +376,10 @@ export default function Admin() {
 
         {isAdmin ? (
           <Tabs defaultValue="all" className="space-y-6">
-            <TabsList className="grid w-full max-w-2xl grid-cols-4">
+            <TabsList className="grid w-full max-w-3xl grid-cols-5">
               <TabsTrigger value="my">My Submissions</TabsTrigger>
               <TabsTrigger value="all">All Submissions</TabsTrigger>
+              <TabsTrigger value="matrix">Priority Matrix</TabsTrigger>
               <TabsTrigger value="roadmap">Roadmap</TabsTrigger>
               <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
@@ -388,6 +390,17 @@ export default function Admin() {
                 initiatives={userInitiatives || []}
                 loading={userLoading}
                 onViewDetails={openInitiativeDetail}
+              />
+            </TabsContent>
+
+            {/* Priority Matrix Tab */}
+            <TabsContent value="matrix" className="space-y-6">
+              <PrioritizationMatrix 
+                initiatives={initiatives || []} 
+                onInitiativeClick={(id) => {
+                  const initiative = initiatives?.find(i => i.id === id);
+                  if (initiative) openInitiativeDetail(initiative);
+                }}
               />
             </TabsContent>
 

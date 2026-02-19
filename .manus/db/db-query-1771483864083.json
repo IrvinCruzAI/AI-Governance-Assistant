@@ -1,0 +1,50 @@
+{
+  "query": "SELECT id, title, userEmail FROM initiatives WHERE title LIKE '%test%' OR title LIKE '%Test%' OR title LIKE '%placeholder%' OR userEmail LIKE '%test%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, userEmail FROM initiatives WHERE title LIKE '%test%' OR title LIKE '%Test%' OR title LIKE '%placeholder%' OR userEmail LIKE '%test%';",
+  "rows": [
+    {
+      "id": "660009",
+      "title": "Test Initiative 1",
+      "userEmail": "test@travelandleisure.com"
+    },
+    {
+      "id": "660010",
+      "title": "Test Initiative",
+      "userEmail": "test@travelandleisure.com"
+    },
+    {
+      "id": "660011",
+      "title": "Test Initiative",
+      "userEmail": "test@travelandleisure.com"
+    },
+    {
+      "id": "660012",
+      "title": "AI-Powered Scheduling System",
+      "userEmail": "test@travelandleisure.com"
+    },
+    {
+      "id": "660013",
+      "title": "Test Initiative",
+      "userEmail": "test11@travelandleisure.com"
+    },
+    {
+      "id": "660014",
+      "title": "Test Initiative 2",
+      "userEmail": "test2@travelandleisure.com"
+    },
+    {
+      "id": "660015",
+      "title": "Test Initiative",
+      "userEmail": "test12@travelandleisure.com"
+    },
+    {
+      "id": "660016",
+      "title": "Test Initiative",
+      "userEmail": "test@travelandleisure.com"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tuserEmail\n660009\tTest Initiative 1\ttest@travelandleisure.com\n660010\tTest Initiative\ttest@travelandleisure.com\n660011\tTest Initiative\ttest@travelandleisure.com\n660012\tAI-Powered Scheduling System\ttest@travelandleisure.com\n660013\tTest Initiative\ttest11@travelandleisure.com\n660014\tTest Initiative 2\ttest2@travelandleisure.com\n660015\tTest Initiative\ttest12@travelandleisure.com\n660016\tTest Initiative\ttest@travelandleisure.com\n",
+  "stderr": "",
+  "execution_time_ms": 70
+}

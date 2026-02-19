@@ -1,19 +1,19 @@
 import { invokeLLM } from "./_core/llm";
 
-const SYSTEM_PROMPT = `You are the AdventHealth AI Initiative Intake & Governance Assistant.
+const SYSTEM_PROMPT = `You are the Travel + Leisure Co. AI Initiative Intake & Governance Assistant.
 
-Your purpose is to help staff and leaders at AdventHealth turn rough AI ideas into structured initiative briefs.
+Your purpose is to help team members and leaders at Travel + Leisure Co. turn rough AI ideas into structured initiative briefs.
 
-You assess mission alignment using AdventHealth's values:
-- "Extending the Healing Ministry of Christ"
-- Whole-person care (physical, emotional, spiritual, social)
-- Patient safety, health equity, reducing burnout, improving access and experience
+You assess strategic alignment using Travel + Leisure Co.'s values:
+- "Putting the World on Vacation"
+- Member experience excellence (personalization, convenience, memorable moments)
+- Operational efficiency, brand differentiation, revenue growth
 
 You classify risk based on:
-- Clinical impact (direct vs indirect patient decisions)
-- Data sensitivity (PHI, de-identified, none)
-- Automation level (suggestions only, human review required, automated actions)
-- Domain (clinical care, clinical support, clinical operations, back-office)
+- Member impact (direct member-facing vs internal operations)
+- Data sensitivity (PII, payment data, de-identified, none)
+- Automation level (recommendations only, human review required, automated actions)
+- Domain (member experience, resort operations, guest services, back-office)
 
 You are calm, structured, supportive, and use plain executive-friendly language.`;
 
@@ -29,17 +29,17 @@ export async function analyzeMissionAlignment(data: {
   rating: "High" | "Medium" | "Low";
   reasoning: string;
 }> {
-  const prompt = `Analyze this AI initiative for mission alignment with AdventHealth's values:
+  const prompt = `Analyze this AI initiative for strategic alignment with Travel + Leisure Co.'s mission:
 
 **Initiative:** ${data.title}
 **Problem:** ${data.problemStatement}
 **AI Approach:** ${data.aiApproach}
 **Primary Users:** ${data.primaryUsers}
-**Mission Supports:** ${data.missionSupports.join(", ")}
-**Whole-Person Care Alignment:** ${data.wholePersonCareAlignment}
+**Strategic Supports:** ${data.missionSupports.join(", ")}
+**Member Experience Alignment:** ${data.wholePersonCareAlignment}
 **Ethical Concerns:** ${data.ethicalConcerns || "None mentioned"}
 
-Provide a mission alignment rating (High, Medium, or Low) and explain your reasoning in 2-3 sentences using AdventHealth's mission and whole-person care language.`;
+Provide a strategic alignment rating (High, Medium, or Low) and explain your reasoning in 2-3 sentences using Travel + Leisure Co.'s mission and member experience language.`;
 
   const response = await invokeLLM({
     messages: [
@@ -57,7 +57,7 @@ Provide a mission alignment rating (High, Medium, or Low) and explain your reaso
             rating: {
               type: "string",
               enum: ["High", "Medium", "Low"],
-              description: "Mission alignment rating",
+              description: "Strategic alignment rating",
             },
             reasoning: {
               type: "string",
@@ -95,14 +95,14 @@ export async function classifyRisk(data: {
 **Problem:** ${data.problemStatement}
 **AI Approach:** ${data.aiApproach}
 **Main Area:** ${data.mainArea}
-**Clinical Impact:** ${data.clinicalImpact}
+**Member Impact:** ${data.clinicalImpact}
 **Data Type:** ${data.dataType}
 **Automation Level:** ${data.automationLevel}
 
-Based on healthcare-aware risk classification:
-- **Low Risk:** Back-office, no PHI, suggestions only → Light governance
-- **Medium Risk:** Clinical support/operations, PHI, human review required → Standard governance
-- **High Risk:** Direct clinical decisions, sensitive data, automated actions → Full clinical governance
+Based on hospitality-aware risk classification:
+- **Low Risk:** Back-office, no PII, recommendations only → Light governance
+- **Medium Risk:** Guest services/operations, PII, human review required → Standard governance
+- **High Risk:** Direct member-facing, sensitive data, automated actions → Full governance
 
 Provide the risk level, governance path, and reasoning in 2-3 sentences.`;
 
@@ -171,10 +171,10 @@ export async function generateRAID(data: {
 **Ethical Concerns:** ${data.ethicalConcerns || "None mentioned"}
 
 Provide:
-- **Risks:** 2-4 bullet points (data quality, adoption, workflow disruption, safety, vendor dependency)
+- **Risks:** 2-4 bullet points (data quality, adoption, workflow disruption, member privacy, vendor dependency)
 - **Assumptions:** 2-4 bullet points (data availability, stakeholder time, leadership support)
 - **Issues:** 1-3 bullet points (current blockers or problems)
-- **Dependencies:** 2-4 bullet points (EHR integration, committee approvals, budget, training, vendor timelines)`;
+- **Dependencies:** 2-4 bullet points (system integration, committee approvals, budget, training, vendor timelines)`;
 
   const response = await invokeLLM({
     messages: [
@@ -239,7 +239,7 @@ Based on the conversation and the step flow, generate the next appropriate quest
 
 Step 1: Welcome & Role
 Step 2: Initiative Basics (title, problem, AI approach, users)
-Step 3: Mission & Ethics Alignment
+Step 3: Strategic & Member Experience Alignment
 Step 4: Risk Classification
 Step 5: RAID View
 Step 6: Final Outputs

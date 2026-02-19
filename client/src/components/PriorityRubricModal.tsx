@@ -40,7 +40,7 @@ export function PriorityRubricModal({ open, onOpenChange }: PriorityRubricModalP
                 <strong className="text-blue-900">Impact Score (0-100)</strong>
                 <ul className="list-disc list-inside mt-2 text-gray-700 space-y-1">
                   <li>Scale: How many people helped?</li>
-                  <li>Benefit Type: Patient outcomes, efficiency, cost savings</li>
+                  <li>Benefit Type: Member experience, efficiency, cost savings</li>
                   <li>Financial Return: Direct revenue or cost reduction</li>
                 </ul>
               </div>

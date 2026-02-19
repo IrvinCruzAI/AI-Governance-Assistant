@@ -333,7 +333,7 @@ export default function NewInitiative() {
                 </Label>
                 <Input
                   id="title"
-                  placeholder="e.g., Automated Patient Appointment Reminders"
+                  placeholder="e.g., Automated Guest Communication System"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   required

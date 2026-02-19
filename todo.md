@@ -1,70 +1,29 @@
-# Travel + Leisure Co. AI Governance Platform - Complete Transformation
+# Travel + Leisure Co. AI Governance Platform - TODO
 
-## Phase 1: Database Schema
-- [x] Add governance fields to initiatives table (28 new fields)
-- [x] Push schema changes to database
+## Phase 1: Sample Initiatives
+- [x] Create 5 realistic Travel + Leisure sample initiatives
+  - [x] AI-Powered Mobile Check-In (Quick Win - Low Effort/High Return)
+  - [x] Personalized Vacation Recommendations (Strategic Bet - High Effort/High Return)
+  - [x] Dynamic Resort Pricing Optimization (Strategic Bet - High Effort/High Return)
+  - [x] Automated Guest Communication System (Quick Win - Low Effort/High Return)
+  - [ ] Predictive Maintenance for Resort Facilities (Medium Effort/Medium Return) - Skipped due to DB constraint
+- [x] Populate all governance fields for each initiative
+- [x] Set evaluation scores and priority quadrants
 
-## Phase 2: Visual Rebranding
-- [x] Update color scheme to Travel + Leisure teal (#00828C)
-- [x] Update logo and app title
-- [x] Update theme configuration
+## Phase 2: Operational Prioritization Matrix
+- [x] Build Effort vs Return vs Risk quadrant chart component
+- [x] Add to Admin Dashboard with interactive tooltips
+- [x] Show Quick Wins, Strategic Bets, Nice-to-Have, Reconsider quadrants
+- [x] Make initiatives clickable to view details
 
-## Phase 3: Content Updates
-- [x] Replace all AdventHealth references with Travel + Leisure Co.
-- [x] Update healthcare terminology to hospitality terminology
-- [x] Update mission statements and values
+## Phase 3: Executive Dashboard KPIs
+- [ ] Add metrics cards: Total initiatives, by status, avg review time
+- [ ] Add Quick Wins deployed counter
+- [ ] Add operational ROI metrics
+- [ ] Add member impact score aggregation
 
-## Phase 4: Multi-Step Submission Form
-- [ ] Build 6-step wizard with progress indicator
-- [ ] Step 1: Initiative Overview
-- [ ] Step 2: Workflow Analysis
-- [ ] Step 3: Measurable Outcomes
-- [ ] Step 4: Operational Assessment
-- [ ] Step 5: Revenue Impact
-- [ ] Step 6: Strategic Alignment
-
-## Phase 5: Operational Prioritization Matrix
-- [ ] Create PrioritizationMatrix component
-- [ ] Implement 2x2 matrix visualization
-- [ ] Add interactive features (click to view details)
-- [ ] Integrate with admin dashboard
-
-## Phase 6: Admin Dashboard
-- [ ] Update executive summary metrics
-- [ ] Add governance checklist to evaluation modal
-- [ ] Update terminology and branding
-- [ ] Add prioritization matrix view
-
-## Phase 7: Executive Dashboard
-- [ ] Create new Executive.tsx page
-- [ ] Build portfolio health metrics
-- [ ] Add operational excellence panels
-- [ ] Integrate prioritization matrix
-- [ ] Add strategic insights section
-
-## Phase 8: Browse and Roadmap
-- [ ] Update Browse page with T+L branding
-- [ ] Update Roadmap page with T+L branding
-- [ ] Update terminology throughout
-
-## Phase 9: Testing and Deployment
-- [ ] Test all user flows
-- [ ] Verify governance framework works end-to-end
-- [ ] Create sample Travel + Leisure initiatives
-- [ ] Save final checkpoint
-- [x] Update IdeaStarters page with hospitality prompts and Travel + Leisure branding
-- [x] Update Browse page with Travel + Leisure Co. content and categories
-- [x] Update Roadmap page with Travel + Leisure Co. branding
-- [x] Update Admin page export filename
-- [x] Update NewInitiative page with hospitality terminology
-
-## Deep Cleanup - Remove ALL Healthcare References
-
-- [x] Find and replace all healthcare role options (registered nurse, physician, etc.)
-- [x] Update all form dropdown options to hospitality roles
-- [x] Replace "patient" with "member/guest" everywhere
-- [x] Replace "clinical" with hospitality equivalents
-- [x] Update all example initiatives (automated patient reminders → guest communication)
-- [x] Check IdeaStarters for healthcare prompts
-- [x] Verify all area/department dropdowns are hospitality-focused
-- [x] Final grep search for: patient, clinical, nurse, physician, healthcare, hospital, medical, EHR
+## Phase 4: Final Testing
+- [ ] Test all pages with sample data
+- [ ] Verify matrix visualization works correctly
+- [ ] Run vitest tests
+- [ ] Create final checkpoint
