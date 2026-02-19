@@ -27,3 +27,9 @@
 - [ ] Verify matrix visualization works correctly
 - [ ] Run vitest tests
 - [ ] Create final checkpoint
+
+## Bug Fixes
+- [x] Fix IdeaStarters category button filtering (buttons work correctly - click to filter, click again to show all)
+- [x] Add Browse and Roadmap to header navigation for better discoverability
+- [x] Verify Browse page is accessible and working
+- [x] Verify Roadmap page is accessible and working

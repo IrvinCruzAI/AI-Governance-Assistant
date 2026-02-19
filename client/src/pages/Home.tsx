@@ -56,26 +56,49 @@ export default function Home() {
               <span className="sm:hidden">AI Portal</span>
             </span>
           </div>
-          {!isAuthenticated ? (
-            <AuthDialog />
-          ) : (
-            <div className="flex items-center gap-2 md:gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
+            {/* Navigation Links */}
+            <nav className="hidden md:flex items-center gap-1">
               <Button
-                onClick={() => setLocation("/admin")}
-                variant="default"
+                onClick={() => setLocation("/browse")}
+                variant="ghost"
                 size="sm"
-                className="bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-900 hover:to-gray-800 text-white shadow-md hover:shadow-lg transition-all"
-                aria-label={user?.role === 'admin' ? 'Go to admin dashboard' : 'View my submissions'}
+                className="text-gray-700 hover:text-gray-900 hover:bg-gray-100"
               >
-                <LayoutDashboard className="h-4 w-4 md:mr-2" />
-                <span className="hidden md:inline">{user?.role === 'admin' ? 'Dashboard' : 'My Submissions'}</span>
+                Browse Ideas
               </Button>
-              <div className="h-6 w-px bg-gray-300 hidden md:block" />
-              <span className="text-sm text-gray-600 hidden md:inline">
-                Hi, <span className="font-medium text-gray-900">{user?.name?.split(' ')[0] || 'there'}</span>!
-              </span>
-            </div>
-          )}
+              <Button
+                onClick={() => setLocation("/roadmap")}
+                variant="ghost"
+                size="sm"
+                className="text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+              >
+                Roadmap
+              </Button>
+            </nav>
+            
+            {!isAuthenticated ? (
+              <AuthDialog />
+            ) : (
+              <>
+                <div className="h-6 w-px bg-gray-300 hidden md:block" />
+                <Button
+                  onClick={() => setLocation("/admin")}
+                  variant="default"
+                  size="sm"
+                  className="bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-900 hover:to-gray-800 text-white shadow-md hover:shadow-lg transition-all"
+                  aria-label={user?.role === 'admin' ? 'Go to admin dashboard' : 'View my submissions'}
+                >
+                  <LayoutDashboard className="h-4 w-4 md:mr-2" />
+                  <span className="hidden md:inline">{user?.role === 'admin' ? 'Dashboard' : 'My Submissions'}</span>
+                </Button>
+                <div className="h-6 w-px bg-gray-300 hidden md:block" />
+                <span className="text-sm text-gray-600 hidden md:inline">
+                  Hi, <span className="font-medium text-gray-900">{user?.name?.split(' ')[0] || 'there'}</span>!
+                </span>
+              </>
+            )}
+          </div>
         </div>
       </header>
 
