@@ -37,3 +37,15 @@
 - [x] Test tab switching functionality
 - [x] Redesign Settings access (removed from tab row, added gear icon button in header)
 - [x] Optimize header button layout (vertically stacked, Back to Home on top, Settings gear below)
+- [x] Populate database with 6 realistic marketing AI initiatives for Travel + Leisure Co.
+- [x] Optimize Priority Matrix visualization for professional demo appearance
+  - [x] Remove yellow dashed rings from bubbles
+  - [x] Increase bubble opacity for better visibility (0.7-1.0 range)
+  - [x] Add white borders and shadows to bubbles
+  - [x] Improve quadrant label visibility (font-semibold, 60% opacity)
+  - [x] Fix tooltip text visibility (gray-400 for labels on dark background)
+- [x] Fix Priority Matrix bubble positioning (swapped bottom quadrant labels: Nice-to-Have left, Reconsider right)
+- [x] Fix tooltip text readability (changed to text-gray-300 for labels, text-white with font-semibold for values)
+- [x] Simplify matrix subtitle for clarity ("Effort vs Return analysis • Size = Revenue impact • Color = Quadrant")
+- [x] Fix tooltip badge visibility (changed to secondary variant with white text and semi-transparent background)
+- [x] Fix High Return label positioning (centered on top edge with left-1/2 -translate-x-1/2)

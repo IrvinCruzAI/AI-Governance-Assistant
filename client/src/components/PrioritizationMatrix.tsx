@@ -30,7 +30,7 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
 
   // Filter evaluated initiatives with scores
   const evaluatedInitiatives = initiatives.filter(
-    (i) => i.effortScore && i.returnScore && i.status === "evaluated"
+    (i) => i.effortScore && i.returnScore
   );
 
   // Apply quadrant filters
@@ -71,6 +71,7 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
         return {
           label: "Quick Wins",
           color: "bg-green-500",
+          hexColor: "#22c55e",
           icon: Zap,
           description: "Low Effort, High Return - Fast-track these",
         };
@@ -78,6 +79,7 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
         return {
           label: "Strategic Bets",
           color: "bg-blue-500",
+          hexColor: "#3b82f6",
           icon: TrendingUp,
           description: "High Effort, High Return - Long-term investments",
         };
@@ -85,6 +87,7 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
         return {
           label: "Nice-to-Have",
           color: "bg-yellow-500",
+          hexColor: "#eab308",
           icon: Clock,
           description: "Low Effort, Low Return - Backlog candidates",
         };
@@ -92,6 +95,7 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
         return {
           label: "Reconsider",
           color: "bg-red-500",
+          hexColor: "#ef4444",
           icon: AlertTriangle,
           description: "High Effort, Low Return - Deprioritize",
         };
@@ -99,6 +103,7 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
         return {
           label: "Unclassified",
           color: "bg-gray-500",
+          hexColor: "#6b7280",
           icon: AlertTriangle,
           description: "Not yet evaluated",
         };
@@ -182,22 +187,22 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
         <CardHeader>
           <CardTitle>Operational Prioritization Matrix</CardTitle>
           <CardDescription>
-            Effort vs Return analysis - Bubble size represents revenue impact, color indicates risk level
+            Effort vs Return analysis • Size = Revenue impact • Color = Quadrant
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="relative w-full aspect-square bg-gradient-to-br from-background to-muted/20 rounded-lg border touch-manipulation">
             {/* Quadrant Labels */}
-            <div className="absolute top-1 sm:top-2 left-1 sm:left-2 text-[10px] sm:text-xs font-semibold text-muted-foreground">
+            <div className="absolute top-1 sm:top-2 left-1/2 -translate-x-1/2 text-[10px] sm:text-xs font-semibold text-muted-foreground">
               High Return
             </div>
-            <div className="absolute bottom-1 sm:bottom-2 left-1 sm:left-2 text-[10px] sm:text-xs font-semibold text-muted-foreground">
+            <div className="absolute bottom-1 sm:bottom-2 left-1/2 -translate-x-1/2 text-[10px] sm:text-xs font-semibold text-muted-foreground">
               Low Return
             </div>
-            <div className="absolute bottom-1 sm:bottom-2 left-1 sm:left-2 text-[10px] sm:text-xs font-semibold text-muted-foreground">
+            <div className="absolute top-1/2 -translate-y-1/2 left-1 sm:left-2 text-[10px] sm:text-xs font-semibold text-muted-foreground [writing-mode:vertical-lr] rotate-180">
               Low Effort
             </div>
-            <div className="absolute bottom-1 sm:bottom-2 right-1 sm:right-2 text-[10px] sm:text-xs font-semibold text-muted-foreground">
+            <div className="absolute top-1/2 -translate-y-1/2 right-1 sm:right-2 text-[10px] sm:text-xs font-semibold text-muted-foreground [writing-mode:vertical-lr] rotate-180">
               High Effort
             </div>
 
@@ -206,20 +211,20 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
             <div className="absolute left-0 right-0 top-1/2 h-px bg-border" />
 
             {/* Quadrant Background Labels */}
-            <div className="absolute top-2 sm:top-4 left-2 sm:left-4 text-[10px] sm:text-sm font-medium text-muted-foreground/40">
+            <div className="absolute top-2 sm:top-4 left-2 sm:left-4 text-[10px] sm:text-sm font-semibold text-muted-foreground/60">
               <span className="hidden sm:inline">Strategic Bets</span>
               <span className="sm:hidden">Strategic</span>
             </div>
-            <div className="absolute top-2 sm:top-4 right-2 sm:right-4 text-[10px] sm:text-sm font-medium text-muted-foreground/40">
+            <div className="absolute top-2 sm:top-4 right-2 sm:right-4 text-[10px] sm:text-sm font-semibold text-muted-foreground/60">
               <span className="hidden sm:inline">Quick Wins</span>
               <span className="sm:hidden">Quick</span>
             </div>
-            <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-[10px] sm:text-sm font-medium text-muted-foreground/40">
-              Reconsider
-            </div>
-            <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 text-[10px] sm:text-sm font-medium text-muted-foreground/40">
+            <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-[10px] sm:text-sm font-semibold text-muted-foreground/60">
               <span className="hidden sm:inline">Nice-to-Have</span>
               <span className="sm:hidden">Nice</span>
+            </div>
+            <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 text-[10px] sm:text-sm font-semibold text-muted-foreground/60">
+              Reconsider
             </div>
 
             {/* Initiative Bubbles */}
@@ -231,20 +236,20 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
               const maxRevenue = Math.max(...evaluatedInitiatives.map((i) => i.totalRevenueImpact || 0));
               const bubbleSize = 24 + ((initiative.totalRevenueImpact || 0) / maxRevenue) * 36;
               
-              // Risk color intensity
-              const riskOpacity = initiative.riskScore ? 0.4 + (initiative.riskScore / 10) * 0.6 : 0.7;
+              // Risk color intensity - increased for better visibility
+              const riskOpacity = initiative.riskScore ? 0.7 + (initiative.riskScore / 10) * 0.3 : 0.9;
 
               return (
                 <Tooltip key={initiative.id}>
                   <TooltipTrigger asChild>
                     <button
-                      className="absolute transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-all hover:scale-110 active:scale-95 hover:shadow-lg cursor-pointer border-2 border-background touch-manipulation"
+                      className="absolute transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-all hover:scale-110 active:scale-95 hover:shadow-xl cursor-pointer border-2 border-white shadow-md touch-manipulation"
                       style={{
                         left: `${pos.x}%`,
                         top: `${pos.y}%`,
                         width: `${bubbleSize}px`,
                         height: `${bubbleSize}px`,
-                        backgroundColor: info.color.replace("bg-", "#"),
+                        backgroundColor: info.hexColor,
                         opacity: riskOpacity,
                       }}
                       onClick={() => {
@@ -256,22 +261,21 @@ export function PrioritizationMatrix({ initiatives, onInitiativeClick }: Priorit
                   <TooltipContent className="max-w-xs">
                     <div className="space-y-2">
                       <p className="font-semibold">{initiative.title}</p>
-                      <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div className="grid grid-cols-2 gap-2 text-xs text-white">
                         <div>
-                          <span className="text-muted-foreground">Effort:</span> {initiative.effortScore}/10
+                          <span className="text-gray-300">Effort:</span> <span className="font-semibold">{initiative.effortScore}/10</span>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">Return:</span> {initiative.returnScore}/10
+                          <span className="text-gray-300">Return:</span> <span className="font-semibold">{initiative.returnScore}/10</span>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">Risk:</span> {initiative.riskScore}/10
+                          <span className="text-gray-300">Risk:</span> <span className="font-semibold">{initiative.riskScore}/10</span>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">Revenue:</span> $
-                          {((initiative.totalRevenueImpact || 0) / 1000000).toFixed(1)}M
+                          <span className="text-gray-300">Revenue:</span> <span className="font-semibold">${((initiative.totalRevenueImpact || 0) / 1000000).toFixed(1)}M</span>
                         </div>
                       </div>
-                      <Badge variant="outline" className="text-xs">
+                      <Badge variant="secondary" className="text-xs text-white bg-white/20 border-white/30">
                         {info.label}
                       </Badge>
                     </div>
