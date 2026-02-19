@@ -213,7 +213,7 @@ export default function Home() {
             <div className="bg-[#2F5A4A] text-white p-10 text-center rounded-sm">
               <div className="text-5xl md:text-6xl font-bold mb-3">270+</div>
               <div className="h-px w-12 bg-white/40 mx-auto mb-3"></div>
-              <div className="text-sm uppercase tracking-wider">Resorts Worldwide</div>
+              <div className="text-sm uppercase tracking-wider">Resorts Impacted Worldwide</div>
             </div>
             <div className="bg-[#2F5A4A] text-white p-10 text-center rounded-sm">
               <div className="text-5xl md:text-6xl font-bold mb-3">{totalSubmissions}</div>

@@ -73,6 +73,6 @@
 - [x] Test responsive design and save checkpoint
 
 ## Idea Starters Page Brand Matching
-- [ ] Review Idea Starters page design
-- [ ] Apply Travel + Leisure Co. brand aesthetic (beige/cream backgrounds, dark green accents, bold uppercase headlines)
+- [x] Review Idea Starters page design
+- [x] Apply Travel + Leisure Co. brand aesthetic (beige/cream backgrounds, dark green accents, bold uppercase headlines)
 - [ ] Test and save checkpoint
