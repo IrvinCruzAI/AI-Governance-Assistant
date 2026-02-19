@@ -76,3 +76,13 @@
 - [x] Review Idea Starters page design
 - [x] Apply Travel + Leisure Co. brand aesthetic (beige/cream backgrounds, dark green accents, bold uppercase headlines)
 - [ ] Test and save checkpoint
+
+## New Initiative Form Page Brand Matching
+- [ ] Review New Initiative form page design
+- [ ] Apply Travel + Leisure Co. brand aesthetic (beige/cream backgrounds, dark green accents, bold uppercase headlines)
+- [ ] Test and save checkpoint
+
+## Browse & Roadmap Pages Brand Matching
+- [ ] Redesign Browse page with Travel + Leisure Co. brand aesthetic
+- [ ] Redesign Roadmap page with Travel + Leisure Co. brand aesthetic
+- [ ] Test and save checkpoint
