@@ -205,6 +205,16 @@ export const appRouter = router({
   }),
 
   initiative: router({
+    getById: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ input }) => {
+        const initiative = await db.getInitiativeById(input.id);
+        if (!initiative) {
+          throw new TRPCError({ code: 'NOT_FOUND', message: 'Initiative not found' });
+        }
+        return initiative;
+      }),
+
     create: protectedProcedure
       .input(z.object({
         title: z.string(),

@@ -1,35 +1,30 @@
-# Travel + Leisure Co. AI Governance Platform - TODO
+# Travel + Leisure Co. AI Governance Platform - UX Enhancements
 
-## Phase 1: Sample Initiatives
-- [x] Create 5 realistic Travel + Leisure sample initiatives
-  - [x] AI-Powered Mobile Check-In (Quick Win - Low Effort/High Return)
-  - [x] Personalized Vacation Recommendations (Strategic Bet - High Effort/High Return)
-  - [x] Dynamic Resort Pricing Optimization (Strategic Bet - High Effort/High Return)
-  - [x] Automated Guest Communication System (Quick Win - Low Effort/High Return)
-  - [ ] Predictive Maintenance for Resort Facilities (Medium Effort/Medium Return) - Skipped due to DB constraint
-- [x] Populate all governance fields for each initiative
-- [x] Set evaluation scores and priority quadrants
+## Phase 1: IdeaStarters Submit Buttons
+- [x] Add "Start Initiative from This Prompt" button to each prompt card
+- [x] Pass selected prompt to NewInitiative page via URL params or state
+- [x] Pre-fill problem statement field with the prompt context
 
-## Phase 2: Operational Prioritization Matrix
-- [x] Build Effort vs Return vs Risk quadrant chart component
-- [x] Add to Admin Dashboard with interactive tooltips
-- [x] Show Quick Wins, Strategic Bets, Nice-to-Have, Reconsider quadrants
-- [x] Make initiatives clickable to view details
+## Phase 2: Browse Page Filtering
+- [x] Add category filter dropdown (Member Experience, Operations, etc.)
+- [x] Add status filter (Submitted, Evaluated, In Progress, Deployed)
+- [x] Add priority quadrant filter (Quick Win, Strategic Bet, etc.)
+- [x] Add search box for title/description text search
+- [x] Show active filter badges with clear buttons
 
-## Phase 3: Executive Dashboard KPIs
-- [ ] Add metrics cards: Total initiatives, by status, avg review time
-- [ ] Add Quick Wins deployed counter
-- [ ] Add operational ROI metrics
-- [ ] Add member impact score aggregation
+## Phase 3: Initiative Detail Pages
+- [x] Create InitiativeDetail.tsx page component
+- [x] Add route /initiative/:id to App.tsx
+- [x] Display full initiative information (all governance fields)
+- [x] Show RAID view (Risks, Assumptions, Issues, Dependencies)
+- [x] Show evaluation notes and priority scoring
+- [x] Add "Back to Browse" navigation
+- [x] Make initiative titles clickable from Browse
+- [x] Make initiative titles clickable from Roadmap (already implemented)
 
-## Phase 4: Final Testing
-- [ ] Test all pages with sample data
-- [ ] Verify matrix visualization works correctly
+## Phase 4: Testing & Delivery
+- [ ] Test IdeaStarters submit flow end-to-end
+- [ ] Test Browse filtering with sample data
+- [ ] Test initiative detail page navigation
 - [ ] Run vitest tests
-- [ ] Create final checkpoint
-
-## Bug Fixes
-- [x] Fix IdeaStarters category button filtering (buttons work correctly - click to filter, click again to show all)
-- [x] Add Browse and Roadmap to header navigation for better discoverability
-- [x] Verify Browse page is accessible and working
-- [x] Verify Roadmap page is accessible and working
+- [ ] Save final checkpoint

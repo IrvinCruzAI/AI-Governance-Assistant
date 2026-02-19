@@ -29,6 +29,8 @@ export default function Browse() {
   const [searchQuery, setSearchQuery] = useState("");
   const [areaFilter, setAreaFilter] = useState<string>("all");
   const [riskFilter, setRiskFilter] = useState<string>("all");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [priorityFilter, setPriorityFilter] = useState<string>("all");
 
   const { data: allInitiatives, isLoading } = trpc.initiative.listAllWithVotes.useQuery();
   const voteMutation = trpc.initiative.vote.useMutation();
@@ -44,8 +46,10 @@ export default function Browse() {
 
     const matchesArea = areaFilter === "all" || initiative.area === areaFilter;
     const matchesRisk = riskFilter === "all" || initiative.riskLevel === riskFilter;
+    const matchesStatus = statusFilter === "all" || initiative.status === statusFilter;
+    const matchesPriority = priorityFilter === "all" || initiative.priorityQuadrant === priorityFilter;
 
-    return matchesSearch && matchesArea && matchesRisk;
+    return matchesSearch && matchesArea && matchesRisk && matchesStatus && matchesPriority;
   });
 
   const handleVote = async (initiativeId: number, hasVoted: boolean) => {
@@ -163,7 +167,7 @@ export default function Browse() {
               <h3 className="font-semibold text-gray-900">Search & Filter</h3>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-5 gap-4">
               {/* Search */}
               <div className="md:col-span-3">
                 <label htmlFor="search" className="sr-only">
@@ -220,18 +224,99 @@ export default function Browse() {
                 </Select>
               </div>
 
-              {/* Results Count */}
-              <div className="flex items-end">
-                <p className="text-sm text-gray-600">
-                  {filteredInitiatives ? (
-                    <span>
-                      <strong>{filteredInitiatives.length}</strong> {filteredInitiatives.length === 1 ? "initiative" : "initiatives"} found
-                    </span>
-                  ) : (
-                    <span>Loading...</span>
-                  )}
-                </p>
+              {/* Status Filter */}
+              <div>
+                <label htmlFor="status-filter" className="block text-sm font-medium text-gray-700 mb-2">
+                  Status
+                </label>
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger id="status-filter" aria-label="Filter by status">
+                    <SelectValue placeholder="All Statuses" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Statuses</SelectItem>
+                    <SelectItem value="submitted">Submitted</SelectItem>
+                    <SelectItem value="under-review">Under Review</SelectItem>
+                    <SelectItem value="approved">Approved</SelectItem>
+                    <SelectItem value="in-progress">In Progress</SelectItem>
+                    <SelectItem value="deployed">Deployed</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
+
+              {/* Priority Filter */}
+              <div>
+                <label htmlFor="priority-filter" className="block text-sm font-medium text-gray-700 mb-2">
+                  Priority
+                </label>
+                <Select value={priorityFilter} onValueChange={setPriorityFilter}>
+                  <SelectTrigger id="priority-filter" aria-label="Filter by priority">
+                    <SelectValue placeholder="All Priorities" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Priorities</SelectItem>
+                    <SelectItem value="quick-win">Quick Win</SelectItem>
+                    <SelectItem value="strategic-bet">Strategic Bet</SelectItem>
+                    <SelectItem value="nice-to-have">Nice to Have</SelectItem>
+                    <SelectItem value="reconsider">Reconsider</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Active Filters & Results Count */}
+            <div className="mt-4 flex items-center justify-between">
+              <div className="flex flex-wrap gap-2">
+                {searchQuery && (
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-gray-800 text-white text-sm rounded-full">
+                    Search: {searchQuery}
+                    <button onClick={() => setSearchQuery("")} className="hover:text-gray-300">
+                      ×
+                    </button>
+                  </span>
+                )}
+                {areaFilter !== "all" && (
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-gray-800 text-white text-sm rounded-full">
+                    Area: {getAreaLabel(areaFilter)}
+                    <button onClick={() => setAreaFilter("all")} className="hover:text-gray-300">
+                      ×
+                    </button>
+                  </span>
+                )}
+                {riskFilter !== "all" && (
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-gray-800 text-white text-sm rounded-full">
+                    Risk: {riskFilter}
+                    <button onClick={() => setRiskFilter("all")} className="hover:text-gray-300">
+                      ×
+                    </button>
+                  </span>
+                )}
+                {statusFilter !== "all" && (
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-gray-800 text-white text-sm rounded-full">
+                    Status: {statusFilter}
+                    <button onClick={() => setStatusFilter("all")} className="hover:text-gray-300">
+                      ×
+                    </button>
+                  </span>
+                )}
+                {priorityFilter !== "all" && (
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-gray-800 text-white text-sm rounded-full">
+                    Priority: {priorityFilter}
+                    <button onClick={() => setPriorityFilter("all")} className="hover:text-gray-300">
+                      ×
+                    </button>
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-gray-600">
+                {filteredInitiatives ? (
+                  <span>
+                    <strong>{filteredInitiatives.length}</strong> {filteredInitiatives.length === 1 ? "initiative" : "initiatives"} found
+                  </span>
+                ) : (
+                  <span>Loading...</span>
+                )}
+              </p>
             </div>
           </div>
         </div>
@@ -256,7 +341,10 @@ export default function Browse() {
                     <div className="flex items-start gap-3 mb-4">
                       <FileText className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" aria-hidden="true" />
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">
+                        <h3 
+                          className="font-semibold text-gray-900 mb-1 line-clamp-2 hover:text-blue-600 cursor-pointer transition-colors"
+                          onClick={() => setLocation(`/initiative/${initiative.id}`)}
+                        >
                           {initiative.title || "Untitled Initiative"}
                         </h3>
                         <p className="text-sm text-gray-600">

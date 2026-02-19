@@ -14,6 +14,7 @@ import Brief from "./pages/Brief";
 import Browse from "./pages/Browse";
 import Roadmap from "./pages/Roadmap";
 import Login from "./pages/Login";
+import InitiativeDetail from "./pages/InitiativeDetail";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -26,6 +27,7 @@ function Router() {
       <Route path={"/new-initiative"} component={NewInitiative} />
 
       <Route path={"/brief/:id"} component={Brief} />
+      <Route path={"/initiative/:id"} component={InitiativeDetail} />
       <Route path={"/browse"} component={Browse} />
       <Route path={"/roadmap"} component={Roadmap} />
       <Route path={"/idea-starters"} component={IdeaStarters} />

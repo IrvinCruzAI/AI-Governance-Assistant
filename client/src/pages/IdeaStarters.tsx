@@ -173,8 +173,17 @@ export default function IdeaStarters() {
                     key={idx}
                     className="border-l-4 border-l-gray-700 hover:shadow-md transition-shadow"
                   >
-                    <CardContent className="pt-6">
+                    <CardContent className="pt-6 space-y-4">
                       <p className="text-gray-700 font-medium">{prompt}</p>
+                      <Button
+                        onClick={() => setLocation(`/new-initiative?prompt=${encodeURIComponent(prompt)}&category=${encodeURIComponent(category.category)}`)}
+                        size="sm"
+                        variant="outline"
+                        className="w-full border-gray-700 text-gray-800 hover:bg-gray-100"
+                      >
+                        <ArrowRight className="h-4 w-4 mr-2" />
+                        Start Initiative from This Prompt
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}

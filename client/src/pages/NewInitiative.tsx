@@ -38,6 +38,29 @@ export default function NewInitiative() {
   const [userRole, setUserRole] = useState("");
   const [userEmail, setUserEmail] = useState(user?.email || "");
 
+  // Read URL parameters for prompt pre-fill
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const prompt = params.get('prompt');
+    const category = params.get('category');
+    
+    if (prompt) {
+      setProblemStatement(`<p><strong>Inspired by:</strong> ${prompt}</p><p><br></p><p>Describe the specific operational challenge or opportunity this addresses:</p>`);
+    }
+    
+    if (category) {
+      // Map category to area
+      const categoryToArea: Record<string, string> = {
+        'Member Experience': 'member-experience',
+        'Check-In & Reservations': 'reservations',
+        'Guest Services': 'guest-services',
+        'Operations': 'resort-operations',
+        'Team Efficiency': 'operations'
+      };
+      setArea(categoryToArea[category] || '');
+    }
+  }, []);
+
   // Update email when user loads
   useEffect(() => {
     if (user?.email) {
