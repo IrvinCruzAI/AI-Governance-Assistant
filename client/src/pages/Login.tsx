@@ -35,7 +35,7 @@ export default function Login() {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-4">
           <div className="flex justify-center">
-            <img src={APP_LOGO} alt="AdventHealth" className="h-12" />
+            <img src={APP_LOGO} alt="Travel + Leisure Co." className="h-12" />
           </div>
           <div className="text-center">
             <CardTitle className="text-2xl">Admin Login</CardTitle>

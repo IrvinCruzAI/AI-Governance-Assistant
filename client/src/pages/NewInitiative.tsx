@@ -260,7 +260,7 @@ export default function NewInitiative() {
                     value={userEmail}
                     onChange={(e) => setUserEmail(e.target.value)}
                     required
-                    placeholder="your.email@adventhealth.com"
+                    placeholder="your.email@travelandleisure.com"
                   />
                   <p className="text-sm text-muted-foreground">
                     We'll use this to contact you

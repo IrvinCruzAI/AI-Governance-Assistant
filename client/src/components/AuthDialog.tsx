@@ -93,7 +93,7 @@ export function AuthDialog() {
                 <Input
                   id="login-email"
                   type="email"
-                  placeholder="your.email@adventhealth.com"
+                  placeholder="your.email@travelandleisure.com"
                   value={loginData.email}
                   onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                   required
@@ -144,7 +144,7 @@ export function AuthDialog() {
                 <Input
                   id="signup-email"
                   type="email"
-                  placeholder="your.email@adventhealth.com"
+                  placeholder="your.email@travelandleisure.com"
                   value={signupData.email}
                   onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
                   required

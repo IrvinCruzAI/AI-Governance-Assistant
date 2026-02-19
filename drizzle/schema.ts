@@ -21,53 +21,17 @@ export type InsertUser = typeof users.$inferInsert;
 
 /**
  * AI initiatives submitted through the intake process
+ * NOTE: Field order MUST match database column order for Drizzle to work correctly
  */
 export const initiatives = mysqlTable("initiatives", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
-  
-  // Step 1: Role & Area
   userRole: text("userRole"),
-  userEmail: varchar("userEmail", { length: 320 }),
   area: varchar("area", { length: 100 }),
-  
-  // Step 2: Initiative Basics
   title: varchar("title", { length: 255 }).notNull(),
   problemStatement: text("problemStatement"),
   aiApproach: text("aiApproach"),
   primaryUsers: text("primaryUsers"),
-  
-  // Workflow Analysis (Travel + Leisure Governance)
-  currentWorkflow: text("currentWorkflow"),
-  proposedWorkflow: text("proposedWorkflow"),
-  bottlenecksAddressed: text("bottlenecksAddressed"),
-  processOwner: varchar("processOwner", { length: 255 }),
-  affectedTeams: text("affectedTeams"), // JSON array
-  
-  // Measurable Outcomes (Travel + Leisure Governance)
-  primaryMetric: mysqlEnum("primaryMetric", ["time_savings", "cost_reduction", "risk_mitigation", "revenue_increase"]),
-  quantifiedGoal: text("quantifiedGoal"),
-  baselineMeasurement: text("baselineMeasurement"),
-  successCriteria: text("successCriteria"),
-  measurementMethod: text("measurementMethod"),
-  
-  // Operational Assessment (Travel + Leisure Governance)
-  effortScore: int("effortScore"), // 1-10
-  returnScore: int("returnScore"), // 1-10
-  riskScore: int("riskScore"), // 1-10
-  
-  // Revenue Impact (Travel + Leisure Governance)
-  affectedEmployeeCount: int("affectedEmployeeCount"),
-  projectedImprovement: int("projectedImprovement"), // percentage
-  totalRevenueImpact: int("totalRevenueImpact"), // dollars
-  
-  // Strategic Alignment (Travel + Leisure Governance)
-  memberExperienceImpact: mysqlEnum("memberExperienceImpact", ["low", "medium", "high"]),
-  brandDifferentiation: mysqlEnum("brandDifferentiation", ["low", "medium", "high"]),
-  operationalExcellence: mysqlEnum("operationalExcellence", ["low", "medium", "high"]),
-  
-  // Governance Checklist (Travel + Leisure Governance)
-  governanceChecklist: text("governanceChecklist"), // JSON object with 8 boolean fields
   
   // Step 3: Mission & Ethics
   missionSupports: text("missionSupports"), // JSON array
@@ -95,31 +59,83 @@ export const initiatives = mysqlTable("initiatives", {
   briefGenerated: boolean("briefGenerated").default(false),
   emailSummaryGenerated: boolean("emailSummaryGenerated").default(false),
   
-  // Simplified Evaluation (Admin evaluates)
-  impact: mysqlEnum("impact", ["high", "medium", "low"]), // Value/benefit to organization
-  effort: mysqlEnum("effort", ["high", "medium", "low"]), // Complexity/resources required
-  evaluationNotes: text("evaluationNotes"), // Admin's assessment notes
-  evaluatedBy: varchar("evaluatedBy", { length: 255 }), // Admin who evaluated
-  evaluatedAt: timestamp("evaluatedAt"), // When evaluation was completed
-  
-  // Calculated Priority (Effort vs Return matrix - Travel + Leisure)
-  priorityScore: int("priorityScore"),
-  priorityCategory: mysqlEnum("priorityCategory", ["quick_win", "strategic_bet", "not_now", "reconsider"]),
-  priorityQuadrant: mysqlEnum("priorityQuadrant", ["quick-win", "strategic-bet", "nice-to-have", "reconsider"]), // Legacy field
-  
-  // Keyword Tags (for search and duplicate detection)
-  tags: text("tags"), // JSON array of keywords
-  
-  // Admin fields
-  status: mysqlEnum("status", ["pending", "under-review", "approved", "rejected"]).default("pending"),
-  roadmapStatus: mysqlEnum("roadmapStatus", ["under-review", "research", "development", "pilot", "deployed", "on-hold", "rejected"]).default("under-review"),
-  adminNotes: text("adminNotes"),
-  
   // Metadata
   currentStep: int("currentStep").default(1),
   completed: boolean("completed").default(false),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  
+  // Admin fields
+  status: mysqlEnum("status", ["pending", "under-review", "approved", "rejected"]).default("pending"),
+  adminNotes: text("adminNotes"),
+  userEmail: varchar("userEmail", { length: 320 }),
+  roadmapStatus: mysqlEnum("roadmapStatus", ["under-review", "research", "development", "pilot", "deployed", "on-hold", "rejected"]).default("under-review"),
+  priorityScore: int("priorityScore"),
+  priorityQuadrant: mysqlEnum("priorityQuadrant", ["quick-win", "strategic-bet", "nice-to-have", "reconsider"]), // Legacy field
+  
+  // Simplified Evaluation (Admin evaluates)
+  impact: mysqlEnum("impact", ["high", "medium", "low"]), // Value/benefit to organization
+  effort: mysqlEnum("effort", ["high", "medium", "low"]), // Complexity/resources required
+  evaluationNotes: text("evaluationNotes"), // Admin's assessment notes
+  
+  // Keyword Tags (for search and duplicate detection)
+  tags: text("tags"), // JSON array of keywords
+  
+  evaluatedBy: varchar("evaluatedBy", { length: 255 }), // Admin who evaluated
+  evaluatedAt: timestamp("evaluatedAt"), // When evaluation was completed
+  
+  // Workflow Analysis (Travel + Leisure Governance)
+  currentWorkflow: text("currentWorkflow"),
+  proposedWorkflow: text("proposedWorkflow"),
+  bottlenecksAddressed: text("bottlenecksAddressed"),
+  processOwner: varchar("processOwner", { length: 255 }),
+  affectedTeams: text("affectedTeams"), // JSON array
+  
+  // Measurable Outcomes (Travel + Leisure Governance)
+  primaryMetric: mysqlEnum("primaryMetric", ["time_savings", "cost_reduction", "risk_mitigation", "revenue_increase"]),
+  quantifiedGoal: text("quantifiedGoal"),
+  baselineMeasurement: text("baselineMeasurement"),
+  successCriteria: text("successCriteria"),
+  measurementMethod: text("measurementMethod"),
+  
+  // Operational Assessment (Travel + Leisure Governance)
+  effortScore: int("effortScore"), // 1-10
+  returnScore: int("returnScore"), // 1-10
+  riskScore: int("riskScore"), // 1-10
+  
+  priorityCategory: mysqlEnum("priorityCategory", ["quick_win", "strategic_bet", "not_now", "reconsider"]),
+  
+  // Revenue Impact (Travel + Leisure Governance)
+  affectedEmployeeCount: int("affectedEmployeeCount"),
+  projectedImprovement: int("projectedImprovement"), // percentage
+  totalRevenueImpact: int("totalRevenueImpact"), // dollars
+  
+  // Governance Checklist (Travel + Leisure Governance)
+  workflowDocumented: boolean("workflowDocumented"),
+  outcomesDefined: boolean("outcomesDefined"),
+  riskAssessed: boolean("riskAssessed"),
+  privacyReviewed: boolean("privacyReviewed"),
+  complianceVerified: boolean("complianceVerified"),
+  stakeholderBuyIn: boolean("stakeholderBuyIn"),
+  pilotPlanDefined: boolean("pilotPlanDefined"),
+  governanceChecklistComplete: boolean("governanceChecklistComplete"),
+  
+  // Strategic Alignment (Travel + Leisure Governance)
+  memberExperienceImpact: mysqlEnum("memberExperienceImpact", ["low", "medium", "high"]),
+  brandDifferentiation: mysqlEnum("brandDifferentiation", ["low", "medium", "high"]),
+  operationalExcellence: mysqlEnum("operationalExcellence", ["low", "medium", "high"]),
+  
+  // Impact Assessment
+  impactScale: mysqlEnum("impactScale", ["individual", "team", "department", "organization"]),
+  impactBenefitType: text("impactBenefitType"),
+  impactFinancialReturn: int("impactFinancialReturn"),
+  impactScore: int("impactScore"),
+  
+  // Feasibility Assessment
+  feasibilityComplexity: mysqlEnum("feasibilityComplexity", ["low", "medium", "high"]),
+  feasibilityTimeline: varchar("feasibilityTimeline", { length: 100 }),
+  feasibilityDependencies: text("feasibilityDependencies"),
+  feasibilityScore: int("feasibilityScore"),
 });
 
 export type Initiative = typeof initiatives.$inferSelect;

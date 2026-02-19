@@ -358,7 +358,7 @@ export default function Initiative() {
             <p className="text-white/90 text-sm">
               {currentStep === 1 && "Tell us about your initiative and your role"}
               {currentStep === 2 && "Describe the problem and how AI can help"}
-              {currentStep === 3 && "Assess alignment with AdventHealth's mission"}
+              {currentStep === 3 && "Assess alignment with Travel + Leisure Co.'s mission"}
               {currentStep === 4 && "Help us understand the risk profile"}
               {currentStep === 5 && "Review your submission before sending"}
             </p>
