@@ -98,6 +98,11 @@
 - [ ] Save final checkpoint
 
 ## Scroll-to-Top on All Page Navigation
-- [ ] Add global scroll-to-top behavior in App.tsx for all route changes
-- [ ] Test navigation between all pages (Home, Browse, Roadmap, Idea Starters, New Initiative, Admin)
-- [ ] Save final checkpoint
+- [x] Add global scroll-to-top behavior in App.tsx for all route changes
+- [x] Test navigation between all pages (Home, Browse, Roadmap, Idea Starters, New Initiative, Admin)
+- [x] Save final checkpoint
+
+## Final Quality Check
+- [x] TypeScript type check: ✓ No errors
+- [x] All tests: ✓ 37/37 passing
+- [x] Ready for demo
