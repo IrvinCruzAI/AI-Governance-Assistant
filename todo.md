@@ -31,5 +31,5 @@
 - [x] Fix overlapping tab navigation on Admin Dashboard
 - [x] Ensure tabs are properly spaced and mobile-responsive (2-col mobile, 3-col tablet, 5-col desktop)
 - [x] Fix inconsistent tab styling (add borders around ALL tabs, not just active tab)
-- [ ] Fix card spacing within tab content sections (cards are touching, need proper gaps)
+- [x] Fix tabs overlapping with content below (added mb-8 to TabsList)
 - [x] Test tab switching functionality
