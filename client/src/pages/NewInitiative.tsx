@@ -184,10 +184,10 @@ export default function NewInitiative() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <header className="border-b border-gray-200 bg-white sticky top-0 z-50 shadow-sm">
+      <div className="min-h-screen bg-[#F5F1E8]">
+        <header className="border-b border-[#2F5A4A]/20 bg-white sticky top-0 z-50 shadow-sm">
           <div className="container flex justify-between items-center py-4">
-            <h1 className="text-lg md:text-xl font-semibold text-gray-900">{APP_TITLE}</h1>
+            <h1 className="text-lg md:text-xl font-black text-gray-900 uppercase tracking-wide">{APP_TITLE}</h1>
           </div>
         </header>
         <div className="container max-w-2xl py-16">
@@ -223,11 +223,11 @@ export default function NewInitiative() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F5F1E8]">
       {/* Header */}
-      <header className="border-b border-gray-200 bg-white sticky top-0 z-50 shadow-sm">
+      <header className="border-b border-[#2F5A4A]/20 bg-white sticky top-0 z-50 shadow-sm">
         <div className="container flex justify-between items-center py-4">
-          <h1 className="text-lg md:text-xl font-semibold text-gray-900">{APP_TITLE}</h1>
+          <h1 className="text-lg md:text-xl font-black text-gray-900 uppercase tracking-wide">{APP_TITLE}</h1>
           <Button variant="ghost" size="sm" onClick={() => setLocation("/")}>
             <ArrowLeft className="h-4 w-4 mr-2" />
             Cancel
@@ -236,7 +236,7 @@ export default function NewInitiative() {
       </header>
 
       {/* Progress Indicator */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white border-b border-[#2F5A4A]/20">
         <div className="container max-w-4xl py-6">
           <div className="flex items-center justify-between">
             {steps.map((step, index) => {
@@ -250,7 +250,7 @@ export default function NewInitiative() {
                     <div
                       className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-colors ${
                         isActive
-                          ? "bg-gray-900 border-gray-900 text-white"
+                          ? "bg-[#2F5A4A] border-[#2F5A4A] text-white"
                           : isCompleted
                           ? "bg-green-600 border-green-600 text-white"
                           : "bg-white border-gray-300 text-gray-400"

@@ -78,11 +78,16 @@
 - [ ] Test and save checkpoint
 
 ## New Initiative Form Page Brand Matching
-- [ ] Review New Initiative form page design
-- [ ] Apply Travel + Leisure Co. brand aesthetic (beige/cream backgrounds, dark green accents, bold uppercase headlines)
-- [ ] Test and save checkpoint
+- [x] Review New Initiative form page design
+- [x] Apply Travel + Leisure Co. brand aesthetic (beige/cream backgrounds, dark green accents, bold uppercase headlines)
+- [x] Test and save checkpoint
 
 ## Browse & Roadmap Pages Brand Matching
 - [x] Redesign Browse page with Travel + Leisure Co. brand aesthetic
 - [x] Redesign Roadmap page with Travel + Leisure Co. brand aesthetic
+- [x] Test and save checkpoint
+
+## Homepage Messaging Update for Internal Tool Positioning
+- [x] Update trust badge to "For Travel + Leisure Co. Team Members"
+- [x] Review and adjust other homepage copy to reflect internal tool positioning
 - [ ] Test and save checkpoint

@@ -108,7 +108,7 @@ export default function Home() {
           {/* Trust Badge */}
           <div className="inline-flex items-center gap-2 bg-white border border-[#2F5A4A]/20 text-gray-800 px-5 py-2.5 rounded-sm mb-8 text-sm font-medium tracking-wide">
             <Palmtree className="h-4 w-4 text-[#2F5A4A]" />
-            <span className="uppercase text-xs">Innovation That Enhances Every Vacation</span>
+            <span className="uppercase text-xs">For Travel + Leisure Co. Team Members</span>
           </div>
 
           {/* Main Headline */}
