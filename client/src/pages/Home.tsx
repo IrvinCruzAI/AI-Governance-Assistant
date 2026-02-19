@@ -127,7 +127,7 @@ export default function Home() {
           {/* Subheadline */}
           <div className="text-lg md:text-xl text-gray-700 mb-10 max-w-4xl mx-auto space-y-6 leading-relaxed">
             <p>
-              That manual process slowing down check-ins? The personalization you wish you could offer every member? The operational bottleneck costing time and revenue?
+              That manual process slowing down check-ins? The personalization you wish you could offer? The operational bottleneck costing time and revenue?
             </p>
             <p className="text-xl md:text-2xl font-bold text-gray-900">
               What if your idea could actually get built and deployed across Travel + Leisure Co.'s 270+ resorts?
