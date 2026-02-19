@@ -77,6 +77,7 @@ function getPriorityLabel(priorityQuadrant?: string | null): { label: string; co
 
 export default function Admin() {
   const [, setLocation] = useLocation();
+  const [activeTab, setActiveTab] = useState("all");
   const { user, isAuthenticated, loading } = useAuth();
   const [selectedInitiative, setSelectedInitiative] = useState<any>(null);
   const [statusFilter, setStatusFilter] = useState<string>("all");
@@ -377,11 +378,7 @@ export default function Admin() {
             <Button
               variant="outline"
               size="icon"
-              onClick={() => {
-                const tabs = document.querySelector('[role="tablist"]');
-                const settingsTab = document.querySelector('[value="settings"]') as HTMLButtonElement;
-                if (settingsTab) settingsTab.click();
-              }}
+              onClick={() => setActiveTab("settings")}
               aria-label="Settings"
               className="border-2 border-gray-300 hover:border-blue-500"
             >
@@ -391,7 +388,7 @@ export default function Admin() {
         </div>
 
         {isAdmin ? (
-          <Tabs defaultValue="all" className="space-y-6">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
             <TabsList className="grid grid-cols-2 md:grid-cols-4 !w-full gap-3 !bg-transparent !p-0 mb-12">
               <TabsTrigger value="my" className="border-2 border-gray-300 data-[state=active]:border-blue-500">My Submissions</TabsTrigger>
               <TabsTrigger value="all" className="border-2 border-gray-300 data-[state=active]:border-blue-500">All Submissions</TabsTrigger>
