@@ -376,7 +376,7 @@ export default function Admin() {
 
         {isAdmin ? (
           <Tabs defaultValue="all" className="space-y-6">
-            <TabsList className="grid !w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 !bg-transparent !p-0 mb-8">
+            <TabsList className="grid !w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 !bg-transparent !p-0 mb-12">
               <TabsTrigger value="my" className="border-2 border-gray-300 data-[state=active]:border-blue-500">My Submissions</TabsTrigger>
               <TabsTrigger value="all" className="border-2 border-gray-300 data-[state=active]:border-blue-500">All Submissions</TabsTrigger>
               <TabsTrigger value="matrix" className="border-2 border-gray-300 data-[state=active]:border-blue-500">Priority Matrix</TabsTrigger>
