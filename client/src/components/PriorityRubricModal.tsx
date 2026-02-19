@@ -88,7 +88,7 @@ export function PriorityRubricModal({ open, onOpenChange }: PriorityRubricModalP
                   </p>
                   <div className="space-y-2 text-sm text-gray-700">
                     <p><strong className="text-purple-900">Strategic Action:</strong> Plan carefully. Worth the investment but requires dedicated resources and executive sponsorship.</p>
-                    <p><strong className="text-purple-900">Typical Examples:</strong> Predictive analytics platforms, clinical decision support systems, custom AI models</p>
+                    <p><strong className="text-purple-900">Typical Examples:</strong> Predictive analytics platforms, personalized recommendation engines, custom AI models</p>
                     <p><strong className="text-purple-900">Resource Allocation:</strong> Schedule after Quick Wins. Secure budget and cross-functional team commitment.</p>
                   </div>
                 </div>

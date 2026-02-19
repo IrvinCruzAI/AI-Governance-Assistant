@@ -97,7 +97,7 @@ ${missionSupports.map((s: string) => `- ${s}`).join("\n")}
 
 **Domain:** ${initiative.mainArea || "Not specified"}
 
-**Impact on Patients:** ${initiative.clinicalImpact || "Not specified"}
+**Impact on Members:** ${initiative.clinicalImpact || "Not specified"}
 
 **Data Sensitivity:** ${initiative.dataType || "Not specified"}
 
@@ -134,7 +134,7 @@ ${dependencies.map((d: string) => `- ${d}`).join("\n")}
 ### Suggested Next Steps
 
 - Submit this initiative to the formal AI intake process
-- Engage relevant clinical or operational leaders for input
+- Engage relevant operational leaders and stakeholders for input
 - Confirm data sources and availability with IT and analytics teams
 - Design a small, safe pilot to test value and impact
 - Schedule review with the Chief AI Officer's team

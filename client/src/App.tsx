@@ -9,7 +9,7 @@ import Settings from "./pages/Settings";
 import IdeaStarters from "./pages/IdeaStarters";
 import Admin from "./pages/Admin";
 import NewInitiative from "./pages/NewInitiative";
-import Initiative from "./pages/Initiative";
+
 import Brief from "./pages/Brief";
 import Browse from "./pages/Browse";
 import Roadmap from "./pages/Roadmap";
@@ -24,7 +24,7 @@ function Router() {
       <Route path={"/admin"} component={Admin} />
       <Route path={"/new"} component={NewInitiative} />
       <Route path={"/new-initiative"} component={NewInitiative} />
-      <Route path={"/initiative/:id"} component={Initiative} />
+
       <Route path={"/brief/:id"} component={Brief} />
       <Route path={"/browse"} component={Browse} />
       <Route path={"/roadmap"} component={Roadmap} />

@@ -57,3 +57,14 @@
 - [x] Update Roadmap page with Travel + Leisure Co. branding
 - [x] Update Admin page export filename
 - [x] Update NewInitiative page with hospitality terminology
+
+## Deep Cleanup - Remove ALL Healthcare References
+
+- [x] Find and replace all healthcare role options (registered nurse, physician, etc.)
+- [x] Update all form dropdown options to hospitality roles
+- [x] Replace "patient" with "member/guest" everywhere
+- [x] Replace "clinical" with hospitality equivalents
+- [x] Update all example initiatives (automated patient reminders → guest communication)
+- [x] Check IdeaStarters for healthcare prompts
+- [x] Verify all area/department dropdowns are hospitality-focused
+- [x] Final grep search for: patient, clinical, nurse, physician, healthcare, hospital, medical, EHR

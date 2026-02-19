@@ -81,9 +81,10 @@ export function BrowseView({ initiatives, loading, onViewDetails }: BrowseViewPr
 
   const getAreaLabel = (area: string) => {
     const labels: Record<string, string> = {
-      "clinical-care": "Clinical Care",
-      "clinical-support": "Clinical Support",
-      "clinical-operations": "Clinical Operations",
+      "member-experience": "Member Experience",
+      "resort-operations": "Resort Operations",
+      "guest-services": "Guest Services",
+      "operations": "Operations",
       "back-office": "Back Office",
     };
     return labels[area] || area;
@@ -128,9 +129,10 @@ export function BrowseView({ initiatives, loading, onViewDetails }: BrowseViewPr
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Areas</SelectItem>
-            <SelectItem value="clinical-care">Clinical Care</SelectItem>
-            <SelectItem value="clinical-support">Clinical Support</SelectItem>
-            <SelectItem value="clinical-operations">Clinical Operations</SelectItem>
+            <SelectItem value="member-experience">Member Experience</SelectItem>
+            <SelectItem value="resort-operations">Resort Operations</SelectItem>
+            <SelectItem value="guest-services">Guest Services</SelectItem>
+            <SelectItem value="operations">Operations</SelectItem>
             <SelectItem value="back-office">Back Office</SelectItem>
           </SelectContent>
         </Select>

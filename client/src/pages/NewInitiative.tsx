@@ -273,7 +273,7 @@ export default function NewInitiative() {
                   </Label>
                   <Input
                     id="role"
-                    placeholder="e.g., Registered Nurse, IT Manager, Physician"
+                    placeholder="e.g., Resort Manager, Guest Services Director, Operations Analyst"
                     value={userRole}
                     onChange={(e) => setUserRole(e.target.value)}
                     required
