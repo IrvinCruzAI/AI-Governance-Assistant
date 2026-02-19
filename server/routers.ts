@@ -223,6 +223,22 @@ export const appRouter = router({
         area: z.string(),
         problemStatement: z.string(),
         proposedSolution: z.string().optional(),
+        // Step 2: Impact & Outcomes
+        currentWorkflow: z.string().optional(),
+        proposedWorkflow: z.string().optional(),
+        bottlenecksAddressed: z.string().optional(),
+        primaryMetric: z.enum(['time_savings', 'cost_reduction', 'risk_mitigation', 'revenue_increase']).optional(),
+        quantifiedGoal: z.string().optional(),
+        effortScore: z.number().optional(),
+        returnScore: z.number().optional(),
+        riskScore: z.number().optional(),
+        // Step 3: Strategic Alignment
+        affectedEmployeeCount: z.number().optional(),
+        projectedImprovement: z.number().optional(),
+        totalRevenueImpact: z.number().optional(),
+        memberExperienceImpact: z.enum(['low', 'medium', 'high']).optional(),
+        brandDifferentiation: z.enum(['low', 'medium', 'high']).optional(),
+        operationalExcellence: z.enum(['low', 'medium', 'high']).optional(),
       }))
       .mutation(async ({ ctx, input }) => {
         console.log('[DEBUG] initiative.create called with:', { userId: ctx.user.id, input });
@@ -235,6 +251,22 @@ export const appRouter = router({
             title: input.title,
             problemStatement: input.problemStatement,
             aiApproach: input.proposedSolution || null,
+            // Step 2: Impact & Outcomes
+            currentWorkflow: input.currentWorkflow || null,
+            proposedWorkflow: input.proposedWorkflow || null,
+            bottlenecksAddressed: input.bottlenecksAddressed || null,
+            primaryMetric: input.primaryMetric || null,
+            quantifiedGoal: input.quantifiedGoal || null,
+            effortScore: input.effortScore || null,
+            returnScore: input.returnScore || null,
+            riskScore: input.riskScore || null,
+            // Step 3: Strategic Alignment
+            affectedEmployeeCount: input.affectedEmployeeCount || null,
+            projectedImprovement: input.projectedImprovement || null,
+            totalRevenueImpact: input.totalRevenueImpact || null,
+            memberExperienceImpact: input.memberExperienceImpact || null,
+            brandDifferentiation: input.brandDifferentiation || null,
+            operationalExcellence: input.operationalExcellence || null,
           });
           console.log('[DEBUG] Initiative created successfully:', initiativeId);
           
