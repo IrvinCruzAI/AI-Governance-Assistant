@@ -64,3 +64,10 @@
 - [x] Update backend roadmapStatus on drop with toast notifications
 - [x] Public Roadmap page remains non-draggable (view-only)
 - [x] Test drag-and-drop across all stages in Admin Dashboard (all 4 tests passing)
+
+## Homepage Visual Design Enhancement
+- [x] Analyze current homepage design and identify improvement areas
+- [x] Research Travel + Leisure Co. brand aesthetic from official website
+- [x] Extract brand colors, typography, imagery style, and design patterns
+- [x] Implement brand-matched visual design on homepage
+- [x] Test responsive design and save checkpoint
