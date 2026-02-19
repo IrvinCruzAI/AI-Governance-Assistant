@@ -1,61 +1,59 @@
-# AI Governance Assistant - Final MVP Preparation
+# Travel + Leisure Co. AI Governance Platform - Complete Transformation
 
-## Comprehensive End-to-End Verification & Fixes
+## Phase 1: Database Schema
+- [x] Add governance fields to initiatives table (28 new fields)
+- [x] Push schema changes to database
 
-### USER-FACING FLOWS
-- [ ] Landing page loads correctly with all sections
-- [ ] "Submit Your Idea" button works and opens intake form
-- [ ] "Browse Ideas" link works and displays all public initiatives
-- [ ] "See All Ideas" button works
-- [ ] Intake form: All 6 steps work correctly
-- [ ] Intake form: AI analysis runs and saves data
-- [ ] Intake form: Submission success message appears
-- [ ] Browse/Roadmap: Community voting works (upvote button)
-- [ ] Browse: Filtering by area/status works
-- [ ] Mobile responsiveness works on all pages
+## Phase 2: Visual Rebranding
+- [x] Update color scheme to Travel + Leisure teal (#00828C)
+- [x] Update logo and app title
+- [x] Update theme configuration
 
-### ADMIN FLOWS
-- [ ] Admin dashboard loads with correct data
-- [ ] All Submissions tab shows all initiatives
-- [ ] Filtering works (Status, Risk Level, Opportunity)
-- [ ] "Review" button opens evaluation modal
-- [ ] Evaluation modal displays all data correctly
-- [ ] AI Assessment shows Mission Alignment & Risk Level (when data exists)
-- [ ] Prioritization Matrix shows correct quadrant
-- [ ] Impact/Effort dropdowns save correctly
-- [ ] Review Status dropdown works (Pending/Approved/Rejected)
-- [ ] Roadmap Stage dropdown works
-- [ ] Roadmap tab displays initiatives in correct columns
-- [ ] Drag-and-drop roadmap: REMOVE (broken feature)
-- [ ] Settings tab works
+## Phase 3: Content Updates
+- [x] Replace all AdventHealth references with Travel + Leisure Co.
+- [x] Update healthcare terminology to hospitality terminology
+- [x] Update mission statements and values
 
-### CRITICAL FIXES
-- [ ] Remove drag-and-drop roadmap feature (replace with dropdown-only)
-- [ ] Verify Browse Ideas page exists and works
-- [ ] Clean up 18 incomplete test initiatives (delete or complete)
-- [ ] Fix any broken links or 404 errors
-- [ ] Ensure all AI assessments display correctly
+## Phase 4: Multi-Step Submission Form
+- [ ] Build 6-step wizard with progress indicator
+- [ ] Step 1: Initiative Overview
+- [ ] Step 2: Workflow Analysis
+- [ ] Step 3: Measurable Outcomes
+- [ ] Step 4: Operational Assessment
+- [ ] Step 5: Revenue Impact
+- [ ] Step 6: Strategic Alignment
 
-### HIGH-PRIORITY ADDITIONS
-- [ ] Add Excel export button to admin dashboard
-- [ ] Implement Excel export functionality (all initiatives)
-- [ ] Create executive summary dashboard (stats cards)
-- [ ] Add metrics: Total Submissions, Quick Wins, Pending Review, Approved, Avg Days Pending
+## Phase 5: Operational Prioritization Matrix
+- [ ] Create PrioritizationMatrix component
+- [ ] Implement 2x2 matrix visualization
+- [ ] Add interactive features (click to view details)
+- [ ] Integrate with admin dashboard
 
-### FINAL TESTING
-- [ ] Test complete user flow: Submit idea → See it in Browse → Vote on it
-- [ ] Test complete admin flow: Review initiative → Change status → See on roadmap
-- [ ] Run all 35 tests and ensure passing
-- [ ] Check for console errors in browser
-- [ ] Verify mobile experience
-- [ ] Take final screenshots for documentation
+## Phase 6: Admin Dashboard
+- [ ] Update executive summary metrics
+- [ ] Add governance checklist to evaluation modal
+- [ ] Update terminology and branding
+- [ ] Add prioritization matrix view
+
+## Phase 7: Executive Dashboard
+- [ ] Create new Executive.tsx page
+- [ ] Build portfolio health metrics
+- [ ] Add operational excellence panels
+- [ ] Integrate prioritization matrix
+- [ ] Add strategic insights section
+
+## Phase 8: Browse and Roadmap
+- [ ] Update Browse page with T+L branding
+- [ ] Update Roadmap page with T+L branding
+- [ ] Update terminology throughout
+
+## Phase 9: Testing and Deployment
+- [ ] Test all user flows
+- [ ] Verify governance framework works end-to-end
+- [ ] Create sample Travel + Leisure initiatives
 - [ ] Save final checkpoint
-
-### POST-DELIVERY CHANGES
-- [x] Remove "Real Ideas, Real Impact" section from home page
-- [x] Create dedicated admin account (Admin@aiportal.com / Admin123) for executive access
-- [x] Fix duplicate user creation bug in auth.signup
-- [x] Delete duplicate admin entries (IDs 1890020, 1890021)
-- [x] Remove Manus OAuth login and use only /login page
-- [x] Delete test users from database (keep only 3 real users)
-- [x] Remove unused messages table and related code
+- [x] Update IdeaStarters page with hospitality prompts and Travel + Leisure branding
+- [x] Update Browse page with Travel + Leisure Co. content and categories
+- [x] Update Roadmap page with Travel + Leisure Co. branding
+- [x] Update Admin page export filename
+- [x] Update NewInitiative page with hospitality terminology

@@ -137,7 +137,7 @@ export default function Roadmap() {
               </Button>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">AI Initiative Roadmap</h1>
-                <p className="text-sm text-gray-600">Track the progress of AI initiatives across AdventHealth</p>
+                <p className="text-sm text-gray-600">Track the progress of AI initiatives across Travel + Leisure Co.</p>
               </div>
             </div>
             {isAuthenticated && user?.role === 'admin' && (

@@ -1,0 +1,21 @@
+ALTER TABLE `initiatives` ADD `currentWorkflow` text;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `proposedWorkflow` text;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `bottlenecksAddressed` text;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `processOwner` varchar(255);--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `affectedTeams` text;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `primaryMetric` enum('time_savings','cost_reduction','risk_mitigation','revenue_increase');--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `quantifiedGoal` text;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `baselineMeasurement` text;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `successCriteria` text;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `measurementMethod` text;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `effortScore` int;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `returnScore` int;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `riskScore` int;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `affectedEmployeeCount` int;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `projectedImprovement` int;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `totalRevenueImpact` int;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `memberExperienceImpact` enum('low','medium','high');--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `brandDifferentiation` enum('low','medium','high');--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `operationalExcellence` enum('low','medium','high');--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `governanceChecklist` text;--> statement-breakpoint
+ALTER TABLE `initiatives` ADD `priorityCategory` enum('quick_win','strategic_bet','not_now','reconsider');

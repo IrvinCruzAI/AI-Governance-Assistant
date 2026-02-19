@@ -215,8 +215,8 @@ export default function NewInitiative() {
             <h1 className="text-4xl font-bold">Submit Your AI Initiative</h1>
           </div>
           <p className="text-lg text-muted-foreground">
-            Share your idea to improve healthcare delivery at AdventHealth.
-            Takes just a few minutes.
+            Share your idea to improve member experiences and operational excellence at Travel + Leisure Co.
+            Takes just 15-20 minutes.
           </p>
         </div>
 
@@ -292,14 +292,14 @@ export default function NewInitiative() {
                       <SelectValue placeholder="Select your area" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="clinical-care">
-                        Clinical Care
+                      <SelectItem value="member-experience">
+                        Member Experience
                       </SelectItem>
-                      <SelectItem value="clinical-operations">
-                        Clinical Operations
+                      <SelectItem value="operations">
+                        Operations
                       </SelectItem>
-                      <SelectItem value="clinical-support">
-                        Clinical Support
+                      <SelectItem value="guest-services">
+                        Guest Services
                       </SelectItem>
                       <SelectItem value="back-office">
                         Back Office / Administrative
@@ -355,9 +355,8 @@ export default function NewInitiative() {
                   placeholder="Describe the current challenge or frustration. What's not working? Why does it matter? Be specific about the impact."
                 />
                 <p className="text-sm text-muted-foreground">
-                  Example: "No-show rates average 15-20% across our facilities,
-                  wasting appointment slots and delaying care for other
-                  patients."
+                  Example: "Check-in wait times average 15-20 minutes during peak seasons,
+                  frustrating members and creating operational bottlenecks."
                 </p>
               </div>
 
@@ -432,7 +431,7 @@ export default function NewInitiative() {
             </li>
             <li className="flex gap-2">
               <span className="text-primary">•</span>
-              <span>Administrative work that takes you away from patients</span>
+              <span>Administrative work that takes you away from members</span>
             </li>
           </ul>
         </Card>

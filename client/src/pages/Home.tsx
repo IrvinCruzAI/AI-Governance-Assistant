@@ -9,7 +9,7 @@ import { trpc } from "@/lib/trpc";
 import {
   ArrowRight,
   CheckCircle2,
-  Heart,
+  Palmtree,
   LayoutDashboard,
   Lightbulb,
   Lock,
@@ -33,26 +33,26 @@ export default function Home() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-800"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-blue-50/30 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white">
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
           <div className="flex items-center gap-3 md:gap-6">
             <div className="flex flex-col">
-              <img src={APP_LOGO} alt="AdventHealth logo" className="h-8 md:h-12" />
+              <img src={APP_LOGO} alt="Travel + Leisure Co. logo" className="h-8 md:h-12" />
               <span className="text-xs text-gray-500 mt-1 hidden sm:block">
-                Extending the Healing Ministry of Christ
+                Putting the World on Vacation
               </span>
             </div>
             <div className="h-8 md:h-12 w-px bg-gray-300 hidden sm:block" />
             <span className="text-lg md:text-2xl font-semibold text-gray-900">
-              <span className="hidden sm:inline">AI Initiative Portal</span>
+              <span className="hidden sm:inline">AI Governance Platform</span>
               <span className="sm:hidden">AI Portal</span>
             </span>
           </div>
@@ -64,7 +64,7 @@ export default function Home() {
                 onClick={() => setLocation("/admin")}
                 variant="default"
                 size="sm"
-                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white shadow-md hover:shadow-lg transition-all"
+                className="bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-900 hover:to-gray-800 text-white shadow-md hover:shadow-lg transition-all"
                 aria-label={user?.role === 'admin' ? 'Go to admin dashboard' : 'View my submissions'}
               >
                 <LayoutDashboard className="h-4 w-4 md:mr-2" />
@@ -83,30 +83,30 @@ export default function Home() {
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="max-w-4xl mx-auto text-center">
           {/* Trust Badge */}
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full mb-6 text-sm font-medium">
-            <Heart className="h-4 w-4" />
-            <span>A Safe Space for Your Ideas</span>
+          <div className="inline-flex items-center gap-2 bg-gray-100 text-gray-800 px-4 py-2 rounded-full mb-6 text-sm font-medium">
+            <Palmtree className="h-4 w-4" />
+            <span>Innovation That Enhances Every Vacation</span>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            You See Problems Every Day.
+            You See Opportunities Every Day.
             <br />
-            <span className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-              What If AI Could Help?
+            <span className="bg-gradient-to-r from-gray-800 to-gray-700 bg-clip-text text-transparent">
+              What If AI Could Unlock Them?
             </span>
           </h1>
 
           {/* Subheadline */}
           <div className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto space-y-4">
             <p>
-              That frustrating task you repeat 20 times a day? The information you wish was at your fingertips? The process that takes forever?
+              That manual process slowing down check-ins? The personalization you wish you could offer every member? The operational bottleneck costing time and revenue?
             </p>
             <p className="text-2xl font-bold text-gray-900">
-              What if your idea could actually get built and deployed across AdventHealth?
+              What if your idea could actually get built and deployed across Travel + Leisure Co.'s 270+ resorts?
             </p>
             <p>
-              You don't need to be technical to share it.
+              You don't need to be a data scientist to share it.
             </p>
           </div>
 
@@ -116,7 +116,7 @@ export default function Home() {
               <Button
                 size="lg"
                 onClick={() => window.location.href = getLoginUrl()}
-                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold shadow-xl hover:shadow-2xl transition-all min-h-[48px]"
+                className="bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-900 hover:to-gray-800 text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold shadow-xl hover:shadow-2xl transition-all min-h-[48px]"
                 aria-label="Sign in to share your AI idea"
               >
                 Share Your Idea Now
@@ -127,23 +127,23 @@ export default function Home() {
                 <Button
                   size="lg"
                   onClick={() => setLocation("/new-initiative")}
-                  className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold shadow-xl hover:shadow-2xl transition-all min-h-[48px]"
+                  className="bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-900 hover:to-gray-800 text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold shadow-xl hover:shadow-2xl transition-all min-h-[48px]"
                   aria-label="Submit a new AI initiative idea"
                 >
-                  <span className="hidden sm:inline">Submit Your Idea for Consideration</span>
-                  <span className="sm:hidden">Submit Your Idea</span>
+                  <span className="hidden sm:inline">Submit Your Initiative for Review</span>
+                  <span className="sm:hidden">Submit Initiative</span>
                   <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
                   onClick={() => setLocation("/idea-starters")}
-                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold min-h-[48px]"
+                  className="border-2 border-gray-800 text-gray-800 hover:bg-gray-50 px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold min-h-[48px]"
                   aria-label="View idea starters and examples"
                 >
                   <Lightbulb className="mr-2 h-5 w-5" aria-hidden="true" />
-                  <span className="hidden sm:inline">Not Sure What to Share?</span>
-                  <span className="sm:hidden">Need Ideas?</span>
+                  <span className="hidden sm:inline">Need Inspiration?</span>
+                  <span className="sm:hidden">Get Ideas</span>
                 </Button>
               </>
             )}
@@ -153,15 +153,15 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base text-gray-600">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-5 w-5 text-green-600" aria-hidden="true" />
-              <span>No technical knowledge needed</span>
+              <span>No technical expertise required</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-5 w-5 text-green-600" aria-hidden="true" />
-              <span>Takes 10-15 minutes</span>
+              <span>15-20 minute submission</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-5 w-5 text-green-600" aria-hidden="true" />
-              <span>Ideas reviewed weekly</span>
+              <span>Governance review within 5 days</span>
             </div>
           </div>
 
@@ -169,52 +169,52 @@ export default function Home() {
           {totalSubmissions > 0 && (
             <div className="mt-8 inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-800 px-4 md:px-6 py-3 rounded-full text-sm md:text-base" role="status" aria-live="polite">
               <Users className="h-5 w-5" aria-hidden="true" />
-              <span className="font-semibold">{totalSubmissions} colleagues</span>
-              <span className="hidden sm:inline">have already shared their ideas</span>
-              <span className="sm:hidden">shared ideas</span>
+              <span className="font-semibold">{totalSubmissions} team members</span>
+              <span className="hidden sm:inline">have already submitted initiatives</span>
+              <span className="sm:hidden">submitted ideas</span>
             </div>
           )}
         </div>
       </section>
 
-      {/* Let's Be Honest Section - Addresses Fear */}
-      <section className="bg-gradient-to-r from-blue-600 to-teal-600 text-white py-12 md:py-20">
+      {/* Let's Be Honest Section - Addresses Concerns */}
+      <section className="bg-gradient-to-r from-gray-800 to-gray-700 text-white py-12 md:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-5xl font-bold mb-8 md:mb-12 text-center">
-              Let's Be Honest About AI
+              Let's Be Honest About AI in Hospitality
             </h2>
             <div className="space-y-6 md:space-y-8 text-base md:text-xl leading-relaxed">
-              <p className="text-center text-blue-50">
+              <p className="text-center text-gray-50">
                 We know what you might be thinking:
               </p>
               
               <p className="text-xl md:text-3xl font-bold text-center italic px-4">
-                "Is this how they replace me?"
+                "Is this going to eliminate jobs?"
               </p>
               
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 border border-white/20">
                 <p className="text-lg md:text-2xl font-bold text-white mb-4 md:mb-6">
-                  Here's the truth:
+                  Here's our commitment:
                 </p>
-                <p className="text-base md:text-xl text-blue-50 leading-relaxed">
-                  We're not trying to replace anyone. We're trying to give you your time back.
+                <p className="text-base md:text-xl text-gray-50 leading-relaxed">
+                  We're not replacing people. We're empowering our teams to deliver exceptional member experiences at scale.
                 </p>
               </div>
               
-              <p className="text-base md:text-xl text-blue-50 leading-relaxed px-2">
-                AI won't replace nurses, doctors, or staff. But it can handle the repetitive stuff—the charting, the scheduling headaches, the endless searching for information—so you can focus on what actually matters:
+              <p className="text-base md:text-xl text-gray-50 leading-relaxed px-2">
+                AI won't replace resort managers, guest services, or operations teams. But it can handle the repetitive workflows—the manual data entry, the scheduling conflicts, the endless searching for member preferences—so you can focus on what actually creates loyalty:
               </p>
               
               <p className="text-2xl md:text-4xl font-bold text-center px-4">
-                Caring for people.
+                Creating unforgettable vacation experiences.
               </p>
               
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 md:p-8 border border-white/20 mt-8 md:mt-10">
                 <p className="text-xl md:text-3xl font-bold text-center">
-                  Your job isn't going away.
+                  Your role isn't going away.
                   <br />
-                  <span className="text-blue-100">The boring parts of it might.</span>
+                  <span className="text-gray-100">The tedious parts of it might.</span>
                 </p>
               </div>
             </div>
@@ -226,10 +226,10 @@ export default function Home() {
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            We Need Your Perspective
+            We Need Your Operational Insights
           </h2>
           <p className="text-xl text-gray-600 leading-relaxed">
-            The best AI solutions don't come from executives in conference rooms—they come from people on the ground who see the problems every day. <strong className="inline-block">You know what would actually help.</strong> We're not guessing. We're listening.
+            The best AI solutions don't come from corporate headquarters—they come from people on the ground who see the operational bottlenecks every day. <strong className="inline-block">You know what would actually move the needle.</strong> We're not guessing. We're listening.
           </p>
         </div>
       </section>
@@ -239,10 +239,10 @@ export default function Home() {
         <section className="container mx-auto px-4 py-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Ideas Your Colleagues Are Already Sharing
+              Initiatives Your Colleagues Are Already Proposing
             </h2>
             <p className="text-xl text-gray-600">
-              Real problems from real people—just like you
+              Real operational challenges from real team members
             </p>
           </div>
 
@@ -250,7 +250,7 @@ export default function Home() {
             {recentThree.map((idea) => (
               <Card key={idea.id} className="border-2 hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <Badge className="w-fit mb-2 bg-blue-100 text-blue-800 hover:bg-blue-100">
+                  <Badge className="w-fit mb-2 bg-gray-100 text-gray-800 hover:bg-gray-100">
                     {idea.area?.replace("-", " ") || "general"}
                   </Badge>
                   <CardTitle className="text-lg line-clamp-2">
@@ -261,7 +261,7 @@ export default function Home() {
                   <div 
                     className="text-sm text-gray-600 line-clamp-3"
                     dangerouslySetInnerHTML={{ 
-                      __html: idea.problemStatement || "Improving healthcare delivery through AI innovation." 
+                      __html: idea.problemStatement || "Improving member experience through AI-powered operational excellence." 
                     }}
                   />
                 </CardContent>
@@ -273,15 +273,15 @@ export default function Home() {
             <Button
               variant="outline"
               onClick={() => setLocation("/browse")}
-              className="border-blue-600 text-blue-600 hover:bg-blue-50"
+              className="border-gray-800 text-gray-800 hover:bg-gray-50"
             >
-              See All Ideas
+              See All Initiatives
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button
               variant="outline"
               onClick={() => setLocation("/roadmap")}
-              className="border-teal-600 text-teal-600 hover:bg-teal-50"
+              className="border-gray-700 text-cyan-600 hover:bg-gray-50"
             >
               View Roadmap
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -290,269 +290,179 @@ export default function Home() {
         </section>
       )}
 
-      {/* What Happens Next - Humanized */}
+      {/* What Happens Next - Governance Process */}
       <section className="bg-gray-50 py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-              "Okay, But What Actually Happens?"
+              "What's the Governance Process?"
             </h2>
             <p className="text-base md:text-xl text-gray-600 px-4">
-              We get it—you want to know where your idea goes. Here's the honest process:
+              We use a structured framework to ensure every initiative is evaluated fairly
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+            {/* Step 1 */}
+            <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border-2 border-gray-100 hover:border-teal-200 transition-colors">
+              <div className="bg-gray-100 text-gray-700 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-4">
                 1
               </div>
-              <h3 className="font-bold text-lg mb-2">You Share</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                You Submit
+              </h3>
               <p className="text-gray-600">
-                Answer a few simple questions about the problem you see. Takes 10-15 minutes, tops.
+                Fill out our governance framework: workflow analysis, measurable outcomes, operational impact, and strategic alignment.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            {/* Step 2 */}
+            <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border-2 border-gray-100 hover:border-teal-200 transition-colors">
+              <div className="bg-gray-100 text-gray-700 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-4">
                 2
               </div>
-              <h3 className="font-bold text-lg mb-2">We Analyze</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Governance Review
+              </h3>
               <p className="text-gray-600">
-                Our AI team reviews it within 48 hours. We look at mission fit, risk, and feasibility.
+                Our AI Governance team evaluates using the Operational Prioritization Matrix: Effort vs. Return vs. Risk.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            {/* Step 3 */}
+            <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border-2 border-gray-100 hover:border-teal-200 transition-colors">
+              <div className="bg-gray-100 text-gray-700 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-4">
                 3
               </div>
-              <h3 className="font-bold text-lg mb-2">Leadership Reviews</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Decision & Roadmap
+              </h3>
               <p className="text-gray-600">
-                The Chief AI Officer and team evaluate it. High-priority ideas move fast.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                4
-              </div>
-              <h3 className="font-bold text-lg mb-2">You Hear Back</h3>
-              <p className="text-gray-600">
-                We email you with next steps—whether it's moving forward, needs more info, or future consideration.
+                Quick Wins get fast-tracked. Strategic Bets get phased planning. You get transparent feedback either way.
               </p>
             </div>
           </div>
 
-          <div className="text-center mt-10 md:mt-12 space-y-4 md:space-y-6">
-            <div className="bg-green-50 border-2 border-green-200 rounded-xl p-5 md:p-6 max-w-2xl mx-auto">
-              <p className="text-base md:text-lg text-gray-900 font-semibold">
-                <span className="text-green-600" aria-hidden="true">✨</span> <strong className="inline-block">Approved ideas may receive resources and support for pilot implementation.</strong> <span className="text-green-600" aria-hidden="true">✨</span>
-              </p>
-            </div>
-            <p className="text-base md:text-lg text-gray-700 font-semibold">
-              Average response time: <span className="text-blue-600">3-5 business days</span>
+          <div className="text-center mt-10">
+            <p className="text-lg text-gray-600 mb-4">
+              <strong className="text-gray-900">Average review time:</strong> 3-5 business days
+            </p>
+            <p className="text-sm text-gray-500">
+              All decisions are tracked and visible on the roadmap
             </p>
           </div>
         </div>
       </section>
 
-      {/* Why This Matters - Mission Connection */}
+      {/* Governance Principles */}
       <section className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center border-2 border-blue-200">
-              <CardHeader>
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Lock className="h-8 w-8 text-blue-600" />
-                </div>
-                <CardTitle>Safe & Secure</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  Every idea is reviewed for patient safety, privacy, and ethics before moving forward. Your concerns matter.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-2 border-teal-200">
-              <CardHeader>
-                <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-teal-600" />
-                </div>
-                <CardTitle>You're the Expert</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  AI supports you—reducing burnout and tedious tasks—so you can focus on what you do best: healing.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center border-2 border-red-200">
-              <CardHeader>
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="h-8 w-8 text-red-600" />
-                </div>
-                <CardTitle>Mission-Driven</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  Aligned with whole-person care and our healing ministry values. AI that serves people, not profits.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Our Governance Principles
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Every initiative is evaluated against these criteria to ensure operational excellence and member impact
+          </p>
         </div>
-      </section>
 
-      {/* Leadership Endorsement */}
-      <section className="bg-blue-50 py-16">
-        <div className="container mx-auto px-4">
-          <Card className="max-w-3xl mx-auto border-2 border-blue-200 shadow-xl">
-            <CardContent className="p-8 md:p-12">
-              <div className="flex flex-col md:flex-row gap-6 items-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-teal-600 rounded-full flex items-center justify-center text-white text-3xl font-bold flex-shrink-0">
-                  AH
-                </div>
-                <div>
-                  <p className="text-lg md:text-xl text-gray-700 italic mb-4 leading-relaxed">
-                    "We're not trying to replace people's thinking. We're just trying to enhance it. 
-                    Your frontline insights are invaluable—share them with us."
-                  </p>
-                  <p className="font-bold text-gray-900">Dr. Victor Herrera</p>
-                  <p className="text-gray-600">Chief Clinical Officer, AdventHealth</p>
-                </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <Card className="border-2 border-gray-100 hover:border-gray-300 transition-colors">
+            <CardHeader>
+              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-3">
+                <TrendingUp className="h-6 w-6 text-gray-800" />
               </div>
+              <CardTitle className="text-lg">Workflow Impact</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-600">
+                "No workflow change = No impact." Every initiative must demonstrate measurable process improvement.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-2 border-gray-100 hover:border-gray-300 transition-colors">
+            <CardHeader>
+              <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mb-3">
+                <Sparkles className="h-6 w-6 text-cyan-600" />
+              </div>
+              <CardTitle className="text-lg">Measurable Outcomes</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-600">
+                One clear goal. Quantified baseline. Defined success criteria. No vague "innovation theater."
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-2 border-blue-100 hover:border-blue-300 transition-colors">
+            <CardHeader>
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
+                <Shield className="h-6 w-6 text-blue-600" />
+              </div>
+              <CardTitle className="text-lg">Risk Assessment</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-600">
+                Compliance, data privacy, and operational risks evaluated before approval. Governance first.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-2 border-purple-100 hover:border-purple-300 transition-colors">
+            <CardHeader>
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-3">
+                <Lock className="h-6 w-6 text-purple-600" />
+              </div>
+              <CardTitle className="text-lg">Strategic Alignment</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-600">
+                Member experience, brand differentiation, and operational excellence are our north stars.
+              </p>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* Common Questions - More Human */}
-      <section className="bg-gray-50 py-12 md:py-16" aria-labelledby="faq-heading">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 id="faq-heading" className="text-2xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8 text-center">
-              Questions We Hear a Lot
-            </h2>
-
-            <div className="space-y-4" role="list">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">"I'm not technical. Can I still submit an idea?"</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700">
-                    <strong className="inline-block">Absolutely.</strong> In fact, we prefer it. You don't need to know how AI works—you just need to know what frustrates you. 
-                    We have technical people to figure out the "how." We need YOU to tell us the "what."
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">"Will AI take my job?"</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700">
-                    <strong className="inline-block">No.</strong> AI can't hold a patient's hand, have a difficult conversation with a family, or make the kind of judgment calls you make every day. 
-                    What it CAN do is handle the repetitive, time-consuming tasks that keep you from doing those things. Think of it as getting an assistant, not a replacement.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">"What if I don't have a fully formed idea?"</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700">
-                    <strong className="inline-block">Even better.</strong> Most great ideas start as "I wish this was easier" or "Why do we still do it this way?" 
-                    You don't need a solution—just a problem you see. We'll help you shape it from there.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">"How long does the process take?"</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700">
-                    <strong className="inline-block">It depends on the idea.</strong> Simple, low-risk ideas might move in weeks. Complex ones (like anything touching clinical decisions) take longer because we're extra careful. 
-                    But you'll hear back from us within 3-5 business days either way.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">"What makes a good idea?"</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700">
-                    <strong className="inline-block">A problem you see repeatedly.</strong> If it frustrates you, it probably frustrates others too. 
-                    The best ideas are things that happen 10+ times a day, waste time, or create unnecessary risk. Start there.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA */}
-      <section className="bg-gradient-to-r from-blue-600 to-teal-600 text-white py-12 md:py-16">
+      <section className="bg-gradient-to-r from-gray-800 to-gray-700 text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <Sparkles className="h-12 md:h-16 w-12 md:w-16 mx-auto mb-4 md:mb-6 text-yellow-300" aria-hidden="true" />
-            <h2 className="text-2xl md:text-5xl font-bold mb-4 md:mb-6 px-4">
-              Your Idea Could Change Everything
-            </h2>
-            <p className="text-lg md:text-2xl mb-6 md:mb-8 text-blue-100 px-4">
-              The best innovations come from people doing the work every day. 
-              That's you. Let's build the future of healthcare together.
-            </p>
-            {!isAuthenticated ? (
-              <Button
-                size="lg"
-                onClick={() => window.location.href = getLoginUrl()}
-                className="bg-white text-blue-600 hover:bg-gray-100 px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold shadow-xl min-h-[48px]"
-                aria-label="Sign in and submit your AI idea"
-              >
-                Submit Your Idea Now
-                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
-              </Button>
-            ) : (
-              <Button
-                size="lg"
-                onClick={() => setLocation("/new-initiative")}
-                className="bg-white text-blue-600 hover:bg-gray-100 px-6 md:px-8 py-5 md:py-6 text-base md:text-lg font-semibold shadow-xl min-h-[48px]"
-                aria-label="Submit a new AI initiative idea"
-              >
-                Submit Your Idea Now
-                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
-              </Button>
-            )}
-          </div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            Ready to Make an Impact?
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-50 mb-8 max-w-3xl mx-auto">
+            Your operational insight could become the next Quick Win deployed across 270+ resorts
+          </p>
+          {!isAuthenticated ? (
+            <Button
+              size="lg"
+              onClick={() => window.location.href = getLoginUrl()}
+              className="bg-white text-gray-800 hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all"
+            >
+              Get Started Now
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          ) : (
+            <Button
+              size="lg"
+              onClick={() => setLocation("/new-initiative")}
+              className="bg-white text-gray-800 hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all"
+            >
+              Submit Your Initiative
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          )}
         </div>
       </section>
-
-      {/* Disclaimer */}
-      <div className="bg-gray-50 py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-gray-600 max-w-3xl mx-auto">
-            Ideas submitted are reviewed by AdventHealth's Chief AI Officer team. Selected initiatives may be developed for pilot testing and potential system-wide deployment.
-          </p>
-        </div>
-      </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm">
-            © 2025 AdventHealth • Extending the Healing Ministry of Christ
+      <footer className="border-t bg-gray-50 py-8">
+        <div className="container mx-auto px-4 text-center text-sm text-gray-600">
+          <p className="mb-2">
+            <strong className="text-gray-900">Travel + Leisure Co.</strong> — Putting the World on Vacation
+          </p>
+          <p>
+            AI Governance Platform | Operational Excellence Through Responsible Innovation
           </p>
         </div>
       </footer>

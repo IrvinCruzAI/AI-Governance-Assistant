@@ -84,10 +84,10 @@ export default function Browse() {
 
   const getAreaLabel = (area: string) => {
     const labels: Record<string, string> = {
-      "clinical-care": "Clinical Care",
-      "clinical-support": "Clinical Support",
-      "clinical-operations": "Clinical Operations",
-      "back-office": "Back Office",
+      "member-experience": "Member Experience",
+      "operations": "Operations",
+      "guest-services": "Guest Services",
+      "technology": "Technology",
     };
     return labels[area] || area;
   };
@@ -140,7 +140,7 @@ export default function Browse() {
             Browse Ideas from Your Colleagues
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Get inspired by real AI initiatives submitted by AdventHealth team members. Vote for ideas you'd like to see implemented!
+            Get inspired by real AI initiatives submitted by Travel + Leisure Co. team members. Vote for ideas you'd like to see implemented!
           </p>
 
           {!isAuthenticated && (
@@ -194,10 +194,10 @@ export default function Browse() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Areas</SelectItem>
-                    <SelectItem value="clinical-care">Clinical Care</SelectItem>
-                    <SelectItem value="clinical-support">Clinical Support</SelectItem>
-                    <SelectItem value="clinical-operations">Clinical Operations</SelectItem>
-                    <SelectItem value="back-office">Back Office</SelectItem>
+                    <SelectItem value="member-experience">Member Experience</SelectItem>
+                    <SelectItem value="operations">Operations</SelectItem>
+                    <SelectItem value="guest-services">Guest Services</SelectItem>
+                    <SelectItem value="technology">Technology</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -346,7 +346,7 @@ export default function Browse() {
       <footer className="border-t border-gray-200 bg-gray-50 py-8 mt-16">
         <div className="container text-center text-gray-600">
           <p className="text-sm">
-            © 2025 AdventHealth • Extending the Healing Ministry of Christ
+            © 2026 Travel + Leisure Co. • Putting the World on Vacation
           </p>
         </div>
       </footer>

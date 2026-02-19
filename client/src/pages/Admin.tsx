@@ -244,7 +244,7 @@ export default function Admin() {
 
       // Generate filename with timestamp
       const timestamp = new Date().toISOString().split('T')[0];
-      const filename = `AdventHealth_AI_Initiatives_${timestamp}.xlsx`;
+      const filename = `TravelLeisure_AI_Initiatives_${timestamp}.xlsx`;
 
       // Download
       XLSX.writeFile(wb, filename);

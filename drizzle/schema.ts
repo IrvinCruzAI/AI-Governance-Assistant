@@ -37,6 +37,38 @@ export const initiatives = mysqlTable("initiatives", {
   aiApproach: text("aiApproach"),
   primaryUsers: text("primaryUsers"),
   
+  // Workflow Analysis (Travel + Leisure Governance)
+  currentWorkflow: text("currentWorkflow"),
+  proposedWorkflow: text("proposedWorkflow"),
+  bottlenecksAddressed: text("bottlenecksAddressed"),
+  processOwner: varchar("processOwner", { length: 255 }),
+  affectedTeams: text("affectedTeams"), // JSON array
+  
+  // Measurable Outcomes (Travel + Leisure Governance)
+  primaryMetric: mysqlEnum("primaryMetric", ["time_savings", "cost_reduction", "risk_mitigation", "revenue_increase"]),
+  quantifiedGoal: text("quantifiedGoal"),
+  baselineMeasurement: text("baselineMeasurement"),
+  successCriteria: text("successCriteria"),
+  measurementMethod: text("measurementMethod"),
+  
+  // Operational Assessment (Travel + Leisure Governance)
+  effortScore: int("effortScore"), // 1-10
+  returnScore: int("returnScore"), // 1-10
+  riskScore: int("riskScore"), // 1-10
+  
+  // Revenue Impact (Travel + Leisure Governance)
+  affectedEmployeeCount: int("affectedEmployeeCount"),
+  projectedImprovement: int("projectedImprovement"), // percentage
+  totalRevenueImpact: int("totalRevenueImpact"), // dollars
+  
+  // Strategic Alignment (Travel + Leisure Governance)
+  memberExperienceImpact: mysqlEnum("memberExperienceImpact", ["low", "medium", "high"]),
+  brandDifferentiation: mysqlEnum("brandDifferentiation", ["low", "medium", "high"]),
+  operationalExcellence: mysqlEnum("operationalExcellence", ["low", "medium", "high"]),
+  
+  // Governance Checklist (Travel + Leisure Governance)
+  governanceChecklist: text("governanceChecklist"), // JSON object with 8 boolean fields
+  
   // Step 3: Mission & Ethics
   missionSupports: text("missionSupports"), // JSON array
   wholPersonCareAlignment: text("wholPersonCareAlignment"),
@@ -70,9 +102,10 @@ export const initiatives = mysqlTable("initiatives", {
   evaluatedBy: varchar("evaluatedBy", { length: 255 }), // Admin who evaluated
   evaluatedAt: timestamp("evaluatedAt"), // When evaluation was completed
   
-  // Calculated Priority (Impact vs Effort matrix)
-  priorityScore: int("priorityScore"), // Calculated from impact + effort
-  priorityQuadrant: mysqlEnum("priorityQuadrant", ["quick-win", "strategic-bet", "nice-to-have", "reconsider"]),
+  // Calculated Priority (Effort vs Return matrix - Travel + Leisure)
+  priorityScore: int("priorityScore"),
+  priorityCategory: mysqlEnum("priorityCategory", ["quick_win", "strategic_bet", "not_now", "reconsider"]),
+  priorityQuadrant: mysqlEnum("priorityQuadrant", ["quick-win", "strategic-bet", "nice-to-have", "reconsider"]), // Legacy field
   
   // Keyword Tags (for search and duplicate detection)
   tags: text("tags"), // JSON array of keywords
