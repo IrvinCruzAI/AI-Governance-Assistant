@@ -55,3 +55,12 @@
   - [x] Added detailed business cases with measurable outcomes
   - [x] Included realistic implementation plans with current/proposed workflows
   - [x] Ensured alignment with Travel + Leisure marketing workflows
+
+## Roadmap Drag-and-Drop Enhancement (Admin Dashboard Only)
+- [x] Add backend mutation for updating roadmap status (already existed)
+- [x] Implement drag-and-drop functionality in Admin Dashboard Roadmap tab ONLY (not public Roadmap page)
+- [x] Allow admins to drag initiative cards between stages (Under Review → Research → Development → Pilot → Deployed → On Hold → Not Pursuing)
+- [x] Add visual feedback during drag (opacity, cursor changes, grip icon)
+- [x] Update backend roadmapStatus on drop with toast notifications
+- [x] Public Roadmap page remains non-draggable (view-only)
+- [x] Test drag-and-drop across all stages in Admin Dashboard (all 4 tests passing)

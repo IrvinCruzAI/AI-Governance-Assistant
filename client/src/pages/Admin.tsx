@@ -45,7 +45,8 @@ import {
   Settings,
   Zap,
   ThumbsUp,
-  Download
+  Download,
+  GripVertical
 } from "lucide-react";
 import { toast } from "sonner";
 import { PrioritizationMatrix } from "@/components/PrioritizationMatrix";
@@ -1403,7 +1404,7 @@ function UserSubmissionsView({
   );
 }
 
-// Roadmap Management Component
+// Roadmap Management Component with Drag-and-Drop
 function RoadmapManagementView({
   initiatives,
   onViewDetails
@@ -1411,6 +1412,19 @@ function RoadmapManagementView({
   initiatives: any[];
   onViewDetails: (initiative: any) => void;
 }) {
+  const [draggedInitiative, setDraggedInitiative] = useState<any>(null);
+  const utils = trpc.useUtils();
+  const updateRoadmapStatus = trpc.initiative.updateRoadmapStatus.useMutation({
+    onSuccess: () => {
+      toast.success("Initiative moved successfully");
+      utils.initiative.listAll.invalidate();
+    },
+    onError: (error) => {
+      toast.error(`Failed to move initiative: ${error.message}`);
+      utils.initiative.listAll.invalidate();
+    },
+  });
+
   const roadmapStages = [
     { key: 'under-review', label: 'Under Review', color: 'bg-gray-100' },
     { key: 'research', label: 'Research', color: 'bg-blue-100' },
@@ -1426,36 +1440,103 @@ function RoadmapManagementView({
     initiatives: initiatives.filter(i => (i.roadmapStatus || 'under-review') === stage.key)
   }));
 
+  const handleDragStart = (e: React.DragEvent, initiative: any) => {
+    setDraggedInitiative(initiative);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('initiative-id', initiative.id.toString());
+    e.dataTransfer.setData('current-status', initiative.roadmapStatus || 'under-review');
+  };
+
+  const handleDragEnd = () => {
+    setDraggedInitiative(null);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = async (e: React.DragEvent, targetStage: string) => {
+    e.preventDefault();
+    
+    const initiativeId = parseInt(e.dataTransfer.getData('initiative-id'));
+    const currentStatus = e.dataTransfer.getData('current-status');
+    
+    if (currentStatus === targetStage) {
+      setDraggedInitiative(null);
+      return;
+    }
+    
+    try {
+      await updateRoadmapStatus.mutateAsync({
+        id: initiativeId,
+        roadmapStatus: targetStage as any,
+      });
+    } catch (error) {
+      console.error('Failed to update roadmap status:', error);
+    }
+    
+    setDraggedInitiative(null);
+  };
+
   return (
     <div className="space-y-6">
+      <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <p className="text-sm text-blue-800">
+          <strong>Drag & Drop:</strong> Click and drag initiative cards between columns to update their roadmap stage.
+        </p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {initiativesByStage.map(stage => (
-          <Card key={stage.key} className={`border-2 ${stage.color}`}>
+          <Card 
+            key={stage.key} 
+            className={`border-2 ${stage.color}`}
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, stage.key)}
+          >
             <CardHeader>
               <CardTitle className="text-sm font-semibold">{stage.label}</CardTitle>
               <p className="text-xs text-gray-600">{stage.initiatives.length} initiatives</p>
             </CardHeader>
-            <CardContent className="space-y-2 max-h-96 overflow-y-auto">
+            <CardContent className="space-y-2 max-h-96 overflow-y-auto min-h-[200px]">
               {stage.initiatives.length === 0 ? (
-                <p className="text-xs text-gray-500 italic">No initiatives in this stage</p>
+                <p className="text-xs text-gray-500 italic text-center py-8">Drop initiatives here</p>
               ) : (
                 stage.initiatives.map(initiative => (
                   <div 
                     key={initiative.id}
-                    className="p-3 bg-white rounded border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
-                    onClick={() => onViewDetails(initiative)}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, initiative)}
+                    onDragEnd={handleDragEnd}
+                    className={`p-3 bg-white rounded border border-gray-200 hover:shadow-md transition-all cursor-move group ${
+                      draggedInitiative?.id === initiative.id ? 'opacity-50 rotate-1 scale-105' : ''
+                    }`}
                   >
-                    <p className="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
-                      {initiative.title || 'Untitled Initiative'}
-                    </p>
-                    <div className="flex items-center gap-2 text-xs text-gray-600">
-                      <span>{initiative.area}</span>
-                      {initiative.riskLevel && (
-                        <Badge variant="outline" className="text-xs">
-                          {initiative.riskLevel}
-                        </Badge>
-                      )}
+                    <div className="flex items-start gap-2">
+                      <GripVertical className="h-4 w-4 text-gray-400 flex-shrink-0 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
+                          {initiative.title || 'Untitled Initiative'}
+                        </p>
+                        <div className="flex items-center gap-2 text-xs text-gray-600">
+                          <span>{initiative.area}</span>
+                          {initiative.riskLevel && (
+                            <Badge variant="outline" className="text-xs">
+                              {initiative.riskLevel}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
                     </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onViewDetails(initiative);
+                      }}
+                      className="mt-2 w-full text-xs text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      View Details
+                    </button>
                   </div>
                 ))
               )}

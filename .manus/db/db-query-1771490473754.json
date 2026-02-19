@@ -1,0 +1,87 @@
+{
+  "query": "SELECT id, title, roadmapStatus, area, createdAt FROM initiatives ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user oYC4Lz5DqbQiGEf.root --database LVN2BBaghCkJZKnQ9H5R4v --execute SELECT id, title, roadmapStatus, area, createdAt FROM initiatives ORDER BY id;",
+  "rows": [
+    {
+      "id": "660017",
+      "title": "AI Social Media Content Generator",
+      "roadmapStatus": "under-review",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 07:52:47"
+    },
+    {
+      "id": "660018",
+      "title": "Email Campaign A/B Testing Automation",
+      "roadmapStatus": "under-review",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 07:52:47"
+    },
+    {
+      "id": "660019",
+      "title": "Predictive Customer Lifetime Value Model",
+      "roadmapStatus": "under-review",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 07:52:47"
+    },
+    {
+      "id": "660020",
+      "title": "AI-Powered Marketing Analytics Dashboard",
+      "roadmapStatus": "under-review",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 07:52:47"
+    },
+    {
+      "id": "660021",
+      "title": "AI Image Enhancement for Marketing Materials",
+      "roadmapStatus": "under-review",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 07:52:47"
+    },
+    {
+      "id": "660022",
+      "title": "Custom AI Video Production Platform",
+      "roadmapStatus": "under-review",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 07:52:47"
+    },
+    {
+      "id": "660023",
+      "title": "Test Initiative for Roadmap Status",
+      "roadmapStatus": "under-review",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 08:28:36"
+    },
+    {
+      "id": "660024",
+      "title": "Test Initiative for Roadmap Status",
+      "roadmapStatus": "development",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 08:28:36"
+    },
+    {
+      "id": "660026",
+      "title": "Test Initiative for Roadmap Status",
+      "roadmapStatus": "rejected",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 08:28:36"
+    },
+    {
+      "id": "660028",
+      "title": "Test Initiative for Roadmap Status",
+      "roadmapStatus": "deployed",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 08:39:00"
+    },
+    {
+      "id": "660030",
+      "title": "Test Initiative for Roadmap Status",
+      "roadmapStatus": "rejected",
+      "area": "Marketing",
+      "createdAt": "2026-02-19 08:39:00"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\troadmapStatus\tarea\tcreatedAt\n660017\tAI Social Media Content Generator\tunder-review\tMarketing\t2026-02-19 07:52:47\n660018\tEmail Campaign A/B Testing Automation\tunder-review\tMarketing\t2026-02-19 07:52:47\n660019\tPredictive Customer Lifetime Value Model\tunder-review\tMarketing\t2026-02-19 07:52:47\n660020\tAI-Powered Marketing Analytics Dashboard\tunder-review\tMarketing\t2026-02-19 07:52:47\n660021\tAI Image Enhancement for Marketing Materials\tunder-review\tMarketing\t2026-02-19 07:52:47\n660022\tCustom AI Video Production Platform\tunder-review\tMarketing\t2026-02-19 07:52:47\n660023\tTest Initiative for Roadmap Status\tunder-review\tMarketing\t2026-02-19 08:28:36\n660024\tTest Initiative for Roadmap Status\tdevelopment\tMarketing\t2026-02-19 08:28:36\n660026\tTest Initiative for Roadmap Status\trejected\tMarketing\t2026-02-19 08:28:36\n660028\tTest Initiative for Roadmap Status\tdeployed\tMarketing\t2026-02-19 08:39:00\n660030\tTest Initiative for Roadmap Status\trejected\tMarketing\t2026-02-19 08:39:00\n",
+  "stderr": "",
+  "execution_time_ms": 48
+}
