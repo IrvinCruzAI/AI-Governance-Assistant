@@ -376,16 +376,16 @@ export default function Admin() {
 
         {isAdmin ? (
           <Tabs defaultValue="all" className="space-y-6">
-            <TabsList className="grid !w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 !bg-transparent !p-0">
-              <TabsTrigger value="my">My Submissions</TabsTrigger>
-              <TabsTrigger value="all">All Submissions</TabsTrigger>
-              <TabsTrigger value="matrix">Priority Matrix</TabsTrigger>
-              <TabsTrigger value="roadmap">Roadmap</TabsTrigger>
-              <TabsTrigger value="settings">Settings</TabsTrigger>
+            <TabsList className="grid !w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 !bg-transparent !p-0">
+              <TabsTrigger value="my" className="border-2 border-gray-300 data-[state=active]:border-blue-500">My Submissions</TabsTrigger>
+              <TabsTrigger value="all" className="border-2 border-gray-300 data-[state=active]:border-blue-500">All Submissions</TabsTrigger>
+              <TabsTrigger value="matrix" className="border-2 border-gray-300 data-[state=active]:border-blue-500">Priority Matrix</TabsTrigger>
+              <TabsTrigger value="roadmap" className="border-2 border-gray-300 data-[state=active]:border-blue-500">Roadmap</TabsTrigger>
+              <TabsTrigger value="settings" className="border-2 border-gray-300 data-[state=active]:border-blue-500">Settings</TabsTrigger>
             </TabsList>
 
             {/* My Submissions Tab */}
-            <TabsContent value="my" className="space-y-6">
+            <TabsContent value="my" className="space-y-8">
               <UserSubmissionsView 
                 initiatives={userInitiatives || []}
                 loading={userLoading}
@@ -394,7 +394,7 @@ export default function Admin() {
             </TabsContent>
 
             {/* Priority Matrix Tab */}
-            <TabsContent value="matrix" className="space-y-6">
+            <TabsContent value="matrix" className="space-y-8">
               <PrioritizationMatrix 
                 initiatives={initiatives || []} 
                 onInitiativeClick={(id) => {
@@ -405,7 +405,7 @@ export default function Admin() {
             </TabsContent>
 
             {/* All Submissions Tab (Admin Only) */}
-            <TabsContent value="all" className="space-y-6">
+            <TabsContent value="all" className="space-y-8">
               {/* Executive Summary Dashboard */}
               <Card className="border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-teal-50 shadow-lg mb-6">
                 <CardHeader>
@@ -736,7 +736,7 @@ export default function Admin() {
             </TabsContent>
 
             {/* Roadmap Tab (Admin Only) */}
-            <TabsContent value="roadmap" className="space-y-6">
+            <TabsContent value="roadmap" className="space-y-8">
               <RoadmapManagementView 
                 initiatives={initiativesWithPriority}
                 onViewDetails={openInitiativeDetail}
@@ -744,7 +744,7 @@ export default function Admin() {
             </TabsContent>
 
             {/* Settings Tab */}
-            <TabsContent value="settings" className="space-y-6">
+            <TabsContent value="settings" className="space-y-8">
               <SettingsView user={user!} />
             </TabsContent>
           </Tabs>
@@ -757,7 +757,7 @@ export default function Admin() {
             </TabsList>
 
             {/* My Submissions Tab */}
-            <TabsContent value="my" className="space-y-6">
+            <TabsContent value="my" className="space-y-8">
               <UserSubmissionsView 
                 initiatives={userInitiatives || []}
                 loading={userLoading}
@@ -766,7 +766,7 @@ export default function Admin() {
             </TabsContent>
 
             {/* Browse Ideas Tab */}
-            <TabsContent value="browse" className="space-y-6">
+            <TabsContent value="browse" className="space-y-8">
               <BrowseView 
                 initiatives={browseInitiatives || []}
                 loading={browseLoading}
@@ -775,7 +775,7 @@ export default function Admin() {
             </TabsContent>
 
             {/* Settings Tab */}
-            <TabsContent value="settings" className="space-y-6">
+            <TabsContent value="settings" className="space-y-8">
               <SettingsView user={user!} />
             </TabsContent>
           </Tabs>
