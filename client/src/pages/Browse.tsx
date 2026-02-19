@@ -97,11 +97,11 @@ export default function Browse() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F5F1E8]">
       {/* Header */}
-      <header className="border-b border-gray-200 bg-white sticky top-0 z-50 shadow-sm">
+      <header className="border-b border-[#2F5A4A]/20 bg-white sticky top-0 z-50 shadow-sm">
         <div className="container flex justify-between items-center py-4">
-          <h1 className="text-lg md:text-xl font-semibold text-gray-900">
+          <h1 className="text-lg md:text-xl font-black text-gray-900 uppercase tracking-wide">
             {APP_TITLE}
           </h1>
           <div className="flex items-center gap-3">
@@ -110,7 +110,7 @@ export default function Browse() {
               size="sm"
               onClick={() => setLocation("/roadmap")}
               aria-label="View AI Initiative Roadmap"
-              className="border-teal-600 text-teal-600 hover:bg-teal-50"
+              className="border-2 border-[#2F5A4A] text-[#2F5A4A] hover:bg-[#2F5A4A]/10 uppercase text-xs tracking-wider font-medium"
             >
               View Roadmap
             </Button>
@@ -140,10 +140,10 @@ export default function Browse() {
       {/* Page Header */}
       <section className="container py-12 md:py-16">
         <div className="max-w-4xl mx-auto text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 uppercase tracking-tight">
             Browse Ideas from Your Colleagues
           </h2>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-xl text-gray-700 mb-8">
             Get inspired by real AI initiatives submitted by Travel + Leisure Co. team members. Vote for ideas you'd like to see implemented!
           </p>
 
@@ -161,10 +161,10 @@ export default function Browse() {
 
         {/* Search and Filters */}
         <div className="max-w-6xl mx-auto mb-8">
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+            <div className="bg-white border-2 border-gray-200 rounded-sm p-6 shadow-sm">
             <div className="flex items-center gap-2 mb-4">
               <Filter className="h-5 w-5 text-gray-600" aria-hidden="true" />
-              <h3 className="font-semibold text-gray-900">Search & Filter</h3>
+              <h3 className="font-bold text-gray-900 uppercase tracking-wide text-sm">Search & Filter</h3>
             </div>
 
             <div className="grid md:grid-cols-5 gap-4">

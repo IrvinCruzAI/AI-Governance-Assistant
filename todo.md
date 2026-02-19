@@ -83,6 +83,6 @@
 - [ ] Test and save checkpoint
 
 ## Browse & Roadmap Pages Brand Matching
-- [ ] Redesign Browse page with Travel + Leisure Co. brand aesthetic
-- [ ] Redesign Roadmap page with Travel + Leisure Co. brand aesthetic
+- [x] Redesign Browse page with Travel + Leisure Co. brand aesthetic
+- [x] Redesign Roadmap page with Travel + Leisure Co. brand aesthetic
 - [ ] Test and save checkpoint

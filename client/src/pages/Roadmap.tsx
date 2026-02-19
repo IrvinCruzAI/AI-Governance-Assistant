@@ -86,10 +86,10 @@ function InitiativeCard({ initiative }: { initiative: Initiative }) {
   
   return (
     <div
-      className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer"
+      className="bg-white border-2 border-gray-200 rounded-sm p-3 hover:shadow-md transition-shadow cursor-pointer"
       onClick={() => setLocation(`/initiative/${initiative.id}`)}
     >
-      <h4 className="font-medium text-sm text-gray-900 mb-2 line-clamp-2">
+      <h4 className="font-bold text-sm text-gray-900 mb-2 line-clamp-2">
         {initiative.title || "Untitled Initiative"}
       </h4>
       <div className="flex items-center justify-between text-xs text-gray-500">
@@ -120,9 +120,9 @@ export default function Roadmap() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#F5F1E8]">
       {/* Header */}
-      <header className="bg-white border-b sticky top-0 z-10">
+      <header className="bg-white border-b border-[#2F5A4A]/20 sticky top-0 z-10 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -136,14 +136,15 @@ export default function Roadmap() {
                 Back to Home
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">AI Initiative Roadmap</h1>
-                <p className="text-sm text-gray-600">Track the progress of AI initiatives across Travel + Leisure Co.</p>
+                <h1 className="text-2xl font-black text-gray-900 uppercase tracking-wide">AI Initiative Roadmap</h1>
+                <p className="text-sm text-gray-700">Track the progress of AI initiatives across Travel + Leisure Co.</p>
               </div>
             </div>
             {isAuthenticated && user?.role === 'admin' && (
               <Button
                 onClick={() => setLocation("/admin")}
                 variant="outline"
+                className="border-2 border-[#2F5A4A] text-[#2F5A4A] hover:bg-[#2F5A4A]/10 uppercase text-xs tracking-wider font-medium"
               >
                 Admin Dashboard
               </Button>
