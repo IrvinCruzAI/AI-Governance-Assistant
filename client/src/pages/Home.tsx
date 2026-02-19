@@ -103,7 +103,7 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 md:py-32">
+      <section className="container mx-auto px-4 py-16 md:py-28">
         <div className="max-w-5xl mx-auto text-center">
           {/* Trust Badge */}
           <div className="inline-flex items-center gap-2 bg-white border border-[#2F5A4A]/20 text-gray-800 px-5 py-2.5 rounded-sm mb-8 text-sm font-medium tracking-wide">
